@@ -80,7 +80,7 @@ export default function Home() {
             width={16}
             height={16}
           />
-          Examples
+          Consultation
         </a>
         <a
           className="flex items-center gap-2 hover:underline hover:underline-offset-4"
@@ -95,7 +95,7 @@ export default function Home() {
             width={16}
             height={16}
           />
-          Go to nextjs.org →
+          Let's Partner up →
         </a>
       </footer>
     </div>

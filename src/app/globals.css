@@ -1,26 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. */
+
+@theme {
+    --color-background: hsl(0 0% 4%);
+    --color-foreground: hsl(0 0% 90%);
+
+    --color-card: hsl(0 0% 6%);
+    --color-card-foreground: hsl(0 0% 90%);
+
+    --color-popover: hsl(0 0% 6%);
+    --color-popover-foreground: hsl(0 0% 90%);
+
+    --color-primary: hsl(170 100% 50%);
+    --color-primary-foreground: hsl(0 0% 4%);
+
+    --color-secondary: hsl(195 100% 50%);
+    --color-secondary-foreground: hsl(0 0% 4%);
+
+    --color-muted: hsl(0 0% 10%);
+    --color-muted-foreground: hsl(0 0% 60%);
+
+    --color-accent: hsl(0 0% 16%);
+    --color-accent-foreground: hsl(0 0% 90%);
+
+    --color-destructive: hsl(0 84% 60%);
+    --color-destructive-foreground: hsl(0 0% 98%);
+
+    --color-border: hsl(0 0% 16%);
+    --color-input: hsl(0 0% 16%);
+    --color-ring: hsl(170 100% 50%);
+
+    --radius: 0.3rem;
+
+    --font-sans: 'IBM Plex Sans', sans-serif;
+    --font-mono: 'Space Mono', monospace;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  * {
+    @apply border-border font-sans;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  body {
+    @apply bg-background text-foreground;
+    cursor: none;
+  }
+
+  /* Custom cursor */
+  .custom-cursor {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    background: #00FFB2;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transition: all 0.1s ease;
+    box-shadow: 0 0 10px rgba(0, 255, 178, 0.8);
+  }
+
+  .custom-cursor.hover {
+    width: 16px;
+    height: 16px;
+    background: rgba(0, 255, 178, 0.3);
+    border: 1px solid #00FFB2;
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #0A0A0A;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #00FFB2;
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #00C2FF;
+  }
+
+  /* Hide scrollbar for horizontal navigation */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .terminal-glow {
+    box-shadow: 0 0 10px rgba(0, 255, 178, 0.2);
+    border: 1px solid rgba(0, 255, 178, 0.3);
+  }
+
+  .cyber-border {
+    border: 1px solid rgba(0, 255, 178, 0.2);
+    background: linear-gradient(135deg, rgba(0, 255, 178, 0.1) 0%, rgba(0, 194, 255, 0.1) 100%);
+  }
+
+  /* Animation for submenu slide up */
+  .animate-slide-up {
+    animation: slideUp 0.2s ease-out;
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Animation for pulse */
+  .animate-pulse-slow {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.8;
+      transform: scale(1.2);
+    }
+  }
 }

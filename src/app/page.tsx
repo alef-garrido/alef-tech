@@ -1,12 +1,17 @@
 import Image from "next/image";
+import Hero from "./components/hero";
 
 export default function Home() {
   return (
     <main className="min-h-screen flex flex-col items-center justify-center p-8">
-      <div className="text-center mb-12">
-        <h1 className="text-5xl font-bold text-primary mb-2 font-mono">Welcome to Alef-Tech</h1>
-        <p className="text-muted-foreground">A demonstration of the new cyberpunk theme.</p>
+      <div className="relative w-full h-screen">
+        <Hero />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center z-10">
+          <h1 className="text-5xl font-bold text-white mb-2 font-mono">Welcome to Alef-Tech</h1>
+          <p className="text-primary font-mono">A demonstration of the new cyberpunk theme.</p>
+        </div>
       </div>
+
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl">
         <div className="terminal-glow p-6 rounded-lg cyber-border">

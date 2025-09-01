@@ -4,24 +4,44 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 
 const TrainingIcon = () => (
-    <div className="relative w-[13px] h-[21px] mt-px flex-shrink-0" aria-hidden="true">
-        <div className="absolute top-0 left-0 w-[9px] h-full bg-foreground"></div>
-        <div className="absolute top-1/2 -translate-y-1/2 left-[6px] w-[7px] h-[14px] bg-foreground"></div>
+    <div className="flex items-end gap-1 h-[4.5rem]" aria-hidden="true">
+        <div className="w-1 h-1/3 bg-foreground"></div>
+        <div className="w-1 h-2/3 bg-foreground"></div>
+        <div className="w-1 h-full bg-foreground"></div>
     </div>
 );
 
 const ConsultationIcon = () => (
-    <div className="w-[13px] h-[33px] bg-foreground flex-shrink-0" aria-hidden="true"></div>
+    <div className="flex gap-2 h-[4.5rem]" aria-hidden="true">
+        <div className="flex flex-col gap-1 w-1">
+            <div className="h-1/2 bg-foreground"></div>
+            <div className="h-1/2 bg-foreground"></div>
+        </div>
+        <div className="flex flex-col gap-1 w-1">
+            <div className="h-1/2 bg-foreground"></div>
+            <div className="h-1/2 bg-foreground"></div>
+        </div>
+    </div>
 );
 
 const ImplementationIcon = () => (
-    <div className="w-[21px] h-[26px] border-[3px] border-foreground bg-background flex-shrink-0" aria-hidden="true"></div>
+    <div className="grid grid-cols-3 grid-rows-3 gap-1 w-5 h-5" aria-hidden="true">
+        <div className="w-full h-full bg-foreground"></div>
+        <div className="w-full h-full bg-foreground"></div>
+        <div className="w-full h-full bg-foreground"></div>
+        <div className="w-full h-full bg-foreground"></div>
+        <div className="w-full h-full bg-foreground"></div>
+        <div className="w-full h-full bg-foreground"></div>
+        <div className="w-full h-full bg-foreground"></div>
+        <div className="w-full h-full bg-foreground"></div>
+        <div className="w-full h-full bg-foreground"></div>
+    </div>
 );
 
 const SupportIcon = () => (
-    <div className="relative w-[21px] h-[21px] flex-shrink-0 mt-px" aria-hidden="true">
-        <div className="w-full h-full border-2 border-foreground rounded-full"></div>
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[7px] h-[7px] bg-foreground rounded-full"></div>
+    <div className="relative w-5 h-5" aria-hidden="true">
+        <div className="absolute top-0 left-1/2 w-1 h-full bg-foreground -translate-x-1/2"></div>
+        <div className="absolute top-1/2 left-0 w-full h-1 bg-foreground -translate-y-1/2"></div>
     </div>
 );
 

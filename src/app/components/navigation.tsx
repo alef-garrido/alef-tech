@@ -85,11 +85,11 @@ const [currentDateTime, setCurrentDateTime] = useState(new Date());
                         <div className="flex gap-3">
                             <TrainingIcon />
                             <div>
-                                <Link href="/products" className="text-sm font-normal lowercase block mb-2 hover:text-primary">Training</Link>
+                                <Link href="#" className="text-sm font-normal lowercase block mb-2 hover:text-primary">Training</Link>
                                 <ul className="space-y-1 text-xs lowercase">
-                                    <li><Link href="/products/audio-and-synthesizers" className="hover:text-primary">Design my Onboarding</Link></li>
-                                    <li><Link href="/products/wireless-speakers" className="hover:text-primary">Train my team</Link></li>
-                                    <li><Link href="/designs" className="hover:text-primary">Learning Partner</Link></li>
+                                    <li><Link href="#" className="hover:text-primary">Design my Onboarding</Link></li>
+                                    <li><Link href="#" className="hover:text-primary">Train my team</Link></li>
+                                    <li><Link href="#" className="hover:text-primary">Learning Partner</Link></li>
                                 </ul>
                             </div>
                         </div>
@@ -97,10 +97,10 @@ const [currentDateTime, setCurrentDateTime] = useState(new Date());
                         <div className="flex gap-3">
                             <ConsultationIcon />
                             <div>
-                                <Link href="/store" className="text-sm font-normal lowercase block mb-2 hover:text-primary">Consultation</Link>
+                                <Link href="#" className="text-sm font-normal lowercase block mb-2 hover:text-primary">Consultation</Link>
                                 <ul className="space-y-1 text-xs lowercase">
-                                    <li><Link href="/store" className="hover:text-primary">1:1 Consultation</Link></li>
-                                    <li><Link href="/store/checkout" className="hover:text-primary">Free Call</Link></li>
+                                    <li><Link href="#" className="hover:text-primary">1:1 Consultation</Link></li>
+                                    <li><Link href="#" className="hover:text-primary">Free Call</Link></li>
                                 </ul>
                             </div>
                         </div>
@@ -108,11 +108,11 @@ const [currentDateTime, setCurrentDateTime] = useState(new Date());
                         <div className="flex gap-3">
                             <ImplementationIcon />
                             <div>
-                                <Link href="/now" className="text-sm font-normal lowercase block mb-2 hover:text-primary">Cx Implementation</Link>
+                                <Link href="#" className="text-sm font-normal lowercase block mb-2 hover:text-primary">Cx Implementation</Link>
                                 <ul className="space-y-1 text-xs lowercase">
-                                    <li><Link href="/newsletter" className="hover:text-primary">Cx Assistance</Link></li>
-                                    <li><a href="http://instagram.com/teenageengineering" target="_blank" rel="noopener noreferrer" className="hover:text-primary">AI Assistance</a></li>
-                                    <li><Link href="/now" className="hover:text-primary">Bespoke Software</Link></li>
+                                    <li><Link href="#" className="hover:text-primary">Cx Assistance</Link></li>
+                                    <li><a href="#" target="_blank" rel="noopener noreferrer" className="hover:text-primary">AI Assistance</a></li>
+                                    <li><Link href="#" className="hover:text-primary">Bespoke Software</Link></li>
                                 </ul>
                             </div>
                         </div>
@@ -120,11 +120,11 @@ const [currentDateTime, setCurrentDateTime] = useState(new Date());
                         <div className="flex gap-3">
                             <SupportIcon />
                             <div>
-                                <Link href="/guides" className="text-sm font-normal lowercase block mb-2 hover:text-primary">Contact</Link>
+                                <Link href="#" className="text-sm font-normal lowercase block mb-2 hover:text-primary">Contact</Link>
                                 <ul className="space-y-1 text-xs lowercase">
-                                    <li><Link href="/newsletter" className="hover:text-primary">newsletter</Link></li>
-                                    <li><a href="http://instagram.com/teenageengineering" target="_blank" rel="noopener noreferrer" className="hover:text-primary">instagram</a></li>
-                                    <li><Link href="/now" className="hover:text-primary">blog</Link></li>
+                                    <li><Link href="#" className="hover:text-primary">newsletter</Link></li>
+                                    <li><a href="#" target="_blank" rel="noopener noreferrer" className="hover:text-primary">instagram</a></li>
+                                    <li><Link href="#" className="hover:text-primary">blog</Link></li>
                                 </ul>
                             </div>
                         </div>
@@ -156,17 +156,17 @@ const [currentDateTime, setCurrentDateTime] = useState(new Date());
 
                 {/* Mobile Menu */}
                 {isMenuOpen && (
-                    <div className="lg:hidden mt-4">
+                    <div className="lg:hidden mt-4 pt-4 border-t border-foreground/20">
                         <div className="grid grid-cols-2 grid-rows-2 gap-8 items-start justify-start">
                             {/* Training */}
                             <div className="flex gap-3">
                                 <TrainingIcon />
                                 <div>
-                                    <Link href="/products" className="text-sm font-normal lowercase block mb-2 hover:text-primary">Training</Link>
+                                    <Link href="#" className="text-sm font-normal lowercase block mb-2 hover:text-primary">Training</Link>
                                     <ul className="space-y-1 text-xs lowercase">
-                                        <li><Link href="/products/audio-and-synthesizers" className="hover:text-primary">Design my Onboarding</Link></li>
-                                        <li><Link href="/products/wireless-speakers" className="hover:text-primary">Train my team</Link></li>
-                                        <li><Link href="/designs" className="hover:text-primary">Learning Partner</Link></li>
+                                        <li><Link href="#" className="hover:text-primary">Design my Onboarding</Link></li>
+                                        <li><Link href="#" className="hover:text-primary">Train my team</Link></li>
+                                        <li><Link href="#" className="hover:text-primary">Learning Partner</Link></li>
                                     </ul>
                                 </div>
                             </div>
@@ -174,10 +174,10 @@ const [currentDateTime, setCurrentDateTime] = useState(new Date());
                             <div className="flex gap-3">
                                 <ConsultationIcon />
                                 <div>
-                                    <Link href="/store" className="text-sm font-normal lowercase block mb-2 hover:text-primary">Consultation</Link>
+                                    <Link href="#" className="text-sm font-normal lowercase block mb-2 hover:text-primary">Consultation</Link>
                                     <ul className="space-y-1 text-xs lowercase">
-                                        <li><Link href="/store" className="hover:text-primary">1:1 Consultation</Link></li>
-                                        <li><Link href="/store/checkout" className="hover:text-primary">Free Call</Link></li>
+                                        <li><Link href="#" className="hover:text-primary">1:1 Consultation</Link></li>
+                                        <li><Link href="#" className="hover:text-primary">Free Call</Link></li>
                                     </ul>
                                 </div>
                             </div>
@@ -185,11 +185,11 @@ const [currentDateTime, setCurrentDateTime] = useState(new Date());
                             <div className="flex gap-3">
                                 <ImplementationIcon />
                                 <div>
-                                    <Link href="/now" className="text-sm font-normal lowercase block mb-2 hover:text-primary">Cx Implementation</Link>
+                                    <Link href="#" className="text-sm font-normal lowercase block mb-2 hover:text-primary">Cx Implementation</Link>
                                     <ul className="space-y-1 text-xs lowercase">
-                                        <li><Link href="/newsletter" className="hover:text-primary">Cx Assistance</Link></li>
-                                        <li><a href="http://instagram.com/teenageengineering" target="_blank" rel="noopener noreferrer" className="hover:text-primary">AI Assistance</a></li>
-                                        <li><Link href="/now" className="hover:text-primary">Bespoke Software</Link></li>
+                                        <li><Link href="#" className="hover:text-primary">Cx Assistance</Link></li>
+                                        <li><a href="#" target="_blank" rel="noopener noreferrer" className="hover:text-primary">AI Assistance</a></li>
+                                        <li><Link href="#" className="hover:text-primary">Bespoke Software</Link></li>
                                     </ul>
                                 </div>
                             </div>
@@ -197,11 +197,11 @@ const [currentDateTime, setCurrentDateTime] = useState(new Date());
                             <div className="flex gap-3">
                                 <SupportIcon />
                                 <div>
-                                    <Link href="/guides" className="text-sm font-normal lowercase block mb-2 hover:text-primary">Contact</Link>
+                                    <Link href="#" className="text-sm font-normal lowercase block mb-2 hover:text-primary">Contact</Link>
                                     <ul className="space-y-1 text-xs lowercase">
-                                        <li><Link href="/newsletter" className="hover:text-primary">newsletter</Link></li>
-                                        <li><a href="http://instagram.com/teenageengineering" target="_blank" rel="noopener noreferrer" className="hover:text-primary">instagram</a></li>
-                                        <li><Link href="/now" className="hover:text-primary">blog</Link></li>
+                                        <li><Link href="#" className="hover:text-primary">newsletter</Link></li>
+                                        <li><a href="#" target="_blank" rel="noopener noreferrer" className="hover:text-primary">instagram</a></li>
+                                        <li><Link href="#" className="hover:text-primary">blog</Link></li>
                                     </ul>
                                 </div>
                             </div>

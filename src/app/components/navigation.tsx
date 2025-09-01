@@ -157,7 +157,7 @@ const [currentDateTime, setCurrentDateTime] = useState(new Date());
                 {/* Mobile Menu */}
                 {isMenuOpen && (
                     <div className="lg:hidden mt-4">
-                        <div className="flex flex-col items-center gap-8">
+                        <div className="grid grid-cols-2 grid-rows-2 gap-8 items-start justify-start">
                             {/* Training */}
                             <div className="flex gap-3">
                                 <TrainingIcon />

@@ -150,7 +150,7 @@ const [currentDateTime, setCurrentDateTime] = useState(new Date());
                         </div>
                         {/* Japanese Text */}
                         <div className="text-xs max-w-[160px] leading-snug pt-0.5">
-                            <p>Adaptability, continuous learning and a bit of love to evething I do. That's my way.</p>
+                            <p>Adaptability, continuous learning and a bit of love to evething I do. That&apos;s my way.</p>
                         </div>
                     </div>
 

@@ -1,5 +1,14 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Alef Lemat-Tech Portfolio
 
+This is a Next.js project that serves as a personal portfolio and business website for Alef Lemat-Tech, a web developer and Cx strategist. The website showcases his skills and introduces a project called "XNORIA".
+
+## Technologies Used
+
+*   **Framework:** Next.js
+*   **Language:** TypeScript
+*   **Styling:** Tailwind CSS
+*   **3D Interactive Content:** Spline
+*   **Linting:** ESLint
 ## Getting Started
 
 First, run the development server:

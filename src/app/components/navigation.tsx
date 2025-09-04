@@ -136,18 +136,7 @@ const [currentDateTime, setCurrentDateTime] = useState(new Date());
                                 </ul>
                             </div>
                         </div>
-                        {/* Support */}
-                        <div className="flex gap-3">
-                            <SupportIcon />
-                            <div>
-                                <Link href="#" className="text-sm font-normal lowercase block mb-2 hover:text-primary">Contact</Link>
-                                <ul className="space-y-1 text-xs lowercase">
-                                    <li><Link href="#" className="hover:text-primary">newsletter</Link></li>
-                                    <li><a href="#" target="_blank" rel="noopener noreferrer" className="hover:text-primary">instagram</a></li>
-                                    <li><Link href="#" className="hover:text-primary">blog</Link></li>
-                                </ul>
-                            </div>
-                        </div>
+                        
                         {/* Japanese Text */}
                         <div className="text-xs max-w-[160px] leading-snug pt-0.5">
                             <p>Adaptability, continuous learning and a bit of love to evething I do. That&apos;s my way.</p>

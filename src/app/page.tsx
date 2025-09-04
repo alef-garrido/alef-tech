@@ -18,7 +18,6 @@ export default function Home() {
         </div>
       </div>
 
-      <FeaturedProjects />
 
       <Services />
 
@@ -46,6 +45,8 @@ export default function Home() {
         </div>
       </div>
 
+      <FeaturedProjects />
+      
       <FinalCTA />
 
       <Footer />

@@ -98,6 +98,10 @@
 }
 
 @layer components {
+  .btn-primary {
+    @apply px-4 py-2 rounded-md bg-white text-black hover:bg-primary hover:text-primary-foreground transition-colors font-mono;
+  }
+
   .terminal-glow {
     box-shadow: 0 0 10px rgba(0, 255, 178, 0.2);
     border: 1px solid rgba(0, 255, 178, 0.3);

@@ -39,8 +39,9 @@ export default function Home() {
           </div>
           <div className="w-full md:w-2/3 text-center md:text-left">
             <p>
-              Web developer and Cx strategist with 9+ years in Customer Success. <br /> I’m building XNORIA a unique Business Engine where strategy, technology, and creativity meet to create powerfull contex-engenieered systems for Agentic Websites.
+              Certified Business Consultant with 9+ years of CX and digital transformation experience. I combine customer service expertise with agentic software development to deliver measurable impact.
             </p>
+            <button className="my-4 bg-transparent underline hover:primary/80 font-mono cursor-pointer"> More about me →</button>
           </div>
         </div>
       </div>

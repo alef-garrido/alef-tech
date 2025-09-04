@@ -76,7 +76,7 @@ const Services = () => {
         </div>
       </div>
       <div className="text-center mt-12">
-        <button className="bg-green-500 text-black font-bold py-3 px-6 rounded-lg hover:bg-green-600 transition-colors">View All Services</button>
+        <button className="bg-white text-black font-mono py-3 px-6 rounded-md hover:bg-primary/80 transition-colors">View All Services</button>
       </div>
     </div>
   );

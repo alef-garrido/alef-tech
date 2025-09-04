@@ -6,7 +6,7 @@ const CaseStudy = () => {
         <p className="text-2xl text-gray-400 italic">"Working with them was a game-changer. Their expertise in CX and AI helped us reduce response times by 40% and increase customer satisfaction by 25%."</p>
         <p className="text-xl font-bold text-white mt-4">- John Doe, CEO of ExampleCorp</p>
         <div className="mt-8">
-            <button className="bg-green-500 text-black font-bold py-3 px-6 rounded-lg hover:bg-green-600 transition-colors">See More Results</button>
+            <button className="bg-white text-black font-mono py-3 px-6 rounded-md hover:bg-primary/80 transition-colors">See More Results</button>
         </div>
       </div>
     </div>

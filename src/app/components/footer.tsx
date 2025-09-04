@@ -47,52 +47,54 @@ const Footer = () => {
   return (
     <footer className="bg-background w-full font-sans mt-24">
         <div className="mx-auto max-w-none px-4 sm:px-6 lg:px-8 py-12">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-                {/* Training */}
-                <div className="flex gap-3">
-                    <TrainingIcon />
-                    <div>
-                        <Link href="#" className="text-sm font-normal lowercase block mb-2 hover:text-primary">Training</Link>
-                        <ul className="space-y-1 text-xs lowercase">
-                            <li><Link href="#" className="hover:text-primary">Design my Onboarding</Link></li>
-                            <li><Link href="#" className="hover:text-primary">Train my team</Link></li>
-                            <li><Link href="#" className="hover:text-primary">Learning Partner</Link></li>
-                        </ul>
+            <div className="flex justify-center">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+                    {/* Training */}
+                    <div className="flex gap-3">
+                        <TrainingIcon />
+                        <div>
+                            <Link href="#" className="text-sm font-normal lowercase block mb-2 hover:text-primary">Training</Link>
+                            <ul className="space-y-1 text-xs lowercase">
+                                <li><Link href="#" className="hover:text-primary">Design my Onboarding</Link></li>
+                                <li><Link href="#" className="hover:text-primary">Train my team</Link></li>
+                                <li><Link href="#" className="hover:text-primary">Learning Partner</Link></li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-                {/* Consultation */}
-                <div className="flex gap-3">
-                    <ConsultationIcon />
-                    <div>
-                        <Link href="#" className="text-sm font-normal lowercase block mb-2 hover:text-primary">Consultation</Link>
-                        <ul className="space-y-1 text-xs lowercase">
-                            <li><Link href="#" className="hover:text-primary">1:1 Consultation</Link></li>
-                            <li><Link href="#" className="hover:text-primary">Free Call</Link></li>
-                        </ul>
+                    {/* Consultation */}
+                    <div className="flex gap-3">
+                        <ConsultationIcon />
+                        <div>
+                            <Link href="#" className="text-sm font-normal lowercase block mb-2 hover:text-primary">Consultation</Link>
+                            <ul className="space-y-1 text-xs lowercase">
+                                <li><Link href="#" className="hover:text-primary">1:1 Consultation</Link></li>
+                                <li><Link href="#" className="hover:text-primary">Free Call</Link></li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-                {/* Now */}
-                <div className="flex gap-3">
-                    <ImplementationIcon />
-                    <div>
-                        <Link href="#" className="text-sm font-normal lowercase block mb-2 hover:text-primary">Cx Implementation</Link>
-                        <ul className="space-y-1 text-xs lowercase">
-                            <li><Link href="#" className="hover:text-primary">Cx Assistance</Link></li>
-                            <li><a href="#" target="_blank" rel="noopener noreferrer" className="hover:text-primary">AI Assistance</a></li>
-                            <li><Link href="#" className="hover:text-primary">Bespoke Software</Link></li>
-                        </ul>
+                    {/* Now */}
+                    <div className="flex gap-3">
+                        <ImplementationIcon />
+                        <div>
+                            <Link href="#" className="text-sm font-normal lowercase block mb-2 hover:text-primary">Cx Implementation</Link>
+                            <ul className="space-y-1 text-xs lowercase">
+                                <li><Link href="#" className="hover:text-primary">Cx Assistance</Link></li>
+                                <li><a href="#" target="_blank" rel="noopener noreferrer" className="hover:text-primary">AI Assistance</a></li>
+                                <li><Link href="#" className="hover:text-primary">Bespoke Software</Link></li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-                {/* Support */}
-                <div className="flex gap-3">
-                    <SupportIcon />
-                    <div>
-                        <Link href="#" className="text-sm font-normal lowercase block mb-2 hover:text-primary">Contact</Link>
-                        <ul className="space-y-1 text-xs lowercase">
-                            <li><Link href="#" className="hover:text-primary">newsletter</Link></li>
-                            <li><a href="#" target="_blank" rel="noopener noreferrer" className="hover:text-primary">instagram</a></li>
-                            <li><Link href="#" className="hover:text-primary">blog</Link></li>
-                        </ul>
+                    {/* Support */}
+                    <div className="flex gap-3">
+                        <SupportIcon />
+                        <div>
+                            <Link href="#" className="text-sm font-normal lowercase block mb-2 hover:text-primary">Contact</Link>
+                            <ul className="space-y-1 text-xs lowercase">
+                                <li><Link href="#" className="hover:text-primary">newsletter</Link></li>
+                                <li><a href="#" target="_blank" rel="noopener noreferrer" className="hover:text-primary">instagram</a></li>
+                                <li><Link href="#" className="hover:text-primary">blog</Link></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -103,12 +105,12 @@ const Footer = () => {
                     <a href="#" className="text-gray-400 hover:text-white"><Rss size={24} /></a>
                 </div>
                 <div className="text-center text-gray-500">
-                    <p>Adaptability, continuous learning, and a bit of love in everything I do.</p>
+                    <p>Ever evolving, always adapting, and delivering solutions with genuine care.</p>
                 </div>
                 <form>
                     <div className="flex">
-                        <input type="email" placeholder="Enter your email" className="bg-gray-800 text-white px-4 py-2 rounded-l-lg focus:outline-none" />
-                        <button type="submit" className="bg-green-500 text-black font-bold px-4 py-2 rounded-r-lg hover:bg-green-600 transition-colors">Subscribe</button>
+                        <input type="email" placeholder="Enter your email" className="border bg-transparent text-white px-4 py-2 rounded-l-lg focus:outline-none" />
+                        <button type="submit" className="bg-white text-black font-mono py-3 px-6 rounded-md hover:bg-primary/80 transition-colors">Subscribe</button>
                     </div>
                 </form>
             </div>

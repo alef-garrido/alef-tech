@@ -1,23 +1,57 @@
 
+'use client';
 import React from 'react';
+import useModal from '../hooks/use-modal';
+import ProjectModal from './project-modal';
+import { project } from '../../types';
 
 const FeaturedProjects = () => {
-  const projects = [
+  const { isModalOpen, selectedProject, openModal, closeModal } = useModal();
+
+  const projects: project[] = [
     {
       title: 'Project Alpha',
-      link: '#',
+      description: 'This is a description for Project Alpha.',
+      tech: ['React', 'TypeScript', 'Next.js', 'Tailwind CSS'],
+      src: 'ppicture.png',
+      image: 'ppicture.png',
+      featured: true,
+      githubUrl: '#',
+      liveUrl: '#',
+      color: '#b1b1b1'
     },
     {
       title: 'Project Beta',
-      link: '#',
+      description: 'This is a description for Project Beta.',
+      tech: ['React', 'TypeScript', 'Next.js', 'Tailwind CSS'],
+      src: 'ppicture.png',
+      image: 'ppicture.png',
+      featured: false,
+      githubUrl: '#',
+      liveUrl: '#',
+      color: '#b1b1b1'
     },
     {
       title: 'Project Gamma',
-      link: '#',
+      description: 'This is a description for Project Gamma.',
+      tech: ['React', 'TypeScript', 'Next.js', 'Tailwind CSS'],
+      src: 'ppicture.png',
+      image: 'ppicture.png',
+      featured: false,
+      githubUrl: '#',
+      liveUrl: '#',
+      color: '#b1b1b1'
     },
     {
       title: 'Project Delta',
-      link: '#',
+      description: 'This is a description for Project Delta.',
+      tech: ['React', 'TypeScript', 'Next.js', 'Tailwind CSS'],
+      src: 'ppicture.png',
+      image: 'ppicture.png',
+      featured: false,
+      githubUrl: '#',
+      liveUrl: '#',
+      color: '#b1b1b1'
     },
   ];
 
@@ -32,16 +66,19 @@ const FeaturedProjects = () => {
           </div>
           <ul>
             {projects.map((project, index) => (
-              <li key={index} className="flex items-center">
+              <li key={index} className="flex items-center cursor-pointer" onClick={() => openModal(project)}>
                 <span className="text-green-500 mr-2">-&gt;</span>
-                <a href={project.link} className="text-blue-500 hover:underline">
+                <span className="text-blue-500 hover:underline">
                   {project.title}
-                </a>
+                </span>
               </li>
             ))}
           </ul>
         </div>
       </div>
+      {isModalOpen && selectedProject && (
+        <ProjectModal project={selectedProject} closeModal={closeModal} />
+      )}
     </div>
   );
 };

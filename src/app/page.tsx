@@ -10,11 +10,11 @@ export default function Home() {
   return (
     <main className="min-h-screen flex flex-col items-center justify-center p-8">
       {/* HERO SECTION */}
-      <div className="relative w-full h-screen">
+      <div className="relative w-full h-screen overflow-hidden">
         <Hero />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center z-10">
-          <h1 className="text-8xl font-bold text-white mb-4 font-mono">Alef Lemat-Tech</h1>
-          <p className="text-primary font-mono text-4xl ">Consulting | Training | Implementation</p>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-left z-10">
+          <h1 className="text-6xl font-bold text-white mb-4 font-mono">Alef Lemat-Tech</h1>
+          <p className="text-primary font-mono text-2xl ">Consulting | Training | Implementation</p>
         </div>
       </div>
 

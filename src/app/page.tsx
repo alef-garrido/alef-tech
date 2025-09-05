@@ -13,8 +13,8 @@ export default function Home() {
       <div className="relative w-full h-screen">
         <Hero />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center z-10">
-          <h1 className="text-5xl font-bold text-white mb-4 font-mono">Alef Lemat-Tech</h1>
-          <p className="text-primary font-mono">Consulting | Training | Implementation</p>
+          <h1 className="text-8xl font-bold text-white mb-4 font-mono">Alef Lemat-Tech</h1>
+          <p className="text-primary font-mono text-4xl ">Consulting | Training | Implementation</p>
         </div>
       </div>
 

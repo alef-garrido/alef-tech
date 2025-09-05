@@ -1,5 +1,11 @@
 "use client";
 
+import dynamic from 'next/dynamic';
+
+const Spline = dynamic(() => import('@splinetool/react-spline'), {
+  ssr: false,
+});
+
 export default function Hero() {
   return (
     <div className="relative pb-8 w-full h-screen">
@@ -8,7 +14,7 @@ export default function Hero() {
             Let&apos;s Partner up →
           </button>
         </div>
-      <spline-viewer url="https://prod.spline.design/40EPCVfL0h9rrsPF/scene.splinecode"></spline-viewer>
+      <Spline scene="https://prod.spline.design/40EPCVfL0h9rrsPF/scene.splinecode" />
     </div>
   );
 }

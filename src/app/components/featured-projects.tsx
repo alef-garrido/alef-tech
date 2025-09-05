@@ -22,7 +22,7 @@ const FeaturedProjects = () => {
       color: '#b1b1b1'
     },
     {
-      title: 'Project Beta',
+      title: 'Project Betaa',
       description: 'This is a description for Project Beta.',
       tech: ['React', 'TypeScript', 'Next.js', 'Tailwind CSS'],
       src: 'ppicture.png',
@@ -57,14 +57,15 @@ const FeaturedProjects = () => {
   ];
 
   const menuItems = projects.map(project => ({
-    link: project.liveUrl,
+    link: project.liveUrl || '#',
     text: project.title,
     image: project.image,
+    onClick: () => openModal(project),
   }));
 
   return (
-    <div className="w-full my-24 px-6 md:px-12">
-      <h2 className="text-4xl font-bold text-secondary mb-8 font-mono text-center">Featured Projects</h2>
+    <div className="w-full my-48 px-6 md:px-12">
+      <h2 className="text-5xl font-bold text-secondary mb-8 font-mono text-center">Featured Projects</h2>
           <div className="min-h-[500px] p-4 rounded-lg relative">
             <FlowingMenu items={menuItems} />
       </div>

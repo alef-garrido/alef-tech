@@ -104,11 +104,11 @@ const Footer = () => {
                     <a href="#" className="text-gray-400 hover:text-white"><Instagram size={24} /></a>
                     <a href="#" className="text-gray-400 hover:text-white"><Rss size={24} /></a>
                 </div>
-                <div className="text-center text-gray-500">
+                <div className="text-center text-gray-500 my-2">
                     <p>Ever evolving, always adapting, and delivering solutions with genuine care.</p>
                 </div>
                 <form>
-                    <div className="flex">
+                    <div className="flex my-2">
                         <input type="email" placeholder="Enter your email" className="border bg-transparent text-white px-4 py-2 rounded-l-lg focus:outline-none" />
                         <button type="submit" className="bg-white text-black font-mono py-3 px-6 rounded-md hover:bg-primary/80 transition-colors">Subscribe</button>
                     </div>

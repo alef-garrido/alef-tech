@@ -35,8 +35,8 @@ const ImplementationIcon = () => (
 
 const Services = () => {
   return (
-    <div className="w-full my-24 px-6 md:px-12">
-      <h2 className="text-4xl font-bold text-secondary mb-8 font-mono text-center">How I Can Help You</h2>
+    <div className="w-full my-48 px-6 md:px-12">
+      <h2 className="text-5xl font-bold text-secondary mb-8 font-mono text-center">How I Can Help You</h2>
       <div className="grid md:grid-cols-3 gap-8 font-mono text-left">
         <div className="bg-black p-6 rounded-lg">
           <div className="flex items-center mb-4">

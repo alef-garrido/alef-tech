@@ -64,7 +64,7 @@ const FeaturedProjects = () => {
   }));
 
   return (
-    <div className="w-full my-48 px-6 md:px-12">
+    <div className="grid w-full my-48 px-6 md:px-12">
       <h2 className="text-5xl font-bold text-secondary mb-8 font-mono text-center">Featured Projects</h2>
           <div className="min-h-[500px] p-4 rounded-lg relative">
             <FlowingMenu items={menuItems} />

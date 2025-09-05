@@ -28,6 +28,7 @@ export default function RootLayout({
             }
             .animate-marquee {
               animation: marquee 15s linear infinite;
+              transform: translateZ(0);
             }
           `}
         </style>

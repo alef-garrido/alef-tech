@@ -14,10 +14,9 @@ export default function Home() {
         <Hero />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-left z-10">
           <h1 className="text-6xl font-bold text-white mb-4 font-mono">Alef Lemat-Tech</h1>
-          <p className="text-primary font-mono text-2xl ">Consulting | Training | Implementation</p>
+          <p className="text-primary/80 font-mono text-2xl font-extralight">Consulting | Training | Implementation</p>
         </div>
       </div>
-
 
       <Services />
 

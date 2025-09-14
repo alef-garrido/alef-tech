@@ -1,4 +1,3 @@
-
 'use client';
 import React from 'react';
 import useModal from '../hooks/use-modal';
@@ -11,47 +10,47 @@ const FeaturedProjects = () => {
 
   const projects: project[] = [
     {
-      title: 'Project Alpha',
+      title: 'Nomad_Proxy Traveller Platform',
       description: 'This is a description for Project Alpha.',
       tech: ['React', 'TypeScript', 'Next.js', 'Tailwind CSS'],
-      src: 'ppicture.png',
-      image: 'ppicture.png',
+      src: 'pholder.png',
+      image: 'pholder.png',
       featured: true,
-      githubUrl: '#',
+      githubUrl: 'https://github.com/alef-garrido/nomad_proxy',
       liveUrl: '#',
       color: '#b1b1b1'
     },
     {
-      title: 'Project Betaa',
+      title: 'Dinami_CO Gamified Learning Platform',
       description: 'This is a description for Project Beta.',
       tech: ['React', 'TypeScript', 'Next.js', 'Tailwind CSS'],
-      src: 'ppicture.png',
-      image: 'ppicture.png',
+      src: 'pholder.png',
+      image: 'pholder.png',
       featured: false,
       githubUrl: '#',
-      liveUrl: '#',
+      liveUrl: 'https://github.com/alef-garrido/dinami_co-app',
       color: '#b1b1b1'
     },
     {
-      title: 'Project Gamma',
+      title: 'Xnoria Registration System',
       description: 'This is a description for Project Gamma.',
       tech: ['React', 'TypeScript', 'Next.js', 'Tailwind CSS'],
-      src: 'ppicture.png',
-      image: 'ppicture.png',
+      src: 'pholder.png',
+      image: 'pholder.png',
       featured: false,
-      githubUrl: '#',
+      githubUrl: 'https://github.com/alef-garrido/xnoria-alpha-registrationList',
       liveUrl: '#',
       color: '#b1b1b1'
     },
     {
-      title: 'Project Delta',
+      title: 'ECOM Quiz Funnel',
       description: 'This is a description for Project Delta.',
       tech: ['React', 'TypeScript', 'Next.js', 'Tailwind CSS'],
-      src: 'ppicture.png',
-      image: 'ppicture.png',
+      src: 'pholder.png',
+      image: 'pholder.png',
       featured: false,
       githubUrl: '#',
-      liveUrl: '#',
+      liveUrl: 'https://github.com/alef-garrido/ecom-test-business-owners',
       color: '#b1b1b1'
     },
   ];

@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navigation from "./components/navigation";
 import Script from "next/script";
+import { SidebarProvider } from "./context/sidebar-context";
+import SidebarChat from "./components/sidebar-chat";
 
 export const metadata: Metadata = {
   title: "Alef Lemat TECH",
@@ -34,8 +36,11 @@ export default function RootLayout({
         </style>
       </head>
       <body className={`antialiased`}>
-        <Navigation />
-        {children}
+        <SidebarProvider>
+          <Navigation />
+          <SidebarChat />
+          {children}
+        </SidebarProvider>
       </body>
     </html>
   );

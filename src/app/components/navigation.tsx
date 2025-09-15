@@ -107,11 +107,11 @@ const [currentDateTime, setCurrentDateTime] = useState(new Date());
                         <div className="flex gap-3">
                             <TrainingIcon />
                             <div>
-                                <Link href="#" onClick={openSidebar} className="text-sm font-normal lowercase block mb-2 hover:text-primary">Training</Link>
+                                <Link href="#" onClick={() => openSidebar('Training')} className="text-sm font-normal lowercase block mb-2 hover:text-primary">Training</Link>
                                 <ul className="space-y-1 text-xs lowercase">
-                                    <li><Link href="#" onClick={openSidebar} className="hover:text-primary">Design my Onboarding</Link></li>
-                                    <li><Link href="#" onClick={openSidebar} className="hover:text-primary">Train my team</Link></li>
-                                    <li><Link href="#" onClick={openSidebar} className="hover:text-primary">Learning Partner</Link></li>
+                                    <li><Link href="#" onClick={() => openSidebar('Design my Onboarding')} className="hover:text-primary">Design my Onboarding</Link></li>
+                                    <li><Link href="#" onClick={() => openSidebar('Train my team')} className="hover:text-primary">Train my team</Link></li>
+                                    <li><Link href="#" onClick={() => openSidebar('Learning Partner')} className="hover:text-primary">Learning Partner</Link></li>
                                 </ul>
                             </div>
                         </div>
@@ -173,11 +173,11 @@ const [currentDateTime, setCurrentDateTime] = useState(new Date());
                             <div className="flex gap-3">
                                 <TrainingIcon />
                                 <div>
-                                    <Link href="#" onClick={openSidebar} className="text-sm font-normal lowercase block mb-2 hover:text-primary">Training</Link>
+                                    <Link href="#" onClick={() => openSidebar('Training')} className="text-sm font-normal lowercase block mb-2 hover:text-primary">Training</Link>
                                     <ul className="space-y-1 text-xs lowercase">
-                                        <li><Link href="#" onClick={openSidebar} className="hover:text-primary">Design my Onboarding</Link></li>
-                                        <li><Link href="#" onClick={openSidebar} className="hover:text-primary">Train my team</Link></li>
-                                        <li><Link href="#" onClick={openSidebar} className="hover:text-primary">Learning Partner</Link></li>
+                                        <li><Link href="#" onClick={() => openSidebar('Design my Onboarding')} className="hover:text-primary">Design my Onboarding</Link></li>
+                                        <li><Link href="#" onClick={() => openSidebar('Train my team')} className="hover:text-primary">Train my team</Link></li>
+                                        <li><Link href="#" onClick={() => openSidebar('Learning Partner')} className="hover:text-primary">Learning Partner</Link></li>
                                     </ul>
                                 </div>
                             </div>

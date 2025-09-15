@@ -1,10 +1,10 @@
 'use client';
 
 import { useSidebar } from '../context/sidebar-context';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function SidebarChat() {
-  const { isSidebarOpen, closeSidebar } = useSidebar();
+  const { isSidebarOpen, closeSidebar, initialMessage } = useSidebar();
   const [messages, setMessages] = useState([
     {
       id: 1,
@@ -13,13 +13,24 @@ export default function SidebarChat() {
     },
   ]);
 
+  useEffect(() => {
+    if (initialMessage) {
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        { id: Date.now(), text: initialMessage, sender: 'user' },
+      ]);
+    }
+  }, [initialMessage]);
+
   if (!isSidebarOpen) {
     return null;
   }
 
   const handleOptionClick = (optionText: string) => {
-    // Placeholder for handling option clicks
-    console.log(optionText);
+    setMessages((prevMessages) => [
+      ...prevMessages,
+      { id: Date.now(), text: optionText, sender: 'user' },
+    ]);
   };
 
   return (

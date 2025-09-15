@@ -5,18 +5,26 @@ import { useSidebar } from '../context/sidebar-context';
 export default function SidebarChat() {
   const { isSidebarOpen, closeSidebar } = useSidebar();
 
+  if (!isSidebarOpen) {
+    return null;
+  }
+
   return (
     <div
-      className={`fixed top-0 right-0 h-full w-80 bg-background shadow-lg transform transition-transform duration-300 ease-in-out ${
-        isSidebarOpen ? 'translate-x-0' : 'translate-x-full'
-      }`}
+      className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-50 flex items-center justify-center"
+      onClick={closeSidebar}
     >
-      <div className="p-4">
-        <button onClick={closeSidebar} className="text-foreground">
-          Close
-        </button>
-        <h2 className="text-lg font-bold mt-4">Chat</h2>
-        {/* Add your chat UI here */}
+      <div
+        className="relative h-full w-full md:w-1/2 bg-background shadow-lg"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="p-4">
+          <button onClick={closeSidebar} className="text-foreground">
+            Close
+          </button>
+          <h2 className="text-lg font-bold mt-4">Chat</h2>
+          {/* Add your chat UI here */}
+        </div>
       </div>
     </div>
   );

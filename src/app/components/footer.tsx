@@ -53,7 +53,7 @@ const Footer = () => {
                     <div className="flex gap-3">
                         <TrainingIcon />
                         <div>
-                            <Link href="#" className="text-sm font-normal lowercase block mb-2 hover:text-primary">Training</Link>
+                            <p className="text-sm font-bold lowercase block mb-2">Training</p>
                             <ul className="space-y-1 text-xs lowercase">
                                 <li><Link href="#" className="hover:text-primary">Design my Onboarding</Link></li>
                                 <li><Link href="#" className="hover:text-primary">Train my team</Link></li>
@@ -65,7 +65,7 @@ const Footer = () => {
                     <div className="flex gap-3">
                         <ConsultationIcon />
                         <div>
-                            <Link href="#" className="text-sm font-normal lowercase block mb-2 hover:text-primary">Consultation</Link>
+                            <p className="text-sm font-bold lowercase block mb-2">Consultation</p>
                             <ul className="space-y-1 text-xs lowercase">
                                 <li><Link href="#" className="hover:text-primary">1:1 Consultation</Link></li>
                                 <li><Link href="#" className="hover:text-primary">Free Call</Link></li>
@@ -76,7 +76,7 @@ const Footer = () => {
                     <div className="flex gap-3">
                         <ImplementationIcon />
                         <div>
-                            <Link href="#" className="text-sm font-normal lowercase block mb-2 hover:text-primary">Cx Implementation</Link>
+                            <p className="text-sm font-bold lowercase block mb-2">Cx Implementation</p>
                             <ul className="space-y-1 text-xs lowercase">
                                 <li><Link href="#" className="hover:text-primary">Cx Assistance</Link></li>
                                 <li><a href="#" target="_blank" rel="noopener noreferrer" className="hover:text-primary">AI Assistance</a></li>
@@ -88,7 +88,7 @@ const Footer = () => {
                     <div className="flex gap-3">
                         <SupportIcon />
                         <div>
-                            <Link href="#" className="text-sm font-normal lowercase block mb-2 hover:text-primary">Contact</Link>
+                            <p className="text-sm font-bold lowercase block mb-2">Contact</p>
                             <ul className="space-y-1 text-xs lowercase">
                                 <li><Link href="#" className="hover:text-primary">newsletter</Link></li>
                                 <li><a href="#" target="_blank" rel="noopener noreferrer" className="hover:text-primary">instagram</a></li>

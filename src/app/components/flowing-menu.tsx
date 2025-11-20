@@ -1,7 +1,6 @@
 import React from 'react';
 
 interface MenuItemProps {
-  link: string;
   text: string;
   image: string;
   onClick: () => void;
@@ -25,7 +24,7 @@ const FlowingMenu: React.FC<FlowingMenuProps> = ({ items = [] }) => {
 
 const REPEATED_MARQUEE_CONTENT = Array.from({ length: 4 });
 
-const MenuItem: React.FC<MenuItemProps> = ({ link, text, image, onClick }) => {
+const MenuItem: React.FC<MenuItemProps> = ({ text, image, onClick }) => {
   const itemRef = React.useRef<HTMLDivElement>(null);
   const marqueeRef = React.useRef<HTMLDivElement>(null);
 
@@ -49,7 +48,7 @@ const MenuItem: React.FC<MenuItemProps> = ({ link, text, image, onClick }) => {
         />
       </React.Fragment>
     ));
-  }, []);
+  }, [text, image]);
 
   return (
     <div className="flex-1 relative overflow-hidden text-center shadow-[0_-1px_0_0_#fff]" ref={itemRef}>

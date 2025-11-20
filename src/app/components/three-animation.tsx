@@ -18,7 +18,7 @@ export default function ThreeAnimation() {
     if (!canvasRef.current) return;
 
     // Create a renderer
-    var renderer = new THREE.WebGLRenderer({
+    const renderer = new THREE.WebGLRenderer({
       canvas: canvasRef.current,
       antialias: true
     });
@@ -33,10 +33,10 @@ export default function ThreeAnimation() {
     renderer.setSize(window.innerWidth, window.innerHeight);
 
     // Create a new Three.js scene
-    var scene = new THREE.Scene();
+    const scene = new THREE.Scene();
 
     // Create a new camera
-    var camera = new THREE.PerspectiveCamera(
+    const camera = new THREE.PerspectiveCamera(
       45,
       window.innerWidth / window.innerHeight,
       0.1,
@@ -73,14 +73,14 @@ export default function ThreeAnimation() {
     scene.fog = new THREE.FogExp2(0x11151c, 0.4);
 
     // Load a texture for the 3d model
-    var surfaceImperfection = new THREE.TextureLoader().load(
+    const surfaceImperfection = new THREE.TextureLoader().load(
       "https://miroleon.github.io/daily-assets/surf_imp_02.jpg"
     );
     surfaceImperfection.wrapT = THREE.RepeatWrapping;
     surfaceImperfection.wrapS = THREE.RepeatWrapping;
 
     // Create a new MeshPhysicalMaterial for the 3d model
-    var hands_mat = new THREE.MeshPhysicalMaterial({
+    const hands_mat = new THREE.MeshPhysicalMaterial({
       color: 0x606060,
       roughness: 0.2,
       metalness: 1,
@@ -214,7 +214,7 @@ export default function ThreeAnimation() {
     displacementPass.uniforms["tileFactor"].value = 2;
 
     // Create a new EffectComposer to add all the passes to the scene
-    let composer = new EffectComposer(renderer);
+    const composer = new EffectComposer(renderer);
     composer.addPass(renderScene);
     composer.addPass(afterimagePass);
     composer.addPass(bloomPass);
@@ -232,23 +232,23 @@ export default function ThreeAnimation() {
     // Variables to control the transition
     let isUserInteracting = false;
     let transitionProgress = 0;
-    let transitionTime = 2; // Transition should complete over 5 seconds
-    let transitionIncrement = 1 / (60 * transitionTime); // Assuming 60 FPS
-    let transitionStartCameraPosition = new THREE.Vector3();
-    let transitionStartCameraQuaternion = new THREE.Quaternion();
+    const transitionTime = 2; // Transition should complete over 5 seconds
+    const transitionIncrement = 1 / (60 * transitionTime); // Assuming 60 FPS
+    const transitionStartCameraPosition = new THREE.Vector3();
+    const transitionStartCameraQuaternion = new THREE.Quaternion();
 
-    var theta = 0;
-    var update = function () {
+    let theta = 0;
+    const update = function () {
       // Update theta continuously
       theta += 0.005;
 
-      let targetPosition = new THREE.Vector3(
+      const targetPosition = new THREE.Vector3(
         Math.sin(theta) * 3,
         Math.sin(theta),
         Math.cos(theta) * 3
       );
 
-      let targetQuaternion = new THREE.Quaternion().setFromEuler(
+      const targetQuaternion = new THREE.Quaternion().setFromEuler(
         new THREE.Euler(0, -theta, 0)
       );
 
@@ -263,7 +263,7 @@ export default function ThreeAnimation() {
       } else {
         if (transitionProgress < 1) {
           transitionProgress += transitionIncrement; // Increment the progress towards the scripted path
-          let easedProgress = easeInOutCubic(transitionProgress);
+          const easedProgress = easeInOutCubic(transitionProgress);
 
           // Smoothly interpolate camera position and rotation using eased progress
           camera.position.lerpVectors(
@@ -271,8 +271,7 @@ export default function ThreeAnimation() {
             targetPosition,
             easedProgress
           );
-          camera.quaternion.slerp(
-            transitionStartCameraQuaternion,
+          camera.quaternion.copy(transitionStartCameraQuaternion).slerp(
             targetQuaternion,
             easedProgress
           );

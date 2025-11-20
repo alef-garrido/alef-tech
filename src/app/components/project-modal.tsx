@@ -1,6 +1,6 @@
 import { X, Github, ExternalLink, Maximize } from 'lucide-react';
 import { useEffect } from 'react';
-import { project } from '../../types';
+import { project } from '../../../types';
 import Image from 'next/image';
 
 interface ProjectModalProps {
@@ -229,7 +229,7 @@ const ProjectModal = ({ project, closeModal }: ProjectModalProps) => {
                     <br />
                     <span className="c-cyber-accent">admin@portfolio:~$</span> npm install && npm run dev
                     <br />
-                    <span className="c-cyber-text-dim">Cloning into '{project.title.toLowerCase().replace(/\s+/g, '-')}'...</span>
+                    <span className="c-cyber-text-dim">Cloning into {project.title.toLowerCase().replace(/\s+/g, '-')}...</span>
                     <span className="c-terminal-cursor">_</span>
                   </div>
                 </div>

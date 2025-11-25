@@ -1,5 +1,7 @@
 import Link from 'next/link';
-import { Linkedin, Instagram, Rss } from 'lucide-react';
+import LinkedinIcon from './icons/LinkedinIcon';
+import InstagramIcon from './icons/InstagramIcon';
+import SubstackIcon from './icons/SubstackIcon';
 
 const TrainingIcon = () => (
     <div className="flex items-end gap-1 h-[4.5rem]" aria-hidden="true">
@@ -100,11 +102,11 @@ const Footer = () => {
             </div>
             <div className="mt-12 border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
                 <div className="flex gap-4 mb-4 md:mb-0">
-                    <a href="#" className="text-gray-400 hover:text-white"><Linkedin size={24} /></a>
-                    <a href="#" className="text-gray-400 hover:text-white"><Instagram size={24} /></a>
-                    <a href="#" className="text-gray-400 hover:text-white"><Rss size={24} /></a>
+                    <a href="https://www.linkedin.com/in/alef-lemat/" className="text-gray-400 hover:text-white"><LinkedinIcon size={24} /></a>
+                    <a href="https://www.instagram.com/studiolemat/" className="text-gray-400 hover:text-white"><InstagramIcon size={24} /></a>
+                    <a href="https://substack.com/@aleflemat" className="text-gray-400 hover:text-white"><SubstackIcon size={24} /></a>
                 </div>
-                <div className="text-center text-gray-500 my-2">
+                <div className="mx-4 text-center text-gray-500 my-2">
                     <p>Ever evolving, always adapting, and delivering solutions with genuine care.</p>
                 </div>
                 <form>

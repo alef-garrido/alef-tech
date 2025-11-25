@@ -17,31 +17,31 @@ const FeaturedProjects = () => {
       image: 'pholder.png',
       featured: true,
       githubUrl: 'https://github.com/alef-garrido/nomad_proxy',
-      liveUrl: '#',
+      liveUrl: 'https://nomad-proxy.vercel.app/',
       color: '#b1b1b1'
     },
     {
-      title: 'Dinami_CO Gamified Learning Platform',
+      title: 'Gamified Learning Platform',
       description: 'This is a description for Project Beta.',
       tech: ['React', 'TypeScript', 'Next.js', 'Tailwind CSS'],
       src: 'pholder.png',
       image: 'pholder.png',
       featured: false,
-      githubUrl: '#',
-      liveUrl: 'https://github.com/alef-garrido/dinami_co-app',
+      githubUrl: 'https://github.com/alef-garrido/elearning-camp-FullStack',
+      liveUrl: 'https://elearning-camp-full-stack-frontend.vercel.app/',
       color: '#b1b1b1'
     },
-    {
-      title: 'Xnoria Registration System',
-      description: 'This is a description for Project Gamma.',
-      tech: ['React', 'TypeScript', 'Next.js', 'Tailwind CSS'],
-      src: 'pholder.png',
-      image: 'pholder.png',
-      featured: false,
-      githubUrl: 'https://github.com/alef-garrido/xnoria-alpha-registrationList',
-      liveUrl: '#',
-      color: '#b1b1b1'
-    },
+    // {
+    //   title: 'Xnoria Registration System',
+    //   description: 'This is a description for Project Gamma.',
+    //   tech: ['React', 'TypeScript', 'Next.js', 'Tailwind CSS'],
+    //   src: 'pholder.png',
+    //   image: 'pholder.png',
+    //   featured: false,
+    //   githubUrl: 'https://github.com/alef-garrido/xnoria-alpha-registrationList',
+    //   liveUrl: '#',
+    //   color: '#b1b1b1'
+    // },
     {
       title: 'ECOM Quiz Funnel',
       description: 'This is a description for Project Delta.',

@@ -49,7 +49,7 @@ const FeaturedProjects = () => {
       src: 'pholder.png',
       image: 'pholder.png',
       featured: false,
-      githubUrl: '#',
+      githubUrl: 'https://github.com/alef-garrido/ecom-test-business-owners',
       liveUrl: 'https://github.com/alef-garrido/ecom-test-business-owners',
       color: '#b1b1b1'
     },

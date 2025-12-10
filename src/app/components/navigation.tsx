@@ -123,6 +123,7 @@ const [currentDateTime, setCurrentDateTime] = useState(new Date());
                                 <ul className="space-y-1 text-xs lowercase">
                                     <li><Link href="#" className="hover:text-primary">1:1 Consultation</Link></li>
                                     <li><Link href="#" className="hover:text-primary">Free Call</Link></li>
+                                    <li><Link href="#" onClick={(e) => { e.preventDefault(); openSidebar(); }} className="hover:text-primary">Chat with AI</Link></li>
                                 </ul>
                             </div>
                         </div>
@@ -189,6 +190,7 @@ const [currentDateTime, setCurrentDateTime] = useState(new Date());
                                     <ul className="space-y-1 text-xs lowercase">
                                         <li><Link href="#" className="hover:text-primary">1:1 Consultation</Link></li>
                                         <li><Link href="#" className="hover:text-primary">Free Call</Link></li>
+                                        <li><Link href="#" onClick={(e) => { e.preventDefault(); openSidebar(); }} className="hover:text-primary">Chat with AI</Link></li>
                                     </ul>
                                 </div>
                             </div>

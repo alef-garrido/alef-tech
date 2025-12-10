@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { useSidebar } from '../context/sidebar-context';
+import LeadCaptureForm from './lead-capture-form';
 
 interface Message {
   sender: 'user' | 'ai';
@@ -107,6 +108,9 @@ export default function SidebarChat() {
 
         <div className="flex-1 p-4 overflow-y-auto">
           <div className="flex flex-col space-y-4">
+            {/* Lead Capture Form */}
+            {activeFlow && <LeadCaptureForm />}
+
             {messages.map((msg, index) => (
               <div
                 key={index}

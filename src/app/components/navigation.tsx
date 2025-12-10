@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { useSidebar } from '../context/sidebar-context';
+import { AUTOMATION_FLOWS } from '@/config/automation-flows';
 
 const TrainingIcon = () => (
     <div className="flex items-end gap-1 h-[4.5rem]" aria-hidden="true">
@@ -60,7 +61,7 @@ const CloseIcon = () => (
 
 export default function Navigation() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const { openSidebar } = useSidebar();
+    const { openSidebar, openSidebarWithFlow } = useSidebar();
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -107,11 +108,11 @@ const [currentDateTime, setCurrentDateTime] = useState(new Date());
                         <div className="flex gap-3">
                             <TrainingIcon />
                             <div>
-                                <Link href="#" onClick={openSidebar} className="text-sm font-normal lowercase block mb-2 hover:text-primary">Training</Link>
+                                <Link href="#" className="text-sm font-normal lowercase block mb-2 hover:text-primary">Training</Link>
                                 <ul className="space-y-1 text-xs lowercase">
-                                    <li><Link href="#" onClick={openSidebar} className="hover:text-primary">Design my Onboarding</Link></li>
-                                    <li><Link href="#" onClick={openSidebar} className="hover:text-primary">Train my team</Link></li>
-                                    <li><Link href="#" onClick={openSidebar} className="hover:text-primary">Learning Partner</Link></li>
+                                    <li><Link href="#" onClick={(e) => { e.preventDefault(); openSidebarWithFlow(AUTOMATION_FLOWS['design-onboarding']); }} className="hover:text-primary">Design my Onboarding</Link></li>
+                                    <li><Link href="#" onClick={(e) => { e.preventDefault(); openSidebarWithFlow(AUTOMATION_FLOWS['train-my-team']); }} className="hover:text-primary">Train my team</Link></li>
+                                    <li><Link href="#" onClick={(e) => { e.preventDefault(); openSidebarWithFlow(AUTOMATION_FLOWS['learning-partner']); }} className="hover:text-primary">Learning Partner</Link></li>
                                 </ul>
                             </div>
                         </div>
@@ -121,9 +122,9 @@ const [currentDateTime, setCurrentDateTime] = useState(new Date());
                             <div>
                                 <Link href="#" className="text-sm font-normal lowercase block mb-2 hover:text-primary">Consultation</Link>
                                 <ul className="space-y-1 text-xs lowercase">
-                                    <li><Link href="#" className="hover:text-primary">1:1 Consultation</Link></li>
-                                    <li><Link href="#" className="hover:text-primary">Free Call</Link></li>
-                                    <li><Link href="#" onClick={(e) => { e.preventDefault(); openSidebar(); }} className="hover:text-primary">Chat with AI</Link></li>
+                                    <li><Link href="#" onClick={(e) => { e.preventDefault(); openSidebarWithFlow(AUTOMATION_FLOWS['1on1-consultation']); }} className="hover:text-primary">1:1 Consultation</Link></li>
+                                    <li><Link href="#" onClick={(e) => { e.preventDefault(); openSidebarWithFlow(AUTOMATION_FLOWS['free-call']); }} className="hover:text-primary">Free Call</Link></li>
+                                    <li><Link href="#" onClick={(e) => { e.preventDefault(); openSidebarWithFlow(AUTOMATION_FLOWS['chat-with-ai']); }} className="hover:text-primary">Chat with AI</Link></li>
                                 </ul>
                             </div>
                         </div>
@@ -133,9 +134,9 @@ const [currentDateTime, setCurrentDateTime] = useState(new Date());
                             <div>
                                 <Link href="#" className="text-sm font-normal lowercase block mb-2 hover:text-primary">Cx Implementation</Link>
                                 <ul className="space-y-1 text-xs lowercase">
-                                    <li><Link href="#" className="hover:text-primary">Cx Assistance</Link></li>
-                                    <li><a href="#" target="_blank" rel="noopener noreferrer" className="hover:text-primary">AI Assistance</a></li>
-                                    <li><Link href="#" className="hover:text-primary">Bespoke Software</Link></li>
+                                    <li><Link href="#" onClick={(e) => { e.preventDefault(); openSidebarWithFlow(AUTOMATION_FLOWS['cx-assistance']); }} className="hover:text-primary">Cx Assistance</Link></li>
+                                    <li><Link href="#" onClick={(e) => { e.preventDefault(); openSidebarWithFlow(AUTOMATION_FLOWS['ai-assistance']); }} className="hover:text-primary">AI Assistance</Link></li>
+                                    <li><Link href="#" onClick={(e) => { e.preventDefault(); openSidebarWithFlow(AUTOMATION_FLOWS['bespoke-software']); }} className="hover:text-primary">Bespoke Software</Link></li>
                                 </ul>
                             </div>
                         </div>
@@ -174,11 +175,11 @@ const [currentDateTime, setCurrentDateTime] = useState(new Date());
                             <div className="flex gap-3">
                                 <TrainingIcon />
                                 <div>
-                                    <Link href="#" onClick={openSidebar} className="text-sm font-normal lowercase block mb-2 hover:text-primary">Training</Link>
+                                    <Link href="#" className="text-sm font-normal lowercase block mb-2 hover:text-primary">Training</Link>
                                     <ul className="space-y-1 text-xs lowercase">
-                                        <li><Link href="#" onClick={openSidebar} className="hover:text-primary">Design my Onboarding</Link></li>
-                                        <li><Link href="#" onClick={openSidebar} className="hover:text-primary">Train my team</Link></li>
-                                        <li><Link href="#" onClick={openSidebar} className="hover:text-primary">Learning Partner</Link></li>
+                                        <li><Link href="#" onClick={(e) => { e.preventDefault(); openSidebarWithFlow(AUTOMATION_FLOWS['design-onboarding']); }} className="hover:text-primary">Design my Onboarding</Link></li>
+                                        <li><Link href="#" onClick={(e) => { e.preventDefault(); openSidebarWithFlow(AUTOMATION_FLOWS['train-my-team']); }} className="hover:text-primary">Train my team</Link></li>
+                                        <li><Link href="#" onClick={(e) => { e.preventDefault(); openSidebarWithFlow(AUTOMATION_FLOWS['learning-partner']); }} className="hover:text-primary">Learning Partner</Link></li>
                                     </ul>
                                 </div>
                             </div>
@@ -188,9 +189,9 @@ const [currentDateTime, setCurrentDateTime] = useState(new Date());
                                 <div>
                                     <Link href="#" className="text-sm font-normal lowercase block mb-2 hover:text-primary">Consultation</Link>
                                     <ul className="space-y-1 text-xs lowercase">
-                                        <li><Link href="#" className="hover:text-primary">1:1 Consultation</Link></li>
-                                        <li><Link href="#" className="hover:text-primary">Free Call</Link></li>
-                                        <li><Link href="#" onClick={(e) => { e.preventDefault(); openSidebar(); }} className="hover:text-primary">Chat with AI</Link></li>
+                                        <li><Link href="#" onClick={(e) => { e.preventDefault(); openSidebarWithFlow(AUTOMATION_FLOWS['1on1-consultation']); }} className="hover:text-primary">1:1 Consultation</Link></li>
+                                        <li><Link href="#" onClick={(e) => { e.preventDefault(); openSidebarWithFlow(AUTOMATION_FLOWS['free-call']); }} className="hover:text-primary">Free Call</Link></li>
+                                        <li><Link href="#" onClick={(e) => { e.preventDefault(); openSidebarWithFlow(AUTOMATION_FLOWS['chat-with-ai']); }} className="hover:text-primary">Chat with AI</Link></li>
                                     </ul>
                                 </div>
                             </div>
@@ -200,9 +201,9 @@ const [currentDateTime, setCurrentDateTime] = useState(new Date());
                                 <div>
                                     <Link href="#" className="text-sm font-normal lowercase block mb-2 hover:text-primary">Cx Implementation</Link>
                                     <ul className="space-y-1 text-xs lowercase">
-                                        <li><Link href="#" className="hover:text-primary">Cx Assistance</Link></li>
-                                        <li><a href="#" target="_blank" rel="noopener noreferrer" className="hover:text-primary">AI Assistance</a></li>
-                                        <li><Link href="#" className="hover:text-primary">Bespoke Software</Link></li>
+                                        <li><Link href="#" onClick={(e) => { e.preventDefault(); openSidebarWithFlow(AUTOMATION_FLOWS['cx-assistance']); }} className="hover:text-primary">Cx Assistance</Link></li>
+                                        <li><Link href="#" onClick={(e) => { e.preventDefault(); openSidebarWithFlow(AUTOMATION_FLOWS['ai-assistance']); }} className="hover:text-primary">AI Assistance</Link></li>
+                                        <li><Link href="#" onClick={(e) => { e.preventDefault(); openSidebarWithFlow(AUTOMATION_FLOWS['bespoke-software']); }} className="hover:text-primary">Bespoke Software</Link></li>
                                     </ul>
                                 </div>
                             </div>

@@ -9,17 +9,39 @@ interface Message {
 }
 
 export default function SidebarChat() {
-  const { isSidebarOpen, closeSidebar } = useSidebar();
+  const { isSidebarOpen, closeSidebar, activeFlow, clearFlow, leadData, updateLeadData } = useSidebar();
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const flowInitializedRef = useRef(false);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   useEffect(scrollToBottom, [messages]);
+
+  // Auto-send trigger message when flow is active
+  useEffect(() => {
+    if (activeFlow && isSidebarOpen && !flowInitializedRef.current) {
+      flowInitializedRef.current = true;
+      const triggerMsg: Message = {
+        sender: 'ai',
+        text: activeFlow.triggerMessage,
+      };
+      setMessages([triggerMsg]);
+    }
+  }, [activeFlow, isSidebarOpen]);
+
+  // Reset flow initialization when sidebar closes
+  useEffect(() => {
+    if (!isSidebarOpen) {
+      flowInitializedRef.current = false;
+      setMessages([]);
+      clearFlow();
+    }
+  }, [isSidebarOpen, clearFlow]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -36,7 +58,12 @@ export default function SidebarChat() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ prompt: input }),
+        body: JSON.stringify({
+          prompt: input,
+          flowId: activeFlow?.id,
+          systemPrompt: activeFlow?.systemPrompt,
+          leadData: leadData,
+        }),
       });
 
       if (!response.ok) {
@@ -72,7 +99,7 @@ export default function SidebarChat() {
         onClick={(e) => e.stopPropagation()}
       >
         <div className="p-4 border-b border-gray-700 flex justify-between items-center">
-          <h2 className="text-lg font-bold">AI Assistant</h2>
+          <h2 className="text-lg font-bold">{activeFlow ? activeFlow.name : 'AI Assistant'}</h2>
           <button onClick={closeSidebar} className="text-foreground">
             &times;
           </button>

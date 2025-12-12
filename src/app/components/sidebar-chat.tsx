@@ -3,10 +3,14 @@
 import { useState, useRef, useEffect } from 'react';
 import { useSidebar } from '../context/sidebar-context';
 import LeadCaptureForm from './lead-capture-form';
+import { saveConversation, loadConversation } from '@/lib/conversation-storage';
+import DOMPurify from 'dompurify';
 
 interface Message {
+  id: string;
   sender: 'user' | 'ai';
   text: string;
+  timestamp: number;
 }
 
 export default function SidebarChat() {
@@ -14,6 +18,7 @@ export default function SidebarChat() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [csrfToken, setCSRFToken] = useState<string>('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const flowInitializedRef = useRef(false);
 
@@ -23,32 +28,104 @@ export default function SidebarChat() {
 
   useEffect(scrollToBottom, [messages]);
 
-  // Auto-send trigger message when flow is active
+  // Fetch CSRF token on component mount
+  useEffect(() => {
+    const fetchCSRFToken = async () => {
+      try {
+        const response = await fetch('/api/csrf-token', { method: 'GET' });
+        const data = await response.json();
+        setCSRFToken(data.token);
+      } catch (error) {
+        console.error('Failed to fetch CSRF token:', error);
+      }
+    };
+
+    fetchCSRFToken();
+  }, []);
+
+  // Load or initialize messages when flow changes
   useEffect(() => {
     if (activeFlow && isSidebarOpen && !flowInitializedRef.current) {
       flowInitializedRef.current = true;
-      const triggerMsg: Message = {
-        sender: 'ai',
-        text: activeFlow.triggerMessage,
-      };
-      setMessages([triggerMsg]);
+      const storageKey = `sidebar-chat-${activeFlow.id}`;
+
+      // Try localStorage first (for instant load)
+      const stored = localStorage.getItem(storageKey);
+      if (stored) {
+        try {
+          setMessages(JSON.parse(stored));
+          return;
+        } catch (e) {
+          console.error('Failed to parse stored messages');
+        }
+      }
+
+      // Fall back to API (server-side persistence)
+      loadConversation(activeFlow.id).then((messages) => {
+        if (messages && messages.length > 0) {
+          setMessages(messages);
+        } else {
+          initializeTriggerMessage();
+        }
+      });
     }
   }, [activeFlow, isSidebarOpen]);
+
+  // Save messages to both localStorage and API
+  useEffect(() => {
+    if (activeFlow && messages.length > 0) {
+      const storageKey = `sidebar-chat-${activeFlow.id}`;
+      // Save locally for instant access
+      localStorage.setItem(storageKey, JSON.stringify(messages));
+      // Save to server for persistence across browsers
+      saveConversation(activeFlow.id, messages);
+    }
+  }, [messages, activeFlow]);
+
+  const initializeTriggerMessage = () => {
+    if (!activeFlow) return;
+    const triggerMsg: Message = {
+      id: `msg-${Date.now()}`,
+      sender: 'ai',
+      text: activeFlow.triggerMessage,
+      timestamp: Date.now(),
+    };
+    setMessages([triggerMsg]);
+  };
 
   // Reset flow initialization when sidebar closes
   useEffect(() => {
     if (!isSidebarOpen) {
       flowInitializedRef.current = false;
-      setMessages([]);
       clearFlow();
     }
   }, [isSidebarOpen, clearFlow]);
+
+  const MAX_INPUT_LENGTH = 1000;
+  const MAX_CONVERSATION_LENGTH = 50;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim() || isLoading) return;
 
-    const userMessage: Message = { sender: 'user', text: input };
+    if (input.length > MAX_INPUT_LENGTH) {
+      alert(`Message limited to ${MAX_INPUT_LENGTH} characters`);
+      return;
+    }
+
+    if (messages.length > MAX_CONVERSATION_LENGTH) {
+      const proceed = confirm(
+        'This conversation is getting long. Continue or start fresh?'
+      );
+      if (!proceed) return;
+    }
+
+    const userMessage: Message = {
+      id: `msg-${Date.now()}`,
+      sender: 'user',
+      text: input,
+      timestamp: Date.now(),
+    };
     setMessages((prev) => [...prev, userMessage]);
     setInput('');
     setIsLoading(true);
@@ -58,9 +135,11 @@ export default function SidebarChat() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'x-csrf-token': csrfToken,
         },
         body: JSON.stringify({
           prompt: input,
+          messages: messages,
           flowId: activeFlow?.id,
           systemPrompt: activeFlow?.systemPrompt,
           leadData: leadData,
@@ -72,13 +151,20 @@ export default function SidebarChat() {
       }
 
       const data = await response.json();
-      const aiMessage: Message = { sender: 'ai', text: data.text };
+      const aiMessage: Message = {
+        id: `msg-${Date.now()}`,
+        sender: 'ai',
+        text: data.text,
+        timestamp: Date.now(),
+      };
       setMessages((prev) => [...prev, aiMessage]);
     } catch (error) {
       console.error('Failed to fetch AI response:', error);
       const errorMessage: Message = {
+        id: `msg-${Date.now()}`,
         sender: 'ai',
         text: 'Sorry, I am having trouble connecting. Please try again later.',
+        timestamp: Date.now(),
       };
       setMessages((prev) => [...prev, errorMessage]);
     } finally {
@@ -111,9 +197,9 @@ export default function SidebarChat() {
             {/* Lead Capture Form */}
             {activeFlow && <LeadCaptureForm />}
 
-            {messages.map((msg, index) => (
+            {messages.map((msg) => (
               <div
-                key={index}
+                key={msg.id}
                 className={`flex ${
                   msg.sender === 'user' ? 'justify-end' : 'justify-start'
                 }`}
@@ -124,9 +210,8 @@ export default function SidebarChat() {
                       ? 'bg-primary text-primary-foreground'
                       : 'bg-secondary text-secondary-foreground'
                   }`}
-                >
-                  <p className="text-sm">{msg.text}</p>
-                </div>
+                  dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(msg.text) }}
+                ></div>
               </div>
             ))}
             {isLoading && (

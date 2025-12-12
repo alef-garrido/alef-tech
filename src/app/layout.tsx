@@ -4,6 +4,9 @@ import Navigation from "./components/navigation";
 import Script from "next/script";
 import { SidebarProvider } from "./context/sidebar-context";
 import SidebarChat from "./components/sidebar-chat";
+import { validateEnvironmentVariables } from "@/config/env-validation";
+
+validateEnvironmentVariables();
 
 export const metadata: Metadata = {
   title: "Alef Lemat TECH",

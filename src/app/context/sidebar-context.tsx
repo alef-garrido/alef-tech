@@ -1,7 +1,10 @@
 'use client';
 
-import { createContext, useContext, useState, ReactNode } from 'react';
+import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 import { AutomationFlow } from '@/config/automation-flows';
+import { ChatErrorBoundary } from '../components/error-boundary';
+import { saveLead } from '@/lib/lead-storage';
+import { getSessionId } from '@/lib/conversation-storage';
 
 export interface LeadData {
   name?: string;
@@ -49,7 +52,7 @@ export function SidebarProvider({ children }: { children: ReactNode }) {
 
   const openSidebar = () => setSidebarOpen(true);
   const closeSidebar = () => setSidebarOpen(false);
-  
+
   const openSidebarWithFlow = (flow: AutomationFlow) => {
     setActiveFlow(flow);
     setLeadDataState((prev) => ({
@@ -58,42 +61,51 @@ export function SidebarProvider({ children }: { children: ReactNode }) {
     }));
     setSidebarOpen(true);
   };
-  
+
   const clearFlow = () => setActiveFlow(null);
-  
+
   const setLeadData = (data: Partial<LeadData>) => {
     setLeadDataState((prev) => ({
       ...defaultLeadData,
       ...data,
     }));
   };
-  
+
   const updateLeadData = (data: Partial<LeadData>) => {
     setLeadDataState((prev) => ({
       ...prev,
       ...data,
     }));
   };
-  
+
   const clearLeadData = () => setLeadDataState(defaultLeadData);
 
+  // Auto-save lead data whenever it changes and has email
+  useEffect(() => {
+    if (activeFlow && leadData.email) {
+      saveLead(activeFlow.id, leadData);
+    }
+  }, [leadData, activeFlow]);
+
   return (
-    <SidebarContext.Provider
-      value={{
-        isSidebarOpen,
-        openSidebar,
-        closeSidebar,
-        activeFlow,
-        openSidebarWithFlow,
-        clearFlow,
-        leadData,
-        setLeadData,
-        updateLeadData,
-        clearLeadData,
-      }}
-    >
-      {children}
-    </SidebarContext.Provider>
+    <ChatErrorBoundary>
+      <SidebarContext.Provider
+        value={{
+          isSidebarOpen,
+          openSidebar,
+          closeSidebar,
+          activeFlow,
+          openSidebarWithFlow,
+          clearFlow,
+          leadData,
+          setLeadData,
+          updateLeadData,
+          clearLeadData,
+        }}
+      >
+        {children}
+      </SidebarContext.Provider>
+    </ChatErrorBoundary>
   );
 }
 

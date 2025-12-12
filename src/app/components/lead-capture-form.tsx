@@ -1,11 +1,33 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSidebar } from '../context/sidebar-context';
 
 export default function LeadCaptureForm() {
   const { leadData, updateLeadData, activeFlow } = useSidebar();
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isSaved, setIsSaved] = useState(false);
+  const [emailError, setEmailError] = useState('');
+
+  useEffect(() => {
+    if (leadData.email) {
+      setIsSaved(false);
+    }
+  }, [leadData.email]);
+
+  const validateEmail = (email: string): boolean => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  };
+
+  const handleEmailChange = (value: string) => {
+    updateLeadData({ email: value });
+    if (value && !validateEmail(value)) {
+      setEmailError('Invalid email address');
+    } else {
+      setEmailError('');
+    }
+  };
 
   if (!activeFlow || !isExpanded) {
     return (
@@ -22,12 +44,15 @@ export default function LeadCaptureForm() {
     <div className="bg-secondary/50 p-4 rounded-md mb-4 border border-secondary">
       <div className="flex justify-between items-center mb-3">
         <h3 className="text-sm font-semibold text-secondary-foreground">Your Information</h3>
-        <button
-          onClick={() => setIsExpanded(false)}
-          className="text-xs text-secondary-foreground/70 hover:text-secondary-foreground"
-        >
-          minimize
-        </button>
+        <div className="flex items-center gap-2">
+          {isSaved && <span className="text-xs text-green-500">✓ Saved</span>}
+          <button
+            onClick={() => setIsExpanded(false)}
+            className="text-xs text-secondary-foreground/70 hover:text-secondary-foreground"
+          >
+            minimize
+          </button>
+        </div>
       </div>
 
       <div className="space-y-2">
@@ -38,13 +63,18 @@ export default function LeadCaptureForm() {
           onChange={(e) => updateLeadData({ name: e.target.value })}
           className="w-full px-3 py-1.5 bg-input text-foreground text-sm rounded border border-gray-600 focus:outline-none focus:ring-1 focus:ring-primary"
         />
-        <input
-          type="email"
-          placeholder="Email"
-          value={leadData.email || ''}
-          onChange={(e) => updateLeadData({ email: e.target.value })}
-          className="w-full px-3 py-1.5 bg-input text-foreground text-sm rounded border border-gray-600 focus:outline-none focus:ring-1 focus:ring-primary"
-        />
+        <div>
+          <input
+            type="email"
+            placeholder="Email"
+            value={leadData.email || ''}
+            onChange={(e) => handleEmailChange(e.target.value)}
+            className={`w-full px-3 py-1.5 bg-input text-foreground text-sm rounded border focus:outline-none focus:ring-1 ${
+              emailError ? 'border-red-500 focus:ring-red-500' : 'border-gray-600 focus:ring-primary'
+            }`}
+          />
+          {emailError && <p className="text-xs text-red-500 mt-1">{emailError}</p>}
+        </div>
         <input
           type="tel"
           placeholder="Phone (optional)"

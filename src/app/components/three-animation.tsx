@@ -72,19 +72,36 @@ export default function ThreeAnimation() {
     scene.fog = new THREE.Fog(0x11151c, 1, 100);
     scene.fog = new THREE.FogExp2(0x11151c, 0.4);
 
+    // Add a default light so model is visible even without environment map
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+    scene.add(ambientLight);
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+    directionalLight.position.set(5, 5, 5);
+    scene.add(directionalLight);
+
     // Load a texture for the 3d model
-    const surfaceImperfection = new THREE.TextureLoader().load(
-      "https://miroleon.github.io/daily-assets/surf_imp_02.jpg"
+    let surfaceImperfection: THREE.Texture | null = null;
+    const textureLoader = new THREE.TextureLoader();
+    textureLoader.load(
+      "https://miroleon.github.io/daily-assets/surf_imp_02.jpg",
+      (texture) => {
+        surfaceImperfection = texture;
+        texture.wrapT = THREE.RepeatWrapping;
+        texture.wrapS = THREE.RepeatWrapping;
+        console.log("Surface texture loaded successfully");
+      },
+      undefined,
+      (error) => {
+        console.warn("Failed to load surface texture, continuing without it", error);
+      }
     );
-    surfaceImperfection.wrapT = THREE.RepeatWrapping;
-    surfaceImperfection.wrapS = THREE.RepeatWrapping;
 
     // Create a new MeshPhysicalMaterial for the 3d model
     const hands_mat = new THREE.MeshPhysicalMaterial({
       color: 0x606060,
       roughness: 0.2,
       metalness: 1,
-      roughnessMap: surfaceImperfection,
+      roughnessMap: surfaceImperfection || undefined,
       envMap: hdrEquirect,
       // Set the strenth of the environment map on the texture
       envMapIntensity: 1.5
@@ -95,11 +112,13 @@ export default function ThreeAnimation() {
     fbxloader.load(
       "https://miroleon.github.io/daily-assets/two_hands_01.fbx",
       function (object) {
+        console.log("FBX model loaded successfully", object);
         // Traverse through the object to apply the material to all the meshes
         object.traverse(function (child) {
           // Apply the material to the 3d model
           if ((child as THREE.Mesh).isMesh) {
             (child as THREE.Mesh).material = hands_mat;
+            console.log("Applied material to mesh:", child.name);
           }
         });
 
@@ -109,6 +128,13 @@ export default function ThreeAnimation() {
 
         // Add the 3d model to the scene
         scene.add(object);
+        console.log("FBX model added to scene");
+      },
+      (progressEvent) => {
+        console.log("Loading FBX...", Math.round((progressEvent.loaded / progressEvent.total) * 100) + "%");
+      },
+      function (error) {
+        console.error("Error loading FBX model:", error);
       }
     );
 

@@ -37,14 +37,14 @@ export function middleware(request: NextRequest) {
   response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
   response.headers.set('Permissions-Policy', 'geolocation=(), microphone=(), camera=()');
 
-  // CSP Header - allows Gemini API and Supabase
+  // CSP Header - allows Gemini API, Supabase, and external assets for 3D animation
   const cspHeader = [
     "default-src 'self'",
     "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net",
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
     "img-src 'self' data: https:",
     "font-src 'self' https://fonts.gstatic.com",
-    "connect-src 'self' https://generativelanguage.googleapis.com https://*.supabase.co https://api.github.com",
+    "connect-src 'self' https://generativelanguage.googleapis.com https://*.supabase.co https://api.github.com https://miroleon.github.io",
     "frame-ancestors 'none'",
     "base-uri 'self'",
     "form-action 'self'",

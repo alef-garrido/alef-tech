@@ -1,4 +1,6 @@
 import { getConversation, saveConversation, deleteConversation } from '@/lib/conversation-supabase';
+import { ratelimit, getIp } from '@/lib/rate-limiter';
+import { logger } from '@/lib/logger';
 
 interface SavedMessage {
   id: string;
@@ -16,6 +18,20 @@ interface ConversationData {
 
 export async function POST(request: Request) {
   try {
+    const ip = getIp(request);
+    const { success, pending, limit, reset, remaining } = await ratelimit.limit(ip);
+
+    if (!success) {
+      return new Response('Too Many Requests', {
+        status: 429,
+        headers: {
+          'X-RateLimit-Limit': limit.toString(),
+          'X-RateLimit-Remaining': remaining.toString(),
+          'X-RateLimit-Reset': reset.toString(),
+        },
+      });
+    }
+
     const body = await request.json();
     const { action, flowId, messages } = body;
 

@@ -2,7 +2,8 @@
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { useSidebar } from '../context/sidebar-context';
+import { DynamicLeadForm } from './dynamic-lead-form';
+import { ServiceType } from '@/app/types/lead';
 
 const TrainingIcon = () => (
     <div className="flex items-end gap-1 h-[4.5rem]" aria-hidden="true">
@@ -60,10 +61,18 @@ const CloseIcon = () => (
 
 export default function Navigation() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const { openSidebar } = useSidebar();
+    const [showLeadForm, setShowLeadForm] = useState(false);
+    const [selectedService, setSelectedService] = useState<ServiceType>('general');
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
+    };
+
+    const handleServiceClick = (service: ServiceType) => {
+        console.log('Service clicked:', service);
+        setSelectedService(service);
+        setShowLeadForm(true);
+        setIsMenuOpen(false);
     };
 const [currentDateTime, setCurrentDateTime] = useState(new Date());
 
@@ -91,7 +100,8 @@ const [currentDateTime, setCurrentDateTime] = useState(new Date());
     });
   };
     return (
-        <header className="bg-background w-full font-sans">
+        <>
+            <header className="bg-background w-full font-sans relative z-40">
             <div className="mx-auto max-w-none px-4 sm:px-6 lg:px-8 py-5">
                 <nav className="flex justify-between items-start text-foreground">
                     {/* Left Section */}
@@ -107,11 +117,11 @@ const [currentDateTime, setCurrentDateTime] = useState(new Date());
                         <div className="flex gap-3">
                             <TrainingIcon />
                             <div>
-                                <Link href="#" onClick={openSidebar} className="text-sm font-normal lowercase block mb-2 hover:text-primary">Training</Link>
+                                <button type="button" onClick={() => handleServiceClick('training')} className="text-sm font-normal lowercase block mb-2 hover:text-primary cursor-pointer bg-transparent border-none text-left hover:underline">Training</button>
                                 <ul className="space-y-1 text-xs lowercase">
-                                    <li><Link href="#" onClick={openSidebar} className="hover:text-primary">Design my Onboarding</Link></li>
-                                    <li><Link href="#" onClick={openSidebar} className="hover:text-primary">Train my team</Link></li>
-                                    <li><Link href="#" onClick={openSidebar} className="hover:text-primary">Learning Partner</Link></li>
+                                    <li><button type="button" onClick={() => handleServiceClick('training')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">Design my Onboarding</button></li>
+                                    <li><button type="button" onClick={() => handleServiceClick('training')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">Train my team</button></li>
+                                    <li><button type="button" onClick={() => handleServiceClick('training')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">Learning Partner</button></li>
                                 </ul>
                             </div>
                         </div>
@@ -119,10 +129,10 @@ const [currentDateTime, setCurrentDateTime] = useState(new Date());
                         <div className="flex gap-3">
                             <ConsultationIcon />
                             <div>
-                                <Link href="#" className="text-sm font-normal lowercase block mb-2 hover:text-primary">Consultation</Link>
+                                <button type="button" onClick={() => handleServiceClick('consulting')} className="text-sm font-normal lowercase block mb-2 hover:text-primary cursor-pointer bg-transparent border-none hover:underline">Consultation</button>
                                 <ul className="space-y-1 text-xs lowercase">
-                                    <li><Link href="#" className="hover:text-primary">1:1 Consultation</Link></li>
-                                    <li><Link href="#" className="hover:text-primary">Free Call</Link></li>
+                                    <li><button type="button" onClick={() => handleServiceClick('consulting')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">1:1 Consultation</button></li>
+                                    <li><button type="button" onClick={() => handleServiceClick('consulting')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">Free Call</button></li>
                                 </ul>
                             </div>
                         </div>
@@ -130,11 +140,11 @@ const [currentDateTime, setCurrentDateTime] = useState(new Date());
                         <div className="flex gap-3">
                             <ImplementationIcon />
                             <div>
-                                <Link href="#" className="text-sm font-normal lowercase block mb-2 hover:text-primary">Cx Implementation</Link>
+                                <button type="button" onClick={() => handleServiceClick('implementation')} className="text-sm font-normal lowercase block mb-2 hover:text-primary cursor-pointer bg-transparent border-none hover:underline">Cx Implementation</button>
                                 <ul className="space-y-1 text-xs lowercase">
-                                    <li><Link href="#" className="hover:text-primary">Cx Assistance</Link></li>
-                                    <li><a href="#" target="_blank" rel="noopener noreferrer" className="hover:text-primary">AI Assistance</a></li>
-                                    <li><Link href="#" className="hover:text-primary">Bespoke Software</Link></li>
+                                    <li><button type="button" onClick={() => handleServiceClick('implementation')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">Cx Assistance</button></li>
+                                    <li><button type="button" onClick={() => handleServiceClick('implementation')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">AI Assistance</button></li>
+                                    <li><button type="button" onClick={() => handleServiceClick('implementation')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">Bespoke Software</button></li>
                                 </ul>
                             </div>
                         </div>
@@ -173,11 +183,11 @@ const [currentDateTime, setCurrentDateTime] = useState(new Date());
                             <div className="flex gap-3">
                                 <TrainingIcon />
                                 <div>
-                                    <Link href="#" onClick={openSidebar} className="text-sm font-normal lowercase block mb-2 hover:text-primary">Training</Link>
+                                    <button type="button" onClick={() => handleServiceClick('training')} className="text-sm font-normal lowercase block mb-2 hover:text-primary cursor-pointer bg-transparent border-none hover:underline">Training</button>
                                     <ul className="space-y-1 text-xs lowercase">
-                                        <li><Link href="#" onClick={openSidebar} className="hover:text-primary">Design my Onboarding</Link></li>
-                                        <li><Link href="#" onClick={openSidebar} className="hover:text-primary">Train my team</Link></li>
-                                        <li><Link href="#" onClick={openSidebar} className="hover:text-primary">Learning Partner</Link></li>
+                                        <li><button type="button" onClick={() => handleServiceClick('training')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">Design my Onboarding</button></li>
+                                        <li><button type="button" onClick={() => handleServiceClick('training')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">Train my team</button></li>
+                                        <li><button type="button" onClick={() => handleServiceClick('training')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">Learning Partner</button></li>
                                     </ul>
                                 </div>
                             </div>
@@ -185,10 +195,10 @@ const [currentDateTime, setCurrentDateTime] = useState(new Date());
                             <div className="flex gap-3">
                                 <ConsultationIcon />
                                 <div>
-                                    <Link href="#" className="text-sm font-normal lowercase block mb-2 hover:text-primary">Consultation</Link>
+                                    <button type="button" onClick={() => handleServiceClick('consulting')} className="text-sm font-normal lowercase block mb-2 hover:text-primary cursor-pointer bg-transparent border-none hover:underline">Consultation</button>
                                     <ul className="space-y-1 text-xs lowercase">
-                                        <li><Link href="#" className="hover:text-primary">1:1 Consultation</Link></li>
-                                        <li><Link href="#" className="hover:text-primary">Free Call</Link></li>
+                                        <li><button type="button" onClick={() => handleServiceClick('consulting')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">1:1 Consultation</button></li>
+                                        <li><button type="button" onClick={() => handleServiceClick('consulting')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">Free Call</button></li>
                                     </ul>
                                 </div>
                             </div>
@@ -196,11 +206,11 @@ const [currentDateTime, setCurrentDateTime] = useState(new Date());
                             <div className="flex gap-3">
                                 <ImplementationIcon />
                                 <div>
-                                    <Link href="#" className="text-sm font-normal lowercase block mb-2 hover:text-primary">Cx Implementation</Link>
+                                    <button type="button" onClick={() => handleServiceClick('implementation')} className="text-sm font-normal lowercase block mb-2 hover:text-primary cursor-pointer bg-transparent border-none hover:underline">Cx Implementation</button>
                                     <ul className="space-y-1 text-xs lowercase">
-                                        <li><Link href="#" className="hover:text-primary">Cx Assistance</Link></li>
-                                        <li><a href="#" target="_blank" rel="noopener noreferrer" className="hover:text-primary">AI Assistance</a></li>
-                                        <li><Link href="#" className="hover:text-primary">Bespoke Software</Link></li>
+                                        <li><button type="button" onClick={() => handleServiceClick('implementation')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">Cx Assistance</button></li>
+                                        <li><button type="button" onClick={() => handleServiceClick('implementation')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">AI Assistance</button></li>
+                                        <li><button type="button" onClick={() => handleServiceClick('implementation')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">Bespoke Software</button></li>
                                     </ul>
                                 </div>
                             </div>
@@ -221,5 +231,12 @@ const [currentDateTime, setCurrentDateTime] = useState(new Date());
                 )}
             </div>
         </header>
+        {showLeadForm && (
+            <DynamicLeadForm
+                service={selectedService}
+                onClose={() => setShowLeadForm(false)}
+            />
+        )}
+    </>
     );
 }

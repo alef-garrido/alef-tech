@@ -1,8 +1,13 @@
+'use client';
+
 import Link from 'next/link';
+import { useState } from 'react';
 import LinkedinIcon from './icons/LinkedinIcon';
 import InstagramIcon from './icons/InstagramIcon';
 import GitHubIcon from './icons/GitHubIcon';
 import SubstackIcon from './icons/SubstackIcon';
+import { DynamicLeadForm } from './dynamic-lead-form';
+import { ServiceType } from '@/app/types/lead';
 
 const TrainingIcon = () => (
     <div className="flex items-end gap-1 h-[4.5rem]" aria-hidden="true">
@@ -47,8 +52,18 @@ const SupportIcon = () => (
 );
 
 const Footer = () => {
+  const [showLeadForm, setShowLeadForm] = useState(false);
+  const [selectedService, setSelectedService] = useState<ServiceType>('general');
+
+  const handleServiceClick = (service: ServiceType) => {
+    console.log('Service clicked:', service);
+    setSelectedService(service);
+    setShowLeadForm(true);
+  };
+
   return (
-    <footer className="bg-background w-full font-sans mt-24">
+    <>
+      <footer className="bg-background w-full font-sans mt-24 relative z-40">
         <div className="mx-auto max-w-none px-4 sm:px-6 lg:px-8 py-12">
             <div className="flex justify-center">
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -56,11 +71,11 @@ const Footer = () => {
                     <div className="flex gap-3">
                         <TrainingIcon />
                         <div>
-                            <Link href="#" className="text-sm font-normal lowercase block mb-2 hover:text-primary">Training</Link>
+                            <button type="button" onClick={() => handleServiceClick('training')} className="text-sm font-normal lowercase block mb-2 hover:text-primary cursor-pointer bg-transparent border-none hover:underline">Training</button>
                             <ul className="space-y-1 text-xs lowercase">
-                                <li><Link href="#" className="hover:text-primary">Design my Onboarding</Link></li>
-                                <li><Link href="#" className="hover:text-primary">Train my team</Link></li>
-                                <li><Link href="#" className="hover:text-primary">Learning Partner</Link></li>
+                                <li><button type="button" onClick={() => handleServiceClick('training')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">Design my Onboarding</button></li>
+                                <li><button type="button" onClick={() => handleServiceClick('training')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">Train my team</button></li>
+                                <li><button type="button" onClick={() => handleServiceClick('training')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">Learning Partner</button></li>
                             </ul>
                         </div>
                     </div>
@@ -68,10 +83,10 @@ const Footer = () => {
                     <div className="flex gap-3">
                         <ConsultationIcon />
                         <div>
-                            <Link href="#" className="text-sm font-normal lowercase block mb-2 hover:text-primary">Consultation</Link>
+                            <button type="button" onClick={() => handleServiceClick('consulting')} className="text-sm font-normal lowercase block mb-2 hover:text-primary cursor-pointer bg-transparent border-none hover:underline">Consultation</button>
                             <ul className="space-y-1 text-xs lowercase">
-                                <li><Link href="#" className="hover:text-primary">1:1 Consultation</Link></li>
-                                <li><Link href="#" className="hover:text-primary">Free Call</Link></li>
+                                <li><button type="button" onClick={() => handleServiceClick('consulting')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">1:1 Consultation</button></li>
+                                <li><button type="button" onClick={() => handleServiceClick('consulting')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">Free Call</button></li>
                             </ul>
                         </div>
                     </div>
@@ -79,11 +94,11 @@ const Footer = () => {
                     <div className="flex gap-3">
                         <ImplementationIcon />
                         <div>
-                            <Link href="#" className="text-sm font-normal lowercase block mb-2 hover:text-primary">Cx Implementation</Link>
+                            <button type="button" onClick={() => handleServiceClick('implementation')} className="text-sm font-normal lowercase block mb-2 hover:text-primary cursor-pointer bg-transparent border-none hover:underline">Cx Implementation</button>
                             <ul className="space-y-1 text-xs lowercase">
-                                <li><Link href="#" className="hover:text-primary">Cx Assistance</Link></li>
-                                <li><a href="#" target="_blank" rel="noopener noreferrer" className="hover:text-primary">AI Assistance</a></li>
-                                <li><Link href="#" className="hover:text-primary">Bespoke Software</Link></li>
+                                <li><button type="button" onClick={() => handleServiceClick('implementation')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">Cx Assistance</button></li>
+                                <li><button type="button" onClick={() => handleServiceClick('implementation')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">AI Assistance</button></li>
+                                <li><button type="button" onClick={() => handleServiceClick('implementation')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">Bespoke Software</button></li>
                             </ul>
                         </div>
                     </div>
@@ -127,6 +142,13 @@ const Footer = () => {
             </div>
         </div>
     </footer>
+    {showLeadForm && (
+      <DynamicLeadForm
+        service={selectedService}
+        onClose={() => setShowLeadForm(false)}
+      />
+    )}
+    </>
   );
 };
 

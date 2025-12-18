@@ -1,47 +1,30 @@
-import type { Metadata } from "next";
-import "./globals.css";
-import Navigation from "./components/navigation";
-import Script from "next/script";
-import { SidebarProvider } from "./context/sidebar-context";
-import SidebarChat from "./components/sidebar-chat";
+import {ReactNode} from 'react';
+import {setRequestLocale} from 'next-intl/server';
+import { notFound } from 'next/navigation';
 
-export const metadata: Metadata = {
-  title: "Alef Lemat TECH",
-  description: "Agentic Website of Alef Lemat",
+// Can be imported from a shared config
+const locales = ['en', 'es'];
+
+export function generateStaticParams() {
+  return locales.map((locale) => ({locale}));
+}
+
+type Props = {
+  children: ReactNode;
+  params: {locale: string};
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function LocaleLayout({children, params: {locale}}: Props) {
+  // Validate that the incoming `locale` parameter is valid
+  const isValidLocale = locales.some((cur) => cur === locale);
+  if (!isValidLocale) notFound();
+
+  // Enable static rendering
+  setRequestLocale(locale);
+
   return (
-    <html lang="en" suppressHydrationWarning={true}>
-      <head>
-        <Script
-          type="module"
-          src="https://unpkg.com/@splinetool/viewer@1.10.55/build/spline-viewer.js"
-        />
-        <style>
-          {`
-            @keyframes marquee {
-              from { transform: translateX(0%); }
-              to { transform: translateX(-50%); }
-            }
-            .animate-marquee {
-              animation: marquee 15s linear infinite;
-              transform: translateZ(0);
-            }
-          `}
-        </style>
-      </head>
-      <body className={`antialiased`}>
-        <SidebarProvider>
-          <Navigation />
-          <SidebarChat />
-          {children}
-        </SidebarProvider>
-      </body>
+    <html lang={locale}>
+      <body>{children}</body>
     </html>
   );
 }

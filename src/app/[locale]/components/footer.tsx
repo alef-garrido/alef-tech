@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useState } from 'react';
 import LinkedinIcon from './icons/LinkedinIcon';
@@ -52,6 +53,11 @@ const SupportIcon = () => (
 );
 
 const Footer = () => {
+  const tServices = useTranslations('services');
+  const tMisc = useTranslations('misc');
+  const tCta = useTranslations('cta');
+  const tNav = useTranslations('navigation');
+
   const [showLeadForm, setShowLeadForm] = useState(false);
   const [selectedService, setSelectedService] = useState<ServiceType>('general');
 
@@ -71,11 +77,11 @@ const Footer = () => {
                     <div className="flex gap-3">
                         <TrainingIcon />
                         <div>
-                            <button type="button" onClick={() => handleServiceClick('training')} className="text-sm font-normal lowercase block mb-2 hover:text-primary cursor-pointer bg-transparent border-none hover:underline">Training</button>
+                            <button type="button" onClick={() => handleServiceClick('training')} className="text-sm font-normal lowercase block mb-2 hover:text-primary cursor-pointer bg-transparent border-none hover:underline">{tServices('training')}</button>
                             <ul className="space-y-1 text-xs lowercase">
-                                <li><button type="button" onClick={() => handleServiceClick('training')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">Design my Onboarding</button></li>
-                                <li><button type="button" onClick={() => handleServiceClick('training')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">Train my team</button></li>
-                                <li><button type="button" onClick={() => handleServiceClick('training')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">Learning Partner</button></li>
+                                <li><button type="button" onClick={() => handleServiceClick('training')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">{tServices('designOnboarding')}</button></li>
+                                <li><button type="button" onClick={() => handleServiceClick('training')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">{tServices('trainTeam')}</button></li>
+                                <li><button type="button" onClick={() => handleServiceClick('training')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">{tServices('learningPartner')}</button></li>
                             </ul>
                         </div>
                     </div>
@@ -83,10 +89,10 @@ const Footer = () => {
                     <div className="flex gap-3">
                         <ConsultationIcon />
                         <div>
-                            <button type="button" onClick={() => handleServiceClick('consulting')} className="text-sm font-normal lowercase block mb-2 hover:text-primary cursor-pointer bg-transparent border-none hover:underline">Consultation</button>
+                            <button type="button" onClick={() => handleServiceClick('consulting')} className="text-sm font-normal lowercase block mb-2 hover:text-primary cursor-pointer bg-transparent border-none hover:underline">{tServices('consulting')}</button>
                             <ul className="space-y-1 text-xs lowercase">
-                                <li><button type="button" onClick={() => handleServiceClick('consulting')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">1:1 Consultation</button></li>
-                                <li><button type="button" onClick={() => handleServiceClick('consulting')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">Free Call</button></li>
+                                <li><button type="button" onClick={() => handleServiceClick('consulting')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">{tServices('oneOnOne')}</button></li>
+                                <li><button type="button" onClick={() => handleServiceClick('consulting')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">{tServices('freeCall')}</button></li>
                             </ul>
                         </div>
                     </div>
@@ -94,11 +100,11 @@ const Footer = () => {
                     <div className="flex gap-3">
                         <ImplementationIcon />
                         <div>
-                            <button type="button" onClick={() => handleServiceClick('implementation')} className="text-sm font-normal lowercase block mb-2 hover:text-primary cursor-pointer bg-transparent border-none hover:underline">Cx Implementation</button>
+                            <button type="button" onClick={() => handleServiceClick('implementation')} className="text-sm font-normal lowercase block mb-2 hover:text-primary cursor-pointer bg-transparent border-none hover:underline">{tServices('implementation')}</button>
                             <ul className="space-y-1 text-xs lowercase">
-                                <li><button type="button" onClick={() => handleServiceClick('implementation')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">Cx Assistance</button></li>
-                                <li><button type="button" onClick={() => handleServiceClick('implementation')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">AI Assistance</button></li>
-                                <li><button type="button" onClick={() => handleServiceClick('implementation')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">Bespoke Software</button></li>
+                                <li><button type="button" onClick={() => handleServiceClick('implementation')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">{tServices('cxAssistance')}</button></li>
+                                <li><button type="button" onClick={() => handleServiceClick('implementation')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">{tServices('aiAssistance')}</button></li>
+                                <li><button type="button" onClick={() => handleServiceClick('implementation')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">{tServices('bespokeSoftware')}</button></li>
                             </ul>
                         </div>
                     </div>
@@ -106,11 +112,11 @@ const Footer = () => {
                     <div className="flex gap-3">
                         <SupportIcon />
                         <div>
-                            <Link href="#" className="text-sm font-normal lowercase block mb-2 hover:text-primary">Contact</Link>
+                            <Link href="#" className="text-sm font-normal lowercase block mb-2 hover:text-primary">{tNav('contact')}</Link>
                             <ul className="space-y-1 text-xs lowercase">
-                                <li><Link href="#" className="hover:text-primary">newsletter</Link></li>
-                                <li><a href="#" target="_blank" rel="noopener noreferrer" className="hover:text-primary">instagram</a></li>
-                                <li><Link href="#" className="hover:text-primary">blog</Link></li>
+                                <li><Link href="#" className="hover:text-primary">{tMisc('newsletter')}</Link></li>
+                                <li><a href="#" target="_blank" rel="noopener noreferrer" className="hover:text-primary">{tMisc('instagram')}</a></li>
+                                <li><Link href="#" className="hover:text-primary">{tMisc('blog')}</Link></li>
                             </ul>
                         </div>
                     </div>
@@ -124,12 +130,12 @@ const Footer = () => {
                     <a href="https://substack.com/@aleflemat" target="_blank" className="text-gray-400 hover:text-white"><SubstackIcon size={24} /></a>
                 </div>
                 <div className="mx-4 text-center text-gray-500 my-2">
-                    <p>Ever evolving, always adapting, and delivering solutions with genuine care.</p>
+                    <p>{tMisc('evolving')}</p>
                 </div>
                 <form>
                     <div className="flex my-2">
-                        <input type="email" placeholder="Enter your email" className="border bg-transparent text-white px-4 py-2 rounded-l-lg focus:outline-none" />
-                        <button type="submit" className="bg-white text-black font-mono py-3 px-6 rounded-md hover:bg-primary/80 transition-colors">Subscribe</button>
+                        <input type="email" placeholder={tCta('enterEmail')} className="border bg-transparent text-white px-4 py-2 rounded-l-lg focus:outline-none" />
+                        <button type="submit" className="bg-white text-black font-mono py-3 px-6 rounded-md hover:bg-primary/80 transition-colors">{tCta('subscribe')}</button>
                     </div>
                 </form>
             </div>
@@ -137,7 +143,7 @@ const Footer = () => {
                 <div className="text-left">
                     <Link href="/" className="leading-tight text-sm font-medium block font-mono">Alef Lemat</Link>
                     <Link href="/" className="leading-tight text-sm font-medium block font-mono">Tech</Link>
-                    <p className="mt-2 text-xs font-normal lowercase">CX + Software Development</p>
+                    <p className="mt-2 text-xs font-normal lowercase">{tMisc('cxSoftware')}</p>
                 </div>
             </div>
         </div>

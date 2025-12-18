@@ -2,6 +2,7 @@ import { X, Github, ExternalLink, Maximize } from 'lucide-react';
 import { useEffect } from 'react';
 import { project } from '../../../types';
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 
 interface ProjectModalProps {
   project: project;
@@ -9,6 +10,8 @@ interface ProjectModalProps {
 }
 
 const ProjectModal = ({ project, closeModal }: ProjectModalProps) => {
+  const tMisc = useTranslations('misc');
+
   // Handle ESC key to close modal
   useEffect(() => {
     const handleEscKey = (event: KeyboardEvent) => {
@@ -40,7 +43,7 @@ const ProjectModal = ({ project, closeModal }: ProjectModalProps) => {
           <span className="c-cyber-text text-sm font-mono">~/projects/{project.title.toLowerCase().replace(/\s+/g, '-')}.exe</span>
         </div>
         <div className="flex items-center gap-2">
-          <span className="c-cyber-text-dim text-xs font-mono">Press ESC to exit</span>
+          <span className="c-cyber-text-dim text-xs font-mono">{tMisc('pressEscToExit')}</span>
           <button
             onClick={closeModal}
             className="c-bg-cyber-surface border c-border-cyber-border rounded p-2 
@@ -71,7 +74,7 @@ const ProjectModal = ({ project, closeModal }: ProjectModalProps) => {
                                  transition-all duration-300 c-neon-glow text-xs"
                   >
                     <Github size={16} />
-                    VIEW_CODE.sh
+                    {tMisc('viewCode')}
                   </a>
                 ) : (
                   <button
@@ -79,7 +82,7 @@ const ProjectModal = ({ project, closeModal }: ProjectModalProps) => {
                     disabled
                   >
                     <Github size={16} />
-                    VIEW_CODE.sh
+                    {tMisc('viewCode')}
                   </button>
                 )}
                 {project.liveUrl ? (
@@ -93,7 +96,7 @@ const ProjectModal = ({ project, closeModal }: ProjectModalProps) => {
                                  transition-all duration-300 text-xs"
                   >
                     <ExternalLink size={16} />
-                    LAUNCH_DEMO.exe
+                    {tMisc('launchDemo')}
                   </a>
                 ) : (
                   <button
@@ -101,7 +104,7 @@ const ProjectModal = ({ project, closeModal }: ProjectModalProps) => {
                     disabled
                   >
                     <ExternalLink size={16} />
-                    LAUNCH_DEMO.exe
+                    {tMisc('launchDemo')}
                   </button>
                 )}
               </div>
@@ -126,7 +129,7 @@ const ProjectModal = ({ project, closeModal }: ProjectModalProps) => {
                         <div className="w-32 h-32 mx-auto mb-4 c-bg-cyber-accent/20 rounded-lg border c-border-cyber-accent flex items-center justify-center">
                           <span className="text-4xl c-cyber-accent font-mono">&lt;/&gt;</span>
                         </div>
-                        <p className="c-cyber-text font-mono">Project Preview</p>
+                        <p className="c-cyber-text font-mono">{tMisc('projectPreview')}</p>
                       </div>
                     </div>
                   </div>
@@ -146,7 +149,7 @@ const ProjectModal = ({ project, closeModal }: ProjectModalProps) => {
                 <div className="flex items-start justify-between">
                   <div className="space-y-1">
                     <div className="c-cyber-accent text-xs font-mono">
-                      &gt; Loading project metadata...
+                      {tMisc('loadingProjectMetadata')}
                     </div>
                     <h1 className="m-4 text-2xl lg:text-3xl font-bold c-cyber-text c-neon-text font-mono">
                       {project.title}
@@ -155,21 +158,21 @@ const ProjectModal = ({ project, closeModal }: ProjectModalProps) => {
                   {project.featured && (
                     <div className="c-bg-cyber-accent c-text-cyber-bg px-2 py-1 rounded text-xs font-bold font-mono flex items-center gap-1">
                       <span className="w-1.5 h-1.5 c-bg-cyber-bg rounded-full animate-pulse"></span>
-                      FEATURED
+                      {tMisc('featured')}
                     </div>
                   )}
                 </div>
                 <div className="p-4 c-cyber-text-dim text-xs font-mono">
-                  Status: <span className="c-cyber-accent">ACTIVE</span> | 
-                  Type: <span className="c-cyber-accent">WEB_APPLICATION</span> | 
-                  Access: <span className="c-cyber-accent">PUBLIC</span>
+                  {tMisc('status')} <span className="c-cyber-accent">{tMisc('active')}</span> | 
+                  {tMisc('type')} <span className="c-cyber-accent">{tMisc('webApplication')}</span> | 
+                  {tMisc('access')} <span className="c-cyber-accent">{tMisc('public')}</span>
                 </div>
               </div>
 
               {/* Description */}
               <div className="py-4 space-y-4">
                 <h2 className="text-base font-bold c-cyber-text font-mono border-b c-border-cyber-border pb-1">
-                  &gt; project.description
+                  {tMisc('projectDescription')}
                 </h2>
                 <p className="c-cyber-text-dim leading-relaxed text-sm">
                   {project.description}
@@ -179,7 +182,7 @@ const ProjectModal = ({ project, closeModal }: ProjectModalProps) => {
               {/* Tech stack */}
               <div className="py-4 space-y-4">
                 <h2 className="text-base font-bold c-cyber-text font-mono border-b c-border-cyber-border pb-1">
-                  &gt; tech_stack.list()
+                  {tMisc('techStackList')}
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   {project.tech.map((tech, index) => (
@@ -203,20 +206,20 @@ const ProjectModal = ({ project, closeModal }: ProjectModalProps) => {
               {/* Project stats */}
               <div className="py-4 space-y-4">
                 <h2 className="text-base font-bold c-cyber-text font-mono border-b c-border-cyber-border pb-1">
-                  &gt; system.stats
+                  {tMisc('systemStats')}
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                   <div className="c-bg-cyber-surface border c-border-cyber-border rounded p-2 text-center">
                     <div className="c-cyber-accent text-lg font-bold font-mono">85%</div>
-                    <div className="c-cyber-text-dim text-xs font-mono">COMPLETION</div>
+                    <div className="c-cyber-text-dim text-xs font-mono">{tMisc('completion')}</div>
                   </div>
                   <div className="c-bg-cyber-surface border c-border-cyber-border rounded p-2 text-center">
                     <div className="c-cyber-accent text-lg font-bold font-mono">{project.tech.length}</div>
-                    <div className="c-cyber-text-dim text-xs font-mono">TECHNOLOGIES</div>
+                    <div className="c-cyber-text-dim text-xs font-mono">{tMisc('technologies')}</div>
                   </div>
                   <div className="c-bg-cyber-surface border c-border-cyber-border rounded p-2 text-center">
-                    <div className="c-cyber-accent text-lg font-bold font-mono">LIVE</div>
-                    <div className="c-cyber-text-dim text-xs font-mono">STATUS</div>
+                    <div className="c-cyber-accent text-lg font-bold font-mono">{tMisc('live')}</div>
+                    <div className="c-cyber-text-dim text-xs font-mono">{tMisc('status')}</div>
                   </div>
                 </div>
               </div>
@@ -225,11 +228,11 @@ const ProjectModal = ({ project, closeModal }: ProjectModalProps) => {
               <div className="border-t c-border-cyber-border pt-3">
                 <div className="c-bg-cyber-surface border c-border-cyber-border rounded p-2">
                   <div className="c-cyber-text-dim text-xs font-mono">
-                    <span className="c-cyber-accent">admin@portfolio:~$</span> git clone {project.title.toLowerCase().replace(/\s+/g, '-')}.git
+                    <span className="c-cyber-accent">admin@portfolio:~$</span> {tMisc('gitClone')} {project.title.toLowerCase().replace(/\s+/g, '-')}.git
                     <br />
-                    <span className="c-cyber-accent">admin@portfolio:~$</span> npm install && npm run dev
+                    <span className="c-cyber-accent">admin@portfolio:~$</span> {tMisc('npmInstall')}
                     <br />
-                    <span className="c-cyber-text-dim">Cloning into {project.title.toLowerCase().replace(/\s+/g, '-')}...</span>
+                    <span className="c-cyber-text-dim">{tMisc('cloningInto')} {project.title.toLowerCase().replace(/\s+/g, '-')}...</span>
                     <span className="c-terminal-cursor">_</span>
                   </div>
                 </div>

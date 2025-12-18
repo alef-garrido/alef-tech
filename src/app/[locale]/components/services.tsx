@@ -1,3 +1,7 @@
+"use client";
+
+import { useTranslations } from 'next-intl';
+
 const TrainingIcon = () => (
     <div className="flex items-end gap-1 h-[4.5rem]" aria-hidden="true">
         <div className="w-1 h-1/3 bg-foreground"></div>
@@ -34,49 +38,53 @@ const ImplementationIcon = () => (
 );
 
 const Services = () => {
+    const tServices = useTranslations('services');
+    const tMisc = useTranslations('misc');
+    const tCta = useTranslations('cta');
+
   return (
     <div className="w-full my-48 px-6 md:px-12">
-      <h2 className="text-5xl font-bold text-secondary mb-8 font-mono text-center">How I Can Help You</h2>
+      <h2 className="text-5xl font-bold text-secondary mb-8 font-mono text-center">{tMisc('howICanHelp')}</h2>
       <div className="grid md:grid-cols-3 gap-8 font-mono text-left">
         <div className="bg-black p-6 rounded-lg">
           <div className="flex items-center mb-4">
             <TrainingIcon />
-            <h3 className="text-2xl font-bold text-white ml-4">Training</h3>
+            <h3 className="text-2xl font-bold text-white ml-4">{tServices('training')}</h3>
           </div>
           <ul className="list-disc list-inside text-gray-400">
-            <li>Empower People to Perform</li>
-            <li>Onboarding design</li>
-            <li>CX & digital adoption workshops</li>
-            <li>Ongoing learning partnerships</li>
+            <li>{tServices('empowerPeople')}</li>
+            <li>{tServices('onboardingDesign')}</li>
+            <li>{tServices('cxDigitalWorkshops')}</li>
+            <li>{tServices('ongoingLearning')}</li>
           </ul>
         </div>
         <div className="bg-black p-6 rounded-lg">
           <div className="flex items-center mb-4">
             <ConsultationIcon />
-            <h3 className="text-2xl font-bold text-white ml-4">Business Consulting</h3>
+            <h3 className="text-2xl font-bold text-white ml-4">{tServices('consulting')}</h3>
           </div>
           <ul className="list-disc list-inside text-gray-400">
-            <li>Strategy that Drives Retention & Growth</li>
-            <li>CX strategy & audits</li>
-            <li>Agentic AI advisory</li>
-            <li>Growth roadmaps</li>
+            <li>{tServices('strategyRetentionGrowth')}</li>
+            <li>{tServices('cxStrategyAudits')}</li>
+            <li>{tServices('agenticAiAdvisory')}</li>
+            <li>{tServices('growthRoadmaps')}</li>
           </ul>
         </div>
         <div className="bg-black p-6 rounded-lg">
           <div className="flex items-center mb-4">
             <ImplementationIcon />
-            <h3 className="text-2xl font-bold text-white ml-4">Implementation</h3>
+            <h3 className="text-2xl font-bold text-white ml-4">{tServices('implementation')}</h3>
           </div>
           <ul className="list-disc list-inside text-gray-400">
-            <li>Your Agentic Business Engine</li>
-            <li>CX workflow automation</li>
-            <li>Bespoke AI-assisted tools</li>
-            <li>360° business dashboard</li>
+            <li>{tServices('agenticBusinessEngine')}</li>
+            <li>{tServices('cxWorkflowAutomation')}</li>
+            <li>{tServices('bespokeAiTools')}</li>
+            <li>{tServices('businessDashboard')}</li>
           </ul>
         </div>
       </div>
       <div className="text-center mt-12">
-        <button className="bg-white text-black font-mono py-3 px-6 rounded-md hover:bg-primary/80 transition-colors">View All Services</button>
+        <button className="bg-white text-black font-mono py-3 px-6 rounded-md hover:bg-primary/80 transition-colors">{tCta('viewAllServices')}</button>
       </div>
     </div>
   );

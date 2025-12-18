@@ -5,8 +5,12 @@ import Services from "./components/services";
 import CaseStudy from "./components/case-study";
 import FinalCTA from "./components/final-cta";
 import Footer from "./components/footer";
+import { useTranslations } from 'next-intl';
 
 export default function Home() {
+  const tAbout = useTranslations('about');
+  const tMisc = useTranslations('misc');
+
   return (
     <main className="min-h-screen flex flex-col items-center justify-center p-8">
       {/* HERO SECTION */}
@@ -24,7 +28,7 @@ export default function Home() {
 
       {/* ABOUT SECTION */}
       <div className="w-full md:w-2/3 lg:w-1/2 my-48 px-6 md:px-12">
-        <h2 className="text-5xl font-bold text-secondary mb-8 font-mono text-center">About Me</h2>
+        <h2 className="text-5xl font-bold text-secondary mb-8 font-mono text-center">{tAbout('heading')}</h2>
         <div className="flex flex-col md:flex-row justify-center items-center mb-4 gap-8">
           <div className="w-full md:w-1/3 flex justify-center">
             <Image
@@ -37,9 +41,9 @@ export default function Home() {
           </div>
           <div className="w-full md:w-2/3 text-center md:text-left">
             <p>
-              Certified Business Consultant with 9+ years of CX and digital transformation experience. I combine customer service expertise with agentic software development to deliver measurable impact.
+              {tAbout('description')}
             </p>
-            <button className="my-4 bg-transparent underline hover:primary/80 font-mono cursor-pointer"> More about me →</button>
+            <button className="my-4 bg-transparent underline hover:primary/80 font-mono cursor-pointer"> {tMisc('moreAboutMe')} →</button>
           </div>
         </div>
       </div>

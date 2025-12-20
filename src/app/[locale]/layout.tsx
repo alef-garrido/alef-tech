@@ -4,21 +4,41 @@ import Navigation from "./components/navigation";
 import Script from "next/script";
 import { SidebarProvider } from "./context/sidebar-context";
 import SidebarChat from "./components/sidebar-chat";
-import {NextIntlClientProvider, useMessages} from 'next-intl';
+import { TranslationProvider } from '@/i18n/translation-client';
+import en from '@/i18n/translations/en.json';
+import es from '@/i18n/translations/es.json';
+
+const locales = ['en', 'es'];
+const messages: Record<string, any> = { en, es };
+
+export function generateStaticParams() {
+  return locales.map((locale) => ({locale}));
+}
 
 export const metadata: Metadata = {
   title: "Alef Lemat TECH",
   description: "Agentic Website of Alef Lemat",
 };
 
-export default function RootLayout({
+export default async function LocaleLayout({
   children,
-  params: {locale}
+  params,
 }: Readonly<{
   children: React.ReactNode;
-  params: {locale: string};
+  params: Promise<{locale: string}>;
 }>) {
-  const messages = useMessages();
+  const { locale } = await params;
+  
+  // Skip validation for static asset requests (files with extensions)
+  if (locale.includes('.')) {
+    return children;
+  }
+  
+  // Validate locale is valid
+  if (!locales.includes(locale)) {
+    throw new Error(`Invalid locale: ${locale}`);
+  }
+  const messageData = messages[locale as keyof typeof messages];
 
   return (
     <html lang={locale} suppressHydrationWarning={true}>
@@ -41,13 +61,13 @@ export default function RootLayout({
         </style>
       </head>
       <body className={`antialiased`}>
-        <NextIntlClientProvider locale={locale} messages={messages}>
+        <TranslationProvider locale={locale} messages={messageData}>
           <SidebarProvider>
             <Navigation />
             <SidebarChat />
             {children}
           </SidebarProvider>
-        </NextIntlClientProvider>
+        </TranslationProvider>
       </body>
     </html>
   );

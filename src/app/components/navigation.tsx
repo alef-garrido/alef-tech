@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { LanguageSwitcher } from './language-switcher';
 import Link from 'next/link';
@@ -219,29 +219,16 @@ const [currentDateTime, setCurrentDateTime] = useState(new Date());
                                     </ul>
                                 </div>
                             </div>
-                            {/* Support */}
-                            <div className="flex gap-3">
-                                <SupportIcon />
-                                <div>
-                                    <Link href="#" className="text-sm font-normal lowercase block mb-2 hover:text-primary">{t('contact')}</Link>
-                                    <ul className="space-y-1 text-xs lowercase">
-                                        <li><Link href="#" className="hover:text-primary">{tMisc('newsletter')}</Link></li>
-                                        <li><a href="#" target="_blank" rel="noopener noreferrer" className="hover:text-primary">{tMisc('instagram')}</a></li>
-                                        <li><Link href="#" className="hover:text-primary">{tMisc('blog')}</Link></li>
-                                    </ul>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 )}
             </div>
         </header>
+
+        {/* Mobile lead form */}
         {showLeadForm && (
-            <DynamicLeadForm
-                service={selectedService}
-                onClose={() => setShowLeadForm(false)}
-            />
+          <DynamicLeadForm service={selectedService} onClose={() => setShowLeadForm(false)} />
         )}
-    </>
+        </>
     );
 }

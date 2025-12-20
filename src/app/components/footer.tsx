@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useTranslations } from '@/i18n/translation-client';
 import Link from 'next/link';

@@ -1,18 +1,23 @@
 'use client';
 
 import { usePathname, useRouter } from 'next/navigation';
-import { useLocale } from 'next-intl';
 
 export function LanguageSwitcher() {
   const router = useRouter();
   const pathname = usePathname();
-  const locale = useLocale();
+  const segments = pathname.split('/').filter(Boolean);
+  const locale = segments[0] || 'en';
 
   const switchLanguage = (newLocale: string) => {
-    // This is a simplistic approach. A more robust solution would handle
-    // pathnames with dynamic segments.
-    const newPath = pathname.replace(`/${locale}`, `/${newLocale}`);
-    router.replace(newPath);
+    const segments = pathname.split('/').filter(Boolean);
+    if (segments.length && routingAvailableLocale(segments[0])) {
+      segments[0] = newLocale;
+    } else {
+      // if no locale segment present, insert one
+      segments.unshift(newLocale);
+    }
+    const newPath = '/' + segments.join('/');
+    router.push(newPath);
   };
 
   return (
@@ -31,4 +36,8 @@ export function LanguageSwitcher() {
       </button>
     </div>
   );
+}
+
+function routingAvailableLocale(l: string) {
+  return l === 'en' || l === 'es';
 }

@@ -1,16 +1,18 @@
-import Image from "next/image";
-import Hero from "./components/hero";
-import FeaturedProjects from "./components/featured-projects";
-import Services from "./components/services";
-import CaseStudy from "./components/case-study";
-import FinalCTA from "./components/final-cta";
-import Footer from "./components/footer";
+import Image from 'next/image';
+import Hero from './components/hero';
+import FeaturedProjects from './components/featured-projects';
+import Services from './components/services';
+import CaseStudy from './components/case-study';
+import FinalCTA from './components/final-cta';
+import Footer from './components/footer';
 import en from '@/i18n/translations/en.json';
 import es from '@/i18n/translations/es.json';
 import { getServerTranslator } from '@/i18n/translation';
+import { cookies } from 'next/headers';
 
-export default function Home({ params }: { params: { locale: string } }) {
-  const locale = params?.locale || 'en';
+export default function Home() {
+  const cookieStore = cookies();
+  const locale = cookieStore.get('locale')?.value || 'en';
   const messages = locale === 'es' ? es : en;
   const tAbout = getServerTranslator(messages, 'about');
   const tMisc = getServerTranslator(messages, 'misc');
@@ -35,18 +37,10 @@ export default function Home({ params }: { params: { locale: string } }) {
         <h2 className="text-5xl font-bold text-secondary mb-8 font-mono text-center">{tAbout('heading')}</h2>
         <div className="flex flex-col md:flex-row justify-center items-center mb-4 gap-8">
           <div className="w-full md:w-1/3 flex justify-center">
-            <Image
-              src="/assets/ppicture.png"
-              alt="Profile Picture"
-              width={150}
-              height={150}
-              className="rounded-full"
-            />
+            <Image src="/assets/ppicture.png" alt="Profile Picture" width={150} height={150} className="rounded-full" />
           </div>
           <div className="w-full md:w-2/3 text-center md:text-left">
-            <p>
-              {tAbout('description')}
-            </p>
+            <p>{tAbout('description')}</p>
             <button className="my-4 bg-transparent underline hover:primary/80 font-mono cursor-pointer"> {tMisc('moreAboutMe')} →</button>
           </div>
         </div>

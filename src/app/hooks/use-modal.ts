@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { project } from '../../../../types';
+import { project } from '../../../types';
 
 const useModal = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);

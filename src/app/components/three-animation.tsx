@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import * as THREE from "three";
-import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader.js";
+import { HDRLoader } from "three/examples/jsm/loaders/HDRLoader.js";
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer.js";
 import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
 import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass.js";
@@ -15,13 +15,20 @@ export default function ThreeAnimation() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    if (!canvasRef.current) return;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
 
-    // Create a renderer
-    const renderer = new THREE.WebGLRenderer({
-      canvas: canvasRef.current,
-      antialias: true
-    });
+    // Prevent double initialization during HMR / Fast Refresh
+    if ((canvas as any).__three_initialized) return;
+    (canvas as any).__three_initialized = true;
+
+    try {
+      // Create a renderer
+      const renderer = new THREE.WebGLRenderer({
+        canvas,
+        antialias: true,
+        alpha: true,
+      });
 
     // Set a default background color
     renderer.setClearColor(0x11151c);
@@ -29,8 +36,16 @@ export default function ThreeAnimation() {
     //  Set the pixel ratio of the canvas (for HiDPI devices)
     renderer.setPixelRatio(window.devicePixelRatio);
 
-    // Set the size of the renderer to the size of the window
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    // Set the size of the renderer to the canvas size
+    const setRendererSize = () => {
+      const width = canvas.clientWidth || window.innerWidth;
+      const height = canvas.clientHeight || window.innerHeight;
+      renderer.setSize(width, height);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+    };
+    setRendererSize();
 
     // Create a new Three.js scene
     const scene = new THREE.Scene();
@@ -59,14 +74,19 @@ export default function ThreeAnimation() {
     controls.maxPolarAngle = Math.PI / 2 + angleLimit;
 
     // Add a gradient HDR background
-    const hdrEquirect = new RGBELoader()
-      .setPath("https://miroleon.github.io/daily-assets/")
-      .load("GRADIENT_01_01_comp.hdr", function () {
-        hdrEquirect.mapping = THREE.EquirectangularReflectionMapping;
-      });
-
-    // Add the HDR to the scene
-    scene.environment = hdrEquirect;
+    const hdrLoader = new HDRLoader().setPath("https://miroleon.github.io/daily-assets/");
+    hdrLoader.load(
+      "GRADIENT_01_01_comp.hdr",
+      function (texture) {
+        texture.mapping = THREE.EquirectangularReflectionMapping;
+        // Add the HDR to the scene
+        scene.environment = texture;
+      },
+      undefined,
+      (err) => {
+        console.warn('HDR load error:', err);
+      }
+    );
 
     // Add some fog to the scene for moodyness
     scene.fog = new THREE.Fog(0x11151c, 1, 100);
@@ -239,24 +259,31 @@ export default function ThreeAnimation() {
 
     let theta = 0;
 
+    let rafId: number;
     function animate() {
-      requestAnimationFrame(animate);
-
-      // Update controls and camera
+      rafId = requestAnimationFrame(animate);
       controls.update();
-
-      // Render the scene using the composer
       composer.render();
     }
-
     animate();
+
+    // handle resize
+    const handleResize = () => setRendererSize();
+    window.addEventListener('resize', handleResize);
 
     // Cleanup on unmount
     return () => {
-      // Dispose of resources
-      renderer.dispose();
+      window.removeEventListener('resize', handleResize);
+      if (rafId) cancelAnimationFrame(rafId);
+      try {
+        composer.dispose();
+      } catch (e) {}
+      try {
+        renderer.dispose();
+      } catch (e) {}
+      (canvas as any).__three_initialized = false;
     };
   }, []);
 
-  return <canvas ref={canvasRef} className="w-full h-full" />;
+  return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full z-0" />;
 }

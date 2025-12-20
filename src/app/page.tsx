@@ -10,8 +10,8 @@ import es from '@/i18n/translations/es.json';
 import { getServerTranslator } from '@/i18n/translation';
 import { cookies } from 'next/headers';
 
-export default function Home() {
-  const cookieStore = cookies();
+export default async function Home() {
+  const cookieStore = await cookies();
   const locale = cookieStore.get('locale')?.value || 'en';
   const messages = locale === 'es' ? es : en;
   const tAbout = getServerTranslator(messages, 'about');
@@ -22,10 +22,6 @@ export default function Home() {
       {/* HERO SECTION */}
       <div className="relative w-full h-screen overflow-hidden">
         <Hero />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-left z-10">
-          <h1 className="text-6xl font-bold text-white mb-4 font-mono">Alef Lemat-Tech</h1>
-          <p className="text-primary/80 font-mono text-2xl font-extralight">Consulting | Training | Implementation</p>
-        </div>
       </div>
 
       <Services />

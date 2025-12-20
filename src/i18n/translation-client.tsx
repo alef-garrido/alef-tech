@@ -26,7 +26,7 @@ export function TranslationProvider({
 }
 
 export function useTranslations(namespace?: string) {
-  const ctx = useContext(TranslationContext as any);
+  const ctx = useContext(TranslationContext);
 
   return (key?: string) => {
     if (!key) return '';
@@ -36,6 +36,6 @@ export function useTranslations(namespace?: string) {
 }
 
 export function useLocale() {
-  const ctx = useContext(TranslationContext as any);
-  return ctx.locale as string;
+  const ctx = useContext(TranslationContext);
+  return ctx.locale;
 }

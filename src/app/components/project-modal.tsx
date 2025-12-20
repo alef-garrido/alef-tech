@@ -2,7 +2,7 @@
 
 import { X, Github, ExternalLink, Maximize } from 'lucide-react';
 import { useEffect } from 'react';
-import { project } from '../../../../types';
+import { project } from '../../../types';
 import Image from 'next/image';
 import { useTranslations } from '@/i18n/translation-client';
 

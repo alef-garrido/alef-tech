@@ -2,7 +2,7 @@
 import React from 'react';
 import useModal from '../hooks/use-modal';
 import ProjectModal from './project-modal';
-import { project } from '../../../../types';
+import { project } from '../../../types';
 import FlowingMenu from './flowing-menu';
 
 const FeaturedProjects = () => {
@@ -13,8 +13,8 @@ const FeaturedProjects = () => {
       title: 'Nomad_Proxy Traveller Platform',
       description: 'This is a description for Project Alpha.',
       tech: ['React', 'TypeScript', 'Next.js', 'Tailwind CSS'],
-      src: 'pholder.png',
-      image: 'pholder.png',
+      src: 'pholder.svg',
+      image: 'pholder.svg',
       featured: true,
       githubUrl: 'https://github.com/alef-garrido/nomad_proxy',
       liveUrl: 'https://nomad-proxy.vercel.app/',
@@ -24,8 +24,8 @@ const FeaturedProjects = () => {
       title: 'Gamified Learning Platform',
       description: 'This is a description for Project Beta.',
       tech: ['React', 'TypeScript', 'Next.js', 'Tailwind CSS'],
-      src: 'pholder.png',
-      image: 'pholder.png',
+      src: 'pholder.svg',
+      image: 'pholder.svg',
       featured: false,
       githubUrl: 'https://github.com/alef-garrido/elearning-camp-FullStack',
       liveUrl: 'https://elearning-camp-full-stack-frontend.vercel.app/',
@@ -35,8 +35,8 @@ const FeaturedProjects = () => {
       title: 'ECOM Quiz Funnel',
       description: 'This is a description for Project Delta.',
       tech: ['React', 'TypeScript', 'Next.js', 'Tailwind CSS'],
-      src: 'pholder.png',
-      image: 'pholder.png',
+      src: 'pholder.svg',
+      image: 'pholder.svg',
       featured: false,
       githubUrl: 'https://github.com/alef-garrido/ecom-test-business-owners',
       liveUrl: 'https://github.com/alef-garrido/ecom-test-business-owners',
@@ -47,7 +47,7 @@ const FeaturedProjects = () => {
   const menuItems = projects.map(project => ({
     link: project.liveUrl || '#',
     text: project.title,
-    image: project.image,
+    image: `/assets/${project.image}`,
     onClick: () => openModal(project),
   }));
 

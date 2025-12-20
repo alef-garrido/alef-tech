@@ -16,8 +16,8 @@ export const metadata: Metadata = {
   description: 'Agentic Website of Alef Lemat',
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const cookieStore = cookies();
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const cookieStore = await cookies();
   let locale = cookieStore.get('locale')?.value ?? 'en';
   if (!locales.includes(locale)) locale = 'en';
   const messageData = locale === 'es' ? es : en;
@@ -25,9 +25,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang={locale} suppressHydrationWarning={true}>
       <head>
+        <link rel="icon" href="/favicon.svg" />
         <Script
           type="module"
           src="https://unpkg.com/@splinetool/viewer@1.10.55/build/spline-viewer.js"
+          strategy="lazyOnload"
         />
         <style>
           {`

@@ -118,13 +118,13 @@ const ProjectModal = ({ project, closeModal }: ProjectModalProps) => {
                   <video
                     className="w-full h-full object-cover"
                     controls
-                    poster={`/assets/${project.image}`}>
+                    poster={project.image}>
                     <source src={project.videoUrl} type="video/mp4" />
                     Your browser does not support the video tag.
                   </video>
                 ) : (
                     <div className={`w-full h-full relative`}>
-                        <Image src={`/assets/${project.image}`} layout="fill" objectFit="cover" alt={project.title} />
+                        <Image src={project.image} fill style={{ objectFit: 'cover' }} alt={project.title} />
                     <div className="absolute inset-0 bg-black/40" />
                     <div className="absolute inset-0 flex items-center justify-center">
                       <div className="text-center">

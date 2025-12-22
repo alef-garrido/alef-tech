@@ -13,8 +13,8 @@ const FeaturedProjects = () => {
       title: 'Nomad_Proxy Traveller Platform',
       description: 'This is a description for Project Alpha.',
       tech: ['React', 'TypeScript', 'Next.js', 'Tailwind CSS'],
-      src: 'pholder.svg',
-      image: 'pholder.svg',
+        src: '/assets/pholder.svg',
+        image: '/assets/pholder.svg',
       featured: true,
       githubUrl: 'https://github.com/alef-garrido/nomad_proxy',
       liveUrl: 'https://nomad-proxy.vercel.app/',
@@ -24,8 +24,8 @@ const FeaturedProjects = () => {
       title: 'Gamified Learning Platform',
       description: 'This is a description for Project Beta.',
       tech: ['React', 'TypeScript', 'Next.js', 'Tailwind CSS'],
-      src: 'pholder.svg',
-      image: 'pholder.svg',
+        src: '/assets/pholder.svg',
+        image: '/assets/pholder.svg',
       featured: false,
       githubUrl: 'https://github.com/alef-garrido/elearning-camp-FullStack',
       liveUrl: 'https://elearning-camp-full-stack-frontend.vercel.app/',
@@ -53,13 +53,13 @@ const FeaturedProjects = () => {
 
   return (
     <div className="grid w-full my-48 px-6 md:px-12">
-      <h2 className="text-5xl font-bold text-secondary mb-8 font-mono text-center">Featured Projects</h2>
-          <div className="min-h-[500px] p-4 rounded-lg relative">
+      src: '/assets/pholder.svg',
+      image: '/assets/pholder.svg',
             <FlowingMenu items={menuItems} />
       </div>
       {isModalOpen && selectedProject && (
         <ProjectModal project={selectedProject} closeModal={closeModal} />
-      )}
+    image: project.image,
     </div>
   );
 };

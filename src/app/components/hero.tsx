@@ -18,7 +18,7 @@ export default function Hero() {
         <p className="text-lg md:text-xl mt-4">{t('subtitle')}</p>
       </div>
 
-      <div className="absolute bottom-6 right-2 p-6 rounded-lg bg-card text-card-foreground z-10">
+      <div className="bg-transparent absolute bottom-6 right-2  p-6 rounded-lg bg-card text-card-foreground z-10 lg:p-12">
         <button className='px-4 py-2 rounded-md bg-white text-black hover:bg-primary/80 transition-colors font-mono'>
           {tCta('primary')} →
         </button>

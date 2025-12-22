@@ -22,13 +22,12 @@ export default function ThreeAnimation() {
     if ((canvas as any).__three_initialized) return;
     (canvas as any).__three_initialized = true;
 
-    try {
-      // Create a renderer
-      const renderer = new THREE.WebGLRenderer({
-        canvas,
-        antialias: true,
-        alpha: true,
-      });
+    // Create a renderer
+    const renderer = new THREE.WebGLRenderer({
+      canvas,
+      antialias: true,
+      alpha: true,
+    });
 
     // Set a default background color
     renderer.setClearColor(0x11151c);
@@ -36,16 +35,7 @@ export default function ThreeAnimation() {
     //  Set the pixel ratio of the canvas (for HiDPI devices)
     renderer.setPixelRatio(window.devicePixelRatio);
 
-    // Set the size of the renderer to the canvas size
-    const setRendererSize = () => {
-      const width = canvas.clientWidth || window.innerWidth;
-      const height = canvas.clientHeight || window.innerHeight;
-      renderer.setSize(width, height);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-      camera.aspect = width / height;
-      camera.updateProjectionMatrix();
-    };
-    setRendererSize();
+    // Note: renderer size is set after the camera is created below
 
     // Create a new Three.js scene
     const scene = new THREE.Scene();
@@ -60,6 +50,26 @@ export default function ThreeAnimation() {
 
     // Set the camera position
     camera.position.set(0, 0, 10);
+
+    // Set the size of the renderer to the canvas size (after camera exists)
+    const setRendererSize = () => {
+      // Use getBoundingClientRect for sub-pixel/calc precision
+      const rect = canvas.getBoundingClientRect();
+      const width = Math.max(1, Math.floor(rect.width || window.innerWidth));
+      const height = Math.max(1, Math.floor(rect.height || window.innerHeight));
+
+      // Update renderer size and pixel ratio (clamped)
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+      renderer.setSize(width, height, false);
+
+      // Update camera
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+
+      return { width, height };
+    };
+    // initial size
+    const initial = setRendererSize();
 
     // Add controls to the camera/orbit controls
     const controls = new OrbitControls(camera, renderer.domElement);
@@ -99,21 +109,23 @@ export default function ThreeAnimation() {
     surfaceImperfection.wrapT = THREE.RepeatWrapping;
     surfaceImperfection.wrapS = THREE.RepeatWrapping;
 
+    console.debug('[ThreeAnimation] init');
+
     // Create a new MeshPhysicalMaterial for the 3d model
     const hands_mat = new THREE.MeshPhysicalMaterial({
       color: 0x606060,
       roughness: 0.2,
       metalness: 1,
       roughnessMap: surfaceImperfection,
-      envMap: hdrEquirect,
-      // Set the strenth of the environment map on the texture
-      envMapIntensity: 1.5
+      // envMap will be attached when HDR texture is available
+      envMapIntensity: 1.5,
     });
 
     // Load the 3d model as FBX
     const fbxloader = new FBXLoader();
+    const fbxUrl = "https://miroleon.github.io/daily-assets/two_hands_01.fbx";
     fbxloader.load(
-      "https://miroleon.github.io/daily-assets/two_hands_01.fbx",
+      fbxUrl,
       function (object) {
         // Traverse through the object to apply the material to all the meshes
         object.traverse(function (child) {
@@ -129,8 +141,32 @@ export default function ThreeAnimation() {
 
         // Add the 3d model to the scene
         scene.add(object);
+      },
+      undefined,
+      (err) => {
+        console.warn('[ThreeAnimation] FBX load error for', fbxUrl, err);
       }
     );
+    const hdrUrl = "https://miroleon.github.io/daily-assets/GRADIENT_01_01_comp.hdr";
+    hdrLoader.load(
+      hdrUrl,
+      function (texture) {
+        texture.mapping = THREE.EquirectangularReflectionMapping;
+        // Add the HDR to the scene
+        scene.environment = texture;
+        // attach env map to existing materials
+        try {
+          hands_mat.envMap = texture;
+          hands_mat.needsUpdate = true;
+          } catch (e) {
+            console.warn('[ThreeAnimation] failed to attach envMap to material:', e);
+          }
+        },
+        undefined,
+        (err) => {
+          console.warn('[ThreeAnimation] HDR load error for', hdrUrl, err);
+        }
+      );
 
     // POST PROCESSING
     // Create a new render pass
@@ -212,11 +248,16 @@ export default function ThreeAnimation() {
 
     // Load the displacement texture
     // You can change the 'ml-dpt-12-1K_normal.jpeg' to 'ml-dpt-21-1K_normal.jpeg' for the second freebie texture
+    const displacementUrl = "https://raw.githubusercontent.com/miroleon/displacement_texture_freebie/main/assets/1K/jpeg/normal/ml-dpt-21-1K_normal.jpeg";
     const displacementTexture = new THREE.TextureLoader().load(
-      "https://raw.githubusercontent.com/miroleon/displacement_texture_freebie/main/assets/1K/jpeg/normal/ml-dpt-21-1K_normal.jpeg",
+      displacementUrl,
       function (texture) {
         // By setting minFilter to THREE.NearestFilter we can prevent some tiling issues with the displacement texture
         texture.minFilter = THREE.NearestFilter;
+      },
+      undefined,
+      (err) => {
+        console.warn('[ThreeAnimation] displacement texture load error for', displacementUrl, err);
       }
     );
 
@@ -239,15 +280,19 @@ export default function ThreeAnimation() {
     composer.addPass(afterimagePass);
     composer.addPass(bloomPass);
 
+    // Ensure composer matches renderer size after creation
+    try {
+      if (initial) composer.setSize(initial.width, initial.height);
+    } catch (e) {
+      console.warn('[ThreeAnimation] composer setSize failed', e);
+    }
+
     // Add the displacement pass to the composer
     composer.addPass(displacementPass);
 
     // The following section is just a custom way to handle the orbit controls and transition smoothly between user interaction and default camera movement
 
-    // Easing function to smoothen the transition
-    function easeInOutCubic(x: number) {
-      return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
-    }
+    // (easing defined later)
 
     // Variables to control the transition
     let isUserInteracting = false;
@@ -257,24 +302,120 @@ export default function ThreeAnimation() {
     const transitionStartCameraPosition = new THREE.Vector3();
     const transitionStartCameraQuaternion = new THREE.Quaternion();
 
+    let rafId: number;
+    // simple scene animation so something moves even if model isn't loaded
+    let rotTheta = 0;
+    // variables used for scripted camera motion
     let theta = 0;
 
-    let rafId: number;
+    function easeInOutCubic(x: number) {
+      return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+    }
+
+    function update() {
+      // Update theta continuously
+      theta += 0.005;
+
+      const targetPosition = new THREE.Vector3(
+        Math.sin(theta) * 3,
+        Math.sin(theta),
+        Math.cos(theta) * 3
+      );
+
+      const targetQuaternion = new THREE.Quaternion().setFromEuler(
+        new THREE.Euler(0, -theta, 0)
+      );
+
+      if (isUserInteracting) {
+        if (transitionProgress > 0) {
+          transitionProgress = 0;
+        }
+        transitionStartCameraPosition.copy(camera.position);
+        transitionStartCameraQuaternion.copy(camera.quaternion);
+      } else {
+        if (transitionProgress < 1) {
+          transitionProgress += transitionIncrement;
+          const easedProgress = easeInOutCubic(transitionProgress);
+          camera.position.lerpVectors(
+            transitionStartCameraPosition,
+            targetPosition,
+            easedProgress
+          );
+          // Interpolate from the stored start quaternion to the target
+          camera.quaternion.copy(transitionStartCameraQuaternion).slerp(
+            targetQuaternion,
+            easedProgress
+          );
+        } else {
+          camera.position.copy(targetPosition);
+          camera.quaternion.copy(targetQuaternion);
+        }
+      }
+
+      // always look at center
+      camera.lookAt(scene.position);
+
+      // gentle fallback rotation
+      rotTheta += 0.01;
+      scene.rotation.y = rotTheta * 0.2;
+    }
+
+    // Event listeners for OrbitControls interaction
+    const startInteraction = () => {
+      isUserInteracting = true;
+    };
+    const endInteraction = () => {
+      isUserInteracting = false;
+      transitionStartCameraPosition.copy(camera.position);
+      transitionStartCameraQuaternion.copy(camera.quaternion);
+      transitionProgress = 0;
+    };
+    controls.addEventListener('start', startInteraction);
+    controls.addEventListener('end', endInteraction);
+
     function animate() {
       rafId = requestAnimationFrame(animate);
       controls.update();
-      composer.render();
+      update();
+      try {
+        composer.render();
+      } catch (e) {
+        try {
+          renderer.render(scene, camera);
+        } catch (err) {
+          console.warn('[ThreeAnimation] render error:', err);
+        }
+      }
     }
     animate();
 
-    // handle resize
-    const handleResize = () => setRendererSize();
+    // handle resize via ResizeObserver for parent layout changes
+    const handleResize = () => {
+      const { width, height } = setRendererSize();
+      try {
+        composer.setSize(width, height);
+      } catch (e) {
+        // ignore
+      }
+    };
     window.addEventListener('resize', handleResize);
+
+    // Observe size changes of the canvas (or parent layout) so the canvas always fills the component
+    const ro = new ResizeObserver(handleResize);
+    ro.observe(canvas);
 
     // Cleanup on unmount
     return () => {
       window.removeEventListener('resize', handleResize);
+      try {
+        ro.disconnect();
+      } catch (e) {}
       if (rafId) cancelAnimationFrame(rafId);
+      // remove orbit controls listeners
+      try {
+        controls.removeEventListener('start', startInteraction);
+        controls.removeEventListener('end', endInteraction);
+      } catch (e) {}
       try {
         composer.dispose();
       } catch (e) {}

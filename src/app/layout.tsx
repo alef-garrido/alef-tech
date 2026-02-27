@@ -25,7 +25,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html lang={locale} suppressHydrationWarning={true}>
       <head>
-        <link rel="icon" href="/favicon.svg" />
+        <link rel="icon" href="/favicon.ico" />
         <Script
           type="module"
           src="https://unpkg.com/@splinetool/viewer@1.10.55/build/spline-viewer.js"

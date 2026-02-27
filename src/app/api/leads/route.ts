@@ -12,6 +12,47 @@ const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.
 
 const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
+// n8n webhook URL
+const N8N_WEBHOOK_URL = process.env.N8N_WEBHOOK_URL || '';
+
+/**
+ * Send webhook payload to n8n workflow
+ * This is done asynchronously and doesn't block the API response
+ */
+async function sendToN8nWebhook(leadData: any, leadId: string) {
+  if (!N8N_WEBHOOK_URL) {
+    console.warn('N8N_WEBHOOK_URL not configured, skipping webhook');
+    return;
+  }
+
+  try {
+    const payload = {
+      leadId,
+      ...leadData,
+      capturedAt: new Date().toISOString(),
+      source: 'xnoria-diagnostic',
+    };
+
+    const response = await fetch(N8N_WEBHOOK_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (!response.ok) {
+      console.error(`N8N webhook error: ${response.status}`, await response.text());
+      return;
+    }
+
+    console.log('N8N webhook sent successfully', { leadId });
+  } catch (error) {
+    console.error('N8N webhook delivery failed:', error);
+    // Don't throw - webhook failure shouldn't fail the lead capture
+  }
+}
+
 export async function POST(request: Request) {
   try {
     const body = await request.json() as LeadFormData;
@@ -88,6 +129,13 @@ export async function POST(request: Request) {
       source,
       timestamp: new Date().toISOString(),
     });
+
+    // Send to n8n webhook asynchronously (don't await)
+    if (body.service === 'diagnostic' && N8N_WEBHOOK_URL) {
+      sendToN8nWebhook(leadData, String(leadId)).catch((err) => {
+        console.error('Async webhook error:', err);
+      });
+    }
 
     return new Response(
       JSON.stringify({

@@ -1,12 +1,12 @@
 # Lead Capture API Documentation
 
 ## Overview
-El API `/api/leads` captura y almacena formularios de leads desde múltiples landing pages (squeeze pages, diagnostic page, etc.) directamente en Supabase.
+El API `/api/leads` captura y almacena formularios de leads desde múltiples landing pages (squeeze pages, diagnostic page, etc.) directamente en Supabase, y opcionalmente envía webhooks a n8n para automatización.
 
 ## Endpoints
 
 ### POST `/api/leads`
-Registra un nuevo lead en la base de datos.
+Registra un nuevo lead en la base de datos y envía webhook a n8n si aplica.
 
 #### Request Body
 ```json
@@ -57,6 +57,79 @@ Registra un nuevo lead en la base de datos.
 }
 ```
 
+## Webhook Integration with n8n
+
+### Overview
+When a lead is captured from the diagnostic page (`/diagnostic`), the API automatically sends the lead data to your n8n workflow via HTTP POST.
+
+### Webhook Payload
+The webhook sends the following JSON payload to your n8n endpoint:
+
+```json
+{
+  "leadId": "12345",
+  "name": "Juan García",
+  "email": "juan@empresa.com",
+  "phone": "+52 555 123 4567",
+  "company": "Consultoría García",
+  "service": "diagnostic",
+  "specific_needs": "XNORIA Clinic - Diagnóstico CX Express",
+  "budget": null,
+  "timeline": null,
+  "notes": null,
+  "submitted_at": "2026-02-27T07:06:03.093Z",
+  "source": "xnoria-diagnostic",
+  "status": "new",
+  "capturedAt": "2026-02-27T07:06:03.093Z"
+}
+```
+
+### Setup Instructions
+
+#### 1. Configure n8n Webhook
+1. Create a new workflow in n8n
+2. Add an HTTP trigger node:
+   - Method: POST
+   - Path: `/webhook/diagnostic-leads` (customize as needed)
+3. Copy the webhook URL from n8n
+
+#### 2. Set Environment Variable
+Add to `.env`:
+```
+N8N_WEBHOOK_URL=https://your-n8n-instance.com/webhook/diagnostic-leads
+```
+
+#### 3. Example n8n Workflow
+```
+HTTP Trigger (POST)
+  ↓
+Parse JSON
+  ↓
+Process Lead (your custom logic)
+  ↓
+Send Email/WhatsApp notification
+  ↓
+Update CRM
+  ↓
+Return Response
+```
+
+### Features
+
+- **Asynchronous**: Webhook is sent asynchronously, doesn't block user response
+- **Non-blocking**: Webhook failure doesn't affect lead capture
+- **Service-specific**: Only diagnostic leads trigger n8n webhook
+- **Error handling**: Failures are logged but don't interrupt the process
+- **Automatic retry**: Configure retry policy in n8n itself
+
+### Webhook Behavior
+
+- ✅ Sent automatically when `service === 'diagnostic'`
+- ✅ Includes complete lead data + metadata
+- ✅ Async (doesn't block API response)
+- ✅ Logged on success/failure
+- ✅ Continues even if webhook fails
+
 ## Database Schema
 
 ### `leads` table
@@ -78,20 +151,14 @@ Registra un nuevo lead en la base de datos.
 - updated_at (TIMESTAMP WITH TIME ZONE) - auto-updates on modification
 ```
 
-## Implementation Details
-
-### Source Tracking
+## Source Tracking
 Leads are automatically categorized by source:
 - `squeeze-page`: Standard service leads (training, consulting, implementation)
 - `xnoria-diagnostic`: XNORIA Clinic diagnostic form submissions
 
-### Service-Specific Behavior
-- **diagnostic**: Minimal form with business name + WhatsApp focus
-- **other services**: Full lead qualification form
+## Integration Points
 
-### Integration Points
-
-#### Diagnostic Page (`/diagnostic`)
+### Diagnostic Page (`/diagnostic`)
 ```typescript
 const response = await fetch('/api/leads', {
   method: 'POST',
@@ -122,6 +189,7 @@ Required variables (already configured):
 NEXT_PUBLIC_SUPABASE_URL=https://...
 NEXT_PUBLIC_SUPABASE_ANON_KEY=...
 SUPABASE_SERVICE_ROLE_KEY=... (optional, uses anon key if not provided)
+N8N_WEBHOOK_URL=https://your-n8n-instance.com/webhook/diagnostic-leads
 ```
 
 ### 3. Verify Setup
@@ -150,12 +218,18 @@ curl -X POST http://localhost:3000/api/leads \
 - Source tracking for attribution
 - Status field for workflow tracking
 
+✅ **Webhook Integration**
+- Automatic n8n webhook on diagnostic leads
+- Asynchronous, non-blocking delivery
+- Error logging and recovery
+
 ✅ **Indexing**
 - Optimized queries by email, service, source, status
 - Efficient sorting by submission date
 
 ✅ **Error Handling**
 - Graceful fallback if Supabase fails
+- Graceful fallback if webhook fails
 - Detailed error logging
 - Clear user messages
 
@@ -167,6 +241,12 @@ In Supabase Dashboard:
 2. Select `leads` table
 3. Filter by status, service, or source as needed
 
+### Monitor Webhooks
+In n8n:
+1. Open the workflow execution history
+2. Check logs for incoming webhook calls
+3. Monitor lead processing
+
 ### Common Queries
 ```sql
 -- Get all new leads
@@ -177,13 +257,37 @@ SELECT * FROM leads WHERE service = 'diagnostic' ORDER BY submitted_at DESC;
 
 -- Get leads by source
 SELECT source, COUNT(*) as count FROM leads GROUP BY source;
+
+-- Get leads from last 24 hours
+SELECT * FROM leads WHERE submitted_at > NOW() - INTERVAL '24 hours';
 ```
+
+## Troubleshooting
+
+### Webhook Not Triggering
+- Check `N8N_WEBHOOK_URL` is set in `.env`
+- Verify service type is `'diagnostic'`
+- Check server logs for webhook errors
+- Test webhook URL in browser (should return 405 or similar)
+
+### Webhook Retries
+- n8n handles retries automatically
+- Configure retry policy in n8n webhook trigger settings
+- Check n8n logs for specific errors
+
+### Lead Not Saving
+- Verify Supabase `leads` table exists
+- Check Supabase credentials in `.env`
+- Verify RLS policies allow inserts
+- Check browser console for API errors
 
 ## Future Enhancements
 
 - [ ] Email notification on form submission
 - [ ] Lead scoring based on service type and company size
 - [ ] CRM integration (HubSpot, Pipedrive)
-- [ ] Webhook for real-time processing
+- [ ] Webhook retry mechanism with exponential backoff
 - [ ] Lead follow-up automation
 - [ ] Analytics dashboard
+- [ ] Custom webhook payload mapping
+

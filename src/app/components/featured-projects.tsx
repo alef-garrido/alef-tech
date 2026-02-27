@@ -35,8 +35,8 @@ const FeaturedProjects = () => {
       title: 'ECOM Quiz Funnel',
       description: 'This is a description for Project Delta.',
       tech: ['React', 'TypeScript', 'Next.js', 'Tailwind CSS'],
-      src: 'pholder.svg',
-      image: 'pholder.svg',
+      src: '/assets/pholder.svg',
+      image: '/assets/pholder.svg',
       featured: false,
       githubUrl: 'https://github.com/alef-garrido/ecom-test-business-owners',
       liveUrl: 'https://github.com/alef-garrido/ecom-test-business-owners',
@@ -47,19 +47,19 @@ const FeaturedProjects = () => {
   const menuItems = projects.map(project => ({
     link: project.liveUrl || '#',
     text: project.title,
-    image: `/assets/${project.image}`,
+    image: project.image,
     onClick: () => openModal(project),
   }));
 
   return (
     <div className="grid w-full my-48 px-6 md:px-12">
-      src: '/assets/pholder.svg',
-      image: '/assets/pholder.svg',
-            <FlowingMenu items={menuItems} />
+      <h2 className="text-5xl font-bold text-secondary mb-8 font-mono text-center">Featured Projects</h2>
+      <div className="min-h-[500px] p-4 rounded-lg relative">
+        <FlowingMenu items={menuItems} />
       </div>
       {isModalOpen && selectedProject && (
         <ProjectModal project={selectedProject} closeModal={closeModal} />
-    image: project.image,
+      )}
     </div>
   );
 };

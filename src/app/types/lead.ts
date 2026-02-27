@@ -1,5 +1,5 @@
 // Lead form types based on service context
-export type ServiceType = 'training' | 'consulting' | 'implementation' | 'general';
+export type ServiceType = 'training' | 'consulting' | 'implementation' | 'general' | 'diagnostic';
 
 export interface LeadFormData {
   name: string;
@@ -280,6 +280,43 @@ export const FORM_CONFIG: Record<ServiceType, FormField[]> = {
       type: 'textarea',
       placeholder: 'Tell us about your needs...',
       required: true,
+    },
+  ],
+  diagnostic: [
+    {
+      name: 'company',
+      label: 'Nombre de tu negocio',
+      type: 'text',
+      placeholder: 'Ej: Consultoría Nexus',
+      required: true,
+    },
+    {
+      name: 'phone',
+      label: 'WhatsApp (número con país)',
+      type: 'tel',
+      placeholder: '+52 123 456 7890',
+      required: true,
+    },
+    {
+      name: 'email',
+      label: 'Email Address',
+      type: 'email',
+      placeholder: 'tu@email.com',
+      required: true,
+    },
+    {
+      name: 'name',
+      label: 'Tu nombre',
+      type: 'text',
+      placeholder: 'John Doe',
+      required: true,
+    },
+    {
+      name: 'specificNeeds',
+      label: '¿Cuál es tu principal desafío con retención de clientes?',
+      type: 'textarea',
+      placeholder: 'Cuéntanos sobre tu negocio...',
+      required: false,
     },
   ],
 };

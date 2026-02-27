@@ -61,6 +61,18 @@ const SQUEEZE_PAGE_CONFIG: Record<ServiceType, SqueezePage> = {
     ],
     ctaText: 'Get in Touch',
   },
+  diagnostic: {
+    service: 'diagnostic',
+    title: 'XNORIA Clinic: CX Diagnostic',
+    subtitle: 'Free 48-hour business health check',
+    benefits: [
+      'Identify customer retention bottlenecks',
+      'Quantify revenue leakage with precision',
+      'Get actionable recommendations in 48 hours',
+      'No commitment, no credit card required',
+    ],
+    ctaText: 'Schedule Free Diagnostic',
+  },
 };
 
 export const SqueezePage = ({ service }: { service: ServiceType }) => {

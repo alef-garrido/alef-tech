@@ -2,43 +2,11 @@
 
 import { useState } from 'react';
 import { Mail, CheckCircle2, MessageCircle, BarChart3 } from 'lucide-react';
-
-interface FormData {
-  businessName: string;
-  whatsapp: string;
-}
+import { DynamicLeadForm } from '@/app/components/dynamic-lead-form';
 
 export default function DiagnosticPage() {
-  const [formData, setFormData] = useState<FormData>({ businessName: '', whatsapp: '' });
-  const [submitted, setSubmitted] = useState(false);
+  const [showForm, setShowForm] = useState(false);
   const [slotsUsed, setSlotsUsed] = useState(3);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    try {
-      const response = await fetch('/api/leads', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: formData.businessName,
-          phone: formData.whatsapp,
-          email: `lead-${Date.now()}@xnoriaclinic.local`,
-          company: formData.businessName,
-          service: 'diagnostic',
-          specificNeeds: 'XNORIA Clinic - Diagnóstico CX Express',
-        }),
-      });
-
-      if (response.ok) {
-        setSubmitted(true);
-        setFormData({ businessName: '', whatsapp: '' });
-        setTimeout(() => setSubmitted(false), 5000);
-      }
-    } catch (error) {
-      console.error('Error submitting form:', error);
-    }
-  };
 
   return (
     <main className="min-h-screen bg-background text-foreground">
@@ -74,54 +42,18 @@ export default function DiagnosticPage() {
 
           {/* Form Card */}
           <div id="form" className="bg-card rounded-xl p-8 sm:p-10 mb-8 c-cyber-border">
-            {!submitted ? (
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label className="block text-sm font-semibold font-mono mb-2">
-                    Nombre de tu negocio
-                  </label>
-                  <input
-                    type="text"
-                    value={formData.businessName}
-                    onChange={(e) => setFormData({ ...formData, businessName: e.target.value })}
-                    placeholder="Ej: Consultoría Nexus"
-                    required
-                    className="w-full px-4 py-3 border border-border bg-input rounded-lg focus:border-primary outline-none transition font-mono text-sm"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-semibold font-mono mb-2">
-                    WhatsApp (número con país)
-                  </label>
-                  <input
-                    type="tel"
-                    value={formData.whatsapp}
-                    onChange={(e) => setFormData({ ...formData, whatsapp: e.target.value })}
-                    placeholder="+52 123 456 7890"
-                    required
-                    className="w-full px-4 py-3 border border-border bg-input rounded-lg focus:border-primary outline-none transition font-mono text-sm"
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full py-3 px-6 rounded-lg transition font-mono font-bold c-cyber-border hover:bg-primary/30"
-                >
-                  → Agendar Diagnóstico CX Express
-                </button>
-              </form>
+            {showForm ? (
+              <DynamicLeadForm 
+                service="diagnostic"
+                onClose={() => setShowForm(false)}
+              />
             ) : (
-              <div className="text-center py-8">
-                <CheckCircle2 className="w-16 h-16 mx-auto mb-4" style={{color: '#00ffb2'}} />
-                <h3 className="text-2xl font-bold font-mono mb-2">✓ Recibido</h3>
-                <p className="font-mono text-sm mb-4">
-                  Te contactaremos en WhatsApp en 24h
-                </p>
-                <p className="font-mono text-xs" style={{color: '#888'}}>
-                  Código: {Math.random().toString(36).substr(2, 9).toUpperCase()}
-                </p>
-              </div>
+              <button
+                onClick={() => setShowForm(true)}
+                className="w-full py-3 px-6 rounded-lg transition font-mono font-bold c-cyber-border hover:bg-primary/30"
+              >
+                → Agendar Diagnóstico CX Express
+              </button>
             )}
           </div>
 

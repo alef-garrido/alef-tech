@@ -99,14 +99,11 @@ export async function POST(request: Request) {
       email: body.email,
       phone: body.phone,
       company: body.company || null,
-      service: body.service,
-      specific_needs: body.specificNeeds || null,
-      budget: body.budget || null,
-      timeline: body.timeline || null,
+      service_interested: body.service,
+      preferred_time: body.timeline || null,
       notes: body.notes || null,
-      submitted_at: new Date().toISOString(),
-      source: source,
-      status: 'new',
+      flow_id: body.flowId || `flow-${Date.now()}`,
+      session_id: body.sessionId || `session-${Date.now()}`,
     };
 
     const { data, error } = await supabase

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Mail, CheckCircle2, MessageCircle, BarChart3 } from 'lucide-react';
+import { Mail, CheckCircle2, MessageCircle, BarChart3, RotateCw, Phone, Thermometer, Zap } from 'lucide-react';
 import { DynamicLeadForm } from '@/app/components/dynamic-lead-form';
 
 export default function DiagnosticPage() {
@@ -122,8 +122,185 @@ export default function DiagnosticPage() {
         </div>
       </section>
 
-      {/* SECCIÓN 3: SOCIAL PROOF */}
+      {/* SECCIÓN 3: FARMACIA XNORIA */}
       <section className="py-16 sm:py-24 px-4 sm:px-6">
+        <div className="max-w-5xl mx-auto">
+          {/* Header */}
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-bold font-mono mb-2">
+              🏥 FARMACIA XNORIA
+            </h2>
+            <p className="text-lg font-mono mb-8">
+              Remedios que curan tu negocio
+            </p>
+          </div>
+
+          {/* Grid de 4 Frascos */}
+          <div className="grid md:grid-cols-2 gap-8 mb-12">
+            {/* FRASCO 1: Jarabe Reactivador */}
+            <div className="bg-card rounded-xl p-8 c-cyber-border overflow-hidden">
+              <div className="absolute top-0 right-0 w-20 h-20 rounded-bl-3xl" style={{background: 'linear-gradient(135deg, rgba(0, 255, 178, 0.15), transparent)'}}></div>
+              <div className="relative">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 rounded-lg flex items-center justify-center text-2xl" style={{background: 'rgba(0, 255, 178, 0.15)'}}>
+                    <RotateCw className="w-6 h-6 c-cyber-accent" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold font-mono">Jarabe Reactivador</h3>
+                    <p className="text-xs font-mono" style={{color: '#888'}}>REACTIVACIÓN</p>
+                  </div>
+                </div>
+                
+                <div className="space-y-2 mb-6">
+                  <div className="flex items-start gap-3 p-2 rounded-lg" style={{background: 'rgba(0, 255, 178, 0.08)'}}>
+                    <CheckCircle2 className="w-4 h-4 c-cyber-accent flex-shrink-0 mt-0.5" />
+                    <span className="text-sm">Recupera clientes inactivos</span>
+                  </div>
+                  <div className="flex items-start gap-3 p-2 rounded-lg" style={{background: 'rgba(0, 255, 178, 0.08)'}}>
+                    <CheckCircle2 className="w-4 h-4 c-cyber-accent flex-shrink-0 mt-0.5" />
+                    <span className="text-sm">WhatsApp + 14 días</span>
+                  </div>
+                  <div className="flex items-start gap-3 p-2 rounded-lg" style={{background: 'rgba(0, 255, 178, 0.08)'}}>
+                    <CheckCircle2 className="w-4 h-4 c-cyber-accent flex-shrink-0 mt-0.5" />
+                    <span className="text-sm font-mono font-bold c-cyber-accent">$1,999 + $500/cliente</span>
+                  </div>
+                </div>
+                
+                <div className="rounded-lg p-3 border-l-4 border-green-500" style={{background: 'rgba(34, 197, 94, 0.12)'}}>
+                  <p className="text-sm font-bold">✅ Garantía 5% reactivación</p>
+                </div>
+              </div>
+            </div>
+
+            {/* FRASCO 2: Analgésico de Cierre */}
+            <div className="bg-card rounded-xl p-8 c-cyber-border overflow-hidden">
+              <div className="absolute top-0 right-0 w-20 h-20 rounded-bl-3xl" style={{background: 'linear-gradient(135deg, rgba(245, 158, 11, 0.15), transparent)'}}></div>
+              <div className="relative">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 rounded-lg flex items-center justify-center text-2xl" style={{background: 'rgba(245, 158, 11, 0.15)'}}>
+                    <Phone className="w-6 h-6" style={{color: '#f59e0b'}} />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold font-mono">Analgésico de Cierre</h3>
+                    <p className="text-xs font-mono" style={{color: '#888'}}>CONVERSIÓN</p>
+                  </div>
+                </div>
+                
+                <div className="space-y-2 mb-6">
+                  <div className="flex items-start gap-3 p-2 rounded-lg" style={{background: 'rgba(245, 158, 11, 0.08)'}}>
+                    <CheckCircle2 className="w-4 h-4 flex-shrink-0 mt-0.5" style={{color: '#f59e0b'}} />
+                    <span className="text-sm">Convierte leads en ventas</span>
+                  </div>
+                  <div className="flex items-start gap-3 p-2 rounded-lg" style={{background: 'rgba(245, 158, 11, 0.08)'}}>
+                    <CheckCircle2 className="w-4 h-4 flex-shrink-0 mt-0.5" style={{color: '#f59e0b'}} />
+                    <span className="text-sm">5 llamadas + 3 emails</span>
+                  </div>
+                  <div className="flex items-start gap-3 p-2 rounded-lg" style={{background: 'rgba(245, 158, 11, 0.08)'}}>
+                    <CheckCircle2 className="w-4 h-4 flex-shrink-0 mt-0.5" style={{color: '#f59e0b'}} />
+                    <span className="text-sm font-mono font-bold" style={{color: '#f59e0b'}}>$2,499 único</span>
+                  </div>
+                </div>
+                
+                <div className="rounded-lg p-3 border-l-4" style={{borderColor: '#f59e0b', background: 'rgba(245, 158, 11, 0.12)'}}>
+                  <p className="text-sm font-bold">✅ +15% tasa de cierre</p>
+                </div>
+              </div>
+            </div>
+
+            {/* FRASCO 3: Termómetro CX */}
+            <div className="bg-card rounded-xl p-8 c-cyber-border overflow-hidden">
+              <div className="absolute top-0 right-0 w-20 h-20 rounded-bl-3xl" style={{background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.15), transparent)'}}></div>
+              <div className="relative">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 rounded-lg flex items-center justify-center text-2xl" style={{background: 'rgba(59, 130, 246, 0.15)'}}>
+                    <Thermometer className="w-6 h-6" style={{color: '#3b82f6'}} />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold font-mono">Termómetro CX</h3>
+                    <p className="text-xs font-mono" style={{color: '#888'}}>DIAGNÓSTICO</p>
+                  </div>
+                </div>
+                
+                <div className="space-y-2 mb-6">
+                  <div className="flex items-start gap-3 p-2 rounded-lg" style={{background: 'rgba(59, 130, 246, 0.08)'}}>
+                    <CheckCircle2 className="w-4 h-4 flex-shrink-0 mt-0.5" style={{color: '#3b82f6'}} />
+                    <span className="text-sm">Diagnóstico 48h GRATIS</span>
+                  </div>
+                  <div className="flex items-start gap-3 p-2 rounded-lg" style={{background: 'rgba(59, 130, 246, 0.08)'}}>
+                    <CheckCircle2 className="w-4 h-4 flex-shrink-0 mt-0.5" style={{color: '#3b82f6'}} />
+                    <span className="text-sm">Mapa de puntos de fuga</span>
+                  </div>
+                  <div className="flex items-start gap-3 p-2 rounded-lg" style={{background: 'rgba(59, 130, 246, 0.08)'}}>
+                    <CheckCircle2 className="w-4 h-4 flex-shrink-0 mt-0.5" style={{color: '#3b82f6'}} />
+                    <span className="text-sm font-mono font-bold" style={{color: '#3b82f6'}}>Sin compromiso</span>
+                  </div>
+                </div>
+                
+                <div className="rounded-lg p-3 border-l-4" style={{borderColor: '#3b82f6', background: 'rgba(59, 130, 246, 0.12)'}}>
+                  <p className="text-sm font-bold">✅ Reporte visual incluido</p>
+                </div>
+              </div>
+            </div>
+
+            {/* FRASCO 4: Vitamina Automatización */}
+            <div className="bg-card rounded-xl p-8 c-cyber-border overflow-hidden">
+              <div className="absolute top-0 right-0 w-20 h-20 rounded-bl-3xl" style={{background: 'linear-gradient(135deg, rgba(168, 85, 247, 0.15), transparent)'}}></div>
+              <div className="relative">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 rounded-lg flex items-center justify-center text-2xl" style={{background: 'rgba(168, 85, 247, 0.15)'}}>
+                    <Zap className="w-6 h-6" style={{color: '#a855f7'}} />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold font-mono">Vitamina Automatización</h3>
+                    <p className="text-xs font-mono" style={{color: '#888'}}>AUTOMATIZACIÓN</p>
+                  </div>
+                </div>
+                
+                <div className="space-y-2 mb-6">
+                  <div className="flex items-start gap-3 p-2 rounded-lg" style={{background: 'rgba(168, 85, 247, 0.08)'}}>
+                    <CheckCircle2 className="w-4 h-4 flex-shrink-0 mt-0.5" style={{color: '#a855f7'}} />
+                    <span className="text-sm">Automatiza seguimientos</span>
+                  </div>
+                  <div className="flex items-start gap-3 p-2 rounded-lg" style={{background: 'rgba(168, 85, 247, 0.08)'}}>
+                    <CheckCircle2 className="w-4 h-4 flex-shrink-0 mt-0.5" style={{color: '#a855f7'}} />
+                    <span className="text-sm">Flujo preconfigurado</span>
+                  </div>
+                  <div className="flex items-start gap-3 p-2 rounded-lg" style={{background: 'rgba(168, 85, 247, 0.08)'}}>
+                    <CheckCircle2 className="w-4 h-4 flex-shrink-0 mt-0.5" style={{color: '#a855f7'}} />
+                    <span className="text-sm font-mono font-bold" style={{color: '#a855f7'}}>$3,499 + $999/mes</span>
+                  </div>
+                </div>
+                
+                <div className="rounded-lg p-3 border-l-4" style={{borderColor: '#a855f7', background: 'rgba(168, 85, 247, 0.12)'}}>
+                  <p className="text-sm font-bold">✅ -20% carga operativa</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* CTA Section */}
+          <div className="bg-card rounded-xl p-8 sm:p-10 c-cyber-border text-center">
+            <h3 className="text-2xl font-bold font-mono mb-4">
+              🩺 ¿NO SABES QUÉ REMEDIO NECESITAS?
+            </h3>
+            <p className="text-lg font-mono mb-6">
+              ➡️ AGENDA TU DIAGNÓSTICO CX EXPRESS GRATIS (15 min)
+            </p>
+            <a
+              href="#form"
+              className="inline-block py-3 px-8 rounded-lg transition font-mono font-bold c-cyber-border hover:bg-primary/30 text-base mb-4"
+            >
+              Quiero mi diagnóstico GRATIS
+            </a>
+            <p className="text-sm font-mono" style={{color: '#888'}}>
+              ⏳ Solo 3 cupos disponibles esta semana
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* SECCIÓN 4: SOCIAL PROOF */}
+      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-card/30">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl sm:text-4xl font-bold text-center font-mono mb-12">
             Por qué confiar
@@ -157,7 +334,7 @@ export default function DiagnosticPage() {
         </div>
       </section>
 
-      {/* SECCIÓN 4: FAQ MÍNIMA */}
+      {/* SECCIÓN 5: FAQ MÍNIMA */}
       <section className="py-16 sm:py-24 px-4 sm:px-6 bg-card/30">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-3xl sm:text-4xl font-bold text-center font-mono mb-12">
@@ -192,7 +369,7 @@ export default function DiagnosticPage() {
         </div>
       </section>
 
-      {/* SECCIÓN 5: CTA FINAL */}
+      {/* SECCIÓN 6: CTA FINAL */}
       <section className="py-16 sm:py-24 px-4 sm:px-6">
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="text-3xl sm:text-4xl font-bold font-mono mb-6">

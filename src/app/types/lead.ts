@@ -5,12 +5,14 @@ export interface LeadFormData {
   name: string;
   email: string;
   phone: string;
-  company: string;
+  company?: string;
   service: ServiceType;
-  specificNeeds: string;
+  specificNeeds?: string;
   budget?: string;
   timeline?: string;
   notes?: string;
+  flowId?: string;
+  sessionId?: string;
 }
 
 export interface FormField {

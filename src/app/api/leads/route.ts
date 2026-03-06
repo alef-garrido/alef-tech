@@ -107,7 +107,7 @@ export async function POST(request: Request) {
       session_id: body.sessionId || `session-${Date.now()}`,
     };
 
-    const { data, error } = await (getSupabaseClient() as any)
+    const { data, error } = await getSupabaseClient()
       .from('leads')
       .insert([leadData])
       .select();

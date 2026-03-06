@@ -35,8 +35,9 @@ export function useTranslations(namespace?: string) {
       return typeof val === 'string' ? val : key;
     }
     const namespaceContent = ctx.messages[namespace];
-    if (typeof namespaceContent === 'object' && namespaceContent && namespaceContent[key]) {
-      return namespaceContent[key];
+    if (typeof namespaceContent === 'object' && namespaceContent && typeof namespaceContent === 'object') {
+      const content = namespaceContent as Record<string, string>;
+      return content[key] || key;
     }
     return key;
   };

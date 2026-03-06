@@ -431,11 +431,7 @@ export default function ThreeAnimation() {
       } catch {
         // Ignore errors during cleanup
       }
-<<<<<<< HEAD
-      ((canvas as unknown) as Record<string, unknown>).__three_initialized = false;
-=======
       (canvas as unknown as Record<string, unknown>).__three_initialized = false;
->>>>>>> dev
     };
   }, []);
 

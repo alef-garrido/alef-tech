@@ -71,16 +71,20 @@ export function ChatModal({ isOpen, onClose, webhookUrl }: ChatModalProps) {
     if (webhookUrl) {
       setIsLoading(true);
       try {
+        const sessionId = sessionStorage.getItem('chatSessionId') || generateSessionId();
+        const payload = {
+          chatInput: userMessage,
+          timestamp: new Date().toISOString(),
+          sessionId,
+        };
+        console.log('🚀 Sending request to n8n:', { url: webhookUrl, payload });
+        
         const response = await fetch(webhookUrl, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({
-            message: userMessage,
-            timestamp: new Date().toISOString(),
-            sessionId: sessionStorage.getItem('chatSessionId') || generateSessionId(),
-          }),
+          body: JSON.stringify(payload),
         });
 
         if (!response.ok) {
@@ -88,7 +92,40 @@ export function ChatModal({ isOpen, onClose, webhookUrl }: ChatModalProps) {
         }
 
         const data = await response.json();
-        const botResponse = data.response || data.message || 'Lo siento, hubo un error procesando tu mensaje.';
+        console.log('✅ n8n Response received:', JSON.stringify(data, null, 2));
+        
+        // Handle n8n response with LangChain chatHistory format
+        let botResponse = 'Lo siento, hubo un error procesando tu mensaje.';
+        
+        if (data.chatHistory && Array.isArray(data.chatHistory)) {
+          console.log('📋 Found chatHistory array with', data.chatHistory.length, 'messages');
+          // Find the last AI message in the chat history
+          const lastAIMessage = [...data.chatHistory].reverse().find(
+            (msg: any) => msg.id && msg.id[msg.id.length - 1] === 'AIMessage'
+          );
+          console.log('🤖 Last AI Message:', lastAIMessage);
+          if (lastAIMessage?.kwargs?.content) {
+            botResponse = lastAIMessage.kwargs.content;
+            console.log('✨ Extracted response:', botResponse);
+          } else {
+            console.warn('⚠️ AIMessage found but no content in kwargs');
+          }
+        } else if (Array.isArray(data) && data.length > 0 && data[0].output) {
+          // Fallback: array with objects containing "output" field
+          botResponse = data[0].output;
+          console.log('📦 Using array output format:', botResponse);
+        } else if (data.response) {
+          botResponse = data.response;
+          console.log('💬 Using response field:', botResponse);
+        } else if (data.message) {
+          botResponse = data.message;
+          console.log('📧 Using message field:', botResponse);
+        } else if (data.output) {
+          botResponse = data.output;
+          console.log('🎯 Using output field:', botResponse);
+        } else {
+          console.error('❌ No recognized response format. Data structure:', Object.keys(data));
+        }
 
         // Add bot response to chat history
         setChatHistory((prev) => [
@@ -102,8 +139,9 @@ export function ChatModal({ isOpen, onClose, webhookUrl }: ChatModalProps) {
         ]);
       } catch (err) {
         const errorMessage = err instanceof Error ? err.message : 'Error desconocido';
+        console.error('❌ Webhook error:', errorMessage);
+        console.error('Full error:', err);
         setError(`No se pudo conectar con el servicio: ${errorMessage}`);
-        console.error('Webhook error:', err);
 
         // Add error message to chat
         setChatHistory((prev) => [

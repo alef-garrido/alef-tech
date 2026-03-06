@@ -681,7 +681,7 @@ export default function DiagnosticPage() {
       <ChatModal
         isOpen={isChatOpen}
         onClose={() => setIsChatOpen(false)}
-        webhookUrl={process.env.NEXT_PUBLIC_N8N_WEBHOOK_URL}
+        webhookUrl={process.env.NEXT_PUBLIC_N8N_CHAT_WEBHOOK_URL}
       />
 
       {/* Footer */}

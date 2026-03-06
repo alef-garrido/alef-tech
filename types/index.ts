@@ -1,12 +1,13 @@
-export type project = {
+export type service = {
     title: string;
     description: string;
     tech: string[];
-    src: string;
     image: string;
     featured: boolean;
     videoUrl?: string;
-    githubUrl?: string;
     liveUrl?: string;
-    color: string;
+    features?: string[];
+    pricing?: string;
+    guarantee?: string;
+    category?: string;
 };

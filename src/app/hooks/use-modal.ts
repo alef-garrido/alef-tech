@@ -1,23 +1,23 @@
 import { useState } from 'react';
-import { project } from '../../../types';
+import { service } from '../../../types';
 
 const useModal = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedProject, setSelectedProject] = useState<project | null>(null);
+  const [selectedService, setSelectedService] = useState<service | null>(null);
 
-  const openModal = (project: project) => {
-    setSelectedProject(project);
+  const openModal = (service: service) => {
+    setSelectedService(service);
     setIsModalOpen(true);
   };
 
   const closeModal = () => {
-    setSelectedProject(null);
+    setSelectedService(null);
     setIsModalOpen(false);
   };
 
   return {
     isModalOpen,
-    selectedProject,
+    selectedService,
     openModal,
     closeModal,
   };

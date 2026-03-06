@@ -16,7 +16,7 @@ export default function DiagnosticPage() {
       <div className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
         <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
           <div className="font-bold text-lg font-mono">
-            <span className="c-cyber-accent">Studio Lemat</span>
+            <span className="c-cyber-accent">Clinica de Emprendimientos</span>
             <span className="ml-2" style={{color: '#00ffb2'}}>XNORIA</span>
           </div>
           <a
@@ -34,14 +34,14 @@ export default function DiagnosticPage() {
           {/* Hero Copy */}
           <div className="text-center mb-16">
             <p className="text-sm sm:text-base font-mono mb-6 c-cyber-accent" style={{letterSpacing: '0.15em'}}>XNORIA CLINIC</p>
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold font-mono mb-4 leading-tight c-text-primary">
-              Deja de perder clientes<br />que ya confiaron en ti
+            <h1 className="text-5xl sm:text-6xl lg:text-6xl font-bold font-mono mb-4 c-text-primary">
+              ¿Tu negocio tiene fiebre de clientes perdidos?
             </h1>
             <h2 className="text-2xl sm:text-3xl font-bold font-mono mb-8 leading-relaxed c-cyber-accent">
-              Diagnosticamos en 48 horas dónde sangra tu negocio
+              Deja de perder clientes<br />que ya confiaron en ti
             </h2>
             <p className="text-lg sm:text-xl font-mono mb-8 leading-relaxed c-text-secondary">
-              e implementamos la solución exacta — sin complicarte, sin CRM complejo, con resultados en 14 días.
+             Diagnosticamos en 48 horas dónde sangra tu negocio e implementamos la solución exacta — sin complicarte, con resultados en 14 días.
             </p>
           </div>
 
@@ -260,7 +260,7 @@ export default function DiagnosticPage() {
         </div>
       </section>
 
-      {/* SECCIÓN 5: FARMACIA XNORIA */}
+      {/* SECCIÓN 5: */}
       <section className="py-16 sm:py-24 px-4 sm:px-6 bg-card/30">
         <div className="max-w-5xl mx-auto">
           {/* Header */}
@@ -687,9 +687,9 @@ export default function DiagnosticPage() {
       {/* Footer */}
       <footer className="bg-card border-t border-border py-8 px-4">
         <div className="max-w-6xl mx-auto text-center text-xs font-mono">
-          <p>© 2026 Studio Lemat • XNORIA Clinic</p>
+          <p>© 2026 by Studio Lemat</p>
           <p className="mt-2 c-text-tertiary">
-            Diagnóstico CX Express • Lead Magnet para PYMEs Mexicanas
+            • XNORIA Clinic • Soluciones profesionales para PYMEs • Todos los derechos reservados • Aviso de privacidad
           </p>
         </div>
       </footer>

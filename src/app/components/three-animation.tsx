@@ -19,8 +19,9 @@ export default function ThreeAnimation() {
     if (!canvas) return;
 
     // Prevent double initialization during HMR / Fast Refresh
-    if (((canvas as unknown) as Record<string, unknown>).__three_initialized) return;
-    ((canvas as unknown) as Record<string, unknown>).__three_initialized = true;
+    // the cast style from dev is slightly cleaner
+    if ((canvas as unknown as Record<string, unknown>).__three_initialized) return;
+    (canvas as unknown as Record<string, unknown>).__three_initialized = true;
 
     // Create a renderer
     const renderer = new THREE.WebGLRenderer({
@@ -430,7 +431,11 @@ export default function ThreeAnimation() {
       } catch {
         // Ignore errors during cleanup
       }
+<<<<<<< HEAD
       ((canvas as unknown) as Record<string, unknown>).__three_initialized = false;
+=======
+      (canvas as unknown as Record<string, unknown>).__three_initialized = false;
+>>>>>>> dev
     };
   }, []);
 

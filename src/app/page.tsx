@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Hero from './components/hero';
-import FeaturedProjects from './components/featured-projects';
+import ServicesShowcase from './components/services-showcase';
 import Services from './components/services';
 import CaseStudy from './components/case-study';
 import FinalCTA from './components/final-cta';
@@ -42,7 +42,7 @@ export default async function Home() {
         </div>
       </div>
 
-      <FeaturedProjects />
+      <ServicesShowcase />
       
       <FinalCTA />
 

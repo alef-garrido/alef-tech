@@ -28,10 +28,17 @@ export function TranslationProvider({
 export function useTranslations(namespace?: string) {
   const ctx = useContext(TranslationContext);
 
-  return (key?: string) => {
+  return (key?: string): string => {
     if (!key) return '';
-    if (!namespace) return ctx.messages[key] ?? key;
-    return (ctx.messages[namespace] && ctx.messages[namespace][key]) ?? key;
+    if (!namespace) {
+      const val = ctx.messages[key];
+      return typeof val === 'string' ? val : key;
+    }
+    const namespaceContent = ctx.messages[namespace];
+    if (typeof namespaceContent === 'object' && namespaceContent[key]) {
+      return namespaceContent[key];
+    }
+    return key;
   };
 }
 

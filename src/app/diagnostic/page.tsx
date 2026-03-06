@@ -260,7 +260,7 @@ export default function DiagnosticPage() {
         </div>
       </section>
 
-      {/* SECCIÓN 5: FARMACIA XNORIA */}
+      {/* SECCIÓN 5: */}
       <section className="py-16 sm:py-24 px-4 sm:px-6 bg-card/30">
         <div className="max-w-5xl mx-auto">
           {/* Header */}

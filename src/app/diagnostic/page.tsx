@@ -7,6 +7,7 @@ import { ChatModal } from './components/ChatModal';
 
 export default function DiagnosticPage() {
   const [showForm, setShowForm] = useState(false);
+  const [slotsUsed] = useState(3);
   const [isChatOpen, setIsChatOpen] = useState(false);
 
   return (
@@ -33,14 +34,14 @@ export default function DiagnosticPage() {
           {/* Hero Copy */}
           <div className="text-center mb-16">
             <p className="text-sm sm:text-base font-mono mb-6 c-cyber-accent" style={{letterSpacing: '0.15em'}}>XNORIA CLINIC</p>
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold font-mono mb-4 leading-tight c-text-primary">
-              Deja de perder clientes<br />que ya confiaron en ti
+            <h1 className="text-5xl sm:text-6xl lg:text-6xl font-bold font-mono mb-4 c-text-primary">
+              ¿Tu negocio tiene fiebre de clientes perdidos?
             </h1>
             <h2 className="text-2xl sm:text-3xl font-bold font-mono mb-8 leading-relaxed c-cyber-accent">
-              Diagnosticamos en 48 horas dónde sangra tu negocio
+              Deja de perder clientes<br />que ya confiaron en ti
             </h2>
             <p className="text-lg sm:text-xl font-mono mb-8 leading-relaxed c-text-secondary">
-              e implementamos la solución exacta — sin complicarte, sin CRM complejo, con resultados en 14 días.
+             Diagnosticamos en 48 horas dónde sangra tu negocio e implementamos la solución exacta — sin complicarte, con resultados en 14 días.
             </p>
           </div>
 

@@ -109,7 +109,7 @@ export async function POST(request: Request) {
 
     const { data, error } = await getSupabaseClient()
       .from('leads')
-      .insert([leadData])
+      .insert([leadData] as never[])
       .select();
 
     if (error) {
@@ -117,7 +117,7 @@ export async function POST(request: Request) {
       // Continue even if Supabase fails - log locally
     }
 
-    const leadId = data?.[0]?.id || `lead-${Date.now()}`;
+    const leadId = (data as Record<string, unknown>[] | null)?.[0]?.id as string || `lead-${Date.now()}`;
 
     console.log('Lead capture submission:', {
       leadId,

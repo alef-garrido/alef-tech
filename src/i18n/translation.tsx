@@ -1,4 +1,4 @@
-type Messages = Record<string, any>;
+type Messages = Record<string, Record<string, string> | string>;
 
 // Server-friendly translator: call from Server Components when you have messages available
 export function getServerTranslator(messages: Messages, namespace?: string) {

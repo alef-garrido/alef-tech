@@ -1,11 +1,6 @@
 import { LeadFormData } from '@/app/types/lead';
 import { createClient } from '@supabase/supabase-js';
 
-interface LeadSubmission extends LeadFormData {
-  submittedAt: string;
-  source: string;
-}
-
 // Initialize Supabase client
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
@@ -19,7 +14,7 @@ const N8N_WEBHOOK_URL = process.env.N8N_WEBHOOK_URL || '';
  * Send webhook payload to n8n workflow
  * This is done asynchronously and doesn't block the API response
  */
-async function sendToN8nWebhook(leadData: any, leadId: string) {
+async function sendToN8nWebhook(leadData: Record<string, unknown>, leadId: string) {
   if (!N8N_WEBHOOK_URL) {
     console.warn('N8N_WEBHOOK_URL not configured, skipping webhook');
     return;
@@ -79,13 +74,6 @@ export async function POST(request: Request) {
         }
       );
     }
-
-    // Prepare lead submission
-    const submission: LeadSubmission = {
-      ...body,
-      submittedAt: new Date().toISOString(),
-      source: 'squeeze-page',
-    };
 
     // Determine the source based on service type
     let source = 'squeeze-page';

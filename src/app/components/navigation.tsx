@@ -42,13 +42,6 @@ const ImplementationIcon = () => (
     </div>
 );
 
-const SupportIcon = () => (
-    <div className="relative w-5 h-5" aria-hidden="true">
-        <div className="absolute top-0 left-1/2 w-1 h-full bg-foreground -translate-x-1/2"></div>
-        <div className="absolute top-1/2 left-0 w-full h-1 bg-foreground -translate-y-1/2"></div>
-    </div>
-);
-
 const HamburgerIcon = () => (
     <svg className="w-6 h-6 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
@@ -62,7 +55,6 @@ const CloseIcon = () => (
 );
 
 export default function Navigation() {
-    const t = useTranslations('navigation');
     const tServices = useTranslations('services');
     const tMisc = useTranslations('misc');
     const [isMenuOpen, setIsMenuOpen] = useState(false);

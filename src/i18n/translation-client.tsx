@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext } from 'react';
 
-type Messages = Record<string, any>;
+type Messages = Record<string, Record<string, string> | string>;
 
 const TranslationContext = createContext<{ locale: string; messages: Messages }>({
   locale: 'en',

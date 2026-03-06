@@ -101,7 +101,7 @@ export function ChatModal({ isOpen, onClose, webhookUrl }: ChatModalProps) {
           console.log('📋 Found chatHistory array with', data.chatHistory.length, 'messages');
           // Find the last AI message in the chat history
           const lastAIMessage = [...data.chatHistory].reverse().find(
-            (msg: any) => msg.id && msg.id[msg.id.length - 1] === 'AIMessage'
+            (msg: Record<string, unknown>) => msg.id && Array.isArray(msg.id) && msg.id[msg.id.length - 1] === 'AIMessage'
           );
           console.log('🤖 Last AI Message:', lastAIMessage);
           if (lastAIMessage?.kwargs?.content) {

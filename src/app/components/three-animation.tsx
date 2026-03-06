@@ -19,8 +19,8 @@ export default function ThreeAnimation() {
     if (!canvas) return;
 
     // Prevent double initialization during HMR / Fast Refresh
-    if ((canvas as any).__three_initialized) return;
-    (canvas as any).__three_initialized = true;
+    if ((canvas as Record<string, unknown>).__three_initialized) return;
+    (canvas as Record<string, unknown>).__three_initialized = true;
 
     // Create a renderer
     const renderer = new THREE.WebGLRenderer({
@@ -379,7 +379,7 @@ export default function ThreeAnimation() {
       update();
       try {
         composer.render();
-      } catch (e) {
+      } catch {
         try {
           renderer.render(scene, camera);
         } catch (err) {
@@ -394,8 +394,8 @@ export default function ThreeAnimation() {
       const { width, height } = setRendererSize();
       try {
         composer.setSize(width, height);
-      } catch (e) {
-        // ignore
+      } catch {
+        // ignore composer errors during resize
       }
     };
     window.addEventListener('resize', handleResize);
@@ -409,20 +409,28 @@ export default function ThreeAnimation() {
       window.removeEventListener('resize', handleResize);
       try {
         ro.disconnect();
-      } catch (e) {}
+      } catch {
+        // Ignore errors during cleanup
+      }
       if (rafId) cancelAnimationFrame(rafId);
       // remove orbit controls listeners
       try {
         controls.removeEventListener('start', startInteraction);
         controls.removeEventListener('end', endInteraction);
-      } catch (e) {}
+      } catch {
+        // Ignore errors during cleanup
+      }
       try {
         composer.dispose();
-      } catch (e) {}
+      } catch {
+        // Ignore errors during cleanup
+      }
       try {
         renderer.dispose();
-      } catch (e) {}
-      (canvas as any).__three_initialized = false;
+      } catch {
+        // Ignore errors during cleanup
+      }
+      (canvas as Record<string, unknown>).__three_initialized = false;
     };
   }, []);
 

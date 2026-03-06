@@ -1,13 +1,12 @@
 'use client';
 
 import { useState } from 'react';
-import { Mail, CheckCircle2, MessageCircle, BarChart3, RotateCw, Phone, Thermometer, Zap } from 'lucide-react';
+import { CheckCircle2, MessageCircle, RotateCw, Phone, Thermometer, Zap } from 'lucide-react';
 import { DynamicLeadForm } from '@/app/components/dynamic-lead-form';
 import { ChatModal } from './components/ChatModal';
 
 export default function DiagnosticPage() {
   const [showForm, setShowForm] = useState(false);
-  const [slotsUsed, setSlotsUsed] = useState(3);
   const [isChatOpen, setIsChatOpen] = useState(false);
 
   return (

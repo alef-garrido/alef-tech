@@ -37,7 +37,7 @@ export const DynamicLeadForm = ({ service, onClose, onSubmit }: DynamicLeadFormP
     }
 
     if (field.type === 'tel' && value) {
-      const phoneRegex = /^[\d\s\-\+\(\)]+$/;
+      const phoneRegex = /^[\d\s\-+()]+$/;
       if (!phoneRegex.test(value)) {
         return 'Please enter a valid phone number';
       }

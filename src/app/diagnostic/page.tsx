@@ -16,7 +16,7 @@ export default function DiagnosticPage() {
       <div className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
         <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
           <div className="font-bold text-lg font-mono">
-            <span className="c-cyber-accent">Studio Lemat</span>
+            <span className="c-cyber-accent">Clinica de Emprendimientos</span>
             <span className="ml-2" style={{color: '#00ffb2'}}>XNORIA</span>
           </div>
           <a
@@ -687,9 +687,9 @@ export default function DiagnosticPage() {
       {/* Footer */}
       <footer className="bg-card border-t border-border py-8 px-4">
         <div className="max-w-6xl mx-auto text-center text-xs font-mono">
-          <p>© 2026 Studio Lemat • XNORIA Clinic</p>
+          <p>© 2026 by Studio Lemat</p>
           <p className="mt-2 c-text-tertiary">
-            Diagnóstico CX Express • Lead Magnet para PYMEs Mexicanas
+            • XNORIA Clinic • Soluciones profesionales para PYMEs • Todos los derechos reservados • Aviso de privacidad
           </p>
         </div>
       </footer>

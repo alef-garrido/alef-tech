@@ -7,6 +7,7 @@ import { ChatModal } from './components/ChatModal';
 
 export default function DiagnosticPage() {
   const [showForm, setShowForm] = useState(false);
+  const [slotsUsed, setSlotsUsed] = useState(3);
   const [isChatOpen, setIsChatOpen] = useState(false);
 
   return (

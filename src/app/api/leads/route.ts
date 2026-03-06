@@ -1,14 +1,27 @@
 import { LeadFormData } from '@/app/types/lead';
 import { createClient } from '@supabase/supabase-js';
 
-// Initialize Supabase client
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
-
-const supabase = createClient(supabaseUrl, supabaseServiceKey);
-
 // n8n webhook URL
 const N8N_WEBHOOK_URL = process.env.N8N_WEBHOOK_URL || '';
+
+// Lazy-load Supabase client to avoid initialization errors during build
+let supabaseInstance: ReturnType<typeof createClient> | null = null;
+
+function getSupabaseClient() {
+  if (supabaseInstance) {
+    return supabaseInstance;
+  }
+  
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  
+  if (!supabaseUrl || !supabaseKey) {
+    throw new Error('Supabase credentials are not configured. Please set NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY environment variables.');
+  }
+  
+  supabaseInstance = createClient(supabaseUrl, supabaseKey);
+  return supabaseInstance;
+}
 
 /**
  * Send webhook payload to n8n workflow
@@ -94,7 +107,7 @@ export async function POST(request: Request) {
       session_id: body.sessionId || `session-${Date.now()}`,
     };
 
-    const { data, error } = await supabase
+    const { data, error } = await (getSupabaseClient() as any)
       .from('leads')
       .insert([leadData])
       .select();

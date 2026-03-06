@@ -7,21 +7,41 @@
 /* Definition of the design system. All colors, gradients, fonts, etc should be defined here. */
 
 @theme {
+    /* Semantic color system - organized by purpose */
+    
+    /* Neutrals */
     --color-background: hsl(0 0% 4%);
     --color-foreground: hsl(0 0% 90%);
-
     --color-card: hsl(0 0% 6%);
     --color-card-foreground: hsl(0 0% 90%);
-
     --color-popover: hsl(0 0% 6%);
     --color-popover-foreground: hsl(0 0% 90%);
+    
+    /* Text hierarchy - improved contrast */
+    --color-text-primary: hsl(0 0% 93%);      /* #edeef2 - Primary text, was #ccc */
+    --color-text-secondary: hsl(0 0% 68%);    /* #adb0b8 - Secondary text, was #888 */
+    --color-text-tertiary: hsl(0 0% 48%);     /* #7a7e88 - Tertiary text, muted */
+    --color-text-muted: hsl(0 0% 38%);        /* #616470 - Disabled/placeholder text */
 
-    --color-primary: hsl(170 100% 50%);
+    /* Primary action - Cyan neon accent */
+    --color-primary: hsl(170 100% 50%);       /* #00ffb2 */
     --color-primary-foreground: hsl(0 0% 4%);
 
-    --color-secondary: hsl(195 100% 50%);
+    /* Secondary action - Electric blue */
+    --color-secondary: hsl(195 100% 50%);     /* #00c2ff */
     --color-secondary-foreground: hsl(0 0% 4%);
 
+    /* Status colors with improved contrast */
+    --color-success: hsl(160 84% 40%);        /* #10b981 - Success/positive feedback, 7:1 contrast */
+    --color-success-foreground: hsl(0 0% 4%);
+    
+    --color-warning: hsl(38 92% 50%);         /* #fbbf24 - Warning/caution, improved from #f59e0b */
+    --color-warning-foreground: hsl(0 0% 4%);
+    
+    --color-error: hsl(0 84% 60%);            /* #ef4444 - Error/destructive */
+    --color-error-foreground: hsl(0 0% 98%);
+
+    /* Surface variations */
     --color-muted: hsl(0 0% 10%);
     --color-muted-foreground: hsl(0 0% 60%);
 
@@ -31,6 +51,7 @@
     --color-destructive: hsl(0 84% 60%);
     --color-destructive-foreground: hsl(0 0% 98%);
 
+    /* Interactive elements */
     --color-border: hsl(0 0% 16%);
     --color-input: hsl(0 0% 16%);
     --color-ring: hsl(170 100% 50%);
@@ -206,6 +227,85 @@
 
 .c-cyber-text-dim {
     color: #888;
+}
+
+/* Text hierarchy utilities - semantically organized */
+.c-text-primary {
+    color: #edeef2;  /* var(--color-text-primary) */
+}
+
+.c-text-secondary {
+    color: #adb0b8;  /* var(--color-text-secondary) */
+}
+
+.c-text-tertiary {
+    color: #7a7e88;  /* var(--color-text-tertiary) */
+}
+
+.c-text-muted {
+    color: #616470;  /* var(--color-text-muted) */
+}
+
+/* Status color utilities */
+.c-text-success {
+    color: #10b981;
+}
+
+.c-bg-success {
+    background-color: rgba(16, 185, 129, 0.1);
+}
+
+.c-border-success {
+    border-color: #10b981;
+}
+
+.c-text-warning {
+    color: #fbbf24;
+}
+
+.c-bg-warning {
+    background-color: rgba(251, 191, 36, 0.1);
+}
+
+.c-border-warning {
+    border-color: #fbbf24;
+}
+
+.c-text-error {
+    color: #ef4444;
+}
+
+.c-bg-error {
+    background-color: rgba(239, 68, 68, 0.1);
+}
+
+.c-border-error {
+    border-color: #ef4444;
+}
+
+/* Feature-specific color utilities */
+.c-text-info-blue {
+    color: #3b82f6;
+}
+
+.c-bg-info-blue {
+    background-color: rgba(59, 130, 246, 0.1);
+}
+
+.c-border-info-blue {
+    border-color: #3b82f6;
+}
+
+.c-text-info-purple {
+    color: #a855f7;
+}
+
+.c-bg-info-purple {
+    background-color: rgba(168, 85, 247, 0.1);
+}
+
+.c-border-info-purple {
+    border-color: #a855f7;
 }
 
 .c-border-cyber-border {

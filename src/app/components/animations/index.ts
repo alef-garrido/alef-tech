@@ -6,3 +6,4 @@
 export { useDecoration } from './useDecoration';
 export { ECGVisualization } from './ECGVisualization';
 export { SpO2Visualization } from './SpO2Visualization';
+export { GlucoseVisualization } from './GlucoseVisualization';

@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import SidebarChat from '@/app/components/sidebar-chat';
 import ServicesShowcase from '@/app/components/services-showcase';
+import { ECGVisualization } from '@/app/components/animations';
 
 type Messages = Record<string, Record<string, string> | string>;
 
@@ -71,6 +72,11 @@ export default function DiagnosticClient({ messages }: DiagnosticClientProps) {
               </p>
             </div>
           </div>
+        </div>
+
+        {/* ECG Visualization - Full Width Background Decoration */}
+        <div className="w-screen -mx-[calc(50vw-50%)] mt-12">
+          <ECGVisualization height={350} heartRate={72} strokeColor="#00ffaa" showGrid={true} />
         </div>
       </section>
 

@@ -37,7 +37,6 @@ export function MedicalDashboard({
 
     const width = containerRef.current.clientWidth;
     const panelHeight = height / 3;
-    const panelPadding = 10;
 
     // Initialize Three.js
     const scene = new THREE.Scene();

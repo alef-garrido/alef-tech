@@ -50,7 +50,6 @@ export function SpO2Visualization({
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
   const sceneRef = useRef<THREE.Scene | null>(null);
   const cameraRef = useRef<THREE.OrthographicCamera | null>(null);
-  const lineRef = useRef<THREE.Line | null>(null);
   const pulseGroupRef = useRef<THREE.Group | null>(null);
   const offsetRef = useRef(0);
   const animationFrameRef = useRef<number | null>(null);
@@ -94,13 +93,6 @@ export function SpO2Visualization({
         width, lineY, 0,
       ];
       lineGeometry.setAttribute('position', new THREE.BufferAttribute(new Float32Array(linePoints), 3));
-
-      const lineMaterial = new THREE.LineBasicMaterial({
-        color: new THREE.Color(0xff4d6d),
-        transparent: true,
-        opacity: 0.2,
-        linewidth: 1,
-      });
 
       // Create dashed line with shader or using a repeating dash pattern
       const dashGeometry = new THREE.BufferGeometry();

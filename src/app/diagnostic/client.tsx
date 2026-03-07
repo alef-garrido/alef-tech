@@ -4,7 +4,7 @@ import { useState } from 'react';
 import SidebarChat from '@/app/components/sidebar-chat';
 import ServicesShowcase from '@/app/components/services-showcase';
 import Footer from '@/app/components/footer';
-import { ECGVisualization, SpO2Visualization, GlucoseVisualization } from '@/app/components/animations';
+import { ECGVisualization, SpO2Visualization, GlucoseVisualization, MedicalDashboard } from '@/app/components/animations';
 
 type Messages = Record<string, Record<string, string> | string>;
 
@@ -168,6 +168,11 @@ export default function DiagnosticClient({ messages }: DiagnosticClientProps) {
           </div>
         </div>
       </section>
+
+      {/* Medical Dashboard - Full Width Background Decoration */}
+      <div className="w-screen -mx-[calc(50vw-50%)]">
+        <MedicalDashboard height={350} />
+      </div>
 
       {/* SECCIÓN 4: MECANISMO */}
       <section className="py-12 sm:py-20 px-4 sm:px-6 border-t border-border">

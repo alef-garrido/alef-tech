@@ -4,7 +4,7 @@ import { useState } from 'react';
 import SidebarChat from '@/app/components/sidebar-chat';
 import ServicesShowcase from '@/app/components/services-showcase';
 import Footer from '@/app/components/footer';
-import { ECGVisualization } from '@/app/components/animations';
+import { ECGVisualization, SpO2Visualization } from '@/app/components/animations';
 
 type Messages = Record<string, Record<string, string> | string>;
 
@@ -239,6 +239,11 @@ export default function DiagnosticClient({ messages }: DiagnosticClientProps) {
           </p>
         </div>
       </section>
+
+      {/* SpO₂ Visualization - Full Width Background Decoration */}
+      <div className="w-screen -mx-[calc(50vw-50%)]">
+        <SpO2Visualization height={300} respiratoryRate={15} spO2Value={98} showThresholdLine={true} />
+      </div>
 
       {/* SECCIÓN 8: FAQ */}
       <section className="py-12 sm:py-20 px-4 sm:px-6 border-t border-border">

@@ -4,7 +4,7 @@ import { useState } from 'react';
 import SidebarChat from '@/app/components/sidebar-chat';
 import ServicesShowcase from '@/app/components/services-showcase';
 import Footer from '@/app/components/footer';
-import { ECGVisualization, SpO2Visualization, GlucoseVisualization, MedicalDashboard } from '@/app/components/animations';
+import { ECGVisualization, SpO2Visualization, GlucoseVisualization, MedicalDashboard, NutrientRadar } from '@/app/components/animations';
 
 type Messages = Record<string, Record<string, string> | string>;
 
@@ -296,6 +296,11 @@ export default function DiagnosticClient({ messages }: DiagnosticClientProps) {
           </div>
         </div>
       </section>
+
+      {/* Nutrient Radar - Full Width Background Decoration */}
+      <div className="w-screen -mx-[calc(50vw-50%)]">
+        <NutrientRadar height={400} loopDuration={10} />
+      </div>
 
       {/* SECCIÓN 9: FINAL CTA */}
       <section className="py-16 sm:py-24 px-4 sm:px-6 border-t border-border bg-card/50">

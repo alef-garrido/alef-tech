@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import SidebarChat from '@/app/components/sidebar-chat';
 import ServicesShowcase from '@/app/components/services-showcase';
+import Footer from '@/app/components/footer';
 import { ECGVisualization } from '@/app/components/animations';
 
 type Messages = Record<string, Record<string, string> | string>;
@@ -301,6 +302,8 @@ export default function DiagnosticClient({ messages }: DiagnosticClientProps) {
 
       {/* Chat Modal */}
       <SidebarChat />
+
+      <Footer />
     </main>
   );
 }

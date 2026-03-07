@@ -4,7 +4,7 @@ import { useState } from 'react';
 import SidebarChat from '@/app/components/sidebar-chat';
 import ServicesShowcase from '@/app/components/services-showcase';
 import Footer from '@/app/components/footer';
-import { ECGVisualization, SpO2Visualization, GlucoseVisualization, MedicalDashboard, NutrientRadar } from '@/app/components/animations';
+import { ECGVisualization, SpO2Visualization, SimpleWaveVisualization, MedicalDashboard, NutrientRadar } from '@/app/components/animations';
 
 type Messages = Record<string, Record<string, string> | string>;
 
@@ -198,9 +198,9 @@ export default function DiagnosticClient({ messages }: DiagnosticClientProps) {
         </div>
       </section>
 
-      {/* Glucose Visualization - Full Width Background Decoration */}
+      {/* Simple Wave Visualization - Full Width Background Decoration */}
       <div className="w-screen -mx-[calc(50vw-50%)]">
-        <GlucoseVisualization height={300} loopDuration={8} showReferenceZones={true} />
+        <SimpleWaveVisualization height={200} strokeColor="#ffffff" frequency={1} showGrid={true} />
       </div>
 
       {/* SECCIÓN 6: RESULTADOS REALES */}

@@ -15,10 +15,6 @@ export default async function Home() {
         <Hero />
       </div>
 
-      <Services />
-
-      <CaseStudy />
-
       {/* ABOUT SECTION */}
       <section id="about" className="w-full max-w-7xl my-32 px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
@@ -26,6 +22,10 @@ export default async function Home() {
           <AboutManifesto />
         </div>
       </section>
+
+      <Services />
+
+      <CaseStudy />
 
       <ServicesShowcase />
       

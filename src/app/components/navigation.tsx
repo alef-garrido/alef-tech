@@ -114,7 +114,7 @@ const [currentDateTime, setCurrentDateTime] = useState(new Date());
                         <div className="flex gap-3">
                             <TrainingIcon />
                             <div>
-                                <button type="button" onClick={() => handleServiceClick('training')} className="text-sm font-normal lowercase block mb-2 hover:text-primary cursor-pointer bg-transparent border-none text-left hover:underline">{tServices('training')}</button>
+                                <button type="button" onClick={() => handleServiceClick('training')} className="text-sm font-bold lowercase block mb-2 cursor-default bg-transparent border-none text-left">{tServices('training')}</button>
                                 <ul className="space-y-1 text-xs lowercase">
                                     <li><button type="button" onClick={() => handleServiceClick('training')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">{tServices('designOnboarding')}</button></li>
                                     <li><button type="button" onClick={() => handleServiceClick('training')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">{tServices('trainTeam')}</button></li>
@@ -126,7 +126,7 @@ const [currentDateTime, setCurrentDateTime] = useState(new Date());
                         <div className="flex gap-3">
                             <ConsultationIcon />
                             <div>
-                                <button type="button" onClick={() => handleServiceClick('consulting')} className="text-sm font-normal lowercase block mb-2 hover:text-primary cursor-pointer bg-transparent border-none hover:underline">{tServices('consulting')}</button>
+                                <button type="button" onClick={() => handleServiceClick('consulting')} className="text-sm font-bold lowercase block mb-2 cursor-default bg-transparent border-none text-left">{tServices('consulting')}</button>
                                 <ul className="space-y-1 text-xs lowercase">
                                     <li><button type="button" onClick={() => handleServiceClick('consulting')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">{tServices('oneOnOne')}</button></li>
                                     <li><button type="button" onClick={() => handleServiceClick('consulting')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">{tServices('freeCall')}</button></li>
@@ -137,7 +137,7 @@ const [currentDateTime, setCurrentDateTime] = useState(new Date());
                         <div className="flex gap-3">
                             <ImplementationIcon />
                             <div>
-                                <button type="button" onClick={() => handleServiceClick('implementation')} className="text-sm font-normal lowercase block mb-2 hover:text-primary cursor-pointer bg-transparent border-none hover:underline">{tServices('implementation')}</button>
+                                <button type="button" onClick={() => handleServiceClick('implementation')} className="text-sm font-bold lowercase block mb-2 cursor-default bg-transparent border-none text-left">{tServices('implementation')}</button>
                                 <ul className="space-y-1 text-xs lowercase">
                                     <li><button type="button" onClick={() => handleServiceClick('implementation')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">{tServices('cxAssistance')}</button></li>
                                     <li><button type="button" onClick={() => handleServiceClick('implementation')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">{tServices('aiAssistance')}</button></li>
@@ -180,7 +180,7 @@ const [currentDateTime, setCurrentDateTime] = useState(new Date());
                             <div className="flex gap-3">
                                 <TrainingIcon />
                                 <div>
-                                    <button type="button" onClick={() => handleServiceClick('training')} className="text-sm font-normal lowercase block mb-2 hover:text-primary cursor-pointer bg-transparent border-none hover:underline">{tServices('training')}</button>
+                                    <button type="button" onClick={() => handleServiceClick('training')} className="text-sm font-bold lowercase block mb-2 cursor-default bg-transparent border-none text-left">{tServices('training')}</button>
                                     <ul className="space-y-1 text-xs lowercase">
                                         <li><button type="button" onClick={() => handleServiceClick('training')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">{tServices('designOnboarding')}</button></li>
                                         <li><button type="button" onClick={() => handleServiceClick('training')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">{tServices('trainTeam')}</button></li>
@@ -192,7 +192,7 @@ const [currentDateTime, setCurrentDateTime] = useState(new Date());
                             <div className="flex gap-3">
                                 <ConsultationIcon />
                                 <div>
-                                    <button type="button" onClick={() => handleServiceClick('consulting')} className="text-sm font-normal lowercase block mb-2 hover:text-primary cursor-pointer bg-transparent border-none hover:underline">{tServices('consulting')}</button>
+                                    <button type="button" onClick={() => handleServiceClick('consulting')} className="text-sm font-bold lowercase block mb-2 cursor-default bg-transparent border-none text-left">{tServices('consulting')}</button>
                                     <ul className="space-y-1 text-xs lowercase">
                                         <li><button type="button" onClick={() => handleServiceClick('consulting')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">{tServices('oneOnOne')}</button></li>
                                         <li><button type="button" onClick={() => handleServiceClick('consulting')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">{tServices('freeCall')}</button></li>
@@ -203,7 +203,7 @@ const [currentDateTime, setCurrentDateTime] = useState(new Date());
                             <div className="flex gap-3">
                                 <ImplementationIcon />
                                 <div>
-                                    <button type="button" onClick={() => handleServiceClick('implementation')} className="text-sm font-normal lowercase block mb-2 hover:text-primary cursor-pointer bg-transparent border-none hover:underline">{tServices('implementation')}</button>
+                                    <button type="button" onClick={() => handleServiceClick('implementation')} className="text-sm font-bold lowercase block mb-2 cursor-default bg-transparent border-none text-left">{tServices('implementation')}</button>
                                     <ul className="space-y-1 text-xs lowercase">
                                         <li><button type="button" onClick={() => handleServiceClick('implementation')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">{tServices('cxAssistance')}</button></li>
                                         <li><button type="button" onClick={() => handleServiceClick('implementation')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">{tServices('aiAssistance')}</button></li>

@@ -1,24 +1,15 @@
-import Image from 'next/image';
 import Hero from './components/hero';
 import ServicesShowcase from './components/services-showcase';
 import Services from './components/services';
 import CaseStudy from './components/case-study';
+import AboutProfile from './components/about-profile';
+import AboutManifesto from './components/about-manifesto';
 import FinalCTA from './components/final-cta';
 import Footer from './components/footer';
-import en from '@/i18n/translations/en.json';
-import es from '@/i18n/translations/es.json';
-import { getServerTranslator } from '@/i18n/translation';
-import { cookies } from 'next/headers';
 
 export default async function Home() {
-  const cookieStore = await cookies();
-  const locale = cookieStore.get('locale')?.value || 'en';
-  const messages = locale === 'es' ? es : en;
-  const tAbout = getServerTranslator(messages, 'about');
-  const tMisc = getServerTranslator(messages, 'misc');
-
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center p-8">
+    <main className="min-h-screen flex flex-col items-center justify-center p-4 sm:p-8">
       {/* HERO SECTION */}
       <div className="relative w-full h-screen overflow-hidden">
         <Hero />
@@ -29,18 +20,12 @@ export default async function Home() {
       <CaseStudy />
 
       {/* ABOUT SECTION */}
-      <div className="w-full md:w-2/3 lg:w-1/2 my-48 px-6 md:px-12">
-        <h2 className="text-5xl font-bold text-secondary mb-8 font-mono text-center">{tAbout('heading')}</h2>
-        <div className="flex flex-col md:flex-row justify-center items-center mb-4 gap-8">
-          <div className="w-full md:w-1/3 flex justify-center">
-            <Image src="/assets/ppicture.png" alt="Profile Picture" width={150} height={150} className="rounded-full" />
-          </div>
-          <div className="w-full md:w-2/3 text-center md:text-left">
-            <p>{tAbout('description')}</p>
-            <button className="my-4 bg-transparent underline hover:primary/80 font-mono cursor-pointer"> {tMisc('moreAboutMe')} →</button>
-          </div>
+      <section id="about" className="w-full max-w-7xl my-32 px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+          <AboutProfile />
+          <AboutManifesto />
         </div>
-      </div>
+      </section>
 
       <ServicesShowcase />
       

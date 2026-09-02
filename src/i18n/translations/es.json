@@ -12,7 +12,23 @@
   },
   "about": {
     "heading": "Acerca de Mí",
-    "description": "Consultor de negocios y desarrollador de software con más de 9 años de experiencia diseñando e implementando sistemas de experiencia del cliente (CX), automatizaciones inteligentes y arquitectura agentica de IA para startups y empresas en crecimiento."
+    "description": "Consultor de Negocios certificado y Desarrollador de Software con más de 9 años de experiencia fundamentada en el diseño e implementación de sistemas de experiencia del cliente (CX), automatizaciones a medida y arquitectura de IA agéntica para startups y empresas de rápido crecimiento. Mi trabajo es hacer que tu negocio funcione mejor, con menos problemas y mejores resultados.\n\nAyudo a empresas en crecimiento a diagnosticar la fricción operativa, perfeccionar las estrategias de adquisición de clientes y estructurar operaciones escalables para una retención a largo plazo.\n\nCon una trayectoria que abarca logística empresarial de alto impacto, desarrollo de software y operaciones de captación de alta conversión, aporto un enfoque multidisciplinario al desarrollo de negocios. No solo ofrezco consejos de alto nivel; evalúo flujos de trabajo reales, identifico fugas de ingresos y construyo procesos estructurados que generan resultados medibles bajo estrictas restricciones operativas.\n\nComo Consultor de Gestión (EC0249) y Especialista en Desarrollo de Negocios (EC1223) certificado por SEP-CONOCER, colaboro con equipos directivos para transformar sistemas técnicos, legales y operativos complejos en estrategias de crecimiento claras y rentables."
+  },
+  "aboutManifesto": {
+    "eyebrow": "Exnoria Clinic · by Studio Lemat",
+    "title": "He visto negocios morir de cosas que tenían nombre.",
+    "paragraph1": "No de mala suerte. Ni del mercado.\nSino por procesos que nadie se sentó a mirar con calma,\nclientes que dejaron de quejarse y renunciaron sin aviso,\nherramientas que se compraron con convicción y terminaron siendo ignoradas por el equipo, pero seguían abiertas en una pestaña que nadie cierra porque el manual operativo se los pide.",
+    "paragraph2": "Lo curioso es que los dueños no lo saben pero siempre sienten ese peso específico de llegar un lunes y sentir que el negocio exige más de lo que devuelve.",
+    "highlight": "Después de años trabajando en agencias intermediarias y corporativos transnacionales, aprendí que la pregunta relevante rara vez es \"¿qué otra herramienta necesitamos?\" La pregunta relevante es: ¿qué está pasando aquí que hace que nada funcione del todo bien?",
+    "paragraph3": "Exnoria Clinic nació de esa pregunta. De la incomodidad de vender implementaciones a negocios que en realidad necesitaban que alguien se detuviera con ellos, mirara el sistema completo y dijera lo que nadie había dicho en voz alta antes.",
+    "paragraph4": "Aquí trabajamos desde adentro.\nEmpezamos por entender cómo respira tu operación:\ndónde se acumula la presión, dónde se pierde energía, y dónde tu cliente siente que algo no está del todo bien aunque no sepa articularlo.\nLuego intervenimos con precisión:\nautomatizaciones que resuelven el problema real, software que conversa con lo que ya tienes, entrenamiento que ocurre mientras trabajamos para que cuando nos vayamos, tu equipo no te pregunte qué hacer.",
+    "paragraph5": "No prometemos transformaciones. Prometemos claridad.",
+    "ctaQuestion": "¿Hace cuánto que sabes que algo no está funcionando?",
+    "ctaSub": "Una conversación de 15 minutos. Sin presentación de ventas.",
+    "ctaPrimary": "Necesito una segunda opinión",
+    "ctaSecondary": "Ver cómo se vería en landing →",
+    "signatureQuote": "El diagnóstico no requiere valentía. Seguir sin él, sí. —",
+    "signatureAuthor": "Exnoria Clinic"
   },
   "services": {
     "consulting": "Consultoría",

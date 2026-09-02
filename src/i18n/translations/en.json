@@ -12,7 +12,23 @@
   },
   "about": {
     "heading": "About Me",
-    "description": "Certified Business Consultant and Software Developer with 9+ years of experience designing and implementing customer experience (CX) systems, intelligent automations, and agentic AI architecture for startups and high-growth companies."
+    "description": "Certified Business Consultant and Software Developer with 9+ years of experience grounded in designing and implementing customer experience (CX) systems, tailored automations, and agentic AI architecture for startups and fast-growing companies. My job is to make your business work better, with fewer problems and better results.\n\nI help growing companies diagnose operational friction, refine client acquisition strategies, and structure scalable operations for long-term retention.\n\nWith a background spanning high-stakes enterprise logistics, software development, and high-conversion intake operations, I bring a multidisciplinary approach to business development. I don't just offer high-level advice; I evaluate real-world workflows, identify revenue leaks, and build structured processes that drive measurable results under tight operational constraints.\n\nAs a SEP-CONOCER certified Management Consultant (EC0249) and Business Development Specialist (EC1223), I partner with leadership teams to turn complex technical, legal, and operational systems into clear, profitable growth strategies."
+  },
+  "aboutManifesto": {
+    "eyebrow": "Exnoria Clinic · by Studio Lemat",
+    "title": "I've seen businesses die from things that had names.",
+    "paragraph1": "Not from bad luck. Nor from the market.\nBut from processes that no one sat down to inspect calmly,\nclients who stopped complaining and quit without warning,\ntools bought with conviction that ended up ignored by the team, yet kept open in a tab no one closes because the operating manual asks them to.",
+    "paragraph2": "The curious thing is that business owners don't know it, but they always feel that specific weight of arriving on a Monday and feeling that the business demands more than it returns.",
+    "highlight": "After years working in intermediary agencies and transnational corporations, I learned that the relevant question is rarely \"what other tool do we need?\" The relevant question is: what is happening here that makes nothing work quite right?",
+    "paragraph3": "Exnoria Clinic was born from that question. From the discomfort of selling implementations to businesses that actually needed someone to stop with them, look at the full system, and say what no one had said out loud before.",
+    "paragraph4": "Here, we work from the inside out.\nWe start by understanding how your operation breathes:\nwhere pressure builds up, where energy is lost, and where your client feels something isn't quite right even if they can't articulate it.\nThen we intervene with precision:\nautomations that solve the real problem, software that communicates with what you already have, and training that happens while we work so when we leave, your team doesn't ask you what to do.",
+    "paragraph5": "We don't promise transformations. We promise clarity.",
+    "ctaQuestion": "How long have you known that something isn't working?",
+    "ctaSub": "A 15-minute conversation. No sales pitch.",
+    "ctaPrimary": "I need a second opinion",
+    "ctaSecondary": "See how it looks on a landing page →",
+    "signatureQuote": "Diagnosis doesn't require courage. Continuing without it does. —",
+    "signatureAuthor": "Exnoria Clinic"
   },
   "services": {
     "consulting": "Consulting",

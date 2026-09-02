@@ -23,7 +23,7 @@ export default function AboutProfile() {
           />
         </div>
         <div className="flex-1 space-y-4">
-          <p className="text-base text-gray-300 leading-relaxed font-sans">
+          <p className="text-base text-gray-300 leading-relaxed font-sans whitespace-pre-line">
             {tAbout('description')}
           </p>
         </div>

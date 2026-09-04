@@ -236,38 +236,42 @@ const Footer = () => {
           </div>
 
           <div className="mt-12 border-t border-[var(--border)] pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div className="flex gap-4">
+            <div className="flex items-center gap-3">
               <a
                 href="https://www.linkedin.com/in/alef-lemat/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors"
+                aria-label="LinkedIn"
+                className="w-10 h-10 rounded-lg border border-[var(--border)] bg-[var(--surface-2)] flex items-center justify-center text-[var(--text-muted)] hover:text-[#0284C7] dark:hover:text-[#2FD9E3] hover:border-[#2FD9E3]/60 hover:shadow-[0_0_15px_rgba(47,217,227,0.25)] transition-all duration-300"
               >
-                <LinkedinIcon size={24} />
+                <LinkedinIcon size={20} />
               </a>
               <a
                 href="https://www.instagram.com/studiolemat/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors"
+                aria-label="Instagram"
+                className="w-10 h-10 rounded-lg border border-[var(--border)] bg-[var(--surface-2)] flex items-center justify-center text-[var(--text-muted)] hover:text-[#0284C7] dark:hover:text-[#2FD9E3] hover:border-[#2FD9E3]/60 hover:shadow-[0_0_15px_rgba(47,217,227,0.25)] transition-all duration-300"
               >
-                <InstagramIcon size={24} />
+                <InstagramIcon size={20} />
               </a>
               <a
                 href="https://github.com/alef-garrido"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors"
+                aria-label="GitHub"
+                className="w-10 h-10 rounded-lg border border-[var(--border)] bg-[var(--surface-2)] flex items-center justify-center text-[var(--text-muted)] hover:text-[#0284C7] dark:hover:text-[#2FD9E3] hover:border-[#2FD9E3]/60 hover:shadow-[0_0_15px_rgba(47,217,227,0.25)] transition-all duration-300"
               >
-                <GitHubIcon size={24} />
+                <GitHubIcon size={20} />
               </a>
               <a
                 href="https://substack.com/@aleflemat"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors"
+                aria-label="Substack"
+                className="w-10 h-10 rounded-lg border border-[var(--border)] bg-[var(--surface-2)] flex items-center justify-center text-[var(--text-muted)] hover:text-[#0284C7] dark:hover:text-[#2FD9E3] hover:border-[#2FD9E3]/60 hover:shadow-[0_0_15px_rgba(47,217,227,0.25)] transition-all duration-300"
               >
-                <SubstackIcon size={24} />
+                <SubstackIcon size={20} />
               </a>
             </div>
 
@@ -280,19 +284,26 @@ const Footer = () => {
                 e.preventDefault();
                 handleServiceClick('diagnostic');
               }}
-              className="field"
+              className="w-full max-w-sm"
             >
-              <div className="flex items-center">
+              <div className="group relative flex items-center border-b border-[var(--border)] pb-1 focus-within:border-transparent transition-colors">
                 <input
                   type="email"
+                  required
                   placeholder={tCta('enterEmail')}
-                  className="bg-[var(--surface-2)] text-[var(--text)] border border-[var(--border)] px-4 py-2 rounded-l-md text-xs focus:outline-none focus:border-[var(--accent)]"
+                  className="w-full bg-transparent text-[var(--text)] text-xs font-mono py-2 pr-28 focus:outline-none placeholder:text-[var(--text-faint)]"
                 />
+                
+                {/* Animated Neon Underline Indicator */}
+                <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#0284C7] dark:bg-[#2FD9E3] scale-x-0 group-focus-within:scale-x-100 transition-transform duration-300 ease-out origin-left shadow-[0_0_10px_rgba(47,217,227,0.5)]" />
+
+                {/* Integrated Submit Button */}
                 <button
                   type="submit"
-                  className="btn btn-primary sm rounded-l-none text-xs py-2 px-4"
+                  className="absolute right-0 flex items-center gap-1.5 text-xs font-mono font-bold text-[#0284C7] dark:text-[#2FD9E3] hover:text-[var(--text)] transition-colors cursor-pointer py-1"
                 >
-                  {tCta('subscribe')}
+                  <span>{tCta('subscribe')}</span>
+                  <span className="text-sm transition-transform duration-200 group-hover:translate-x-1">→</span>
                 </button>
               </div>
             </form>

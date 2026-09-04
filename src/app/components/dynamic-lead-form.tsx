@@ -322,7 +322,7 @@ export const DynamicLeadForm = ({ service, onClose, onSubmit }: DynamicLeadFormP
           </div>
 
           <p className="text-[10px] text-[var(--text-faint)] text-center font-mono mt-4 uppercase">
-            CONFIDENTIAL // CAPSULA DYNAMICS HARDWARE SPEC
+            CONFIDENTIAL // CAPSULA HARDWARE SPEC
           </p>
         </div>
       </div>

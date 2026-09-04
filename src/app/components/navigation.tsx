@@ -106,7 +106,7 @@ export default function Navigation() {
 
   return (
     <>
-      <header className="nav w-full relative z-40">
+      <header className="nav w-full sticky top-0 z-50">
         <div className="mx-auto max-w-none px-4 sm:px-6 lg:px-8 py-5">
           <nav className="flex justify-between items-start text-[var(--text)]">
             {/* Left Section - Brand Lockup */}
@@ -115,7 +115,7 @@ export default function Navigation() {
                 ALEF LEMAT
               </Link>
               <Link href="/" className="leading-tight text-xs font-mono tracking-widest text-[var(--accent)] block">
-                DYNAMICS
+                TECH
               </Link>
               <p className="mt-1 text-[10px] font-mono text-[var(--text-faint)] lowercase">
                 {tMisc('cxSoftware')}

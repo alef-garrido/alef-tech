@@ -15,7 +15,7 @@ export default async function Home() {
       </div>
 
       {/* ABOUT SECTION */}
-      <section id="about" className="w-full max-w-7xl my-32 px-4 sm:px-6 lg:px-8">
+      <section id="about" className="w-full max-w-7xl mt-48 sm:mt-64 mb-32 px-4 sm:px-6 lg:px-8">
         <AboutSection />
       </section>
 

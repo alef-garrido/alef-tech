@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { useTranslations } from '@/i18n/translation-client';
 import { DynamicLeadForm } from './dynamic-lead-form';
+import { TechnicalAssemblyPlate3 } from './capsula';
 
 export default function AboutSection() {
   const [showLeadForm, setShowLeadForm] = useState(false);
@@ -11,7 +12,12 @@ export default function AboutSection() {
   const tManifesto = useTranslations('aboutManifesto');
 
   return (
-    <div className="w-full relative">
+    <div className="w-full relative overflow-hidden pt-6 sm:pt-10">
+      {/* Background Technical Illustration Plate 3 (Right Side Balance) */}
+      <div className="absolute -top-12 -right-4 md:right-0 w-full max-w-[720px] pointer-events-none opacity-25 dark:opacity-40 z-0 select-none">
+        <TechnicalAssemblyPlate3 />
+      </div>
+
       {/* Section Header */}
       <div className="flex flex-col items-start mb-12 relative z-10 border-b border-[var(--border)] pb-6">
         <div className="flex items-center gap-3 mb-2">

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@300;400;500;600;700&family=Archivo:wdth,wght@112,600;112,700;125,600;125,700&family=JetBrains+Mono:wght@400;500;700&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -58,8 +58,10 @@
 
     --radius: 0.625rem;
 
-    --font-sans: 'IBM Plex Sans', sans-serif;
-    --font-mono: 'Space Mono', monospace;
+    --font-sans: 'Geist Mono', monospace;
+    --font-body: 'Geist Mono', monospace;
+    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+    --font-display: 'HK Grotesk Wide', 'Archivo', 'Geist', sans-serif;
 
     --background: oklch(1 0 0);
     --foreground: oklch(0.145 0 0);
@@ -151,17 +153,17 @@
 /* ── Sticky Header & Navigation ── */
 header.nav {
   position: sticky; top: 0; z-index: 50;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  background-color: rgba(10, 12, 15, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background-color: rgba(10, 12, 15, 0.65);
   border-bottom: 1px solid var(--border);
 }
 [data-theme='dark'] header.nav,
 :root header.nav {
-  background-color: rgba(10, 12, 15, 0.85);
+  background-color: rgba(10, 12, 15, 0.65);
 }
 [data-theme='light'] header.nav {
-  background-color: rgba(244, 248, 251, 0.85);
+  background-color: rgba(244, 248, 251, 0.65);
 }
 .nav-in { display: flex; align-items: center; gap: var(--space-6); padding-block: var(--space-3); }
 .logo-lock { display: flex; align-items: center; gap: var(--space-3); text-decoration: none; color: var(--text); }
@@ -842,6 +844,13 @@ header.nav {
   --brand-carbon-2: #10161E;
   --brand-carbon-3: #172131;
   --brand-carbon-4: #1D2D44;
+
+  /* Font families */
+  --font-display: 'HK Grotesk Wide', 'Archivo', 'Geist', sans-serif;
+  --display-wide: 125%;
+  --font-body: 'Geist Mono', monospace;
+  --font-sans: 'Geist Mono', monospace;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
 
   /* Type scale */
   --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);

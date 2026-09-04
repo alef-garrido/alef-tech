@@ -106,7 +106,7 @@ export default function Navigation() {
 
   return (
     <>
-      <header className="nav w-full sticky top-0 z-50">
+      <header className="nav w-full sticky top-0 z-50 backdrop-blur-xl">
         <div className="mx-auto max-w-none px-4 sm:px-6 lg:px-8 py-5">
           <nav className="flex justify-between items-start text-[var(--text)]">
             {/* Left Section - Brand Lockup */}
@@ -123,7 +123,7 @@ export default function Navigation() {
             </div>
 
             {/* Center Section - Visible on large screens */}
-            <div className="hidden lg:flex justify-center items-start gap-10 xl:gap-14 font-mono">
+            <div className="hidden 2xl:flex justify-center items-start gap-8 2xl:gap-14 font-mono">
               {/* Training */}
               <div className="flex gap-3">
                 <TrainingIcon />
@@ -292,15 +292,8 @@ export default function Navigation() {
             </div>
 
             {/* Hamburger Menu Button - Visible on small screens */}
-            <div className="lg:hidden flex items-center gap-2">
-              <button
-                type="button"
-                className="theme-btn text-xs py-1 px-2"
-                onClick={toggleTheme}
-              >
-                <span>{theme === 'dark' ? '◐' : '◑'}</span>
-              </button>
-              <button onClick={toggleMenu} className="p-1">
+            <div className="2xl:hidden flex items-center gap-2">
+              <button onClick={toggleMenu} className="p-1" aria-label="Toggle menu">
                 {isMenuOpen ? <CloseIcon /> : <HamburgerIcon />}
               </button>
             </div>
@@ -308,8 +301,8 @@ export default function Navigation() {
 
           {/* Mobile Menu */}
           {isMenuOpen && (
-            <div className="lg:hidden mt-4 pt-4 border-t border-[var(--border)] font-mono">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 items-start justify-start">
+            <div className="2xl:hidden mt-4 pt-4 border-t border-[var(--border)] font-mono">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 items-start justify-start">
                 {/* Training */}
                 <div className="flex gap-3">
                   <TrainingIcon />

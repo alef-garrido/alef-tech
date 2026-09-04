@@ -259,10 +259,10 @@ export default function Navigation() {
                 type="button"
                 className="theme-btn"
                 onClick={toggleTheme}
-                aria-label="Toggle theme"
+                aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
               >
-                <span>{theme === 'dark' ? '◐' : '◑'}</span>
-                <span className="hidden xl:inline">{theme === 'dark' ? 'Terminal' : 'Spec Sheet'}</span>
+                <span>{theme === 'dark' ? '🌙' : '☀️'}</span>
+                <span className="hidden sm:inline font-mono font-semibold">{theme === 'dark' ? 'Dark' : 'Light'}</span>
               </button>
 
               {/* Real-time Telemetry Date/Time */}

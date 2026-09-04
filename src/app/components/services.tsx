@@ -17,10 +17,10 @@ const PILLAR_CONFIG = [
 /* ──────────────────────────────────────────
    Perfect Symmetrical Infinity Symbol (∞)
    Single unified path — 100% clean silhouette
-   ViewBox: 800 × 360 | Center: (400, 180)
+   ViewBox: 800 × 380 | Center: (400, 190)
    ────────────────────────────────────────── */
 const INFINITY_PATH =
-  "M 400 180 C 475 90, 640 90, 640 180 C 640 270, 475 270, 400 180 C 325 90, 160 90, 160 180 C 160 270, 325 270, 400 180 Z";
+  "M 400 190 C 475 100, 640 100, 640 190 C 640 280, 475 280, 400 190 C 325 100, 160 100, 160 190 C 160 280, 325 280, 400 190 Z";
 
 const SEGMENT_LENGTH = 0.12;
 const GAP_LENGTH = 1 - SEGMENT_LENGTH;
@@ -36,34 +36,35 @@ function PillarTag({ index, label, level, config, isActive, onClick }: {
   isActive: boolean;
   onClick: () => void;
 }) {
-  const positions = [
-    "left-[16%] sm:left-[22%] top-[4%] sm:top-[6%] -translate-x-1/2",
-    "right-[16%] sm:right-[22%] top-[4%] sm:top-[6%] translate-x-1/2",
-    "right-[16%] sm:right-[22%] bottom-[4%] sm:bottom-[6%] translate-x-1/2",
-    "left-[16%] sm:left-[22%] bottom-[4%] sm:bottom-[6%] -translate-x-1/2",
+  const positionStyles: React.CSSProperties[] = [
+    { top: '0%', left: '2%' },
+    { top: '0%', right: '2%' },
+    { bottom: '0%', right: '2%' },
+    { bottom: '0%', left: '2%' },
   ];
 
   return (
     <motion.button
       type="button"
       onClick={onClick}
-      className={`absolute z-10 w-fit max-w-[48%] cursor-pointer border backdrop-blur-md px-3 py-2 sm:px-4 sm:py-2.5 text-center font-mono text-[9px] sm:text-[11px] md:text-xs rounded-lg transition-all ${positions[index]}`}
+      className="absolute z-10 w-fit max-w-[46%] cursor-pointer border backdrop-blur-md px-2.5 py-1.5 sm:px-3 sm:py-2 text-center font-mono text-[9px] sm:text-[11px] md:text-xs rounded-lg transition-all"
       style={{
+        ...positionStyles[index],
         borderColor: isActive ? config.color : "rgba(255,255,255,0.12)",
         backgroundColor: isActive ? `${config.color}15` : "rgba(10,10,10,0.85)",
         boxShadow: isActive ? `0 0 25px ${config.glowColor}` : "0 4px 12px rgba(0,0,0,0.4)",
       }}
-      animate={{ scale: isActive ? 1.06 : 1 }}
+      animate={{ scale: isActive ? 1.05 : 1 }}
       transition={{ duration: 0.25 }}
-      whileHover={{ scale: 1.08 }}
+      whileHover={{ scale: 1.07 }}
     >
       <span
-        className="block uppercase tracking-[0.2em] text-[8px] sm:text-[9px] font-bold"
+        className="block uppercase tracking-[0.18em] text-[8px] sm:text-[9px] font-bold leading-none mb-0.5"
         style={{ color: config.color }}
       >
         {level}
       </span>
-      <span className="block text-text-primary font-bold mt-0.5 whitespace-nowrap">
+      <span className="block text-text-primary font-bold leading-tight sm:whitespace-nowrap">
         {label}
       </span>
     </motion.button>
@@ -324,125 +325,129 @@ export default function Services() {
         </p>
       </motion.div>
 
-      {/* ── Animated Infinity Graph ── */}
-      <motion.div
-        className="mb-12 sm:mb-16"
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={isInView ? { opacity: 1, scale: 1 } : {}}
-        transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-      >
-        {/* Container matching 800×360 viewBox ratio */}
-        <div className="relative mx-auto w-full max-w-[800px]" style={{ aspectRatio: '800 / 360' }}>
-          {/* HTML Pillar Tags */}
-          {PILLAR_CONFIG.map((config, i) => (
-            <PillarTag
-              key={config.id}
-              index={i}
-              label={pillarLabels[i]}
-              level={levelLabels[i]}
-              config={config}
-              isActive={activeIndex === i}
-              onClick={() => selectPillar(i)}
-            />
-          ))}
+      {/* ── Main Framework Content (Side-by-side on desktop) ── */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        {/* Left Column: Animated Infinity Graph */}
+        <motion.div
+          className="lg:col-span-6 w-full"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={isInView ? { opacity: 1, scale: 1 } : {}}
+          transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+        >
+          {/* Container matching 800×380 viewBox ratio */}
+          <div className="relative mx-auto w-full max-w-[800px]" style={{ aspectRatio: '800 / 380' }}>
+            {/* HTML Pillar Tags */}
+            {PILLAR_CONFIG.map((config, i) => (
+              <PillarTag
+                key={config.id}
+                index={i}
+                label={pillarLabels[i]}
+                level={levelLabels[i]}
+                config={config}
+                isActive={activeIndex === i}
+                onClick={() => selectPillar(i)}
+              />
+            ))}
 
-          {/* SVG Animated Infinity Loop */}
-          <svg
-            role="presentation"
-            viewBox="0 0 800 360"
-            className="absolute inset-0 h-full w-full"
-            fill="none"
-          >
-            {/* Single razor-sharp background infinity path */}
-            <path
-              d={INFINITY_PATH}
-              stroke="rgba(255, 255, 255, 0.12)"
-              strokeWidth="2"
-              strokeLinecap="round"
-            />
+            {/* SVG Animated Infinity Loop */}
+            <svg
+              role="presentation"
+              viewBox="0 0 800 380"
+              className="absolute inset-0 h-full w-full"
+              fill="none"
+            >
+              {/* Single razor-sharp background infinity path */}
+              <path
+                d={INFINITY_PATH}
+                stroke="rgba(255, 255, 255, 0.12)"
+                strokeWidth="2"
+                strokeLinecap="round"
+              />
 
-            {/* 4 Animated Pulses traveling along THE EXACT SAME PATH */}
-            {PILLAR_CONFIG.map((config, i) => {
-              const offsetStart = i * 0.25;
-              const isCurrentPillar = activeIndex === i;
-              return (
-                <motion.path
-                  key={config.id}
-                  d={INFINITY_PATH}
-                  fill="none"
-                  pathLength={1}
-                  stroke={config.color}
-                  strokeWidth={isCurrentPillar ? 3 : 2}
-                  strokeLinecap="round"
-                  strokeDasharray={`${SEGMENT_LENGTH} ${GAP_LENGTH}`}
-                  initial={{ strokeDashoffset: -offsetStart }}
+              {/* 4 Animated Pulses traveling along THE EXACT SAME PATH */}
+              {PILLAR_CONFIG.map((config, i) => {
+                const offsetStart = i * 0.25;
+                const isCurrentPillar = activeIndex === i;
+                return (
+                  <motion.path
+                    key={config.id}
+                    d={INFINITY_PATH}
+                    fill="none"
+                    pathLength={1}
+                    stroke={config.color}
+                    strokeWidth={isCurrentPillar ? 3 : 2}
+                    strokeLinecap="round"
+                    strokeDasharray={`${SEGMENT_LENGTH} ${GAP_LENGTH}`}
+                    initial={{ strokeDashoffset: -offsetStart }}
+                    animate={{
+                      strokeDashoffset: -(1 + offsetStart),
+                      opacity: isCurrentPillar ? 1 : 0.4,
+                    }}
+                    transition={{
+                      strokeDashoffset: {
+                        duration: 4,
+                        ease: "linear",
+                        repeat: Infinity,
+                        repeatType: "loop",
+                      },
+                      opacity: { duration: 0.3 },
+                      strokeWidth: { duration: 0.3 },
+                    }}
+                  />
+                );
+              })}
+
+              {/* Glowing Center Intersection Point */}
+              <circle cx="400" cy="190" r="14" fill="rgba(47, 217, 227, 0.1)" />
+              <circle cx="400" cy="190" r="4" fill="#2FD9E3">
+                <animate attributeName="r" values="3;6;3" dur="2.5s" repeatCount="indefinite" />
+                <animate attributeName="opacity" values="0.5;1;0.5" dur="2.5s" repeatCount="indefinite" />
+              </circle>
+            </svg>
+          </div>
+
+          <p className="text-text-tertiary text-xs font-sans text-center mt-4 max-w-md mx-auto">
+            {tFramework('graphFlowLabel')}
+          </p>
+        </motion.div>
+
+        {/* Right Column: Rolodex Card Stack & Navigation */}
+        <motion.div
+          className="lg:col-span-6 w-full"
+          initial={{ y: 50, opacity: 0 }}
+          animate={isInView ? { y: 0, opacity: 1 } : {}}
+          transition={{ duration: 0.5, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
+          <RolodexStack
+            activeIndex={activeIndex}
+            t={tFramework}
+            onCardClick={advancePillar}
+          />
+
+          {/* ── Dot navigation ── */}
+          <div className="flex justify-center gap-2 sm:gap-3 mt-6">
+            {PILLAR_CONFIG.map((config, i) => (
+              <button
+                key={config.id}
+                type="button"
+                onClick={() => selectPillar(i)}
+                className="cursor-pointer bg-transparent border-none p-1"
+                aria-label={`View ${pillarLabels[i]}`}
+              >
+                <motion.div
+                  className="rounded-full h-2"
                   animate={{
-                    strokeDashoffset: -(1 + offsetStart),
-                    opacity: isCurrentPillar ? 1 : 0.4,
+                    width: activeIndex === i ? 32 : 8,
+                    backgroundColor: activeIndex === i ? config.color : 'hsl(0 0% 20%)',
                   }}
-                  transition={{
-                    strokeDashoffset: {
-                      duration: 4,
-                      ease: "linear",
-                      repeat: Infinity,
-                      repeatType: "loop",
-                    },
-                    opacity: { duration: 0.3 },
-                    strokeWidth: { duration: 0.3 },
-                  }}
+                  transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                 />
-              );
-            })}
-
-            {/* Glowing Center Intersection Point */}
-            <circle cx="400" cy="180" r="14" fill="rgba(47, 217, 227, 0.1)" />
-            <circle cx="400" cy="180" r="4" fill="#2FD9E3">
-              <animate attributeName="r" values="3;6;3" dur="2.5s" repeatCount="indefinite" />
-              <animate attributeName="opacity" values="0.5;1;0.5" dur="2.5s" repeatCount="indefinite" />
-            </circle>
-          </svg>
-        </div>
-
-        <p className="text-text-tertiary text-xs font-sans text-center mt-4 max-w-md mx-auto">
-          {tFramework('graphFlowLabel')}
-        </p>
-      </motion.div>
-
-      {/* ── Rolodex Card Stack ── */}
-      <motion.div
-        initial={{ y: 50, opacity: 0 }}
-        animate={isInView ? { y: 0, opacity: 1 } : {}}
-        transition={{ duration: 0.5, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-        onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={() => setIsPaused(false)}
-      >
-        <RolodexStack
-          activeIndex={activeIndex}
-          t={tFramework}
-          onCardClick={advancePillar}
-        />
-      </motion.div>
-
-      {/* ── Dot navigation ── */}
-      <div className="flex justify-center gap-2 sm:gap-3 mt-8">
-        {PILLAR_CONFIG.map((config, i) => (
-          <button
-            key={config.id}
-            type="button"
-            onClick={() => selectPillar(i)}
-            className="cursor-pointer bg-transparent border-none p-1"
-            aria-label={`View ${pillarLabels[i]}`}
-          >
-            <motion.div
-              className="rounded-full h-2"
-              animate={{
-                width: activeIndex === i ? 32 : 8,
-                backgroundColor: activeIndex === i ? config.color : 'hsl(0 0% 20%)',
-              }}
-              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            />
-          </button>
-        ))}
+              </button>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </section>
   );

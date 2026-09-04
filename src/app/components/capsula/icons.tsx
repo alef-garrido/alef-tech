@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 
 export type IconName =
   | 'capsule'
@@ -28,6 +28,7 @@ interface CapsulaIconProps extends React.SVGProps<SVGSVGElement> {
   name: IconName;
   tier?: IconTier;
   size?: number;
+  animate?: boolean;
 }
 
 const ICON_DATA: Record<
@@ -170,29 +171,119 @@ const ICON_DATA: Record<
   },
 };
 
-export function CapsulaIcon({ name, tier = 2, size = 32, className = '', ...props }: CapsulaIconProps) {
+function wrapG(t?: string, body?: string) {
+  return t ? '<g transform="' + t + '">' + (body || '') + '</g>' : body || '';
+}
+
+export function CapsulaIcon({
+  name,
+  tier = 2,
+  size = 32,
+  className = '',
+  animate = true,
+  ...props
+}: CapsulaIconProps) {
+  const svgRef = useRef<SVGSVGElement>(null);
   const data = ICON_DATA[name];
+
+  useEffect(() => {
+    if (!animate || !svgRef.current) return;
+    const svg = svgRef.current;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const STAGES = [
+      { sel: '.cons, .ctr, .phantom, .hid', delay: 0, dur: 180, draw: false },
+      { sel: '.c1, .c2', delay: 140, dur: 900, draw: true },
+      { sel: '.c3', delay: 620, dur: 700, draw: true },
+      { sel: '.surf, .void, .surf-fill, .hatchA, .hatchB, .hatchC, .isogrid, .icon-hatch', delay: 1000, dur: 260, draw: false },
+    ];
+
+    STAGES.forEach((st) => {
+      const els = svg.querySelectorAll(st.sel);
+      els.forEach((el, i) => {
+        const pathEl = el as SVGPathElement;
+        const delay = st.delay + i * 30;
+        if (st.draw && typeof pathEl.getTotalLength === 'function') {
+          let L = 0;
+          try {
+            L = pathEl.getTotalLength();
+          } catch (e) {
+            L = 0;
+          }
+          if (L > 0) {
+            pathEl.animate(
+              [
+                { strokeDasharray: `${L}px ${L + 1}px`, strokeDashoffset: `${L}px` },
+                { strokeDasharray: `${L}px ${L + 1}px`, strokeDashoffset: '0px' },
+              ],
+              { duration: st.dur, delay, easing: 'cubic-bezier(0.4, 0, 0.2, 1)', fill: 'backwards' }
+            );
+            return;
+          }
+        }
+        pathEl.animate([{ opacity: 0 }, { opacity: 1 }], {
+          duration: st.dur,
+          delay,
+          easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
+          fill: 'backwards',
+        });
+      });
+    });
+  }, [animate, name, tier]);
+
   if (!data) return null;
 
   let innerSvg = '';
   if (tier === 1) {
-    innerSvg = `<g class="c2">${data.p}</g>`;
+    innerSvg = wrapG(
+      data.g,
+      `<g class="c2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round">${data.p}${data.d || ''}</g>`
+    );
   } else if (tier === 2) {
-    innerSvg = `<g class="icon-hatch">${data.s}</g><g class="c2">${data.p}</g><g class="c3">${data.d}</g>`;
+    innerSvg =
+      wrapG(
+        data.g,
+        `<g class="surf" fill="currentColor" fill-opacity="0.15" stroke="none">${data.s || ''}</g>`
+      ) +
+      wrapG(
+        data.g,
+        `<g class="c1" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round">${data.p}</g>`
+      ) +
+      wrapG(
+        data.g,
+        `<g class="c3" fill="none" stroke="currentColor" stroke-width="0.65" stroke-linejoin="round" opacity="0.85">${data.d || ''}</g>`
+      );
   } else {
-    innerSvg = `<g class="ctr">${data.c}${data.x || ''}</g><g class="icon-hatch">${data.s}</g><g class="c1">${data.p}</g><g class="c3">${data.d}</g>`;
-  }
-
-  if (data.g) {
-    innerSvg = `<g transform="${data.g}">${innerSvg}</g>`;
+    innerSvg =
+      '<rect class="cons" x="2" y="2" width="20" height="20" fill="none" stroke="currentColor" stroke-width="0.5" stroke-dasharray="4 3" opacity="0.42"/>' +
+      wrapG(
+        data.g,
+        `<g class="cons" fill="none" stroke="currentColor" stroke-width="0.5" stroke-dasharray="4 3" opacity="0.42">${data.c || ''}</g>`
+      ) +
+      `<g class="ctr" fill="none" stroke="currentColor" stroke-width="0.5" stroke-dasharray="16 4 3 4" opacity="0.55">${data.x || ''}</g>` +
+      wrapG(
+        data.g,
+        `<g class="icon-hatch" fill="url(#hatchIcon)" stroke="none" opacity="0.85">${data.s || ''}</g>`
+      ) +
+      wrapG(
+        data.g,
+        `<g class="c1" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round">${data.p}</g>`
+      ) +
+      wrapG(
+        data.g,
+        `<g class="c3" fill="none" stroke="currentColor" stroke-width="0.65" stroke-linejoin="round" opacity="0.85">${data.d || ''}</g>`
+      );
   }
 
   return (
     <svg
-      className={`dwg ${className}`}
+      ref={svgRef}
+      className={`dwg inline-block ${className}`}
       width={size}
       height={size}
       viewBox="0 0 24 24"
+      fill="none"
+      aria-hidden="true"
       dangerouslySetInnerHTML={{ __html: innerSvg }}
       {...props}
     />

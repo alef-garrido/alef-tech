@@ -4,7 +4,8 @@ import useModal from '../hooks/use-modal';
 import ServiceModal from './service-modal';
 import { service } from '../../../types';
 import FlowingMenu, { MenuItemProps } from './flowing-menu';
-import AnimatedMedicalIcon, { MedicalIconVariant } from './icons/AnimatedMedicalIcon';
+import { MedicalIconVariant } from './icons/AnimatedMedicalIcon';
+import { TechnicalAssemblyPlate } from './capsula/technical-plate';
 import { SimpleWaveVisualization } from './animations';
 import { useTranslations } from '@/i18n/translation-client';
 
@@ -97,20 +98,25 @@ const ServicesShowcase = () => {
 
   return (
     <div className="grid w-full my-32 px-4 md:px-12 relative overflow-hidden">
+      {/* Background Section Technical Illustration Plate (Section 08 Drawing System) */}
+      <div className="absolute -top-4 -left-4 md:left-2 w-full max-w-[640px] pointer-events-none opacity-25 dark:opacity-30 z-0 select-none">
+        <TechnicalAssemblyPlate />
+      </div>
+
       {/* Top Wave Decoration */}
-      <div className="w-full mb-4 opacity-75">
-        <SimpleWaveVisualization height={80} strokeColor="#00ffb2" frequency={1.2} showGrid={false} />
+      <div className="w-full mb-4 opacity-75 relative z-10">
+        <SimpleWaveVisualization height={80} strokeColor="#2FD9E3" frequency={1.2} showGrid={false} />
       </div>
 
       {/* Header Section */}
       <div className="flex flex-col items-center justify-center text-center mb-8 relative z-10">
         <div className="flex items-center justify-center gap-3 mb-3">
-          <AnimatedMedicalIcon variant="cross" size={44} color="#00ffb2" />
-          <h2 className="text-4xl md:text-5xl font-bold text-secondary font-mono tracking-tight">
+          <span className="eyebrow">// SYSTEM SPEC</span>
+          <h2 className="text-4xl md:text-5xl font-bold text-[var(--text)] font-mono tracking-tight">
             {tDiagnostic('farmaciaTitle')}
           </h2>
         </div>
-        <p className="text-xl font-mono text-center c-cyber-accent">
+        <p className="text-xl font-mono text-center text-[var(--accent)]">
           {tDiagnostic('remediesSubtitle')}
         </p>
       </div>
@@ -122,7 +128,7 @@ const ServicesShowcase = () => {
 
       {/* Bottom Wave Decoration */}
       <div className="w-full opacity-60 mt-6">
-        <SimpleWaveVisualization height={100} strokeColor="#00e5ff" frequency={1} showGrid={true} />
+        <SimpleWaveVisualization height={100} strokeColor="#2FD9E3" frequency={1} showGrid={true} />
       </div>
 
       {isModalOpen && selectedService && (

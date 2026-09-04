@@ -74,7 +74,7 @@ const CaseStudy = () => {
           <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-28 bg-gradient-to-l from-background to-transparent z-10"></div>
 
           {/* Scrolling Track */}
-          <div className="c-animate-marquee gap-8 sm:gap-14 items-center">
+          <div className="animate-marquee flex flex-row items-center gap-8 sm:gap-14 flex-nowrap">
             {marqueeItems.map((company, index) => (
               <div
                 key={`${company.id}-${index}`}

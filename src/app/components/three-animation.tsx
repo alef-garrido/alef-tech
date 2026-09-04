@@ -84,21 +84,6 @@ export default function ThreeAnimation() {
     controls.minPolarAngle = Math.PI / 2 - angleLimit;
     controls.maxPolarAngle = Math.PI / 2 + angleLimit;
 
-    // Add a gradient HDR background
-    const hdrLoader = new HDRLoader().setPath("https://miroleon.github.io/daily-assets/");
-    hdrLoader.load(
-      "GRADIENT_01_01_comp.hdr",
-      function (texture) {
-        texture.mapping = THREE.EquirectangularReflectionMapping;
-        // Add the HDR to the scene
-        scene.environment = texture;
-      },
-      undefined,
-      (err) => {
-        console.warn('HDR load error:', err);
-      }
-    );
-
     // Add some fog to the scene for moodyness
     scene.fog = new THREE.Fog(0x11151c, 1, 100);
     scene.fog = new THREE.FogExp2(0x11151c, 0.4);
@@ -121,6 +106,22 @@ export default function ThreeAnimation() {
       // envMap will be attached when HDR texture is available
       envMapIntensity: 1.5,
     });
+
+    // Add a gradient HDR background and environment map
+    const hdrLoader = new HDRLoader().setPath("https://miroleon.github.io/daily-assets/");
+    hdrLoader.load(
+      "GRADIENT_01_01_comp.hdr",
+      function (texture) {
+        texture.mapping = THREE.EquirectangularReflectionMapping;
+        scene.environment = texture;
+        hands_mat.envMap = texture;
+        hands_mat.needsUpdate = true;
+      },
+      undefined,
+      (err) => {
+        console.warn('[ThreeAnimation] HDR load error:', err);
+      }
+    );
 
     // Load the 3d model as FBX
     const fbxloader = new FBXLoader();
@@ -148,26 +149,6 @@ export default function ThreeAnimation() {
         console.warn('[ThreeAnimation] FBX load error for', fbxUrl, err);
       }
     );
-    const hdrUrl = "https://miroleon.github.io/daily-assets/GRADIENT_01_01_comp.hdr";
-    hdrLoader.load(
-      hdrUrl,
-      function (texture) {
-        texture.mapping = THREE.EquirectangularReflectionMapping;
-        // Add the HDR to the scene
-        scene.environment = texture;
-        // attach env map to existing materials
-        try {
-          hands_mat.envMap = texture;
-          hands_mat.needsUpdate = true;
-          } catch (e) {
-            console.warn('[ThreeAnimation] failed to attach envMap to material:', e);
-          }
-        },
-        undefined,
-        (err) => {
-          console.warn('[ThreeAnimation] HDR load error for', hdrUrl, err);
-        }
-      );
 
     // POST PROCESSING
     // Create a new render pass

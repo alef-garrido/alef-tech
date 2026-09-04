@@ -156,11 +156,11 @@ const [currentDateTime, setCurrentDateTime] = useState(new Date());
                     <div className="flex items-start gap-4">
                        <LanguageSwitcher />
                         <div className="text-right">
-                            <div className="text-primary font-bold relative" style={{ fontSize: '2rem', lineHeight: 0.8 }}>
+                            <div className="text-primary font-bold relative" style={{ fontSize: '2rem', lineHeight: 0.8 }} suppressHydrationWarning>
                                 <span className="absolute text-foreground font-normal rotate-[-15deg] animate-pulse-slow" style={{ fontSize: '2.5rem', top: '-0.25em', left: '-0.25em' }}>*</span>
                                 {formatDate(currentDateTime)}
                             </div>
-                            <p className="text-[10px] mt-1 tracking-normal lowercase">{formatTime(currentDateTime)}</p>
+                            <p className="text-[10px] mt-1 tracking-normal lowercase" suppressHydrationWarning>{formatTime(currentDateTime)}</p>
                         </div>
                     </div>
 

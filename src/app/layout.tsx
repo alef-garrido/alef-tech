@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import Navigation from './components/navigation';
-import Script from 'next/script';
 import { SidebarProvider } from './context/sidebar-context';
 import SidebarChat from './components/sidebar-chat';
 import { TranslationProvider } from '@/i18n/translation-client';
@@ -26,11 +25,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang={locale} suppressHydrationWarning={true}>
       <head>
         <link rel="icon" href="/favicon.ico" />
-        <Script
-          type="module"
-          src="https://unpkg.com/@splinetool/viewer@1.10.55/build/spline-viewer.js"
-          strategy="lazyOnload"
-        />
         <style>
           {`
             @keyframes marquee {

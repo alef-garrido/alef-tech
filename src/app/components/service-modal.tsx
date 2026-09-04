@@ -1,10 +1,11 @@
 "use client";
 
 import { X, ExternalLink, Maximize } from 'lucide-react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { service } from '../../../types';
 import Image from 'next/image';
 import { useTranslations } from '@/i18n/translation-client';
+import { DynamicLeadForm } from './dynamic-lead-form';
 
 interface ServiceModalProps {
   service: service;
@@ -12,6 +13,7 @@ interface ServiceModalProps {
 }
 
 const ServiceModal = ({ service, closeModal }: ServiceModalProps) => {
+  const [showLeadForm, setShowLeadForm] = useState(false);
   const tMisc = useTranslations('misc');
 
   // Handle ESC key to close modal
@@ -259,14 +261,15 @@ const ServiceModal = ({ service, closeModal }: ServiceModalProps) => {
               {/* Terminal command line or CTA */}
               {service.pricing || service.guarantee ? (
                 <div className="border-t c-border-cyber-border pt-3">
-                  <a
-                    href="#form"
+                  <button
+                    type="button"
+                    onClick={() => setShowLeadForm(true)}
                     className="w-full block c-bg-cyber-accent/20 border c-border-cyber-accent rounded p-3 
                              hover:c-bg-cyber-accent/30 transition-all duration-300 text-center
-                             c-cyber-accent font-mono font-bold text-sm"
+                             c-cyber-accent font-mono font-bold text-sm cursor-pointer"
                   >
                     🩺 Agenda tu diagnóstico GRATIS
-                  </a>
+                  </button>
                 </div>
               ) : (
                 <div className="border-t c-border-cyber-border pt-3">
@@ -286,6 +289,12 @@ const ServiceModal = ({ service, closeModal }: ServiceModalProps) => {
           </div>
         </div>
       </div>
+      {showLeadForm && (
+        <DynamicLeadForm
+          service="diagnostic"
+          onClose={() => setShowLeadForm(false)}
+        />
+      )}
     </div>
   );
 };

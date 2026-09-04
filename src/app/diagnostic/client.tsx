@@ -5,6 +5,7 @@ import SidebarChat from '@/app/components/sidebar-chat';
 import ServicesShowcase from '@/app/components/services-showcase';
 import Footer from '@/app/components/footer';
 import { ECGVisualization, SpO2Visualization, SimpleWaveVisualization, MedicalDashboard, NutrientRadar } from '@/app/components/animations';
+import { DynamicLeadForm } from '@/app/components/dynamic-lead-form';
 
 type Messages = Record<string, Record<string, string> | string>;
 
@@ -14,6 +15,7 @@ interface DiagnosticClientProps {
 
 export default function DiagnosticClient({ messages }: DiagnosticClientProps) {
   const [slotsUsed] = useState(3);
+  const [showLeadForm, setShowLeadForm] = useState(false);
 
   const t = (key: string, defaultValue: string = key) => {
     const keys = key.split('.');
@@ -31,14 +33,15 @@ export default function DiagnosticClient({ messages }: DiagnosticClientProps) {
         <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
           <div className="font-bold text-lg font-mono">
             <span className="c-cyber-accent">Clinica de Emprendimientos</span>
-            <span className="ml-2" style={{color: '#00ffb2'}}>XNORIA</span>
+            <span className="ml-2" style={{ color: '#00ffb2' }}>Exnoria</span>
           </div>
-          <a
-            href="#form"
-            className="text-sm font-medium font-mono px-4 py-2 rounded transition c-cyber-border hover:bg-primary/20"
+          <button
+            type="button"
+            onClick={() => setShowLeadForm(true)}
+            className="text-sm font-medium font-mono px-4 py-2 rounded transition c-cyber-border hover:bg-primary/20 cursor-pointer bg-transparent"
           >
             → {t('diagnostic.startDiagnosis', 'Diagnosticar')}
-          </a>
+          </button>
         </div>
       </div>
 
@@ -47,7 +50,7 @@ export default function DiagnosticClient({ messages }: DiagnosticClientProps) {
         <div className="max-w-3xl mx-auto">
           {/* Hero Copy */}
           <div className="text-center mb-16">
-            <p className="text-sm sm:text-base font-mono mb-6 c-cyber-accent" style={{letterSpacing: '0.15em'}}>XNORIA CLINIC</p>
+            <p className="text-sm sm:text-base font-mono mb-6 c-cyber-accent" style={{ letterSpacing: '0.15em' }}>Exnoria CLINIC</p>
             <h1 className="text-5xl sm:text-6xl lg:text-6xl font-bold font-mono mb-4 c-text-primary">
               {t('diagnostic.businessFeverHeading', '¿Tu negocio tiene fiebre de clientes perdidos?')}
             </h1>
@@ -55,7 +58,7 @@ export default function DiagnosticClient({ messages }: DiagnosticClientProps) {
               {t('diagnostic.stopLosingHeading', 'Deja de perder clientes\nque ya confiaron en ti')}
             </h2>
             <p className="text-lg sm:text-xl font-mono mb-8 leading-relaxed c-text-secondary">
-             {t('diagnostic.diagnoseSubheading', 'Diagnosticamos en 48 horas dónde sangra tu negocio e implementamos la solución exacta — sin complicarte, con resultados en 14 días.')}
+              {t('diagnostic.diagnoseSubheading', 'Diagnosticamos en 48 horas dónde sangra tu negocio e implementamos la solución exacta — sin complicarte, con resultados en 14 días.')}
             </p>
           </div>
 
@@ -64,12 +67,14 @@ export default function DiagnosticClient({ messages }: DiagnosticClientProps) {
             <div className="text-center">
               <h3 className="text-lg sm:text-xl font-bold font-mono mb-6">{t('diagnostic.beginDiagnosis', 'Comienza tu diagnóstico')}</h3>
               <button
-                className="w-full bg-cyber-accent text-black font-bold py-3 px-6 rounded-lg hover:opacity-90 transition font-mono"
+                type="button"
+                onClick={() => setShowLeadForm(true)}
+                className="w-full bg-cyber-accent text-black font-bold py-3 px-6 rounded-lg hover:opacity-90 transition font-mono cursor-pointer"
               >
                 Agendar diagnóstico gratis
               </button>
               <p className="text-sm c-text-secondary mt-4">
-                ⏰ Solo <span className="c-cyber-accent" style={{fontSize: '1.1em'}}>{5 - slotsUsed} {t('diagnostic.slots', 'cupos')}</span> {t('diagnostic.slotWord', 'disponibles')} esta semana
+                ⏰ Solo <span className="c-cyber-accent" style={{ fontSize: '1.1em' }}>{5 - slotsUsed} {t('diagnostic.slots', 'cupos')}</span> {t('diagnostic.slotWord', 'disponibles')} esta semana
               </p>
             </div>
           </div>
@@ -178,9 +183,9 @@ export default function DiagnosticClient({ messages }: DiagnosticClientProps) {
       <section className="py-12 sm:py-20 px-4 sm:px-6 border-t border-border">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-4xl sm:text-5xl font-bold font-mono text-center mb-16">
-            <span className="c-cyber-accent">{t('diagnostic.diagnosisRealPain', 'DIAGNOSTICAMOS TU DOLOR REAL')}</span><br/>
-            <span className="c-cyber-accent">{t('diagnostic.applyOnly', 'APLICAMOS SOLO LO QUE NECESITAS')}</span><br/>
-            <span className="c-cyber-accent">{t('diagnostic.weOperate', 'NOSOTROS LO OPERAMOS POR TI')}</span><br/>
+            <span className="c-cyber-accent">{t('diagnostic.diagnosisRealPain', 'DIAGNOSTICAMOS TU DOLOR REAL')}</span><br />
+            <span className="c-cyber-accent">{t('diagnostic.applyOnly', 'APLICAMOS SOLO LO QUE NECESITAS')}</span><br />
+            <span className="c-cyber-accent">{t('diagnostic.weOperate', 'NOSOTROS LO OPERAMOS POR TI')}</span><br />
             <span className="c-cyber-accent">{t('diagnostic.seeResultsIn14', 'VES RESULTADOS EN 14 DÍAS')}</span>
           </h2>
           <p className="text-center text-2xl font-bold c-cyber-accent">
@@ -189,7 +194,7 @@ export default function DiagnosticClient({ messages }: DiagnosticClientProps) {
         </div>
       </section>
 
-      {/* SECCIÓN 5: FARMACIA XNORIA */}
+      {/* SECCIÓN 5: FARMACIA Exnoria */}
       <section className="py-12 sm:py-20 px-4 sm:px-6 border-t border-border">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl sm:text-5xl font-bold font-mono text-center mb-4 c-cyber-accent">{t('diagnostic.ourSolutions', 'NUESTRAS SOLUCIONES')}</h2>
@@ -311,12 +316,13 @@ export default function DiagnosticClient({ messages }: DiagnosticClientProps) {
           <p className="text-xl font-mono mb-8 c-text-secondary">
             {t('diagnostic.ctaDesc', 'Descubramos dónde sangra tu negocio.')}
           </p>
-          <a
-            href="#form"
-            className="inline-block bg-cyber-accent text-black font-bold py-4 px-8 rounded-lg hover:opacity-90 transition font-mono text-lg"
+          <button
+            type="button"
+            onClick={() => setShowLeadForm(true)}
+            className="inline-block bg-cyber-accent text-black font-bold py-4 px-8 rounded-lg hover:opacity-90 transition font-mono text-lg cursor-pointer"
           >
             → {t('diagnostic.startDiagnosis', 'Comenzar diagnóstico gratis')}
-          </a>
+          </button>
         </div>
       </section>
 
@@ -324,6 +330,13 @@ export default function DiagnosticClient({ messages }: DiagnosticClientProps) {
       <SidebarChat />
 
       <Footer />
+
+      {showLeadForm && (
+        <DynamicLeadForm
+          service="diagnostic"
+          onClose={() => setShowLeadForm(false)}
+        />
+      )}
     </main>
   );
 }

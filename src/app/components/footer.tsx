@@ -132,10 +132,10 @@ const Footer = () => {
                 <div className="mx-4 text-center text-gray-500 my-2">
                     <p>{tMisc('evolving')}</p>
                 </div>
-                <form>
+                <form onSubmit={(e) => { e.preventDefault(); handleServiceClick('diagnostic'); }}>
                     <div className="flex my-2">
                         <input type="email" placeholder={tCta('enterEmail')} className="border bg-transparent text-white px-4 py-2 rounded-l-lg focus:outline-none" />
-                        <button type="submit" className="bg-white text-black font-mono py-3 px-6 rounded-md hover:bg-primary/80 transition-colors">{tCta('subscribe')}</button>
+                        <button type="submit" className="bg-white text-black font-mono py-3 px-6 rounded-md hover:bg-primary/80 transition-colors cursor-pointer">{tCta('subscribe')}</button>
                     </div>
                 </form>
             </div>

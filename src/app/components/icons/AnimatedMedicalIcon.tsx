@@ -15,7 +15,7 @@ export const AnimatedMedicalIcon: React.FC<AnimatedMedicalIconProps> = ({
   variant = 'cross',
   size = 32,
   className = '',
-  color = '#00ffb2',
+  color = '#2FD9E3',
 }) => {
   const containerStyle = { width: size, height: size };
 

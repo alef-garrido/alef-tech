@@ -9,7 +9,7 @@ import { motion } from 'motion/react';
    ────────────────────────────────────────── */
 const PILLAR_CONFIG = [
   { id: 1, color: '#00c2ff', glowColor: 'rgba(0,194,255,0.25)', levelColor: 'rgba(0,194,255,0.15)', borderColor: 'rgba(0,194,255,0.3)' },
-  { id: 2, color: '#00ffb2', glowColor: 'rgba(0,255,178,0.25)', levelColor: 'rgba(0,255,178,0.15)', borderColor: 'rgba(0,255,178,0.3)' },
+  { id: 2, color: '#2FD9E3', glowColor: 'rgba(47,217,227,0.25)', levelColor: 'rgba(47,217,227,0.15)', borderColor: 'rgba(47,217,227,0.3)' },
   { id: 3, color: '#fbbf24', glowColor: 'rgba(251,191,36,0.25)', levelColor: 'rgba(251,191,36,0.15)', borderColor: 'rgba(251,191,36,0.3)' },
   { id: 4, color: '#a78bfa', glowColor: 'rgba(167,139,250,0.25)', levelColor: 'rgba(167,139,250,0.15)', borderColor: 'rgba(167,139,250,0.3)' },
 ];
@@ -395,8 +395,8 @@ export default function Services() {
             })}
 
             {/* Glowing Center Intersection Point */}
-            <circle cx="400" cy="180" r="14" fill="rgba(0, 255, 178, 0.1)" />
-            <circle cx="400" cy="180" r="4" fill="#00ffb2">
+            <circle cx="400" cy="180" r="14" fill="rgba(47, 217, 227, 0.1)" />
+            <circle cx="400" cy="180" r="4" fill="#2FD9E3">
               <animate attributeName="r" values="3;6;3" dur="2.5s" repeatCount="indefinite" />
               <animate attributeName="opacity" values="0.5;1;0.5" dur="2.5s" repeatCount="indefinite" />
             </circle>

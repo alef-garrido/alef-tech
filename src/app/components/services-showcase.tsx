@@ -19,8 +19,8 @@ const ServicesShowcase = () => {
 
   const services: ExtendedService[] = [
     {
-      title: 'Jarabe Reactivador',
-      description: 'Recupera clientes inactivos y reactivéalos en 14 días. Nuestro sistema de WhatsApp automatizado contacta a tus clientes dormidos con una estrategia probada.',
+      title: tDiagnostic('remedySyrupTitle') || 'Jarabe Reactivador',
+      description: 'Recupera clientes inactivos y reactívalos en 14 días. Nuestro sistema de WhatsApp automatizado contacta a tus clientes dormidos con una estrategia probada.',
       tech: ['WhatsApp Automation', 'CRM Integration', 'Email Sequences', 'Analytics'],
       image: '/assets/pholder.svg',
       iconVariant: 'syrup',
@@ -36,7 +36,7 @@ const ServicesShowcase = () => {
       category: 'REACTIVACIÓN'
     },
     {
-      title: 'Analgésico de Cierre',
+      title: tDiagnostic('remedyPillTitle') || 'Analgésico de Cierre',
       description: 'Convierte leads en ventas con nuestro sistema de seguimiento de 5 llamadas y 3 emails. Aumenta tu tasa de cierre hasta 15% con esta estrategia probada.',
       tech: ['Call Automation', 'Email Marketing', 'Lead Scoring', 'Pipeline Management'],
       image: '/assets/pholder.svg',
@@ -53,7 +53,7 @@ const ServicesShowcase = () => {
       category: 'CONVERSIÓN'
     },
     {
-      title: 'Termómetro CX',
+      title: tDiagnostic('remedyThermometerTitle') || 'Termómetro CX',
       description: 'Diagnóstico completo de tu experiencia del cliente en 48 horas. Identifica dónde se van tus clientes y recibe un plan de acción detallado.',
       tech: ['Customer Analytics', 'Data Visualization', 'Heat Mapping', 'Reporting'],
       image: '/assets/pholder.svg',
@@ -70,7 +70,7 @@ const ServicesShowcase = () => {
       category: 'DIAGNÓSTICO'
     },
     {
-      title: 'Vitamina Operativa',
+      title: tDiagnostic('remedyVitaminTitle') || 'Vitamina Operativa',
       description: 'Automatiza todos tus seguimientos con flujos preconfigurados. Reduce tu carga operativa en 20% sin perder el toque personal con tus clientes.',
       tech: ['Workflow Automation', 'API Integration', 'Custom Triggers', 'Task Management'],
       image: '/assets/pholder.svg',
@@ -97,37 +97,42 @@ const ServicesShowcase = () => {
   }));
 
   return (
-    <div className="grid w-full my-32 px-4 md:px-12 relative overflow-hidden">
-      {/* Background Section Technical Illustration Plate (Section 08 Drawing System) */}
-      <div className="absolute -top-4 -left-4 md:left-2 w-full max-w-[640px] pointer-events-none opacity-25 dark:opacity-30 z-0 select-none">
+    <div id="farmacia-exnoria" className="w-full max-w-7xl my-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      {/* Background Section Technical Illustration Plate */}
+      <div className="absolute -top-4 -left-4 md:left-2 w-full max-w-[640px] pointer-events-none opacity-20 dark:opacity-30 z-0 select-none">
         <TechnicalAssemblyPlate />
       </div>
 
       {/* Top Wave Decoration */}
-      <div className="w-full mb-4 opacity-75 relative z-10">
+      <div className="w-full mb-8 opacity-75 relative z-10">
         <SimpleWaveVisualization height={80} strokeColor="#2FD9E3" frequency={1.2} showGrid={false} />
       </div>
 
-      {/* Header Section */}
-      <div className="flex flex-col items-center justify-center text-center mb-8 relative z-10">
-        <div className="flex items-center justify-center gap-3 mb-3">
-          <span className="eyebrow">// SYSTEM SPEC</span>
-          <h2 className="text-4xl md:text-5xl font-bold text-[var(--text)] font-mono tracking-tight">
+      {/* Side-by-Side 2-Column Section Layout */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10 my-4">
+        {/* Left Column: Section Title */}
+        <div className="lg:col-span-5 flex flex-col justify-center text-left">
+          <div className="inline-flex items-center gap-2 mb-4">
+            <span className="eyebrow">// SYSTEM SPEC</span>
+          </div>
+          
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[var(--text)] font-mono tracking-tight leading-[1.05] mb-4">
             {tDiagnostic('farmaciaTitle')}
           </h2>
-        </div>
-        <p className="text-xl font-mono text-center text-[var(--accent)]">
-          {tDiagnostic('remediesSubtitle')}
-        </p>
-      </div>
 
-      {/* Flowing Menu Showcase */}
-      <div className="min-h-[480px] p-4 rounded-lg relative z-10">
-        <FlowingMenu items={menuItems} />
+          <p className="text-xl sm:text-2xl font-mono text-[#0284C7] dark:text-[#2FD9E3] font-semibold">
+            {tDiagnostic('remediesSubtitle')}
+          </p>
+        </div>
+
+        {/* Right Column: Rotating FlowingMenu (Full size, no card wrapper, no outlines) */}
+        <div className="lg:col-span-7 w-full min-h-[400px] sm:min-h-[480px] flex items-center">
+          <FlowingMenu items={menuItems} />
+        </div>
       </div>
 
       {/* Bottom Wave Decoration */}
-      <div className="w-full opacity-60 mt-6">
+      <div className="w-full opacity-60 mt-12">
         <SimpleWaveVisualization height={100} strokeColor="#2FD9E3" frequency={1} showGrid={true} />
       </div>
 

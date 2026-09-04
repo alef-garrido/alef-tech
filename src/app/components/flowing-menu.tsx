@@ -16,8 +16,8 @@ interface FlowingMenuProps {
 
 const FlowingMenu: React.FC<FlowingMenuProps> = ({ items = [] }) => {
   return (
-    <div className="w-full h-full overflow-hidden">
-      <nav className="flex flex-col h-full m-0 p-0">
+    <div className="w-full h-full overflow-hidden flex flex-col justify-center">
+      <nav className="flex flex-col w-full h-full m-0 p-0 divide-y divide-[var(--border)]">
         {items.map((item, idx) => (
           <MenuItem key={idx} {...item} />
         ))}
@@ -45,32 +45,35 @@ const MenuItem: React.FC<MenuItemProps> = ({ text, iconVariant = 'cross', onClic
   const repeatedMarqueeContent = React.useMemo(() => {
     return REPEATED_MARQUEE_CONTENT.map((_, idx) => (
       <React.Fragment key={idx}>
-        <span className="text-[#060010] uppercase font-bold text-[4.5vh] leading-[1.2] p-[1vh_1vw_0] tracking-wide shrink-0">
+        <span className="text-[#060010] uppercase font-bold text-xl sm:text-2xl md:text-3xl leading-[1.2] px-4 tracking-wide shrink-0">
           {text}
         </span>
-        <div className="w-[180px] h-[6.5vh] max-h-[64px] min-h-[52px] my-[0.8em] mx-[2.5vw] rounded-[50px] bg-[#050609] border-2 border-[#2FD9E3]/60 flex items-center justify-center shadow-[0_0_25px_rgba(47,217,227,0.35)] shrink-0">
-          <AnimatedMedicalIcon variant={iconVariant} size={48} />
+        <div className="w-[100px] sm:w-[130px] h-[40px] sm:h-[48px] my-auto mx-3 rounded-[50px] bg-[#050609] border-2 border-[#2FD9E3]/60 flex items-center justify-center shadow-[0_0_18px_rgba(47,217,227,0.35)] shrink-0">
+          <AnimatedMedicalIcon variant={iconVariant} size={32} />
         </div>
       </React.Fragment>
     ));
   }, [text, iconVariant]);
 
   return (
-    <div className="flex-1 relative overflow-hidden text-center shadow-[0_-1px_0_0_#fff]" ref={itemRef}>
+    <div className="flex-1 relative overflow-hidden text-center py-5 min-h-[84px] flex items-center justify-center group" ref={itemRef}>
+      {/* Base Title (high contrast light/dark mode) */}
       <div
-        className="flex items-center justify-center h-full relative cursor-pointer uppercase no-underline font-semibold text-white text-[5vh] hover:text-[#060010] focus:text-white focus-visible:text-[#060010] transition-colors"
+        className="flex items-center justify-center w-full h-full relative cursor-pointer uppercase no-underline font-bold text-[var(--text)] text-xl sm:text-2xl lg:text-3xl hover:text-[#0284C7] dark:hover:text-[#2FD9E3] focus:text-[var(--text)] transition-colors tracking-tight px-4"
         onClick={onClick}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
         {text}
       </div>
+
+      {/* Marquee Hover Overlay */}
       <div
-        className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none bg-white transition-transform duration-500 ease-in-out"
+        className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none bg-[#2FD9E3] dark:bg-white transition-transform duration-500 ease-in-out z-10 flex items-center"
         ref={marqueeRef}
         style={{ transform: 'translateY(101%)' }}
       >
-        <div className="h-full w-[200%] flex">
+        <div className="h-full w-[200%] flex items-center">
           <div
             className="flex items-center relative h-full w-[200%] will-change-transform animate-marquee"
             style={{ transform: 'translateZ(0)' }}

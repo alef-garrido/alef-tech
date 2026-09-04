@@ -11,6 +11,7 @@ export default [
       "out/**",
       "build/**",
       "next-env.d.ts",
+      "reference/**",
     ],
   },
   js.configs.recommended,

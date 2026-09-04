@@ -2,8 +2,7 @@ import Hero from './components/hero';
 import ServicesShowcase from './components/services-showcase';
 import Services from './components/services';
 import CaseStudy from './components/case-study';
-import AboutProfile from './components/about-profile';
-import AboutManifesto from './components/about-manifesto';
+import AboutSection from './components/about-section';
 import FinalCTA from './components/final-cta';
 import Footer from './components/footer';
 
@@ -17,10 +16,7 @@ export default async function Home() {
 
       {/* ABOUT SECTION */}
       <section id="about" className="w-full max-w-7xl my-32 px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
-          <AboutProfile />
-          <AboutManifesto />
-        </div>
+        <AboutSection />
       </section>
 
       <Services />

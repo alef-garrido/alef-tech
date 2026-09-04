@@ -1,6 +1,6 @@
 # Alef Lemat-Tech Portfolio
 
-This is a Next.js project that serves as a personal portfolio and business website for Alef Lemat-Tech, a web developer and Cx strategist. The website showcases his skills and introduces a project called "XNORIA".
+This is a Next.js project that serves as a personal portfolio and business website for Alef Lemat-Tech, a web developer and Cx strategist. The website showcases his skills and introduces a project called "Exnoria".
 
 ## Technologies Used
 

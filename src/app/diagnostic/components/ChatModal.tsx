@@ -23,7 +23,7 @@ export function ChatModal({ isOpen, onClose, webhookUrl }: ChatModalProps) {
     {
       id: '1',
       type: 'bot',
-      content: '¡Hola! Soy tu asistente XNORIA. ¿En qué puedo ayudarte hoy?',
+      content: '¡Hola! Soy tu asistente Exnoria. ¿En qué puedo ayudarte hoy?',
       timestamp: new Date(),
     },
   ]);
@@ -78,7 +78,7 @@ export function ChatModal({ isOpen, onClose, webhookUrl }: ChatModalProps) {
           sessionId,
         };
         console.log('🚀 Sending request to n8n:', { url: webhookUrl, payload });
-        
+
         const response = await fetch(webhookUrl, {
           method: 'POST',
           headers: {
@@ -93,10 +93,10 @@ export function ChatModal({ isOpen, onClose, webhookUrl }: ChatModalProps) {
 
         const data = await response.json();
         console.log('✅ n8n Response received:', JSON.stringify(data, null, 2));
-        
+
         // Handle n8n response with LangChain chatHistory format
         let botResponse = 'Lo siento, hubo un error procesando tu mensaje.';
-        
+
         if (data.chatHistory && Array.isArray(data.chatHistory)) {
           console.log('📋 Found chatHistory array with', data.chatHistory.length, 'messages');
           // Find the last AI message in the chat history
@@ -191,7 +191,7 @@ export function ChatModal({ isOpen, onClose, webhookUrl }: ChatModalProps) {
                 <Bot className="w-5 h-5 c-cyber-accent" />
               </div>
               <div>
-                <h3 className="font-bold font-mono c-text-primary">XNORIA Assistant</h3>
+                <h3 className="font-bold font-mono c-text-primary">Exnoria Assistant</h3>
                 <p className="text-xs c-text-tertiary">
                   {webhookUrl ? 'Powered by n8n' : 'Chat Assistant'}
                 </p>
@@ -214,11 +214,10 @@ export function ChatModal({ isOpen, onClose, webhookUrl }: ChatModalProps) {
                 className={`flex ${msg.type === 'user' ? 'justify-end' : 'justify-start'}`}
               >
                 <div
-                  className={`rounded-lg p-3 max-w-xs ${
-                    msg.type === 'user'
+                  className={`rounded-lg p-3 max-w-xs ${msg.type === 'user'
                       ? 'bg-primary/20 border border-primary/50'
                       : 'bg-muted'
-                  }`}
+                    }`}
                 >
                   <p className="text-sm c-text-primary">{msg.content}</p>
                   <p className="text-xs c-text-tertiary mt-1">

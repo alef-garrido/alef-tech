@@ -28,7 +28,7 @@ export default function AboutManifesto({ onSendPrompt }: AboutManifestoProps) {
     if (onSendPrompt) {
       onSendPrompt('Muéstrame cómo se vería esto como landing page completa');
     } else {
-      router.push('/diagnostic');
+      setShowLeadForm(true);
     }
   };
 

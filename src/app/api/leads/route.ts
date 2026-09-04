@@ -11,14 +11,14 @@ function getSupabaseClient() {
   if (supabaseInstance) {
     return supabaseInstance;
   }
-  
+
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-  
+
   if (!supabaseUrl || !supabaseKey) {
     throw new Error('Supabase credentials are not configured. Please set NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY environment variables.');
   }
-  
+
   supabaseInstance = createClient(supabaseUrl, supabaseKey);
   return supabaseInstance;
 }
@@ -38,7 +38,7 @@ async function sendToN8nWebhook(leadData: Record<string, unknown>, leadId: strin
       leadId,
       ...leadData,
       capturedAt: new Date().toISOString(),
-      source: 'xnoria-diagnostic',
+      source: 'Exnoria-diagnostic',
     };
 
     const response = await fetch(N8N_WEBHOOK_URL, {
@@ -91,7 +91,7 @@ export async function POST(request: Request) {
     // Determine the source based on service type
     let source = 'squeeze-page';
     if (body.service === 'diagnostic') {
-      source = 'xnoria-diagnostic';
+      source = 'Exnoria-diagnostic';
     }
 
     // Save to Supabase

@@ -63,7 +63,7 @@ const SQUEEZE_PAGE_CONFIG: Record<ServiceType, SqueezePage> = {
   },
   diagnostic: {
     service: 'diagnostic',
-    title: 'XNORIA Clinic: CX Diagnostic',
+    title: 'Exnoria Clinic: CX Diagnostic',
     subtitle: 'Free 48-hour business health check',
     benefits: [
       'Identify customer retention bottlenecks',

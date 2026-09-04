@@ -9,19 +9,19 @@
 @theme {
     /* Semantic color system - organized by purpose */
     
-    /* Neutrals */
-    --color-background: hsl(0 0% 4%);
-    --color-foreground: hsl(0 0% 90%);
-    --color-card: hsl(0 0% 6%);
-    --color-card-foreground: hsl(0 0% 90%);
-    --color-popover: hsl(0 0% 6%);
-    --color-popover-foreground: hsl(0 0% 90%);
+    /* Neutrals - dynamic theme variables */
+    --color-background: var(--bg);
+    --color-foreground: var(--text);
+    --color-card: var(--surface);
+    --color-card-foreground: var(--text);
+    --color-popover: var(--surface-2);
+    --color-popover-foreground: var(--text);
     
-    /* Text hierarchy - improved contrast */
-    --color-text-primary: hsl(0 0% 93%);      /* #edeef2 - Primary text, was #ccc */
-    --color-text-secondary: hsl(0 0% 68%);    /* #adb0b8 - Secondary text, was #888 */
-    --color-text-tertiary: hsl(0 0% 48%);     /* #7a7e88 - Tertiary text, muted */
-    --color-text-muted: hsl(0 0% 38%);        /* #616470 - Disabled/placeholder text */
+    /* Text hierarchy - dynamic contrast */
+    --color-text-primary: var(--text);
+    --color-text-secondary: var(--text-muted);
+    --color-text-tertiary: var(--text-faint);
+    --color-text-muted: var(--text-faint);
 
     /* Primary action - Cyan neon accent */
     --color-primary: hsl(170 100% 50%);       /* #00ffb2 */
@@ -882,30 +882,46 @@ header.nav {
   --dur-slow: 420ms;
 }
 
-/* Light ("Spec Sheet") */
-[data-theme='light'] {
-  --bg: #F4F8FB;
-  --bg-deep: #E6EDF5;
+/* Light Theme Tokens */
+[data-theme='light'], .light {
+  --bg: #F8FAFC;
+  --bg-deep: #F1F5F9;
   --surface: #FFFFFF;
-  --surface-2: #EDF3F9;
-  --surface-3: #E2EBF4;
-  --border: #C7D6E6;
-  --border-strong: #9DB3CB;
-  --text: #0B1F3F;
-  --text-muted: #4A5F7A;
-  --text-faint: #5F7288;
-  --accent: #0B6E77;
-  --accent-hover: #084F56;
+  --surface-2: #F1F5F9;
+  --surface-3: #E2E8F0;
+  --border: #CBD5E1;
+  --border-strong: #94A3B8;
+  --text: #0F172A;
+  --text-muted: #334155;
+  --text-faint: #64748B;
+  --accent: #0284C7;
+  --accent-hover: #0369A1;
   --accent-ink: #FFFFFF;
-  --alert: #B44405;
-  --alert-hover: #8E3504;
+  --alert: #EA580C;
+  --alert-hover: #C2410C;
   --alert-ink: #FFFFFF;
-  --grid-line: rgba(11, 31, 63, 0.06);
-  --glow: 0 0 0 1px rgba(11,110,119,.2), 0 8px 28px -14px rgba(11,31,63,.35);
-  --shadow: 0 14px 34px -22px rgba(11,31,63,.5);
+  --grid-line: rgba(15, 23, 42, 0.06);
+  --glow: 0 0 0 1px rgba(2,132,199,.25), 0 8px 28px -14px rgba(15,23,42,.2);
+  --shadow: 0 14px 34px -22px rgba(15,23,42,.2);
+
+  --background: var(--bg);
+  --foreground: var(--text);
+  --card: var(--surface);
+  --card-foreground: var(--text);
+  --popover: var(--surface-2);
+  --popover-foreground: var(--text);
+  --primary: var(--accent);
+  --primary-foreground: var(--accent-ink);
+  --secondary: var(--surface-2);
+  --secondary-foreground: var(--text);
+  --muted: var(--surface-2);
+  --muted-foreground: var(--text-muted);
+  --border: var(--border);
+  --input: var(--border);
+  --ring: var(--accent);
 }
 
-.dark {
+:root, [data-theme='dark'], .dark {
   --background: var(--bg);
   --foreground: var(--text);
   --card: var(--surface);

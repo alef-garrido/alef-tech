@@ -64,7 +64,7 @@ function PillarTag({ index, label, level, config, isActive, onClick }: {
       >
         {level}
       </span>
-      <span className="block text-text-primary font-bold leading-tight sm:whitespace-nowrap">
+      <span className="block text-[#F4F8FB] font-bold leading-tight sm:whitespace-nowrap">
         {label}
       </span>
     </motion.button>
@@ -94,8 +94,8 @@ function PhaseItem({ name, desc, color, index }: {
         {index + 1}
       </div>
       <div>
-        <p className="text-text-primary text-sm font-semibold font-mono leading-tight">{name}</p>
-        <p className="text-text-tertiary text-xs font-sans leading-relaxed mt-0.5">{desc}</p>
+        <p className="text-[#F4F8FB] text-sm font-semibold font-mono leading-tight">{name}</p>
+        <p className="text-[#8FA6C4] text-xs font-sans leading-relaxed mt-0.5">{desc}</p>
       </div>
     </motion.div>
   );
@@ -140,10 +140,10 @@ function PillarCard({ pillarIndex, t, config, isActive }: {
             >
               {t(`${p}Level`)}
             </span>
-            <h3 className="text-lg sm:text-xl md:text-2xl font-bold font-mono text-text-primary leading-tight">
+            <h3 className="text-lg sm:text-xl md:text-2xl font-bold font-mono text-[#F4F8FB] leading-tight">
               {t(`${p}Title`)}
             </h3>
-            <p className="text-text-secondary text-sm font-sans mt-1">
+            <p className="text-[#8FA6C4] text-sm font-sans mt-1">
               {t(`${p}Subtitle`)}
             </p>
           </div>
@@ -159,7 +159,7 @@ function PillarCard({ pillarIndex, t, config, isActive }: {
           </div>
         </div>
 
-        <p className="text-text-tertiary text-sm font-sans leading-relaxed mt-4">
+        <p className="text-[#8FA6C4] text-sm font-sans leading-relaxed mt-4">
           {t(`${p}Description`)}
         </p>
 
@@ -314,13 +314,13 @@ export default function Services() {
         animate={isInView ? { y: 0, opacity: 1 } : {}}
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
       >
-        <span className="inline-block text-[11px] font-mono tracking-[0.3em] uppercase text-text-muted mb-4">
+        <span className="inline-block text-[11px] font-mono tracking-[0.3em] uppercase text-[var(--text-muted)] mb-4">
           Framework
         </span>
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-secondary font-mono leading-tight">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[var(--text)] font-mono leading-tight">
           {tFramework('sectionTitle')}
         </h2>
-        <p className="text-text-secondary text-base sm:text-lg font-sans max-w-3xl mx-auto mt-4 leading-relaxed">
+        <p className="text-[var(--text-muted)] text-base sm:text-lg font-sans max-w-3xl mx-auto mt-4 leading-relaxed">
           {tFramework('sectionSubtitle')}
         </p>
       </motion.div>
@@ -359,7 +359,7 @@ export default function Services() {
               {/* Single razor-sharp background infinity path */}
               <path
                 d={INFINITY_PATH}
-                stroke="rgba(255, 255, 255, 0.12)"
+                stroke="var(--border-strong)"
                 strokeWidth="2"
                 strokeLinecap="round"
               />
@@ -406,7 +406,7 @@ export default function Services() {
             </svg>
           </div>
 
-          <p className="text-text-tertiary text-xs font-sans text-center mt-4 max-w-md mx-auto">
+          <p className="text-[var(--text-faint)] text-xs font-sans text-center mt-4 max-w-md mx-auto">
             {tFramework('graphFlowLabel')}
           </p>
         </motion.div>

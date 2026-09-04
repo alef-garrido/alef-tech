@@ -31,7 +31,7 @@ export default function ThreeAnimation() {
     });
 
     // Set a default background color
-    renderer.setClearColor(0x11151c);
+    renderer.setClearColor(0x000000);
 
     //  Set the pixel ratio of the canvas (for HiDPI devices)
     renderer.setPixelRatio(window.devicePixelRatio);
@@ -416,5 +416,5 @@ export default function ThreeAnimation() {
     };
   }, []);
 
-  return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full z-0" />;
+  return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full z-0 bg-black" />;
 }

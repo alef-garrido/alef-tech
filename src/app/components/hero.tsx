@@ -22,17 +22,29 @@ export default function Hero() {
           <ThreeAnimation />
         </div>
 
-        <div className="wrap relative z-10 w-full flex flex-col justify-center min-h-[60vh]">
-          <div className="max-w-3xl">
-            <p className="eyebrow">AGENTIC SOFTWARE & CX INTEGRATION</p>
-            <h1>
-              ALEF LEMAT
+        <div className="wrap relative z-10 w-full flex flex-col justify-center min-h-[60vh] py-12">
+          <div className="max-w-4xl">
+            {/* Top Eyebrow Tag */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[var(--accent)]/30 bg-[var(--accent)]/10 text-xs sm:text-sm font-mono tracking-widest text-[var(--accent)] uppercase mb-6 backdrop-blur-sm">
+              <span className="w-2 h-2 rounded-full bg-[var(--accent)] animate-pulse" />
+              {t('eyebrow') || 'Alef Lemat - Consultant and CX strategist'}
+            </div>
+
+            {/* Main Headline */}
+            <h1
+              className="text-5xl sm:text-7xl md:text-8xl font-bold font-display tracking-tight text-[var(--text)] leading-[0.95] mb-6 uppercase"
+              style={{ fontStretch: 'var(--display-wide)' }}
+            >
+              {t('title') || 'CX CLINIC'}
             </h1>
-            <p className="lede">
-              {t('subtitle') || 'Hardware-level precision for autonomous software systems. Custom AI agentic workflows, CX architectures, and high-performance engineering.'}
+
+            {/* Subtitle / Lede */}
+            <p className="text-base sm:text-lg md:text-xl font-sans leading-relaxed max-w-2xl text-[var(--text-muted)] mt-2 mb-8">
+              {t('subtitle')}
             </p>
 
-            <div className="mt-8 flex gap-4 items-center">
+            {/* CTA Buttons */}
+            <div className="flex flex-wrap gap-4 items-center">
               <button
                 type="button"
                 onClick={() => setShowLeadForm(true)}
@@ -40,8 +52,15 @@ export default function Hero() {
               >
                 {tCta('primary')} →
               </button>
-              <a href="#services" className="btn btn-ghost lg">
-                {tCta('secondary') || 'Explore Services'} →
+              <a
+                href="#framework"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById('framework')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="btn btn-ghost lg cursor-pointer"
+              >
+                {tCta('secondary') || 'Learn More'} →
               </a>
             </div>
           </div>

@@ -306,7 +306,7 @@ export default function Services() {
   const levelLabels = [1, 2, 3, 4].map((i) => tFramework(`pillar${i}Level`));
 
   return (
-    <section ref={sectionRef} className="w-full max-w-7xl my-32 px-4 sm:px-6 lg:px-8">
+    <section id="framework" ref={sectionRef} className="w-full max-w-7xl my-32 px-4 sm:px-6 lg:px-8 scroll-mt-28">
       {/* ── Header ── */}
       <motion.div
         className="text-center mb-10 sm:mb-14"

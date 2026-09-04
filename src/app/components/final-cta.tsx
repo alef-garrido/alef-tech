@@ -10,28 +10,32 @@ const FinalCTA = () => {
 
   return (
     <>
-      <div className="w-full my-48 px-6 md:px-12 py-16 bg-white">
-        <div className="text-center font-mono">
-          <h2 className="text-5xl font-bold text-black mb-4 font-mono">{tCta('buildEngine')}</h2>
-          <p className="text-lg text-gray-900 mb-8">{tCta('complexityToClarity')}</p>
-          <div className="flex justify-center gap-4">
+      <section className="w-full wrap my-24">
+        <div className="panel text-center py-16 px-8 relative overflow-hidden">
+          <div className="sec-head mx-auto">
+            <p className="eyebrow justify-center">SYSTEM DEPLOYMENT</p>
+            <h2 className="t-h1 text-[var(--accent)]">{tCta('buildEngine')}</h2>
+            <p className="t-body mx-auto">{tCta('complexityToClarity')}</p>
+          </div>
+
+          <div className="flex flex-wrap justify-center gap-4 mt-8">
             <button
               type="button"
               onClick={() => setShowLeadForm(true)}
-              className="bg-black text-white font-mono py-3 px-6 rounded-md hover:bg-primary/80 transition-colors cursor-pointer"
+              className="btn btn-primary lg"
             >
-              {tCta('bookCall')}
+              {tCta('bookCall')} →
             </button>
             <button
               type="button"
               onClick={() => setShowLeadForm(true)}
-              className="bg-black text-white font-mono py-3 px-6 rounded-md hover:bg-primary/80 transition-colors cursor-pointer"
+              className="btn btn-secondary lg"
             >
               {tCta('getInTouch')}
             </button>
           </div>
         </div>
-      </div>
+      </section>
 
       {showLeadForm && (
         <DynamicLeadForm

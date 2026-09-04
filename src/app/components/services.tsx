@@ -5,18 +5,18 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion } from 'motion/react';
 
 /* ──────────────────────────────────────────
-   Pillar config
+   Capsula Dynamics Pillar Config
+   Cathode Aqua (#2FD9E3), Deep Aqua (#0B6E77), Hazard Orange (#FF6B1A), Deep Orange (#B44405)
    ────────────────────────────────────────── */
 const PILLAR_CONFIG = [
-  { id: 1, color: '#00c2ff', glowColor: 'rgba(0,194,255,0.25)', levelColor: 'rgba(0,194,255,0.15)', borderColor: 'rgba(0,194,255,0.3)' },
-  { id: 2, color: '#00ffb2', glowColor: 'rgba(0,255,178,0.25)', levelColor: 'rgba(0,255,178,0.15)', borderColor: 'rgba(0,255,178,0.3)' },
-  { id: 3, color: '#fbbf24', glowColor: 'rgba(251,191,36,0.25)', levelColor: 'rgba(251,191,36,0.15)', borderColor: 'rgba(251,191,36,0.3)' },
-  { id: 4, color: '#a78bfa', glowColor: 'rgba(167,139,250,0.25)', levelColor: 'rgba(167,139,250,0.15)', borderColor: 'rgba(167,139,250,0.3)' },
+  { id: 1, color: '#2FD9E3', glowColor: 'rgba(47,217,227,0.25)', levelColor: 'rgba(47,217,227,0.15)', borderColor: 'rgba(47,217,227,0.4)' },
+  { id: 2, color: '#0B6E77', glowColor: 'rgba(11,110,119,0.25)', levelColor: 'rgba(11,110,119,0.15)', borderColor: 'rgba(11,110,119,0.4)' },
+  { id: 3, color: '#FF6B1A', glowColor: 'rgba(255,107,26,0.25)', levelColor: 'rgba(255,107,26,0.15)', borderColor: 'rgba(255,107,26,0.4)' },
+  { id: 4, color: '#B44405', glowColor: 'rgba(180,68,5,0.25)', levelColor: 'rgba(180,68,5,0.15)', borderColor: 'rgba(180,68,5,0.4)' },
 ];
 
 /* ──────────────────────────────────────────
    Perfect Symmetrical Infinity Symbol (∞)
-   Single unified path — 100% clean silhouette
    ViewBox: 800 × 360 | Center: (400, 180)
    ────────────────────────────────────────── */
 const INFINITY_PATH =
@@ -47,11 +47,11 @@ function PillarTag({ index, label, level, config, isActive, onClick }: {
     <motion.button
       type="button"
       onClick={onClick}
-      className={`absolute z-10 w-fit max-w-[48%] cursor-pointer border backdrop-blur-md px-3 py-2 sm:px-4 sm:py-2.5 text-center font-mono text-[9px] sm:text-[11px] md:text-xs rounded-lg transition-all ${positions[index]}`}
+      className={`absolute z-10 w-fit max-w-[48%] cursor-pointer border backdrop-blur-md px-3 py-2 sm:px-4 sm:py-2.5 text-center font-mono text-[9px] sm:text-[11px] md:text-xs rounded-[var(--radius-capsule)] transition-all ${positions[index]}`}
       style={{
-        borderColor: isActive ? config.color : "rgba(255,255,255,0.12)",
-        backgroundColor: isActive ? `${config.color}15` : "rgba(10,10,10,0.85)",
-        boxShadow: isActive ? `0 0 25px ${config.glowColor}` : "0 4px 12px rgba(0,0,0,0.4)",
+        borderColor: isActive ? config.color : "var(--border)",
+        backgroundColor: isActive ? "var(--surface-2)" : "var(--surface)",
+        boxShadow: isActive ? `0 0 25px ${config.glowColor}` : "var(--shadow)",
       }}
       animate={{ scale: isActive ? 1.06 : 1 }}
       transition={{ duration: 0.25 }}
@@ -63,7 +63,7 @@ function PillarTag({ index, label, level, config, isActive, onClick }: {
       >
         {level}
       </span>
-      <span className="block text-text-primary font-bold mt-0.5 whitespace-nowrap">
+      <span className="block text-[var(--text)] font-bold mt-0.5 whitespace-nowrap">
         {label}
       </span>
     </motion.button>
@@ -88,13 +88,13 @@ function PhaseItem({ name, desc, color, index }: {
     >
       <div
         className="flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-mono font-bold mt-0.5"
-        style={{ backgroundColor: `${color}15`, color, border: `1px solid ${color}30` }}
+        style={{ backgroundColor: `${color}20`, color, border: `1px solid ${color}40` }}
       >
         {index + 1}
       </div>
       <div>
-        <p className="text-text-primary text-sm font-semibold font-mono leading-tight">{name}</p>
-        <p className="text-text-tertiary text-xs font-sans leading-relaxed mt-0.5">{desc}</p>
+        <p className="text-[var(--text)] text-sm font-semibold font-mono leading-tight">{name}</p>
+        <p className="text-[var(--text-muted)] text-xs leading-relaxed mt-0.5">{desc}</p>
       </div>
     </motion.div>
   );
@@ -113,11 +113,10 @@ function PillarCard({ pillarIndex, t, config, isActive }: {
 
   return (
     <div
-      className="relative rounded-xl overflow-hidden select-none"
+      className="capsule-card relative select-none"
       style={{
-        background: "linear-gradient(135deg, hsl(0 0% 6%), hsl(0 0% 8%))",
-        border: `1px solid ${isActive ? config.borderColor : "hsl(0 0% 12%)"}`,
-        boxShadow: isActive ? `0 4px 40px ${config.glowColor}` : "0 2px 8px rgba(0,0,0,0.3)",
+        borderColor: isActive ? config.borderColor : "var(--border)",
+        boxShadow: isActive ? `0 4px 40px ${config.glowColor}` : "var(--shadow)",
       }}
     >
       {/* Accent top bar */}
@@ -126,45 +125,33 @@ function PillarCard({ pillarIndex, t, config, isActive }: {
         style={{ background: `linear-gradient(90deg, transparent, ${config.color}, transparent)` }}
       />
 
-      <div className="p-5 sm:p-6">
-        <div className="flex items-start justify-between gap-4">
-          <div className="flex-1 min-w-0">
-            <span
-              className="inline-block text-[10px] font-mono font-bold tracking-[0.2em] uppercase px-2.5 py-1 rounded-full mb-3"
-              style={{
-                color: config.color,
-                backgroundColor: config.levelColor,
-                border: `1px solid ${config.borderColor}`,
-              }}
-            >
-              {t(`${p}Level`)}
-            </span>
-            <h3 className="text-lg sm:text-xl md:text-2xl font-bold font-mono text-text-primary leading-tight">
-              {t(`${p}Title`)}
-            </h3>
-            <p className="text-text-secondary text-sm font-sans mt-1">
-              {t(`${p}Subtitle`)}
-            </p>
-          </div>
-          <div
-            className="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center font-mono font-bold text-lg"
-            style={{
-              color: config.color,
-              backgroundColor: config.levelColor,
-              border: `1px solid ${config.borderColor}`,
-            }}
-          >
-            {`0${pillarIndex}`}
-          </div>
-        </div>
+      <div className="cap-head">
+        <span className="dot" style={{ background: config.color, boxShadow: `0 0 0 4px ${config.color}33` }} />
+        <h4>{t(`${p}Title`)}</h4>
+        <span className="id">0{pillarIndex}</span>
+      </div>
 
-        <p className="text-text-tertiary text-sm font-sans leading-relaxed mt-4">
+      <div className="cap-body">
+        <span
+          className="badge b-on"
+          style={{
+            color: config.color,
+            borderColor: config.color,
+            background: config.levelColor,
+          }}
+        >
+          {t(`${p}Level`)}
+        </span>
+        <p className="text-[var(--text-muted)] text-sm mt-1">
+          {t(`${p}Subtitle`)}
+        </p>
+        <p className="text-[var(--text-faint)] text-xs mt-2">
           {t(`${p}Description`)}
         </p>
 
         {/* Phases — only rendered for the active card */}
         {isActive && (
-          <div className="mt-5 space-y-3 border-t border-white/5 pt-4">
+          <div className="mt-5 space-y-3 border-t border-[var(--border)] pt-4">
             {[1, 2, 3, 4].map((phase) => (
               <PhaseItem
                 key={`${pillarIndex}-${phase}`}
@@ -176,6 +163,11 @@ function PillarCard({ pillarIndex, t, config, isActive }: {
             ))}
           </div>
         )}
+      </div>
+
+      <div className="cap-foot">
+        <span className="label">PILLAR ID: 0{pillarIndex}</span>
+        <span className="ml-auto font-mono text-xs" style={{ color: config.color }}>[ACTIVE SPEC]</span>
       </div>
     </div>
   );
@@ -305,145 +297,143 @@ export default function Services() {
   const levelLabels = [1, 2, 3, 4].map((i) => tFramework(`pillar${i}Level`));
 
   return (
-    <section ref={sectionRef} className="w-full max-w-7xl my-32 px-4 sm:px-6 lg:px-8">
+    <section ref={sectionRef} id="services" className="w-full wrap my-24">
       {/* ── Header ── */}
       <motion.div
-        className="text-center mb-10 sm:mb-14"
+        className="sec-head mb-10 sm:mb-14"
         initial={{ y: 40, opacity: 0 }}
         animate={isInView ? { y: 0, opacity: 1 } : {}}
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
       >
-        <span className="inline-block text-[11px] font-mono tracking-[0.3em] uppercase text-text-muted mb-4">
+        <p className="eyebrow">
           Framework
-        </span>
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-secondary font-mono leading-tight">
-          {tFramework('sectionTitle')}
-        </h2>
-        <p className="text-text-secondary text-base sm:text-lg font-sans max-w-3xl mx-auto mt-4 leading-relaxed">
-          {tFramework('sectionSubtitle')}
         </p>
+        <h2>{tFramework('sectionTitle')}</h2>
+        <p>{tFramework('sectionSubtitle')}</p>
       </motion.div>
 
-      {/* ── Animated Infinity Graph ── */}
-      <motion.div
-        className="mb-12 sm:mb-16"
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={isInView ? { opacity: 1, scale: 1 } : {}}
-        transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-      >
-        {/* Container matching 800×360 viewBox ratio */}
-        <div className="relative mx-auto w-full max-w-[800px]" style={{ aspectRatio: '800 / 360' }}>
-          {/* HTML Pillar Tags */}
-          {PILLAR_CONFIG.map((config, i) => (
-            <PillarTag
-              key={config.id}
-              index={i}
-              label={pillarLabels[i]}
-              level={levelLabels[i]}
-              config={config}
-              isActive={activeIndex === i}
-              onClick={() => selectPillar(i)}
-            />
-          ))}
+      {/* ── 2-Column Layout: Graph + Rolodex ── */}
+      <div className="grid-2 gap-8 items-start">
+        {/* Left: Animated Infinity Graph */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={isInView ? { opacity: 1, scale: 1 } : {}}
+          transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <div className="relative w-full panel" style={{ aspectRatio: '800 / 360' }}>
+            {/* HTML Pillar Tags */}
+            {PILLAR_CONFIG.map((config, i) => (
+              <PillarTag
+                key={config.id}
+                index={i}
+                label={pillarLabels[i]}
+                level={levelLabels[i]}
+                config={config}
+                isActive={activeIndex === i}
+                onClick={() => selectPillar(i)}
+              />
+            ))}
 
-          {/* SVG Animated Infinity Loop */}
-          <svg
-            role="presentation"
-            viewBox="0 0 800 360"
-            className="absolute inset-0 h-full w-full"
-            fill="none"
-          >
-            {/* Single razor-sharp background infinity path */}
-            <path
-              d={INFINITY_PATH}
-              stroke="rgba(255, 255, 255, 0.12)"
-              strokeWidth="2"
-              strokeLinecap="round"
-            />
+            {/* SVG Animated Infinity Loop */}
+            <svg
+              role="presentation"
+              viewBox="0 0 800 360"
+              className="absolute inset-0 h-full w-full"
+              fill="none"
+            >
+              {/* Background infinity path */}
+              <path
+                d={INFINITY_PATH}
+                stroke="var(--border-strong)"
+                strokeWidth="2"
+                strokeLinecap="round"
+              />
 
-            {/* 4 Animated Pulses traveling along THE EXACT SAME PATH */}
-            {PILLAR_CONFIG.map((config, i) => {
-              const offsetStart = i * 0.25;
-              const isCurrentPillar = activeIndex === i;
-              return (
-                <motion.path
-                  key={config.id}
-                  d={INFINITY_PATH}
-                  fill="none"
-                  pathLength={1}
-                  stroke={config.color}
-                  strokeWidth={isCurrentPillar ? 3 : 2}
-                  strokeLinecap="round"
-                  strokeDasharray={`${SEGMENT_LENGTH} ${GAP_LENGTH}`}
-                  initial={{ strokeDashoffset: -offsetStart }}
+              {/* 4 Animated Pulses traveling along the path */}
+              {PILLAR_CONFIG.map((config, i) => {
+                const offsetStart = i * 0.25;
+                const isCurrentPillar = activeIndex === i;
+                return (
+                  <motion.path
+                    key={config.id}
+                    d={INFINITY_PATH}
+                    fill="none"
+                    pathLength={1}
+                    stroke={config.color}
+                    strokeWidth={isCurrentPillar ? 3 : 2}
+                    strokeLinecap="round"
+                    strokeDasharray={`${SEGMENT_LENGTH} ${GAP_LENGTH}`}
+                    initial={{ strokeDashoffset: -offsetStart }}
+                    animate={{
+                      strokeDashoffset: -(1 + offsetStart),
+                      opacity: isCurrentPillar ? 1 : 0.4,
+                    }}
+                    transition={{
+                      strokeDashoffset: {
+                        duration: 4,
+                        ease: "linear",
+                        repeat: Infinity,
+                        repeatType: "loop",
+                      },
+                      opacity: { duration: 0.3 },
+                      strokeWidth: { duration: 0.3 },
+                    }}
+                  />
+                );
+              })}
+
+              {/* Glowing Center Intersection Point */}
+              <circle cx="400" cy="180" r="14" fill="rgba(47, 217, 227, 0.1)" />
+              <circle cx="400" cy="180" r="4" fill="#2FD9E3">
+                <animate attributeName="r" values="3;6;3" dur="2.5s" repeatCount="indefinite" />
+                <animate attributeName="opacity" values="0.5;1;0.5" dur="2.5s" repeatCount="indefinite" />
+              </circle>
+            </svg>
+          </div>
+
+          <p className="t-caption text-center mt-4">
+            {tFramework('graphFlowLabel')}
+          </p>
+        </motion.div>
+
+        {/* Right: Rolodex Card Stack + Dot Nav */}
+        <motion.div
+          initial={{ y: 50, opacity: 0 }}
+          animate={isInView ? { y: 0, opacity: 1 } : {}}
+          transition={{ duration: 0.5, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
+          <RolodexStack
+            activeIndex={activeIndex}
+            t={tFramework}
+            onCardClick={advancePillar}
+          />
+
+          {/* Dot navigation */}
+          <div className="flex justify-center gap-2 sm:gap-3 mt-8">
+            {PILLAR_CONFIG.map((config, i) => (
+              <button
+                key={config.id}
+                type="button"
+                onClick={() => selectPillar(i)}
+                className="cursor-pointer bg-transparent border-none p-1"
+                aria-label={`View ${pillarLabels[i]}`}
+              >
+                <motion.div
+                  className="rounded-full h-2"
                   animate={{
-                    strokeDashoffset: -(1 + offsetStart),
-                    opacity: isCurrentPillar ? 1 : 0.4,
+                    width: activeIndex === i ? 32 : 8,
+                    backgroundColor: activeIndex === i ? config.color : 'var(--border)',
                   }}
-                  transition={{
-                    strokeDashoffset: {
-                      duration: 4,
-                      ease: "linear",
-                      repeat: Infinity,
-                      repeatType: "loop",
-                    },
-                    opacity: { duration: 0.3 },
-                    strokeWidth: { duration: 0.3 },
-                  }}
+                  transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                 />
-              );
-            })}
-
-            {/* Glowing Center Intersection Point */}
-            <circle cx="400" cy="180" r="14" fill="rgba(0, 255, 178, 0.1)" />
-            <circle cx="400" cy="180" r="4" fill="#00ffb2">
-              <animate attributeName="r" values="3;6;3" dur="2.5s" repeatCount="indefinite" />
-              <animate attributeName="opacity" values="0.5;1;0.5" dur="2.5s" repeatCount="indefinite" />
-            </circle>
-          </svg>
-        </div>
-
-        <p className="text-text-tertiary text-xs font-sans text-center mt-4 max-w-md mx-auto">
-          {tFramework('graphFlowLabel')}
-        </p>
-      </motion.div>
-
-      {/* ── Rolodex Card Stack ── */}
-      <motion.div
-        initial={{ y: 50, opacity: 0 }}
-        animate={isInView ? { y: 0, opacity: 1 } : {}}
-        transition={{ duration: 0.5, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-        onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={() => setIsPaused(false)}
-      >
-        <RolodexStack
-          activeIndex={activeIndex}
-          t={tFramework}
-          onCardClick={advancePillar}
-        />
-      </motion.div>
-
-      {/* ── Dot navigation ── */}
-      <div className="flex justify-center gap-2 sm:gap-3 mt-8">
-        {PILLAR_CONFIG.map((config, i) => (
-          <button
-            key={config.id}
-            type="button"
-            onClick={() => selectPillar(i)}
-            className="cursor-pointer bg-transparent border-none p-1"
-            aria-label={`View ${pillarLabels[i]}`}
-          >
-            <motion.div
-              className="rounded-full h-2"
-              animate={{
-                width: activeIndex === i ? 32 : 8,
-                backgroundColor: activeIndex === i ? config.color : 'hsl(0 0% 20%)',
-              }}
-              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            />
-          </button>
-        ))}
+              </button>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </section>
   );
 }
+

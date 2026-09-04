@@ -8,6 +8,8 @@ import en from '@/i18n/translations/en.json';
 import es from '@/i18n/translations/es.json';
 import { cookies } from 'next/headers';
 
+import { CapsulaSvgDefs } from './components/capsula';
+
 const locales = ['en', 'es'];
 
 export const metadata: Metadata = {
@@ -22,7 +24,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const messageData = locale === 'es' ? es : en;
 
   return (
-    <html lang={locale} suppressHydrationWarning={true}>
+    <html lang={locale} data-theme="dark" suppressHydrationWarning={true}>
       <head>
         <link rel="icon" href="/favicon.ico" />
         <style>
@@ -39,6 +41,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         </style>
       </head>
       <body className={`antialiased`}>
+        <CapsulaSvgDefs />
         <TranslationProvider locale={locale} messages={messageData}>
           <SidebarProvider>
             <Navigation />
@@ -50,4 +53,3 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     </html>
   );
 }
-// (deduplicated) RootLayout was defined above and returns the full app shell.

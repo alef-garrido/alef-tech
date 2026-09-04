@@ -48,7 +48,7 @@ const MenuItem: React.FC<MenuItemProps> = ({ text, iconVariant = 'cross', onClic
         <span className="text-[#060010] uppercase font-bold text-[4.5vh] leading-[1.2] p-[1vh_1vw_0] tracking-wide shrink-0">
           {text}
         </span>
-        <div className="w-[180px] h-[6.5vh] max-h-[64px] min-h-[52px] my-[0.8em] mx-[2.5vw] rounded-[50px] bg-[#060010] border-2 border-[#00ffb2]/60 flex items-center justify-center shadow-[0_0_25px_rgba(0,255,178,0.35)] shrink-0">
+        <div className="w-[180px] h-[6.5vh] max-h-[64px] min-h-[52px] my-[0.8em] mx-[2.5vw] rounded-[50px] bg-[#050609] border-2 border-[#2FD9E3]/60 flex items-center justify-center shadow-[0_0_25px_rgba(47,217,227,0.35)] shrink-0">
           <AnimatedMedicalIcon variant={iconVariant} size={48} />
         </div>
       </React.Fragment>

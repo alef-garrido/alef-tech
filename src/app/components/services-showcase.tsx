@@ -99,18 +99,18 @@ const ServicesShowcase = () => {
     <div className="grid w-full my-32 px-4 md:px-12 relative overflow-hidden">
       {/* Top Wave Decoration */}
       <div className="w-full mb-4 opacity-75">
-        <SimpleWaveVisualization height={80} strokeColor="#00ffb2" frequency={1.2} showGrid={false} />
+        <SimpleWaveVisualization height={80} strokeColor="#2FD9E3" frequency={1.2} showGrid={false} />
       </div>
 
       {/* Header Section */}
       <div className="flex flex-col items-center justify-center text-center mb-8 relative z-10">
         <div className="flex items-center justify-center gap-3 mb-3">
-          <AnimatedMedicalIcon variant="cross" size={44} color="#00ffb2" />
-          <h2 className="text-4xl md:text-5xl font-bold text-secondary font-mono tracking-tight">
+          <AnimatedMedicalIcon variant="cross" size={44} color="#2FD9E3" />
+          <h2 className="text-4xl md:text-5xl font-bold text-[var(--text)] font-mono tracking-tight">
             {tDiagnostic('farmaciaTitle')}
           </h2>
         </div>
-        <p className="text-xl font-mono text-center c-cyber-accent">
+        <p className="text-xl font-mono text-center text-[var(--accent)]">
           {tDiagnostic('remediesSubtitle')}
         </p>
       </div>
@@ -122,7 +122,7 @@ const ServicesShowcase = () => {
 
       {/* Bottom Wave Decoration */}
       <div className="w-full opacity-60 mt-6">
-        <SimpleWaveVisualization height={100} strokeColor="#00e5ff" frequency={1} showGrid={true} />
+        <SimpleWaveVisualization height={100} strokeColor="#2FD9E3" frequency={1} showGrid={true} />
       </div>
 
       {isModalOpen && selectedService && (

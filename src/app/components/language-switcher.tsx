@@ -4,7 +4,6 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 function setLocaleCookie(locale: string) {
-  // 1 year
   document.cookie = `locale=${locale}; path=/; max-age=${60 * 60 * 24 * 365}`;
 }
 
@@ -24,9 +23,23 @@ export function LanguageSwitcher() {
   };
 
   return (
-    <div className="flex gap-2">
-      <button onClick={() => switchLanguage('en')} className={locale === 'en' ? 'font-bold' : ''}>EN</button>
-      <button onClick={() => switchLanguage('es')} className={locale === 'es' ? 'font-bold' : ''}>ES</button>
+    <div className="tabs" role="tablist" aria-label="Language selector">
+      <button
+        type="button"
+        role="tab"
+        aria-selected={locale === 'en'}
+        onClick={() => switchLanguage('en')}
+      >
+        EN
+      </button>
+      <button
+        type="button"
+        role="tab"
+        aria-selected={locale === 'es'}
+        onClick={() => switchLanguage('es')}
+      >
+        ES
+      </button>
     </div>
   );
 }

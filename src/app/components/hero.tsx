@@ -16,37 +16,24 @@ export default function Hero() {
 
   return (
     <>
-      <section className="hero w-full min-h-screen flex items-center relative">
-        {/* Three.js 3D Background Canvas */}
-        <div className="absolute inset-0 z-0 opacity-80 pointer-events-none">
-          <ThreeAnimation />
+      <div className="relative p-8 md:px-12 w-full h-screen">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center text-white z-10">
+          <h1 className="text-4xl md:text-6xl font-bold">{t('title')}</h1>
+          <p className="text-lg md:text-xl mt-4">{t('subtitle')}</p>
         </div>
 
-        <div className="wrap relative z-10 w-full flex flex-col justify-center min-h-[60vh]">
-          <div className="max-w-3xl">
-            <p className="eyebrow">AGENTIC SOFTWARE & CX INTEGRATION</p>
-            <h1>
-              ALEF LEMAT
-            </h1>
-            <p className="lede">
-              {t('subtitle') || 'Hardware-level precision for autonomous software systems. Custom AI agentic workflows, CX architectures, and high-performance engineering.'}
-            </p>
-
-            <div className="mt-8 flex gap-4 items-center">
-              <button
-                type="button"
-                onClick={() => setShowLeadForm(true)}
-                className="btn btn-primary lg"
-              >
-                {tCta('primary')} →
-              </button>
-              <a href="#services" className="btn btn-ghost lg">
-                {tCta('secondary') || 'Explore Services'} →
-              </a>
-            </div>
-          </div>
+        <div className="bg-transparent absolute bottom-6 right-2 p-6 rounded-lg bg-card text-card-foreground z-10 lg:p-12">
+          <button
+            type="button"
+            onClick={() => setShowLeadForm(true)}
+            className="px-4 py-2 rounded-md bg-white text-black hover:bg-primary/80 transition-colors font-mono cursor-pointer"
+          >
+            {tCta('primary')} →
+          </button>
         </div>
-      </section>
+
+        <ThreeAnimation />
+      </div>
 
       {showLeadForm && (
         <DynamicLeadForm

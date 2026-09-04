@@ -8,437 +8,219 @@ import { ServiceType } from '@/app/types/lead';
 import { useTranslations } from '@/i18n/translation-client';
 
 const TrainingIcon = () => (
-  <div className="flex items-end gap-1 h-[4.5rem]" aria-hidden="true">
-    <div className="w-1 h-1/3 bg-[var(--accent)] opacity-60"></div>
-    <div className="w-1 h-2/3 bg-[var(--accent)] opacity-80"></div>
-    <div className="w-1 h-full bg-[var(--accent)]"></div>
-  </div>
+    <div className="flex items-end gap-1 h-[4.5rem]" aria-hidden="true">
+        <div className="w-1 h-1/3 bg-foreground"></div>
+        <div className="w-1 h-2/3 bg-foreground"></div>
+        <div className="w-1 h-full bg-foreground"></div>
+    </div>
 );
 
 const ConsultationIcon = () => (
-  <div className="flex gap-2 h-[4.5rem]" aria-hidden="true">
-    <div className="flex flex-col gap-1 w-1">
-      <div className="h-1/2 bg-[var(--accent)] opacity-80"></div>
-      <div className="h-1/2 bg-[var(--accent)] opacity-80"></div>
+    <div className="flex gap-2 h-[4.5rem]" aria-hidden="true">
+        <div className="flex flex-col gap-1 w-1">
+            <div className="h-1/2 bg-foreground"></div>
+            <div className="h-1/2 bg-foreground"></div>
+        </div>
+        <div className="flex flex-col gap-1 w-1">
+            <div className="h-1/2 bg-foreground"></div>
+            <div className="h-1/2 bg-foreground"></div>
+        </div>
     </div>
-    <div className="flex flex-col gap-1 w-1">
-      <div className="h-1/2 bg-[var(--accent)]"></div>
-      <div className="h-1/2 bg-[var(--accent)]"></div>
-    </div>
-  </div>
 );
 
 const ImplementationIcon = () => (
-  <div className="grid grid-cols-3 grid-rows-3 gap-1 w-5 h-5" aria-hidden="true">
-    <div className="w-full h-full bg-[var(--accent)]"></div>
-    <div className="w-full h-full bg-[var(--accent)] opacity-80"></div>
-    <div className="w-full h-full bg-[var(--accent)]"></div>
-    <div className="w-full h-full bg-[var(--accent)] opacity-60"></div>
-    <div className="w-full h-full bg-[var(--accent)]"></div>
-    <div className="w-full h-full bg-[var(--accent)] opacity-60"></div>
-    <div className="w-full h-full bg-[var(--accent)]"></div>
-    <div className="w-full h-full bg-[var(--accent)] opacity-80"></div>
-    <div className="w-full h-full bg-[var(--accent)]"></div>
-  </div>
+    <div className="grid grid-cols-3 grid-rows-3 gap-1 w-5 h-5" aria-hidden="true">
+        <div className="w-full h-full bg-foreground"></div>
+        <div className="w-full h-full bg-foreground"></div>
+        <div className="w-full h-full bg-foreground"></div>
+        <div className="w-full h-full bg-foreground"></div>
+        <div className="w-full h-full bg-foreground"></div>
+        <div className="w-full h-full bg-foreground"></div>
+        <div className="w-full h-full bg-foreground"></div>
+        <div className="w-full h-full bg-foreground"></div>
+        <div className="w-full h-full bg-foreground"></div>
+    </div>
 );
 
 const HamburgerIcon = () => (
-  <svg className="w-6 h-6 text-[var(--text)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
-  </svg>
+    <svg className="w-6 h-6 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
+    </svg>
 );
 
 const CloseIcon = () => (
-  <svg className="w-6 h-6 text-[var(--text)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-  </svg>
+    <svg className="w-6 h-6 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+    </svg>
 );
 
 export default function Navigation() {
-  const tServices = useTranslations('services');
-  const tMisc = useTranslations('misc');
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [showLeadForm, setShowLeadForm] = useState(false);
-  const [selectedService, setSelectedService] = useState<ServiceType>('general');
-  const [theme, setTheme] = useState<'dark' | 'light'>('dark');
-  const [currentDateTime, setCurrentDateTime] = useState<Date | null>(null);
+    const tServices = useTranslations('services');
+    const tMisc = useTranslations('misc');
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [showLeadForm, setShowLeadForm] = useState(false);
+    const [selectedService, setSelectedService] = useState<ServiceType>('general');
+
+    const toggleMenu = () => {
+        setIsMenuOpen(!isMenuOpen);
+    };
+
+    const handleServiceClick = (service: ServiceType) => {
+        console.log('Service clicked:', service);
+        setSelectedService(service);
+        setShowLeadForm(true);
+        setIsMenuOpen(false);
+    };
+const [currentDateTime, setCurrentDateTime] = useState(new Date());
 
   useEffect(() => {
-    setCurrentDateTime(new Date());
     const timer = setInterval(() => {
       setCurrentDateTime(new Date());
     }, 1000);
+
     return () => clearInterval(timer);
   }, []);
 
-  const toggleTheme = () => {
-    const nextTheme = theme === 'dark' ? 'light' : 'dark';
-    setTheme(nextTheme);
-    document.documentElement.setAttribute('data-theme', nextTheme);
-  };
-
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-
-  const handleServiceClick = (service: ServiceType) => {
-    setSelectedService(service);
-    setShowLeadForm(true);
-    setIsMenuOpen(false);
-  };
-
   const formatDate = (date: Date) => {
-    return date
-      .toLocaleDateString('en-GB', {
-        day: '2-digit',
-        month: 'short',
-        year: 'numeric',
-      })
-      .toUpperCase()
-      .replace(/ /g, '-');
+    return date.toLocaleDateString('en-GB', {
+      day: '2-digit',
+      month: 'short',
+      year: 'numeric'
+    }).toUpperCase().replace(/ /g, '-');
   };
 
   const formatTime = (date: Date) => {
     return date.toLocaleTimeString('en-US', {
       hour12: false,
       hour: '2-digit',
-      minute: '2-digit',
+      minute: '2-digit'
     });
   };
+    return (
+        <>
+            <header className="bg-background w-full font-sans relative z-40">
+            <div className="mx-auto max-w-none px-4 sm:px-6 lg:px-8 py-5">
+                <nav className="flex justify-between items-start text-foreground">
+                    {/* Left Section */}
+                    <div className="text-left">
+                        <Link href="/" className="leading-tight text-sm font-medium block font-mono">Alef Lemat</Link>
+                        <Link href="/" className="leading-tight text-sm font-medium block font-mono">Tech</Link>
+                        <p className="mt-2 text-xs font-normal lowercase">{tMisc('cxSoftware')}</p>
+                    </div>
 
-  return (
-    <>
-      <header className="nav w-full relative z-40">
-        <div className="mx-auto max-w-none px-4 sm:px-6 lg:px-8 py-5">
-          <nav className="flex justify-between items-start text-[var(--text)]">
-            {/* Left Section - Brand Lockup */}
-            <div className="text-left">
-              <Link href="/" className="leading-tight text-sm font-bold block font-display tracking-widest text-[var(--text)]">
-                ALEF LEMAT
-              </Link>
-              <Link href="/" className="leading-tight text-xs font-mono tracking-widest text-[var(--accent)] block">
-                DYNAMICS
-              </Link>
-              <p className="mt-1 text-[10px] font-mono text-[var(--text-faint)] lowercase">
-                {tMisc('cxSoftware')}
-              </p>
+                    {/* Center Section - Visible on large screens */}
+                    <div className="hidden lg:flex justify-center items-start gap-10 xl:gap-14">
+                        {/* Training */}
+                        <div className="flex gap-3">
+                            <TrainingIcon />
+                            <div>
+                                <button type="button" onClick={() => handleServiceClick('training')} className="text-sm font-bold lowercase block mb-2 cursor-default bg-transparent border-none text-left">{tServices('training')}</button>
+                                <ul className="space-y-1 text-xs lowercase">
+                                    <li><button type="button" onClick={() => handleServiceClick('training')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">{tServices('designOnboarding')}</button></li>
+                                    <li><button type="button" onClick={() => handleServiceClick('training')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">{tServices('trainTeam')}</button></li>
+                                    <li><button type="button" onClick={() => handleServiceClick('training')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">{tServices('learningPartner')}</button></li>
+                                </ul>
+                            </div>
+                        </div>
+                        {/* Consultation */}
+                        <div className="flex gap-3">
+                            <ConsultationIcon />
+                            <div>
+                                <button type="button" onClick={() => handleServiceClick('consulting')} className="text-sm font-bold lowercase block mb-2 cursor-default bg-transparent border-none text-left">{tServices('consulting')}</button>
+                                <ul className="space-y-1 text-xs lowercase">
+                                    <li><button type="button" onClick={() => handleServiceClick('consulting')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">{tServices('oneOnOne')}</button></li>
+                                    <li><button type="button" onClick={() => handleServiceClick('consulting')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">{tServices('freeCall')}</button></li>
+                                </ul>
+                            </div>
+                        </div>
+                        {/* Now */}
+                        <div className="flex gap-3">
+                            <ImplementationIcon />
+                            <div>
+                                <button type="button" onClick={() => handleServiceClick('implementation')} className="text-sm font-bold lowercase block mb-2 cursor-default bg-transparent border-none text-left">{tServices('implementation')}</button>
+                                <ul className="space-y-1 text-xs lowercase">
+                                    <li><button type="button" onClick={() => handleServiceClick('implementation')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">{tServices('cxAssistance')}</button></li>
+                                    <li><button type="button" onClick={() => handleServiceClick('implementation')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">{tServices('aiAssistance')}</button></li>
+                                    <li><button type="button" onClick={() => handleServiceClick('implementation')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">{tServices('bespokeSoftware')}</button></li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        {/* Evolving Text */}
+                        <div className="text-xs max-w-[160px] leading-snug pt-0.5">
+                            <p>{tMisc('evolving')}</p>
+                        </div>
+                    </div>
+
+                    {/* Right Section */}
+                    <div className="flex items-start gap-4">
+                       <LanguageSwitcher />
+                        <div className="text-right">
+                            <div className="text-primary font-bold relative" style={{ fontSize: '2rem', lineHeight: 0.8 }} suppressHydrationWarning>
+                                <span className="absolute text-foreground font-normal rotate-[-15deg] animate-pulse-slow" style={{ fontSize: '2.5rem', top: '-0.25em', left: '-0.25em' }}>*</span>
+                                {formatDate(currentDateTime)}
+                            </div>
+                            <p className="text-[10px] mt-1 tracking-normal lowercase" suppressHydrationWarning>{formatTime(currentDateTime)}</p>
+                        </div>
+                    </div>
+
+                    {/* Hamburger Menu Button - Visible on small screens */}
+                    <div className="lg:hidden">
+                        <button onClick={toggleMenu}>
+                            {isMenuOpen ? <CloseIcon /> : <HamburgerIcon />}
+                        </button>
+                    </div>
+                </nav>
+
+                {/* Mobile Menu */}
+                {isMenuOpen && (
+                    <div className="lg:hidden mt-4 pt-4 border-t border-foreground/20">
+                        <div className="grid grid-cols-2 grid-rows-2 gap-8 items-start justify-start">
+                            {/* Training */}
+                            <div className="flex gap-3">
+                                <TrainingIcon />
+                                <div>
+                                    <button type="button" onClick={() => handleServiceClick('training')} className="text-sm font-bold lowercase block mb-2 cursor-default bg-transparent border-none text-left">{tServices('training')}</button>
+                                    <ul className="space-y-1 text-xs lowercase">
+                                        <li><button type="button" onClick={() => handleServiceClick('training')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">{tServices('designOnboarding')}</button></li>
+                                        <li><button type="button" onClick={() => handleServiceClick('training')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">{tServices('trainTeam')}</button></li>
+                                        <li><button type="button" onClick={() => handleServiceClick('training')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">{tServices('learningPartner')}</button></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            {/* Consultation */}
+                            <div className="flex gap-3">
+                                <ConsultationIcon />
+                                <div>
+                                    <button type="button" onClick={() => handleServiceClick('consulting')} className="text-sm font-bold lowercase block mb-2 cursor-default bg-transparent border-none text-left">{tServices('consulting')}</button>
+                                    <ul className="space-y-1 text-xs lowercase">
+                                        <li><button type="button" onClick={() => handleServiceClick('consulting')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">{tServices('oneOnOne')}</button></li>
+                                        <li><button type="button" onClick={() => handleServiceClick('consulting')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">{tServices('freeCall')}</button></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            {/* Now */}
+                            <div className="flex gap-3">
+                                <ImplementationIcon />
+                                <div>
+                                    <button type="button" onClick={() => handleServiceClick('implementation')} className="text-sm font-bold lowercase block mb-2 cursor-default bg-transparent border-none text-left">{tServices('implementation')}</button>
+                                    <ul className="space-y-1 text-xs lowercase">
+                                        <li><button type="button" onClick={() => handleServiceClick('implementation')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">{tServices('cxAssistance')}</button></li>
+                                        <li><button type="button" onClick={() => handleServiceClick('implementation')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">{tServices('aiAssistance')}</button></li>
+                                        <li><button type="button" onClick={() => handleServiceClick('implementation')} className="hover:text-primary cursor-pointer bg-transparent border-none hover:underline">{tServices('bespokeSoftware')}</button></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
             </div>
+        </header>
 
-            {/* Center Section - Visible on large screens */}
-            <div className="hidden lg:flex justify-center items-start gap-10 xl:gap-14 font-mono">
-              {/* Training */}
-              <div className="flex gap-3">
-                <TrainingIcon />
-                <div>
-                  <button
-                    type="button"
-                    onClick={() => handleServiceClick('training')}
-                    className="text-xs font-bold lowercase block mb-2 cursor-pointer bg-transparent border-none text-left text-[var(--accent)] hover:underline"
-                  >
-                    // {tServices('training')}
-                  </button>
-                  <ul className="space-y-1 text-[11px] text-[var(--text-muted)] lowercase">
-                    <li>
-                      <button
-                        type="button"
-                        onClick={() => handleServiceClick('training')}
-                        className="hover:text-[var(--accent)] cursor-pointer bg-transparent border-none hover:underline"
-                      >
-                        {tServices('designOnboarding')}
-                      </button>
-                    </li>
-                    <li>
-                      <button
-                        type="button"
-                        onClick={() => handleServiceClick('training')}
-                        className="hover:text-[var(--accent)] cursor-pointer bg-transparent border-none hover:underline"
-                      >
-                        {tServices('trainTeam')}
-                      </button>
-                    </li>
-                    <li>
-                      <button
-                        type="button"
-                        onClick={() => handleServiceClick('training')}
-                        className="hover:text-[var(--accent)] cursor-pointer bg-transparent border-none hover:underline"
-                      >
-                        {tServices('learningPartner')}
-                      </button>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              {/* Consultation */}
-              <div className="flex gap-3">
-                <ConsultationIcon />
-                <div>
-                  <button
-                    type="button"
-                    onClick={() => handleServiceClick('consulting')}
-                    className="text-xs font-bold lowercase block mb-2 cursor-pointer bg-transparent border-none text-left text-[var(--accent)] hover:underline"
-                  >
-                    // {tServices('consulting')}
-                  </button>
-                  <ul className="space-y-1 text-[11px] text-[var(--text-muted)] lowercase">
-                    <li>
-                      <button
-                        type="button"
-                        onClick={() => handleServiceClick('consulting')}
-                        className="hover:text-[var(--accent)] cursor-pointer bg-transparent border-none hover:underline"
-                      >
-                        {tServices('oneOnOne')}
-                      </button>
-                    </li>
-                    <li>
-                      <button
-                        type="button"
-                        onClick={() => handleServiceClick('consulting')}
-                        className="hover:text-[var(--accent)] cursor-pointer bg-transparent border-none hover:underline"
-                      >
-                        {tServices('freeCall')}
-                      </button>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              {/* Implementation */}
-              <div className="flex gap-3">
-                <ImplementationIcon />
-                <div>
-                  <button
-                    type="button"
-                    onClick={() => handleServiceClick('implementation')}
-                    className="text-xs font-bold lowercase block mb-2 cursor-pointer bg-transparent border-none text-left text-[var(--accent)] hover:underline"
-                  >
-                    // {tServices('implementation')}
-                  </button>
-                  <ul className="space-y-1 text-[11px] text-[var(--text-muted)] lowercase">
-                    <li>
-                      <button
-                        type="button"
-                        onClick={() => handleServiceClick('implementation')}
-                        className="hover:text-[var(--accent)] cursor-pointer bg-transparent border-none hover:underline"
-                      >
-                        {tServices('cxAssistance')}
-                      </button>
-                    </li>
-                    <li>
-                      <button
-                        type="button"
-                        onClick={() => handleServiceClick('implementation')}
-                        className="hover:text-[var(--accent)] cursor-pointer bg-transparent border-none hover:underline"
-                      >
-                        {tServices('aiAssistance')}
-                      </button>
-                    </li>
-                    <li>
-                      <button
-                        type="button"
-                        onClick={() => handleServiceClick('implementation')}
-                        className="hover:text-[var(--accent)] cursor-pointer bg-transparent border-none hover:underline"
-                      >
-                        {tServices('bespokeSoftware')}
-                      </button>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              {/* Evolving Text */}
-              <div className="text-[11px] font-mono text-[var(--text-faint)] max-w-[160px] leading-snug pt-0.5">
-                <p>{tMisc('evolving')}</p>
-              </div>
-            </div>
-
-            {/* Right Section */}
-            <div className="flex items-start gap-4 font-mono">
-              <LanguageSwitcher />
-
-              {/* Theme Switcher Button */}
-              <button
-                type="button"
-                className="theme-btn"
-                onClick={toggleTheme}
-                aria-label="Toggle theme"
-              >
-                <span>{theme === 'dark' ? '◐' : '◑'}</span>
-                <span className="hidden xl:inline">{theme === 'dark' ? 'Terminal' : 'Spec Sheet'}</span>
-              </button>
-
-              {/* Real-time Telemetry Date/Time */}
-              {currentDateTime && (
-                <div className="text-right">
-                  <div
-                    className="text-[var(--accent)] font-bold relative tracking-wider"
-                    style={{ fontSize: '1.75rem', lineHeight: 0.8 }}
-                    suppressHydrationWarning
-                  >
-                    <span
-                      className="absolute text-[var(--alert)] font-normal rotate-[-15deg] animate-pulse"
-                      style={{ fontSize: '2rem', top: '-0.25em', left: '-0.25em' }}
-                    >
-                      *
-                    </span>
-                    {formatDate(currentDateTime)}
-                  </div>
-                  <p
-                    className="text-[10px] mt-1 tracking-widest text-[var(--text-faint)] font-mono lowercase"
-                    suppressHydrationWarning
-                  >
-                    {formatTime(currentDateTime)} UTC
-                  </p>
-                </div>
-              )}
-            </div>
-
-            {/* Hamburger Menu Button - Visible on small screens */}
-            <div className="lg:hidden flex items-center gap-2">
-              <button
-                type="button"
-                className="theme-btn text-xs py-1 px-2"
-                onClick={toggleTheme}
-              >
-                <span>{theme === 'dark' ? '◐' : '◑'}</span>
-              </button>
-              <button onClick={toggleMenu} className="p-1">
-                {isMenuOpen ? <CloseIcon /> : <HamburgerIcon />}
-              </button>
-            </div>
-          </nav>
-
-          {/* Mobile Menu */}
-          {isMenuOpen && (
-            <div className="lg:hidden mt-4 pt-4 border-t border-[var(--border)] font-mono">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 items-start justify-start">
-                {/* Training */}
-                <div className="flex gap-3">
-                  <TrainingIcon />
-                  <div>
-                    <button
-                      type="button"
-                      onClick={() => handleServiceClick('training')}
-                      className="text-xs font-bold lowercase block mb-2 cursor-pointer bg-transparent border-none text-left text-[var(--accent)]"
-                    >
-                      // {tServices('training')}
-                    </button>
-                    <ul className="space-y-1 text-xs text-[var(--text-muted)] lowercase">
-                      <li>
-                        <button
-                          type="button"
-                          onClick={() => handleServiceClick('training')}
-                          className="hover:text-[var(--accent)] cursor-pointer bg-transparent border-none hover:underline"
-                        >
-                          {tServices('designOnboarding')}
-                        </button>
-                      </li>
-                      <li>
-                        <button
-                          type="button"
-                          onClick={() => handleServiceClick('training')}
-                          className="hover:text-[var(--accent)] cursor-pointer bg-transparent border-none hover:underline"
-                        >
-                          {tServices('trainTeam')}
-                        </button>
-                      </li>
-                      <li>
-                        <button
-                          type="button"
-                          onClick={() => handleServiceClick('training')}
-                          className="hover:text-[var(--accent)] cursor-pointer bg-transparent border-none hover:underline"
-                        >
-                          {tServices('learningPartner')}
-                        </button>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-
-                {/* Consultation */}
-                <div className="flex gap-3">
-                  <ConsultationIcon />
-                  <div>
-                    <button
-                      type="button"
-                      onClick={() => handleServiceClick('consulting')}
-                      className="text-xs font-bold lowercase block mb-2 cursor-pointer bg-transparent border-none text-left text-[var(--accent)]"
-                    >
-                      // {tServices('consulting')}
-                    </button>
-                    <ul className="space-y-1 text-xs text-[var(--text-muted)] lowercase">
-                      <li>
-                        <button
-                          type="button"
-                          onClick={() => handleServiceClick('consulting')}
-                          className="hover:text-[var(--accent)] cursor-pointer bg-transparent border-none hover:underline"
-                        >
-                          {tServices('oneOnOne')}
-                        </button>
-                      </li>
-                      <li>
-                        <button
-                          type="button"
-                          onClick={() => handleServiceClick('consulting')}
-                          className="hover:text-[var(--accent)] cursor-pointer bg-transparent border-none hover:underline"
-                        >
-                          {tServices('freeCall')}
-                        </button>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-
-                {/* Implementation */}
-                <div className="flex gap-3">
-                  <ImplementationIcon />
-                  <div>
-                    <button
-                      type="button"
-                      onClick={() => handleServiceClick('implementation')}
-                      className="text-xs font-bold lowercase block mb-2 cursor-pointer bg-transparent border-none text-left text-[var(--accent)]"
-                    >
-                      // {tServices('implementation')}
-                    </button>
-                    <ul className="space-y-1 text-xs text-[var(--text-muted)] lowercase">
-                      <li>
-                        <button
-                          type="button"
-                          onClick={() => handleServiceClick('implementation')}
-                          className="hover:text-[var(--accent)] cursor-pointer bg-transparent border-none hover:underline"
-                        >
-                          {tServices('cxAssistance')}
-                        </button>
-                      </li>
-                      <li>
-                        <button
-                          type="button"
-                          onClick={() => handleServiceClick('implementation')}
-                          className="hover:text-[var(--accent)] cursor-pointer bg-transparent border-none hover:underline"
-                        >
-                          {tServices('aiAssistance')}
-                        </button>
-                      </li>
-                      <li>
-                        <button
-                          type="button"
-                          onClick={() => handleServiceClick('implementation')}
-                          className="hover:text-[var(--accent)] cursor-pointer bg-transparent border-none hover:underline"
-                        >
-                          {tServices('bespokeSoftware')}
-                        </button>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
-      </header>
-
-      {/* Mobile lead form */}
-      {showLeadForm && (
-        <DynamicLeadForm service={selectedService} onClose={() => setShowLeadForm(false)} />
-      )}
-    </>
-  );
+        {/* Mobile lead form */}
+        {showLeadForm && (
+          <DynamicLeadForm service={selectedService} onClose={() => setShowLeadForm(false)} />
+        )}
+        </>
+    );
 }

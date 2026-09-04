@@ -158,8 +158,8 @@ export const DynamicLeadForm = ({ service, onClose, onSubmit }: DynamicLeadFormP
     const error = errors[field.name];
 
     const baseInputClasses =
-      'w-full px-4 py-3 bg-[var(--surface-2)] border border-[var(--border)] rounded-[var(--radius-md)] text-[var(--text)] placeholder-[var(--text-faint)] focus:outline-none focus:border-[var(--accent)] font-mono text-sm';
-    const errorClasses = error ? 'border-[var(--alert)] focus:border-[var(--alert)]' : '';
+      'w-full px-4 py-3 bg-black border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-white transition-colors font-mono text-base';
+    const errorClasses = error ? 'border-red-500 focus:border-red-500' : '';
 
     switch (field.type) {
       case 'textarea':
@@ -199,7 +199,7 @@ export const DynamicLeadForm = ({ service, onClose, onSubmit }: DynamicLeadFormP
         return (
           <div className="space-y-3">
             {field.options?.map(opt => (
-              <label key={opt.value} className="flex items-center gap-3 cursor-pointer p-3 border border-[var(--border)] rounded-[var(--radius-md)] bg-[var(--surface-2)] hover:border-[var(--accent)] transition">
+              <label key={opt.value} className="flex items-center gap-3 cursor-pointer p-3 border border-gray-700 rounded-lg hover:border-gray-500 transition">
                 <input
                   type="radio"
                   name={field.name}
@@ -207,9 +207,9 @@ export const DynamicLeadForm = ({ service, onClose, onSubmit }: DynamicLeadFormP
                   checked={value === opt.value}
                   onChange={e => handleChange(e, field)}
                   required={field.required}
-                  className="w-4 h-4 cursor-pointer accent-[var(--accent)]"
+                  className="w-5 h-5 cursor-pointer"
                 />
-                <span className="text-[var(--text)] text-sm font-mono flex-1">{opt.label}</span>
+                <span className="text-gray-300 text-sm font-mono flex-1">{opt.label}</span>
               </label>
             ))}
           </div>
@@ -234,12 +234,12 @@ export const DynamicLeadForm = ({ service, onClose, onSubmit }: DynamicLeadFormP
   if (submitted) {
     return (
       <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50">
-        <div className="terminal max-w-md w-full mx-4 text-center">
-          <h2 className="text-xl font-bold text-[var(--accent)] mb-4 font-mono">// DISPATCH SUCCESSFUL</h2>
-          <p className="text-[var(--text-muted)] text-sm mb-6">
-            Your telemetry data has been received. Response expected within 24 hours.
+        <div className="bg-black border border-gray-700 rounded-lg p-8 max-w-md w-full mx-4 text-center">
+          <h2 className="text-2xl font-bold text-white mb-4 font-mono">Thank You!</h2>
+          <p className="text-gray-400 mb-6">
+            Your information has been received. We'll get back to you within 24 hours.
           </p>
-          <div className="inline-block w-8 h-8 border-2 border-[var(--accent)] border-t-transparent rounded-full animate-spin"></div>
+          <div className="inline-block w-8 h-8 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
         </div>
       </div>
     );
@@ -247,82 +247,90 @@ export const DynamicLeadForm = ({ service, onClose, onSubmit }: DynamicLeadFormP
 
   return (
     <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      <div className="panel max-w-2xl w-full border border-[var(--accent)] shadow-[var(--glow)]">
+      <div className="bg-black border border-gray-700 rounded-lg w-full max-w-2xl">
         {/* Header with progress */}
-        <div className="border-b border-[var(--border)] pb-4 flex items-center justify-between">
+        <div className="sticky top-0 bg-black border-b border-gray-700 px-6 py-4 flex items-center justify-between">
           <div className="flex-1">
-            <div className="w-full h-1 bg-[var(--surface-3)] rounded-full overflow-hidden">
+            <div className="w-full h-1 bg-gray-800 rounded-full overflow-hidden">
               <div 
-                className="h-full bg-[var(--accent)] transition-all duration-300"
+                className="h-full bg-white transition-all duration-300"
                 style={{ width: `${progress}%` }}
               />
             </div>
-            <p className="eyebrow mt-3">
-              TELEMETRY INPUT · STEP {currentStep + 1} OF {fields.length}
+            <p className="text-xs text-gray-500 mt-2 font-mono">
+              Question {currentStep + 1} of {fields.length}
             </p>
           </div>
           <button
             onClick={onClose}
-            className="text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors ml-4"
+            className="text-gray-400 hover:text-white transition-colors ml-4 flex-shrink-0"
             aria-label="Close form"
           >
-            <X size={20} />
+            <X size={24} />
           </button>
         </div>
 
         {/* Form Content */}
-        <div className="py-6 flex flex-col">
-          <div className="field">
-            <label htmlFor={currentField.name} className="block text-sm font-mono text-[var(--accent)]">
+        <div className="p-8 min-h-96 flex flex-col">
+          <div className="flex-1">
+            {/* Question Label */}
+            <label htmlFor={currentField.name} className="block text-lg font-mono text-gray-200 mb-6">
               {currentField.label}
-              {currentField.required && <span className="text-[var(--alert)] ml-1">*</span>}
+              {currentField.required && <span className="text-red-400 ml-2">*</span>}
             </label>
 
-            <div className="my-3">
+            {/* Input Field */}
+            <div className="mb-2">
               {renderField(currentField)}
             </div>
 
+            {/* Error Message */}
             {errors[currentField.name] && (
-              <p className="text-[var(--alert)] text-xs font-mono">{errors[currentField.name]}</p>
+              <p className="text-red-400 text-sm font-mono mt-2">{errors[currentField.name]}</p>
             )}
 
+            {/* Submit Error */}
             {errors.submit && (
-              <div className="border border-[var(--alert)] rounded-[var(--radius-md)] p-3 mt-4 bg-[var(--surface-2)]">
-                <p className="text-[var(--alert)] text-xs font-mono">{errors.submit}</p>
+              <div className="bg-red-500/10 border border-red-500/50 rounded-lg p-3 mt-4">
+                <p className="text-red-400 text-sm font-mono">{errors.submit}</p>
               </div>
             )}
           </div>
 
           {/* Navigation Buttons */}
-          <div className="flex gap-3 mt-8 pt-6 border-t border-[var(--border)]">
+          <div className="flex gap-3 mt-8 pt-6 border-t border-gray-700">
             <button
               onClick={handlePrevious}
               disabled={currentStep === 0}
-              className="btn btn-ghost sm flex items-center gap-1"
+              className="flex items-center gap-2 px-6 py-3 rounded-lg border border-gray-700 text-gray-300 hover:text-white hover:border-white transition-colors disabled:opacity-30 disabled:cursor-not-allowed font-mono font-medium"
             >
-              <ChevronLeft size={16} />
-              BACK
+              <ChevronLeft size={20} />
+              Back
             </button>
             <button
               onClick={handleNext}
               disabled={isSubmitting || !canProceedToNext()}
-              className="btn btn-primary sm flex-1 flex items-center justify-center gap-1"
+              className="flex-1 flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-white text-black hover:bg-gray-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-mono font-medium"
             >
               {isSubmitting ? (
-                'DISPATCHING...'
+                <>
+                  <div className="w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin"></div>
+                  Submitting...
+                </>
               ) : isLastStep ? (
-                'SUBMIT TELEMETRY →'
+                'Submit'
               ) : (
                 <>
-                  NEXT STEP
-                  <ChevronRight size={16} />
+                  Next
+                  <ChevronRight size={20} />
                 </>
               )}
             </button>
           </div>
 
-          <p className="text-[10px] text-[var(--text-faint)] text-center font-mono mt-4 uppercase">
-            CONFIDENTIAL // CAPSULA DYNAMICS HARDWARE SPEC
+          {/* Privacy Notice */}
+          <p className="text-xs text-gray-500 text-center font-mono mt-4">
+            We respect your privacy. Your information will be kept confidential.
           </p>
         </div>
       </div>

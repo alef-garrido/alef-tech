@@ -26,7 +26,7 @@ const SEGMENT_LENGTH = 0.12;
 const GAP_LENGTH = 1 - SEGMENT_LENGTH;
 
 /* ──────────────────────────────────────────
-   Pillar Tag — HTML element over the SVG
+   Pillar Tag — Technical Blueprint Badge over the SVG
    ────────────────────────────────────────── */
 function PillarTag({ index, label, level, config, isActive, onClick }: {
   index: number;
@@ -47,24 +47,30 @@ function PillarTag({ index, label, level, config, isActive, onClick }: {
     <motion.button
       type="button"
       onClick={onClick}
-      className="absolute z-10 w-fit max-w-[46%] cursor-pointer border backdrop-blur-md px-2.5 py-1.5 sm:px-3 sm:py-2 text-center font-mono text-[9px] sm:text-[11px] md:text-xs rounded-lg transition-all"
+      className="absolute z-10 w-fit max-w-[46%] cursor-pointer border px-3 py-2 text-left font-mono rounded-lg transition-all backdrop-blur-md"
       style={{
         ...positionStyles[index],
-        borderColor: isActive ? config.color : "rgba(255,255,255,0.12)",
-        backgroundColor: isActive ? `${config.color}15` : "rgba(10,10,10,0.85)",
-        boxShadow: isActive ? `0 0 25px ${config.glowColor}` : "0 4px 12px rgba(0,0,0,0.4)",
+        borderColor: isActive ? config.color : "var(--border)",
+        backgroundColor: isActive ? "var(--surface-2)" : "color-mix(in srgb, var(--surface) 90%, transparent)",
+        boxShadow: isActive ? `0 0 24px ${config.glowColor}, 0 0 0 1px ${config.borderColor}` : "0 4px 12px rgba(0,0,0,0.25)",
       }}
       animate={{ scale: isActive ? 1.05 : 1 }}
-      transition={{ duration: 0.25 }}
+      transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
       whileHover={{ scale: 1.07 }}
     >
-      <span
-        className="block uppercase tracking-[0.18em] text-[8px] sm:text-[9px] font-bold leading-none mb-0.5"
-        style={{ color: config.color }}
-      >
-        {level}
-      </span>
-      <span className="block text-[#F4F8FB] font-bold leading-tight sm:whitespace-nowrap">
+      <div className="flex items-center gap-1.5 mb-1">
+        <span
+          className="w-1.5 h-1.5 rounded-full"
+          style={{ backgroundColor: config.color }}
+        />
+        <span
+          className="uppercase tracking-[0.18em] text-[9px] sm:text-[10px] font-bold leading-none"
+          style={{ color: config.color }}
+        >
+          {level}
+        </span>
+      </div>
+      <span className="block text-[var(--text)] font-mono font-semibold text-[11px] sm:text-xs md:text-sm leading-tight sm:whitespace-nowrap">
         {label}
       </span>
     </motion.button>
@@ -89,13 +95,13 @@ function PhaseItem({ name, desc, color, index }: {
     >
       <div
         className="flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-mono font-bold mt-0.5"
-        style={{ backgroundColor: `${color}15`, color, border: `1px solid ${color}30` }}
+        style={{ backgroundColor: `color-mix(in srgb, ${color} 15%, transparent)`, color, border: `1px solid color-mix(in srgb, ${color} 30%, transparent)` }}
       >
         {index + 1}
       </div>
       <div>
-        <p className="text-[#F4F8FB] text-sm font-semibold font-mono leading-tight">{name}</p>
-        <p className="text-[#8FA6C4] text-xs font-sans leading-relaxed mt-0.5">{desc}</p>
+        <p className="text-[var(--text)] text-sm font-semibold font-mono leading-tight">{name}</p>
+        <p className="text-[var(--text-muted)] text-xs font-sans leading-relaxed mt-0.5">{desc}</p>
       </div>
     </motion.div>
   );
@@ -114,11 +120,10 @@ function PillarCard({ pillarIndex, t, config, isActive }: {
 
   return (
     <div
-      className="relative rounded-xl overflow-hidden select-none"
+      className="relative rounded-xl overflow-hidden select-none bg-[var(--surface)] border border-[var(--border)] transition-colors"
       style={{
-        background: "linear-gradient(135deg, hsl(0 0% 6%), hsl(0 0% 8%))",
-        border: `1px solid ${isActive ? config.borderColor : "hsl(0 0% 12%)"}`,
-        boxShadow: isActive ? `0 4px 40px ${config.glowColor}` : "0 2px 8px rgba(0,0,0,0.3)",
+        borderColor: isActive ? config.borderColor : "var(--border)",
+        boxShadow: isActive ? `0 4px 40px ${config.glowColor}` : "var(--shadow)",
       }}
     >
       {/* Accent top bar */}
@@ -140,10 +145,10 @@ function PillarCard({ pillarIndex, t, config, isActive }: {
             >
               {t(`${p}Level`)}
             </span>
-            <h3 className="text-lg sm:text-xl md:text-2xl font-bold font-mono text-[#F4F8FB] leading-tight">
+            <h3 className="text-lg sm:text-xl md:text-2xl font-bold font-mono text-[var(--text)] leading-tight">
               {t(`${p}Title`)}
             </h3>
-            <p className="text-[#8FA6C4] text-sm font-sans mt-1">
+            <p className="text-[var(--text-muted)] text-sm font-sans mt-1">
               {t(`${p}Subtitle`)}
             </p>
           </div>
@@ -159,13 +164,13 @@ function PillarCard({ pillarIndex, t, config, isActive }: {
           </div>
         </div>
 
-        <p className="text-[#8FA6C4] text-sm font-sans leading-relaxed mt-4">
+        <p className="text-[var(--text-muted)] text-sm font-sans leading-relaxed mt-4">
           {t(`${p}Description`)}
         </p>
 
         {/* Phases — only rendered for the active card */}
         {isActive && (
-          <div className="mt-5 space-y-3 border-t border-white/5 pt-4">
+          <div className="mt-5 space-y-3 border-t border-[var(--border)] pt-4">
             {[1, 2, 3, 4].map((phase) => (
               <PhaseItem
                 key={`${pillarIndex}-${phase}`}
@@ -349,60 +354,140 @@ export default function Services() {
               />
             ))}
 
-            {/* SVG Animated Infinity Loop */}
+            {/* SVG Animated Technical Blueprint Infinity Graph */}
             <svg
               role="presentation"
               viewBox="0 0 800 380"
-              className="absolute inset-0 h-full w-full"
+              className="dwg absolute inset-0 h-full w-full select-none"
               fill="none"
             >
-              {/* Single razor-sharp background infinity path */}
+              {/* Background Technical Grid Guidelines */}
+              <rect className="isogrid" x="40" y="20" width="720" height="340" opacity="0.35" />
+
+              {/* Axis & Centerlines */}
+              <path className="ctr" d="M 60 190 H 740" stroke="currentColor" strokeWidth="0.5" opacity="0.5" />
+              <path className="ctr" d="M 400 40 V 340" stroke="currentColor" strokeWidth="0.5" opacity="0.5" />
+
+              {/* Construction Outer Guidelines */}
+              <path className="cons" d="M 160 100 H 640 V 280 H 160 Z" stroke="currentColor" strokeWidth="0.5" opacity="0.3" />
+
+              {/* Primary Base Technical Infinity Loop */}
               <path
                 d={INFINITY_PATH}
                 stroke="var(--border-strong)"
-                strokeWidth="2"
+                strokeWidth="1.75"
                 strokeLinecap="round"
               />
 
-              {/* 4 Animated Pulses traveling along THE EXACT SAME PATH */}
+              {/* Secondary Dashed Guideline Loop */}
+              <path
+                d={INFINITY_PATH}
+                className="hid"
+                stroke="var(--accent)"
+                strokeWidth="0.65"
+                strokeDasharray="6 4"
+                opacity="0.35"
+              />
+
+              {/* 4 Dual-Layer Laser Pulses traveling along THE EXACT SAME PATH */}
               {PILLAR_CONFIG.map((config, i) => {
                 const offsetStart = i * 0.25;
                 const isCurrentPillar = activeIndex === i;
                 return (
-                  <motion.path
-                    key={config.id}
-                    d={INFINITY_PATH}
-                    fill="none"
-                    pathLength={1}
-                    stroke={config.color}
-                    strokeWidth={isCurrentPillar ? 3 : 2}
-                    strokeLinecap="round"
-                    strokeDasharray={`${SEGMENT_LENGTH} ${GAP_LENGTH}`}
-                    initial={{ strokeDashoffset: -offsetStart }}
-                    animate={{
-                      strokeDashoffset: -(1 + offsetStart),
-                      opacity: isCurrentPillar ? 1 : 0.4,
-                    }}
-                    transition={{
-                      strokeDashoffset: {
-                        duration: 4,
-                        ease: "linear",
-                        repeat: Infinity,
-                        repeatType: "loop",
-                      },
-                      opacity: { duration: 0.3 },
-                      strokeWidth: { duration: 0.3 },
-                    }}
-                  />
+                  <g key={config.id}>
+                    {/* Glow backdrop pulse */}
+                    <motion.path
+                      d={INFINITY_PATH}
+                      fill="none"
+                      pathLength={1}
+                      stroke={config.color}
+                      strokeWidth={isCurrentPillar ? 6 : 3}
+                      strokeLinecap="round"
+                      strokeDasharray={`${SEGMENT_LENGTH} ${GAP_LENGTH}`}
+                      initial={{ strokeDashoffset: -offsetStart }}
+                      animate={{
+                        strokeDashoffset: -(1 + offsetStart),
+                        opacity: isCurrentPillar ? 0.35 : 0.15,
+                      }}
+                      transition={{
+                        strokeDashoffset: {
+                          duration: 4,
+                          ease: "linear",
+                          repeat: Infinity,
+                          repeatType: "loop",
+                        },
+                        opacity: { duration: 0.3 },
+                      }}
+                      style={{ filter: 'blur(3px)' }}
+                    />
+                    {/* Sharp core laser beam */}
+                    <motion.path
+                      d={INFINITY_PATH}
+                      fill="none"
+                      pathLength={1}
+                      stroke={config.color}
+                      strokeWidth={isCurrentPillar ? 3 : 1.75}
+                      strokeLinecap="round"
+                      strokeDasharray={`${SEGMENT_LENGTH} ${GAP_LENGTH}`}
+                      initial={{ strokeDashoffset: -offsetStart }}
+                      animate={{
+                        strokeDashoffset: -(1 + offsetStart),
+                        opacity: isCurrentPillar ? 1 : 0.5,
+                      }}
+                      transition={{
+                        strokeDashoffset: {
+                          duration: 4,
+                          ease: "linear",
+                          repeat: Infinity,
+                          repeatType: "loop",
+                        },
+                        opacity: { duration: 0.3 },
+                        strokeWidth: { duration: 0.3 },
+                      }}
+                    />
+                  </g>
                 );
               })}
 
-              {/* Glowing Center Intersection Point */}
-              <circle cx="400" cy="190" r="14" fill="rgba(47, 217, 227, 0.1)" />
-              <circle cx="400" cy="190" r="4" fill="#2FD9E3">
-                <animate attributeName="r" values="3;6;3" dur="2.5s" repeatCount="indefinite" />
-                <animate attributeName="opacity" values="0.5;1;0.5" dur="2.5s" repeatCount="indefinite" />
-              </circle>
+              {/* 4 Pillar Target Reticles (Node Coordinates along infinity loop) */}
+              {[
+                { cx: 250, cy: 115, id: 0 },
+                { cx: 550, cy: 115, id: 1 },
+                { cx: 550, cy: 265, id: 2 },
+                { cx: 250, cy: 265, id: 3 },
+              ].map((node) => {
+                const isAct = activeIndex === node.id;
+                const cfg = PILLAR_CONFIG[node.id];
+                return (
+                  <g key={node.id} className="transition-all duration-300">
+                    <circle className="surf" cx={node.cx} cy={node.cy} r={isAct ? 18 : 12} fill="color-mix(in srgb, currentColor 12%, transparent)" />
+                    <circle className="c2" cx={node.cx} cy={node.cy} r={isAct ? 14 : 9} stroke={isAct ? cfg.color : "currentColor"} strokeWidth={isAct ? 1.5 : 1} fill="none" />
+                    <circle className="c3" cx={node.cx} cy={node.cy} r={isAct ? 7 : 4} stroke={isAct ? cfg.color : "currentColor"} strokeWidth="0.65" fill="none" opacity="0.8" />
+                    <circle className="node" cx={node.cx} cy={node.cy} r={isAct ? 3 : 2} fill={isAct ? cfg.color : "currentColor"} />
+                    {/* Reticle Ticks */}
+                    <path
+                      className="c3"
+                      d={`M ${node.cx} ${node.cy - (isAct ? 22 : 15)} V ${node.cy - (isAct ? 16 : 11)} M ${node.cx} ${node.cy + (isAct ? 16 : 11)} V ${node.cy + (isAct ? 22 : 15)} M ${node.cx - (isAct ? 22 : 15)} ${node.cy} H ${node.cx - (isAct ? 16 : 11)} M ${node.cx + (isAct ? 16 : 11)} ${node.cy} H ${node.cx + (isAct ? 22 : 15)}`}
+                      stroke={isAct ? cfg.color : "currentColor"}
+                      strokeWidth="0.65"
+                      opacity={isAct ? 1 : 0.5}
+                    />
+                  </g>
+                );
+              })}
+
+              {/* Glowing Central Hub Node (400, 190) */}
+              <g>
+                <circle cx="400" cy="190" r="22" fill="color-mix(in srgb, var(--accent) 12%, transparent)" />
+                <circle className="c2" cx="400" cy="190" r="14" stroke="var(--accent)" strokeWidth="1" fill="none" opacity="0.75" />
+                <circle className="c3" cx="400" cy="190" r="7" stroke="var(--accent)" strokeWidth="0.65" fill="none" opacity="0.9" />
+                <circle className="node" cx="400" cy="190" r="3.5" fill="var(--accent)">
+                  <animate attributeName="r" values="3;5;3" dur="2.5s" repeatCount="indefinite" />
+                  <animate attributeName="opacity" values="0.6;1;0.6" dur="2.5s" repeatCount="indefinite" />
+                </circle>
+                {/* Center Crosshair Ticks */}
+                <path className="c3" d="M 400 168 V 176 M 400 204 V 212 M 378 190 H 386 M 414 190 H 422" stroke="var(--accent)" strokeWidth="0.65" opacity="0.8" />
+              </g>
             </svg>
           </div>
 

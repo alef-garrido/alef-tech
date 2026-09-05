@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import { DynamicLeadForm } from './dynamic-lead-form';
 import { ServiceType } from '@/app/types/lead';
 import { useTranslations } from '@/i18n/translation-client';
+import { Sun, Moon } from 'lucide-react';
 
 const TrainingIcon = () => (
   <div className="flex items-end gap-1 h-[4.5rem]" aria-hidden="true">
@@ -261,7 +262,7 @@ export default function Navigation() {
                 onClick={toggleTheme}
                 aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
               >
-                <span>{theme === 'dark' ? '🌙' : '☀️'}</span>
+                {theme === 'dark' ? <Moon className="w-3.5 h-3.5" /> : <Sun className="w-3.5 h-3.5" />}
                 <span className="hidden sm:inline font-mono font-semibold">{theme === 'dark' ? 'Dark' : 'Light'}</span>
               </button>
 

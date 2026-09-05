@@ -18,30 +18,21 @@ export default function ThreeAnimation() {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    // Prevent double initialization during HMR / Fast Refresh
-    // the cast style from dev is slightly cleaner
     if ((canvas as unknown as Record<string, unknown>).__three_initialized) return;
     (canvas as unknown as Record<string, unknown>).__three_initialized = true;
 
-    // Create a renderer
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
     const renderer = new THREE.WebGLRenderer({
       canvas,
       antialias: true,
       alpha: true,
     });
 
-    // Set a default background color
-    renderer.setClearColor(0x000000);
+    renderer.setClearColor(0x0a0c0f);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
 
-    //  Set the pixel ratio of the canvas (for HiDPI devices)
-    renderer.setPixelRatio(window.devicePixelRatio);
-
-    // Note: renderer size is set after the camera is created below
-
-    // Create a new Three.js scene
     const scene = new THREE.Scene();
-
-    // Create a new camera
     const camera = new THREE.PerspectiveCamera(
       45,
       window.innerWidth / window.innerHeight,
@@ -49,65 +40,139 @@ export default function ThreeAnimation() {
       1000
     );
 
-    // Set the camera position
-    camera.position.set(0, 0, 10);
+    // Responsive horizontal offset to move center of animation to the right of the viewport
+    let offsetX = 0;
+    const updateScenePosition = () => {
+      if (window.innerWidth >= 1280) {
+        offsetX = 3.2;
+      } else if (window.innerWidth >= 1024) {
+        offsetX = 2.4;
+      } else if (window.innerWidth >= 768) {
+        offsetX = 1.5;
+      } else {
+        offsetX = 0;
+      }
+      scene.position.x = offsetX;
+    };
+    updateScenePosition();
+    camera.position.set(offsetX, 0, 10);
 
-    // Set the size of the renderer to the canvas size (after camera exists)
     const setRendererSize = () => {
-      // Use getBoundingClientRect for sub-pixel/calc precision
       const rect = canvas.getBoundingClientRect();
       const width = Math.max(1, Math.floor(rect.width || window.innerWidth));
       const height = Math.max(1, Math.floor(rect.height || window.innerHeight));
 
-      // Update renderer size and pixel ratio (clamped)
       renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
       renderer.setSize(width, height, false);
 
-      // Update camera
       camera.aspect = width / height;
       camera.updateProjectionMatrix();
 
+      updateScenePosition();
+
       return { width, height };
     };
-    // initial size
     const initial = setRendererSize();
 
-    // Add controls to the camera/orbit controls
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.enabled = false;
-    controls.dampingFactor = 1;
-    controls.enablePan = false;
+    controls.dampingFactor = 0.05;
 
-    // Limit the angel that the camera can move
     const angleLimit = Math.PI / 7;
     controls.minPolarAngle = Math.PI / 2 - angleLimit;
     controls.maxPolarAngle = Math.PI / 2 + angleLimit;
 
-    // Add some fog to the scene for moodyness
-    scene.fog = new THREE.Fog(0x11151c, 1, 100);
-    scene.fog = new THREE.FogExp2(0x11151c, 0.4);
+    scene.fog = new THREE.FogExp2(0x0a0c0f, 0.07);
 
-    // Load a texture for the 3d model
+    // ──────────────────────────────────────────
+    // 3D Technical Blueprint Lighting & Color System
+    // ──────────────────────────────────────────
+    const whiteKeyLight = new THREE.DirectionalLight(0xF4F8FB, 2.5);
+    whiteKeyLight.position.set(5, 5, 5);
+    scene.add(whiteKeyLight);
+
+    const cyanSpecLight = new THREE.DirectionalLight(0x2FD9E3, 1.8);
+    cyanSpecLight.position.set(-5, 5, 5);
+    scene.add(cyanSpecLight);
+
+    const orangeRimLight = new THREE.DirectionalLight(0xFF6B1A, 1.6);
+    orangeRimLight.position.set(-5, -3, -5);
+    scene.add(orangeRimLight);
+
+    const ambientLight = new THREE.AmbientLight(0x10161E, 1.2);
+    scene.add(ambientLight);
+
+    // ──────────────────────────────────────────
+    // 3D Isometric Blueprint Particle Lattice Grid
+    // ──────────────────────────────────────────
+    const gridRows = 36;
+    // ──────────────────────────────────────────
+    // Procedural Wireframe Core & Concentric Blueprint Rings
+    // ──────────────────────────────────────────
+    const wireframeGroup = new THREE.Group();
+
+    // Outer Blueprint Icosahedron Wireframe
+    const icoGeo = new THREE.IcosahedronGeometry(2.4, 1);
+    const icoMat = new THREE.LineBasicMaterial({
+      color: 0x2FD9E3,
+      transparent: true,
+      opacity: 0.15,
+      blending: THREE.AdditiveBlending,
+    });
+    const icoWire = new THREE.LineSegments(new THREE.WireframeGeometry(icoGeo), icoMat);
+    wireframeGroup.add(icoWire);
+
+    // Orbital Spec Ring 1 (Ultra-thin Orange Accent)
+    const torusGeo1 = new THREE.TorusGeometry(3.2, 0.005, 16, 100);
+    const torusMat1 = new THREE.LineBasicMaterial({
+      color: 0xFF6B1A,
+      transparent: true,
+      opacity: 0.15,
+      blending: THREE.AdditiveBlending,
+    });
+    const torusWire1 = new THREE.LineSegments(new THREE.WireframeGeometry(torusGeo1), torusMat1);
+    torusWire1.rotation.x = Math.PI / 3;
+    wireframeGroup.add(torusWire1);
+
+    // Orbital Spec Ring 2 (Ultra-thin Capsule White)
+    const torusGeo2 = new THREE.TorusGeometry(2.8, 0.005, 16, 100);
+    const torusMat2 = new THREE.LineBasicMaterial({
+      color: 0xF4F8FB,
+      transparent: true,
+      opacity: 0.12,
+      blending: THREE.AdditiveBlending,
+    });
+    const torusWire2 = new THREE.LineSegments(new THREE.WireframeGeometry(torusGeo2), torusMat2);
+    torusWire2.rotation.y = Math.PI / 4;
+    wireframeGroup.add(torusWire2);
+
+    scene.add(wireframeGroup);
+
+    // ──────────────────────────────────────────
+    // FBX 3D Model with Blueprint Wireframe Overlay
+    // ──────────────────────────────────────────
     const surfaceImperfection = new THREE.TextureLoader().load(
       "https://miroleon.github.io/daily-assets/surf_imp_02.jpg"
     );
     surfaceImperfection.wrapT = THREE.RepeatWrapping;
     surfaceImperfection.wrapS = THREE.RepeatWrapping;
 
-    console.debug('[ThreeAnimation] init');
-
-    // Create a new MeshPhysicalMaterial for the 3d model
     const hands_mat = new THREE.MeshPhysicalMaterial({
-      color: 0x606060,
-      roughness: 0.2,
-      metalness: 1,
+      color: 0x303846,
+      roughness: 0.25,
+      metalness: 0.9,
       roughnessMap: surfaceImperfection,
-      // envMap will be attached when HDR texture is available
-      envMapIntensity: 1.5,
+      envMapIntensity: 1.8,
     });
 
-    // Add a gradient HDR background and environment map
+    const wireOverlayMat = new THREE.LineBasicMaterial({
+      color: 0x2FD9E3,
+      transparent: true,
+      opacity: 0.1,
+      blending: THREE.AdditiveBlending,
+    });
+
     const hdrLoader = new HDRLoader().setPath("https://miroleon.github.io/daily-assets/");
     hdrLoader.load(
       "GRADIENT_01_01_comp.hdr",
@@ -118,90 +183,66 @@ export default function ThreeAnimation() {
         hands_mat.needsUpdate = true;
       },
       undefined,
-      (err) => {
-        console.warn('[ThreeAnimation] HDR load error:', err);
-      }
+      (err) => console.warn('[ThreeAnimation] HDR load error:', err)
     );
 
-    // Load the 3d model as FBX
     const fbxloader = new FBXLoader();
     const fbxUrl = "https://miroleon.github.io/daily-assets/two_hands_01.fbx";
     fbxloader.load(
       fbxUrl,
       function (object) {
-        // Traverse through the object to apply the material to all the meshes
         object.traverse(function (child) {
-          // Apply the material to the 3d model
           if ((child as THREE.Mesh).isMesh) {
-            (child as THREE.Mesh).material = hands_mat;
+            const mesh = child as THREE.Mesh;
+            mesh.material = hands_mat;
+
+            // Attach ultra-thin structural contour edges overlay lines to the 3D model
+            if (mesh.geometry) {
+              const wireGeo = new THREE.EdgesGeometry(mesh.geometry, 18);
+              const wireLines = new THREE.LineSegments(wireGeo, wireOverlayMat);
+              mesh.add(wireLines);
+            }
           }
         });
-
-        // Set the position and scale of the 3d model
         object.position.set(0, 0, 0);
         object.scale.setScalar(0.05);
-
-        // Add the 3d model to the scene
         scene.add(object);
       },
       undefined,
-      (err) => {
-        console.warn('[ThreeAnimation] FBX load error for', fbxUrl, err);
-      }
+      (err) => console.warn('[ThreeAnimation] FBX load error:', err)
     );
 
-    // POST PROCESSING
-    // Create a new render pass
+    // ──────────────────────────────────────────
+    // Post Processing Pipeline
+    // ──────────────────────────────────────────
     const renderScene = new RenderPass(scene, camera);
-
-    // Create a new afterimage pass
     const afterimagePass = new AfterimagePass();
+    afterimagePass.uniforms["damp"].value = 0.88;
 
-    // Set the damping of the afterimage pass
-    afterimagePass.uniforms["damp"].value = 0.9;
-
-    // Set bloom parameters
-    const bloomparams = {
-      exposure: 1,
-      bloomStrength: 1.75,
-      bloomThreshold: 0.1,
-      bloomRadius: 1
-    };
-
-    // Create a new bloom pass
     const bloomPass = new UnrealBloomPass(
       new THREE.Vector2(window.innerWidth, window.innerHeight),
-      1.5,
-      0.4,
+      1.25,
+      0.45,
       0.85
     );
-    bloomPass.threshold = bloomparams.bloomThreshold;
-    bloomPass.strength = bloomparams.bloomStrength;
-    bloomPass.radius = bloomparams.bloomRadius;
+    bloomPass.threshold = 0.14;
+    bloomPass.strength = 1.25;
+    bloomPass.radius = 0.85;
 
-    // Create the displacement shader with vertexShader and fragmentShader
     const displacementShader = {
       uniforms: {
-        // tDiffuse is the texture that the shader will be applied to, in this case the Three.js scene
         tDiffuse: { value: null },
-        // displacement is the texture that will be used to displace the pixels
         displacement: { value: null },
-        // scale is the intensity of the displacement
-        scale: { value: 0.1 },
-        // tileFactor is the number of times the texture will be repeated across the screen
-        tileFactor: { value: 2 }
+        scale: { value: 0.02 },
+        tileFactor: { value: 2 },
       },
-      // This particular vertex shader is basically a Three.js specific boilerplate code
-      //It allows us to connect the vertex shader to the Three.js scene
       vertexShader: `
         varying vec2 vUv;
         void main() {
             vUv = uv;
             gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
         }
-    `,
-      // The fragment shader determines the color of each pixel on the screen
-      // Here we are displacing the pixels based on the displacement texture
+      `,
       fragmentShader: `
         uniform sampler2D tDiffuse;
         uniform sampler2D displacement;
@@ -209,85 +250,54 @@ export default function ThreeAnimation() {
         uniform float tileFactor;
         varying vec2 vUv;
         void main() {
-            // We use the conditional here to apply the displacement only to part of the scene/screen
-            // You can simply cut the if condition and apply the displacement to the entire screen
-
-            if (vUv.x < 0.75 && vUv.x > 0.25 && vUv.y < 0.75 && vUv.y > 0.25) {
+            if (vUv.x < 0.8 && vUv.x > 0.2 && vUv.y < 0.8 && vUv.y > 0.2) {
                 vec2 tiledUv = mod(vUv * tileFactor, 1.0);
                 vec2 disp = texture2D(displacement, tiledUv).rg * scale;
                 vec2 distUv = vUv + disp;
-
-                // By setting gl_FragColor to the displacement texture accross the distibuted UVs we get the displacement effect
-                // You can check the texture by simply substituting the 'tDiffuse' with 'displacement'
-
                 gl_FragColor = texture2D(tDiffuse, distUv);
             } else {
-                gl_FragColor = texture2D(tDiffuse, vUv);  // No displacement on the right half
+                gl_FragColor = texture2D(tDiffuse, vUv);
             }
         }
-    `
+      `,
     };
 
-    // Load the displacement texture
-    // You can change the 'ml-dpt-12-1K_normal.jpeg' to 'ml-dpt-21-1K_normal.jpeg' for the second freebie texture
     const displacementUrl = "https://raw.githubusercontent.com/miroleon/displacement_texture_freebie/main/assets/1K/jpeg/normal/ml-dpt-21-1K_normal.jpeg";
     const displacementTexture = new THREE.TextureLoader().load(
       displacementUrl,
-      function (texture) {
-        // By setting minFilter to THREE.NearestFilter we can prevent some tiling issues with the displacement texture
-        texture.minFilter = THREE.NearestFilter;
-      },
+      (texture) => { texture.minFilter = THREE.NearestFilter; },
       undefined,
-      (err) => {
-        console.warn('[ThreeAnimation] displacement texture load error for', displacementUrl, err);
-      }
+      (err) => console.warn('[ThreeAnimation] displacement error:', err)
     );
 
-    // Create a new ShaderPass with the displacementShader
-    // This adds the displacement effect to the scene
     const displacementPass = new ShaderPass(displacementShader);
-
-    // Here you can select which texture to use for the displacement
     displacementPass.uniforms["displacement"].value = displacementTexture;
-
-    // Adjust scale to control the intensity of distortion
-    displacementPass.uniforms["scale"].value = 0.025;
-
-    // Adjust tileFactor to control the number of repetitions of the texture, which basically makes it smaller or larger
+    displacementPass.uniforms["scale"].value = 0.02;
     displacementPass.uniforms["tileFactor"].value = 2;
 
-    // Create a new EffectComposer to add all the passes to the scene
     const composer = new EffectComposer(renderer);
     composer.addPass(renderScene);
     composer.addPass(afterimagePass);
     composer.addPass(bloomPass);
+    composer.addPass(displacementPass);
 
-    // Ensure composer matches renderer size after creation
     try {
       if (initial) composer.setSize(initial.width, initial.height);
     } catch (e) {
-      console.warn('[ThreeAnimation] composer setSize failed', e);
+      console.warn('[ThreeAnimation] composer setSize failed:', e);
     }
 
-    // Add the displacement pass to the composer
-    composer.addPass(displacementPass);
-
-    // The following section is just a custom way to handle the orbit controls and transition smoothly between user interaction and default camera movement
-
-    // (easing defined later)
-
-    // Variables to control the transition
+    // ──────────────────────────────────────────
+    // Animation Loop
+    // ──────────────────────────────────────────
     let isUserInteracting = false;
     let transitionProgress = 0;
-    const transitionTime = 2; // Transition should complete over 5 seconds
-    const transitionIncrement = 1 / (60 * transitionTime); // Assuming 60 FPS
+    const transitionTime = 2;
+    const transitionIncrement = 1 / (60 * transitionTime);
     const transitionStartCameraPosition = new THREE.Vector3();
     const transitionStartCameraQuaternion = new THREE.Quaternion();
 
     let rafId: number;
-    // simple scene animation so something moves even if model isn't loaded
-    let rotTheta = 0;
-    // variables used for scripted camera motion
     let theta = 0;
 
     function easeInOutCubic(x: number) {
@@ -295,23 +305,24 @@ export default function ThreeAnimation() {
     }
 
     function update() {
-      // Update theta continuously
-      theta += 0.005;
+      const speedMultiplier = prefersReducedMotion ? 0.2 : 1.0;
+      theta += 0.005 * speedMultiplier;
+
+      // Animate Procedural Wireframe Assembly
+      wireframeGroup.rotation.y += 0.003 * speedMultiplier;
+      wireframeGroup.rotation.x += 0.0015 * speedMultiplier;
 
       const targetPosition = new THREE.Vector3(
-        Math.sin(theta) * 3,
-        Math.sin(theta),
-        Math.cos(theta) * 3
+        offsetX + Math.sin(theta) * 2.8,
+        Math.sin(theta * 0.5) * 0.8,
+        Math.cos(theta) * 2.8
       );
-
       const targetQuaternion = new THREE.Quaternion().setFromEuler(
         new THREE.Euler(0, -theta, 0)
       );
 
       if (isUserInteracting) {
-        if (transitionProgress > 0) {
-          transitionProgress = 0;
-        }
+        if (transitionProgress > 0) transitionProgress = 0;
         transitionStartCameraPosition.copy(camera.position);
         transitionStartCameraQuaternion.copy(camera.quaternion);
       } else {
@@ -323,7 +334,6 @@ export default function ThreeAnimation() {
             targetPosition,
             easedProgress
           );
-          // Interpolate from the stored start quaternion to the target
           camera.quaternion.copy(transitionStartCameraQuaternion).slerp(
             targetQuaternion,
             easedProgress
@@ -334,18 +344,11 @@ export default function ThreeAnimation() {
         }
       }
 
-      // always look at center
-      camera.lookAt(scene.position);
-
-      // gentle fallback rotation
-      rotTheta += 0.01;
-      scene.rotation.y = rotTheta * 0.2;
+      // Always look at the offset scene center
+      camera.lookAt(offsetX, 0, 0);
     }
 
-    // Event listeners for OrbitControls interaction
-    const startInteraction = () => {
-      isUserInteracting = true;
-    };
+    const startInteraction = () => { isUserInteracting = true; };
     const endInteraction = () => {
       isUserInteracting = false;
       transitionStartCameraPosition.copy(camera.position);
@@ -371,50 +374,32 @@ export default function ThreeAnimation() {
     }
     animate();
 
-    // handle resize via ResizeObserver for parent layout changes
     const handleResize = () => {
       const { width, height } = setRendererSize();
       try {
         composer.setSize(width, height);
       } catch {
-        // ignore composer errors during resize
+        // ignore composer resize error
       }
     };
     window.addEventListener('resize', handleResize);
 
-    // Observe size changes of the canvas (or parent layout) so the canvas always fills the component
     const ro = new ResizeObserver(handleResize);
     ro.observe(canvas);
 
-    // Cleanup on unmount
     return () => {
       window.removeEventListener('resize', handleResize);
-      try {
-        ro.disconnect();
-      } catch {
-        // Ignore errors during cleanup
-      }
+      try { ro.disconnect(); } catch { /* ignore */ }
       if (rafId) cancelAnimationFrame(rafId);
-      // remove orbit controls listeners
       try {
         controls.removeEventListener('start', startInteraction);
         controls.removeEventListener('end', endInteraction);
-      } catch {
-        // Ignore errors during cleanup
-      }
-      try {
-        composer.dispose();
-      } catch {
-        // Ignore errors during cleanup
-      }
-      try {
-        renderer.dispose();
-      } catch {
-        // Ignore errors during cleanup
-      }
+      } catch { /* ignore */ }
+      try { composer.dispose(); } catch { /* ignore */ }
+      try { renderer.dispose(); } catch { /* ignore */ }
       (canvas as unknown as Record<string, unknown>).__three_initialized = false;
     };
   }, []);
 
-  return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full z-0 bg-black" />;
+  return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full z-0 bg-[#0a0c0f]" />;
 }

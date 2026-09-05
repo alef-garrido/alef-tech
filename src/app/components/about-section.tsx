@@ -12,9 +12,9 @@ export default function AboutSection() {
   const tManifesto = useTranslations('aboutManifesto');
 
   return (
-    <div className="w-full relative overflow-hidden pt-6 sm:pt-10">
+    <div className="w-full relative pt-6 sm:pt-10">
       {/* Background Technical Illustration Plate 3 (Right Side Balance) */}
-      <div className="absolute -top-12 -right-4 md:right-0 w-full max-w-[720px] pointer-events-none opacity-25 dark:opacity-40 z-0 select-none">
+      <div className="absolute -top-12 -right-4 md:right-0 w-full max-w-[720px] pointer-events-none opacity-25 dark:opacity-40 z-0 select-none overflow-hidden">
         <TechnicalAssemblyPlate3 />
       </div>
 
@@ -33,7 +33,7 @@ export default function AboutSection() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start relative z-10">
         
         {/* Left Column: Core Identity Profile (Sticky on Desktop) */}
-        <div className="lg:col-span-5 flex flex-col gap-6 lg:sticky lg:top-28">
+        <div className="lg:col-span-5 flex flex-col gap-6 lg:sticky lg:top-28 lg:self-start">
           <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 sm:p-8 flex flex-col gap-6 shadow-sm">
             {/* Tag Header */}
             <div className="flex items-center justify-between border-b border-[var(--border)] pb-4">

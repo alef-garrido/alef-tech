@@ -29,7 +29,6 @@ export default function ThreeAnimation() {
       alpha: true,
     });
 
-    renderer.setClearColor(0x0a0c0f);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
 
     const scene = new THREE.Scene();
@@ -124,11 +123,11 @@ export default function ThreeAnimation() {
     wireframeGroup.add(icoWire);
 
     // Orbital Spec Ring 1 (Ultra-thin Orange Accent)
-    const torusGeo1 = new THREE.TorusGeometry(3.2, 0.005, 16, 100);
+    const torusGeo1 = new THREE.TorusGeometry(3.2, 0.001, 8, 120);
     const torusMat1 = new THREE.LineBasicMaterial({
       color: 0xFF6B1A,
       transparent: true,
-      opacity: 0.15,
+      opacity: 0.25,
       blending: THREE.AdditiveBlending,
     });
     const torusWire1 = new THREE.LineSegments(new THREE.WireframeGeometry(torusGeo1), torusMat1);

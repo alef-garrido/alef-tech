@@ -196,7 +196,28 @@ header.nav {
 .sec-head h2 { font-size: var(--text-xl); text-transform: uppercase; letter-spacing: 0.02em; }
 .sec-head p { color: var(--text-muted); font-size: var(--text-base); }
 
-/* ── Hero ── */
+/* ── Hero (Theme-Isolated Dark Block) ── */
+.hero,
+[data-theme='light'] .hero,
+[data-theme='dark'] .hero {
+  --bg: #0A0C0F;
+  --bg-deep: #050609;
+  --surface: #10161E;
+  --surface-2: #172131;
+  --surface-3: #1D2D44;
+  --border: #283B58;
+  --border-strong: #325386;
+  --text: #F4F8FB;
+  --text-muted: #8FA6C4;
+  --text-faint: #7A8A9F;
+  --accent: #2FD9E3;
+  --accent-hover: #7FF0F5;
+  --accent-ink: #0A0C0F;
+  --alert: #FF6B1A;
+  color-scheme: dark;
+  background-color: #0A0C0F;
+  color: #F4F8FB;
+}
 .hero { padding-top: clamp(var(--space-16), 9vw, var(--space-32)); padding-bottom: clamp(var(--space-12), 7vw, var(--space-24)); position: relative; overflow: hidden; }
 .hero .lede { margin-top: var(--space-6); max-width: 54ch; color: var(--text-muted); font-size: var(--text-lg); line-height: 1.45; }
 

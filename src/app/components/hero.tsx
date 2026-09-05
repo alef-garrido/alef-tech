@@ -17,14 +17,14 @@ export default function Hero() {
 
   return (
     <>
-      <section className="hero w-full min-h-screen flex items-center relative overflow-hidden bg-[#0A0C0F]">
+      <section className="hero w-full min-h-screen flex items-center relative overflow-hidden bg-[#0A0C0F] text-[#F4F8FB]" data-theme="dark">
         {/* Three.js 3D Blueprint Canvas */}
         <div className="absolute inset-0 z-0 bg-[#0A0C0F] pointer-events-none">
           <ThreeAnimation />
         </div>
 
-        {/* Blueprint Spec Grid Overlay & Ambient Gradient */}
-        <div className="absolute inset-0 z-0 pointer-events-none bg-gradient-to-r from-[#0A0C0F] via-[#0A0C0F]/80 to-transparent" />
+        {/* Ambient Cyan Spec Glow behind left content (no black overlay covering animation) */}
+        <div className="absolute top-1/4 left-0 w-[500px] h-[500px] bg-[#2FD9E3]/5 rounded-full blur-3xl pointer-events-none z-0" />
 
         <div className="wrap relative z-10 w-full py-16">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">

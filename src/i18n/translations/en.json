@@ -11,6 +11,26 @@
     "title": "CX CLINIC",
     "subtitle": "Detect and eliminate customer and revenue leaks before they happen. Fast operational diagnostics and scalable retention strategy."
   },
+  "problem": {
+    "eyebrow": "// SECTION 00 — OPERATIONAL DIAGNOSIS",
+    "title": "Why Growing Businesses Bleed Revenue & Retention (Without Realizing It)",
+    "subtitle": "Most companies don't fail because of a bad product or lack of effort. They fail from uninspected operational bottlenecks, silent customer churn, and software sprawl.",
+    "card1Tag": "DIAG-01 · SILENT CHURN",
+    "card1Title": "Invisible Client Churn",
+    "card1Desc": "Unhappy clients rarely complain—they quietly disengage and cancel. Without proactive feedback loops, revenue leaks go undetected until it's too late.",
+    "card1Metric": "80% of lost revenue happens quietly",
+    "card2Tag": "DIAG-02 · TOOL CHAOS",
+    "card2Title": "Tool Sprawl & Fragmented Data",
+    "card2Desc": "Adding more SaaS tools creates data silos and team burnout. Your tools end up operating in tabs nobody uses instead of talking to each other.",
+    "card2Metric": "3.5 hrs/day lost to manual data copying",
+    "card3Tag": "DIAG-03 · REACTIVE OPS",
+    "card3Title": "Operational Fatigue",
+    "card3Desc": "Leadership spends energy putting out daily fires instead of scaling retention. The business demands more energy every week while delivering diminishing returns.",
+    "card3Metric": "High founder churn & operational friction",
+    "calloutHighlight": "The real problem is rarely 'we need another marketing campaign'.",
+    "calloutText": "The real problem is an uninspected operational bottleneck that drains client trust and team energy before your funnel can even convert.",
+    "calloutBadge": "CLINIC DIAGNOSTIC INSIGHT"
+  },
   "about": {
     "heading": "About Me",
     "description": "Certified Business Consultant and Software Developer with 9+ years of experience grounded in designing and implementing customer experience (CX) systems, tailored automations, and agentic AI architecture for startups and fast-growing companies. My job is to make your business work better, with fewer problems and better results.\n\nI help growing companies diagnose operational friction, refine client acquisition strategies, and structure scalable operations for long-term retention.\n\nWith a background spanning high-stakes enterprise logistics, software development, and high-conversion intake operations, I bring a multidisciplinary approach to business development. I don't just offer high-level advice; I evaluate real-world workflows, identify revenue leaks, and build structured processes that drive measurable results under tight operational constraints.\n\nAs a SEP-CONOCER certified Management Consultant (EC0249) and Business Development Specialist (EC1223), I partner with leadership teams to turn complex technical, legal, and operational systems into clear, profitable growth strategies."

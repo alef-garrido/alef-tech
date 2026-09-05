@@ -1,4 +1,5 @@
 import Hero from './components/hero';
+import ProblemSection from './components/problem-section';
 import ServicesShowcase from './components/services-showcase';
 import Services from './components/services';
 import CaseStudy from './components/case-study';
@@ -14,8 +15,13 @@ export default async function Home() {
         <Hero />
       </div>
 
+      {/* PROBLEM STATEMENT SECTION */}
+      <div className="w-full mt-24 sm:mt-32 px-4 sm:px-6 lg:px-8">
+        <ProblemSection />
+      </div>
+
       {/* ABOUT SECTION */}
-      <section id="about" className="w-full mt-48 sm:mt-72 mb-48 px-4 sm:px-6 lg:px-8">
+      <section id="about" className="w-full mt-24 sm:mt-36 mb-48 px-4 sm:px-6 lg:px-8">
         <AboutSection />
       </section>
 

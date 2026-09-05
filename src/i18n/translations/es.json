@@ -11,6 +11,26 @@
     "title": "CX CLINIC",
     "subtitle": "Detectamos y eliminamos las fugas de clientes e ingresos en tu negocio antes de perderlos. Diagnóstico operativo rápido y estrategia de retención escalable."
   },
+  "problem": {
+    "eyebrow": "// SECCIÓN 00 — DIAGNÓSTICO OPERATIVO",
+    "title": "¿Por qué los negocios en crecimiento pierden ingresos y retención (sin darse cuenta)?",
+    "subtitle": "La mayoría de las empresas no fallan por un mal producto ni por falta de ganas. Fallan por cuellos de botella no inspeccionados, fuga silenciosa de clientes y caos de herramientas.",
+    "card1Tag": "DIAG-01 · FUGA SILENCIOSA",
+    "card1Title": "Cancelaciones Invisibles de Clientes",
+    "card1Desc": "Los clientes insatisfechos rara vez se quejan: simplemente se desconectan y se van. Sin bucles de retroalimentación proactivos, la fuga de ingresos pasa desapercibida hasta que es demasiado tarde.",
+    "card1Metric": "El 80% del churn ocurre en silencio",
+    "card2Tag": "DIAG-02 · CHAOS DE SAAS",
+    "card2Title": "Caos de Herramientas y Datos Fragmentados",
+    "card2Desc": "Comprar más plataformas SaaS crea silos de datos y agotamiento en tu equipo. Las herramientas terminan abiertas en pestañas ignoradas en lugar de conectarse entre sí.",
+    "card2Metric": "3.5 hrs/día perdidas reingresando información",
+    "card3Tag": "DIAG-03 · OPERACIÓN REACTIVA",
+    "card3Title": "Desgaste Operativo y Bomberos",
+    "card3Desc": "La dirección gasta su energía apagando incendios diarios en lugar de escalar la retención. El negocio exige más esfuerzo cada semana devolviendo cada vez menos.",
+    "card3Metric": "Alto desgaste en fundadores y fricción diaria",
+    "calloutHighlight": "El problema real rara vez es 'necesitamos otra campaña de marketing'.",
+    "calloutText": "El problema real es un cuello de botella operativo no inspeccionado que agota la confianza del cliente y la energía del equipo antes de que tu embudo pueda convertir.",
+    "calloutBadge": "INSIGHT DEL DIAGNÓSTICO CLÍNICO"
+  },
   "about": {
     "heading": "Acerca de Mí",
     "description": "Consultor de Negocios certificado y Desarrollador de Software con más de 9 años de experiencia fundamentada en el diseño e implementación de sistemas de experiencia del cliente (CX), automatizaciones a medida y arquitectura de IA agéntica para startups y empresas de rápido crecimiento. Mi trabajo es hacer que tu negocio funcione mejor, con menos problemas y mejores resultados.\n\nAyudo a empresas en crecimiento a diagnosticar la fricción operativa, perfeccionar las estrategias de adquisición de clientes y estructurar operaciones escalables para una retención a largo plazo.\n\nCon una trayectoria que abarca logística empresarial de alto impacto, desarrollo de software y operaciones de captación de alta conversión, aporto un enfoque multidisciplinario al desarrollo de negocios. No solo ofrezco consejos de alto nivel; evalúo flujos de trabajo reales, identifico fugas de ingresos y construyo procesos estructurados que generan resultados medibles bajo estrictas restricciones operativas.\n\nComo Consultor de Gestión (EC0249) y Especialista en Desarrollo de Negocios (EC1223) certificado por SEP-CONOCER, colaboro con equipos directivos para transformar sistemas técnicos, legales y operativos complejos en estrategias de crecimiento claras y rentables."

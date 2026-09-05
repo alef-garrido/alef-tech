@@ -30,38 +30,38 @@ const CaseStudy = () => {
   const marqueeItems = [...COMPANIES, ...COMPANIES, ...COMPANIES, ...COMPANIES];
 
   return (
-    <section className="w-full my-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex flex-col items-center gap-16 font-mono">
+    <section className="w-full my-56 px-4 sm:px-6 lg:px-8 flex flex-col items-center gap-16 font-mono">
       {/* UX QUOTE CARD */}
       <div className="w-full relative group">
         {/* Neon Backlight Ambient Glow */}
         <div className="absolute -inset-1 bg-gradient-to-r from-primary/30 via-secondary/20 to-primary/30 rounded-2xl blur-xl opacity-60 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
 
         {/* Quote Card Container */}
-        <div className="relative w-full bg-black/80 border border-neutral-800 hover:border-primary/40 rounded-2xl p-8 sm:p-12 md:p-16 backdrop-blur-md transition-all duration-300 shadow-2xl flex flex-col items-center text-center">
+        <div className="relative w-full bg-black/80 border border-neutral-800 hover:border-primary/40 rounded-2xl py-24 sm:py-32 px-3 sm:px-4 backdrop-blur-md transition-all duration-300 shadow-2xl flex flex-col items-center text-center">
           {/* Badge Label */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/10 border border-primary/30 text-primary text-xs tracking-widest uppercase mb-8">
-            <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+          <div className="eyebrow rounded-full bg-[var(--primary)]/10 border border-[var(--primary)]/30 px-3.5 py-1.5 mb-8">
+            <span className="w-2 h-2 rounded-full bg-[var(--primary)] animate-pulse"></span>
             {tMisc('resultsSpeak')}
           </div>
 
           {/* Quote Mark Icon */}
-          <div className="mb-6 text-primary/80">
+          <div className="mb-6 text-[var(--primary)]/80">
             <Quote size={48} className="rotate-180" />
           </div>
 
           {/* Quote Text */}
-          <blockquote className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-relaxed max-w-5xl tracking-tight">
+          <blockquote className="t-h1 text-white max-w-5xl">
             &ldquo;{tMisc('uxQuote')}&rdquo;
           </blockquote>
 
           {/* Decorative Divider */}
-          <div className="mt-10 w-24 h-1 bg-gradient-to-r from-primary to-secondary rounded-full"></div>
+          <div className="mt-10 w-24 h-1 bg-gradient-to-r from-[var(--primary)] to-[var(--secondary)] rounded-full"></div>
         </div>
       </div>
 
       {/* EVER SCROLLING LOGO STRIPE */}
       <div className="w-full flex flex-col items-center gap-6">
-        <p className="text-xs uppercase tracking-widest text-neutral-500 font-semibold text-center">
+        <p className="t-caption text-neutral-500 font-semibold text-center">
           {tMisc('trustedCompanies')}
         </p>
 

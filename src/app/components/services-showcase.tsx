@@ -97,7 +97,7 @@ const ServicesShowcase = () => {
   }));
 
   return (
-    <div id="farmacia-exnoria" className="w-full max-w-7xl my-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <div id="farmacia-exnoria" className="w-full my-48 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       {/* Background Section Technical Illustration Plate */}
       <div className="absolute -top-4 -left-4 md:left-2 w-full max-w-[640px] pointer-events-none opacity-20 dark:opacity-30 z-0 select-none">
         <TechnicalAssemblyPlate />
@@ -116,11 +116,11 @@ const ServicesShowcase = () => {
             <span className="eyebrow">// SYSTEM SPEC</span>
           </div>
           
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[var(--text)] font-mono tracking-tight leading-[1.05] mb-4">
+          <h2 className="t-h1 text-[var(--text)] mb-4">
             {tDiagnostic('farmaciaTitle')}
           </h2>
 
-          <p className="text-xl sm:text-2xl font-mono text-[#0284C7] dark:text-[#2FD9E3] font-semibold">
+          <p className="t-body-lg text-[#0284C7] dark:text-[#2FD9E3] font-semibold">
             {tDiagnostic('remediesSubtitle')}
           </p>
         </div>

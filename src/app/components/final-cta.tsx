@@ -10,8 +10,8 @@ const FinalCTA = () => {
 
   return (
     <>
-      <section className="w-full wrap my-24">
-        <div className="panel text-center py-16 px-8 relative overflow-hidden">
+      <section className="w-full my-48 px-4 sm:px-6 lg:px-8">
+        <div className="panel text-center py-32 px-6 sm:px-12 relative overflow-hidden">
           <div className="sec-head mx-auto">
             <p className="eyebrow justify-center">SYSTEM DEPLOYMENT</p>
             <h2 className="t-h1 text-[var(--accent)]">{tCta('buildEngine')}</h2>

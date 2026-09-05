@@ -145,10 +145,10 @@ function PillarCard({ pillarIndex, t, config, isActive }: {
             >
               {t(`${p}Level`)}
             </span>
-            <h3 className="text-lg sm:text-xl md:text-2xl font-bold font-mono text-[var(--text)] leading-tight">
+            <h3 className="t-h2 text-[var(--text)]">
               {t(`${p}Title`)}
             </h3>
-            <p className="text-[var(--text-muted)] text-sm font-sans mt-1">
+            <p className="t-body text-sm mt-1">
               {t(`${p}Subtitle`)}
             </p>
           </div>
@@ -311,7 +311,7 @@ export default function Services() {
   const levelLabels = [1, 2, 3, 4].map((i) => tFramework(`pillar${i}Level`));
 
   return (
-    <section id="framework" ref={sectionRef} className="w-full max-w-7xl my-32 px-4 sm:px-6 lg:px-8 scroll-mt-28">
+    <section id="framework" ref={sectionRef} className="w-full my-64 px-4 sm:px-6 lg:px-8 scroll-mt-28">
       {/* ── Header ── */}
       <motion.div
         className="text-center mb-10 sm:mb-14"
@@ -319,13 +319,13 @@ export default function Services() {
         animate={isInView ? { y: 0, opacity: 1 } : {}}
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
       >
-        <span className="inline-block text-[11px] font-mono tracking-[0.3em] uppercase text-[var(--text-muted)] mb-4">
+        <span className="eyebrow inline-flex mb-4">
           Framework
         </span>
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[var(--text)] font-mono leading-tight">
+        <h2 className="t-h1 text-[var(--text)]">
           {tFramework('sectionTitle')}
         </h2>
-        <p className="text-[var(--text-muted)] text-base sm:text-lg font-sans max-w-3xl mx-auto mt-4 leading-relaxed">
+        <p className="t-body-lg max-w-3xl mx-auto mt-4">
           {tFramework('sectionSubtitle')}
         </p>
       </motion.div>

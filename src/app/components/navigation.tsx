@@ -107,9 +107,9 @@ export default function Navigation() {
 
   return (
     <>
-      <header className="nav w-full sticky top-0 z-50 backdrop-blur-xl">
-        <div className="mx-auto max-w-none px-4 sm:px-6 lg:px-8 py-5">
-          <nav className="flex justify-between items-start text-[var(--text)]">
+      <header className="nav w-full sticky top-0 z-50 backdrop-blur-xl bg-[var(--surface)]/80 border-b border-[var(--border)]/40">
+        <div className="mx-auto max-w-none px-4 sm:px-6 lg:px-8 py-3.5">
+          <nav className="flex justify-between items-center text-[var(--text)]">
             {/* Left Section - Brand Lockup */}
             <div className="text-left">
               <Link href="/" className="leading-tight text-sm font-bold block font-display tracking-widest text-[var(--text)]">
@@ -118,13 +118,13 @@ export default function Navigation() {
               <Link href="/" className="leading-tight text-xs font-mono tracking-widest text-[var(--accent)] block">
                 TECH
               </Link>
-              <p className="mt-1 text-[10px] font-mono text-[var(--text-faint)] lowercase">
+              <p className="mt-0.5 text-[10px] font-mono text-[var(--text-faint)] lowercase">
                 {tMisc('cxSoftware')}
               </p>
             </div>
 
             {/* Center Section - Visible on large screens */}
-            <div className="hidden 2xl:flex justify-center items-start gap-8 2xl:gap-14 font-mono">
+            <div className="hidden 2xl:flex justify-center items-center gap-8 2xl:gap-14 font-mono">
               {/* Training */}
               <div className="flex gap-3">
                 <TrainingIcon />
@@ -252,7 +252,7 @@ export default function Navigation() {
             </div>
 
             {/* Right Section */}
-            <div className="flex items-start gap-4 font-mono">
+            <div className="flex items-center gap-4 font-mono">
               <LanguageSwitcher />
 
               {/* Theme Switcher Button */}
@@ -271,19 +271,19 @@ export default function Navigation() {
                 <div className="text-right">
                   <div
                     className="text-[var(--accent)] font-bold relative tracking-wider"
-                    style={{ fontSize: '1.75rem', lineHeight: 0.8 }}
+                    style={{ fontSize: '1.4rem', lineHeight: 1.0 }}
                     suppressHydrationWarning
                   >
                     <span
                       className="absolute text-[var(--alert)] font-normal rotate-[-15deg] animate-pulse"
-                      style={{ fontSize: '2rem', top: '-0.25em', left: '-0.25em' }}
+                      style={{ fontSize: '1.4rem', top: '-0.15em', left: '-0.3em' }}
                     >
                       *
                     </span>
                     {formatDate(currentDateTime)}
                   </div>
                   <p
-                    className="text-[10px] mt-1 tracking-widest text-[var(--text-faint)] font-mono lowercase"
+                    className="text-[10px] mt-0.5 tracking-widest text-[var(--text-faint)] font-mono lowercase"
                     suppressHydrationWarning
                   >
                     {formatTime(currentDateTime)} UTC

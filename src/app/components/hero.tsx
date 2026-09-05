@@ -18,13 +18,19 @@ export default function Hero() {
   return (
     <>
       <section className="hero w-full min-h-screen flex items-center relative overflow-hidden bg-[#0A0C0F] text-[#F4F8FB]" data-theme="dark">
-        {/* Three.js 3D Blueprint Canvas */}
-        <div className="absolute inset-0 z-0 bg-[#0A0C0F] pointer-events-none">
+        {/* Three.js 3D Blueprint Canvas - Pushed to the right with smooth gradient transition */}
+        <div
+          className="absolute top-0 right-0 w-full lg:w-7/12 h-full z-0 pointer-events-none overflow-hidden opacity-90"
+          style={{
+            maskImage: 'linear-gradient(to right, transparent 0%, rgba(0,0,0,0.4) 15%, black 50%)',
+            WebkitMaskImage: 'linear-gradient(to right, transparent 0%, rgba(0,0,0,0.4) 15%, black 50%)',
+          }}
+        >
           <ThreeAnimation />
         </div>
 
-        {/* Ambient Cyan Spec Glow behind left content (no black overlay covering animation) */}
-        <div className="absolute top-1/4 left-0 w-[500px] h-[500px] bg-[#2FD9E3]/5 rounded-full blur-3xl pointer-events-none z-0" />
+        {/* Ambient Cyan Spec Glow on right side */}
+        <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-[#2FD9E3]/10 rounded-full blur-3xl pointer-events-none z-0" />
 
         <div className="wrap relative z-10 w-full py-16">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
@@ -32,7 +38,7 @@ export default function Hero() {
             {/* Left Column: Hero Copy & Actions */}
             <div className="lg:col-span-7 flex flex-col items-start">
               {/* Eyebrow Tag */}
-              <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-[var(--border)] bg-[var(--surface-2)] text-xs sm:text-sm font-mono tracking-widest text-[var(--accent)] uppercase mb-6 shadow-sm backdrop-blur-md">
+              <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-[var(--border)] bg-[var(--surface-2)]/90 text-xs sm:text-sm font-mono tracking-widest text-[var(--accent)] uppercase mb-6 shadow-sm backdrop-blur-md">
                 <span className="w-2 h-2 rounded-full bg-[var(--accent)] animate-pulse" />
                 {t('eyebrow') || 'Alef Lemat - Consultant and CX strategist'}
               </div>
@@ -67,7 +73,7 @@ export default function Hero() {
                   }}
                   className="btn btn-ghost lg cursor-pointer"
                 >
-                  {tCta('secondary') || 'Learn More'} →
+                  {tCta('secondary') || 'Learn More'}
                 </a>
               </div>
             </div>

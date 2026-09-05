@@ -128,33 +128,34 @@ export function ECGVisualization({
         // Shape 1: Normal heartbeat (shapeIndex 0)
         // Shape 2: Exaggerated heartbeat (shapeIndex 1)
         // Shape 3: Subtle heartbeat (shapeIndex 2)
-        const shapeFactor = [1, 1.6, 0.6][shapeIndex] || 1;
+        const shapeFactor = [1, 1.3, 0.75][shapeIndex] || 1;
+        const maxAmp = height * 0.38; // Keep peak within canvas limits
         
         if (phase < 0.1) {
           return baselineY_offset;
         } else if (phase < 0.15) {
           const ph = (phase - 0.1) / 0.05;
-          const pWaveAmp = 15 * shapeFactor;
+          const pWaveAmp = maxAmp * 0.22 * shapeFactor;
           return baselineY_offset - Math.sin(ph * Math.PI) * pWaveAmp;
         } else if (phase < 0.20) {
           return baselineY_offset;
         } else if (phase < 0.22) {
           const ph = (phase - 0.20) / 0.02;
-          const qWaveAmp = 10 * shapeFactor;
+          const qWaveAmp = maxAmp * 0.15 * shapeFactor;
           return baselineY_offset + Math.sin(ph * Math.PI) * qWaveAmp;
         } else if (phase < 0.30) {
           const ph = (phase - 0.22) / 0.08;
-          const qrsAmp = 100 * shapeFactor;
+          const qrsAmp = maxAmp * shapeFactor;
           if (ph < 0.3) {
             return baselineY_offset - (ph / 0.3) * qrsAmp;
           } else if (ph < 0.7) {
-            return baselineY_offset - qrsAmp;
+            return baselineY_offset - qrsAmp + ((ph - 0.3) / 0.4) * (qrsAmp * 1.5);
           } else {
-            return baselineY_offset - ((1 - ph) / 0.3) * qrsAmp;
+            return baselineY_offset + (qrsAmp * 0.5) - ((ph - 0.7) / 0.3) * (qrsAmp * 0.5);
           }
         } else if (phase < 0.42) {
           const ph = (phase - 0.30) / 0.12;
-          const tWaveAmp = 25 * shapeFactor;
+          const tWaveAmp = maxAmp * 0.35 * shapeFactor;
           return baselineY_offset - Math.sin(ph * Math.PI) * tWaveAmp;
         } else {
           return baselineY_offset;

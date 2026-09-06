@@ -11,6 +11,8 @@ import {
   RadioOption,
   FormField as FormFieldContainer,
   FormError,
+  ConsentCheckbox,
+  PrivacyNoticeDisclaimer,
 } from '@/app/components/ui';
 
 interface DynamicLeadFormProps {
@@ -27,6 +29,7 @@ export const DynamicLeadForm = ({ service, onClose, onSubmit }: DynamicLeadFormP
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
+  const [privacyConsent, setPrivacyConsent] = useState(false);
 
   const fields = FORM_CONFIG[service];
   const currentField = fields[currentStep];
@@ -80,15 +83,30 @@ export const DynamicLeadForm = ({ service, onClose, onSubmit }: DynamicLeadFormP
   };
 
   const canProceedToNext = (): boolean => {
-    const value = formData[currentField.name] as string || '';
+    const value = (formData[currentField.name] as string) || '';
     const error = validateField(currentField, value);
-    return !error;
+    if (error) return false;
+
+    if (isLastStep && !privacyConsent) {
+      return false;
+    }
+
+    return true;
   };
 
   const handleNext = () => {
+    if (isLastStep && !privacyConsent) {
+      setErrors(prev => ({
+        ...prev,
+        privacyConsent: 'Debe aceptar el Aviso de Privacidad para continuar.',
+      }));
+      return;
+    }
+
     if (!canProceedToNext()) {
       return;
     }
+
     if (isLastStep) {
       handleSubmit();
     } else {
@@ -107,13 +125,18 @@ export const DynamicLeadForm = ({ service, onClose, onSubmit }: DynamicLeadFormP
     let isValid = true;
 
     fields.forEach(field => {
-      const value = formData[field.name] as string || '';
+      const value = (formData[field.name] as string) || '';
       const error = validateField(field, value);
       if (error) {
         newErrors[field.name] = error;
         isValid = false;
       }
     });
+
+    if (!privacyConsent) {
+      newErrors.privacyConsent = 'Debe aceptar el Aviso de Privacidad para continuar.';
+      isValid = false;
+    }
 
     setErrors(newErrors);
     return isValid;
@@ -127,9 +150,12 @@ export const DynamicLeadForm = ({ service, onClose, onSubmit }: DynamicLeadFormP
     setIsSubmitting(true);
 
     try {
-      const submitData = {
+      const submitData: LeadFormData = {
         ...formData,
         service: formData.service || service,
+        privacyConsent: true,
+        privacyPolicyVersion: '1.0',
+        consentedAt: new Date().toISOString(),
       } as LeadFormData;
 
       if (onSubmit) {
@@ -284,6 +310,28 @@ export const DynamicLeadForm = ({ service, onClose, onSubmit }: DynamicLeadFormP
               {renderField(currentField)}
             </div>
           </FormFieldContainer>
+
+          {/* Privacy Consent & Disclaimer on Final Step */}
+          {isLastStep && (
+            <div className="mt-5 space-y-3">
+              <ConsentCheckbox
+                id="privacy-consent-checkbox"
+                checked={privacyConsent}
+                onChange={e => {
+                  setPrivacyConsent(e.target.checked);
+                  if (e.target.checked) {
+                    setErrors(prev => ({ ...prev, privacyConsent: undefined }));
+                  }
+                }}
+                hasError={!!errors.privacyConsent}
+                label="Acepto expresamente el tratamiento de mis datos personales para la atención de esta solicitud conforme a la LFPDPPP 2025."
+              />
+              {errors.privacyConsent && (
+                <FormError className="text-xs mt-1">{errors.privacyConsent}</FormError>
+              )}
+              <PrivacyNoticeDisclaimer noticeUrl="/privacy" />
+            </div>
+          )}
 
           {errors.submit && (
             <div className="border border-[var(--alert)] rounded-[var(--radius-md)] p-3 mt-4 bg-[var(--surface-2)]">

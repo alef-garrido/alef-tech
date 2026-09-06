@@ -76,6 +76,17 @@ export async function POST(request: Request) {
       );
     }
 
+    // Validate explicit privacy consent under LFPDPPP 2025 regulations
+    if (body.privacyConsent !== true) {
+      return new Response(
+        JSON.stringify({ error: 'Explicit privacy consent is required under LFPDPPP 2025 regulations.' }),
+        {
+          status: 400,
+          headers: { 'Content-Type': 'application/json' },
+        }
+      );
+    }
+
     // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(body.email)) {
@@ -94,6 +105,9 @@ export async function POST(request: Request) {
       source = 'Exnoria-diagnostic';
     }
 
+    const consentedAt = body.consentedAt || new Date().toISOString();
+    const privacyPolicyVersion = body.privacyPolicyVersion || '1.0';
+
     // Save to Supabase
     const leadData = {
       name: body.name,
@@ -105,6 +119,9 @@ export async function POST(request: Request) {
       notes: body.notes || null,
       flow_id: body.flowId || `flow-${Date.now()}`,
       session_id: body.sessionId || `session-${Date.now()}`,
+      privacy_consent: true,
+      privacy_policy_version: privacyPolicyVersion,
+      consented_at: consentedAt,
     };
 
     const { data, error } = await getSupabaseClient()

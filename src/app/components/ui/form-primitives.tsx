@@ -175,3 +175,69 @@ export const FormField = forwardRef<HTMLDivElement, FormFieldContainerProps>(
   )
 );
 FormField.displayName = 'FormField';
+
+// --- ConsentCheckbox ---
+export interface ConsentCheckboxProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> {
+  label: React.ReactNode;
+  hasError?: boolean;
+}
+
+export const ConsentCheckbox = forwardRef<HTMLInputElement, ConsentCheckboxProps>(
+  ({ className, label, checked, id = 'privacy-consent', hasError, ...props }, ref) => (
+    <label
+      htmlFor={id}
+      className={cn(
+        'field-radio-card flex items-start gap-3 p-3.5 cursor-pointer transition-colors',
+        checked && 'is-checked',
+        hasError && 'border-[var(--alert)]',
+        className
+      )}
+    >
+      <input
+        ref={ref}
+        type="checkbox"
+        id={id}
+        checked={checked}
+        className="mt-0.5 w-4 h-4 rounded cursor-pointer accent-[var(--accent)]"
+        {...props}
+      />
+      <span className="text-xs font-mono text-[var(--text)] leading-relaxed select-none">
+        {label}
+      </span>
+    </label>
+  )
+);
+ConsentCheckbox.displayName = 'ConsentCheckbox';
+
+// --- PrivacyNoticeDisclaimer ---
+export interface PrivacyNoticeDisclaimerProps extends React.HTMLAttributes<HTMLDivElement> {
+  noticeUrl?: string;
+}
+
+export const PrivacyNoticeDisclaimer = forwardRef<HTMLDivElement, PrivacyNoticeDisclaimerProps>(
+  ({ className, noticeUrl = '/privacy', ...props }, ref) => (
+    <div
+      ref={ref}
+      className={cn(
+        'text-[11px] font-mono text-[var(--text-faint)] leading-normal p-3 rounded-[var(--radius-md)] bg-[var(--surface-2)]/60 border border-[var(--border)]/60',
+        className
+      )}
+      {...props}
+    >
+      <p>
+        🔒 <strong>Aviso de Privacidad / Privacy Notice:</strong> Sus datos personales están protegidos conforme a la LFPDPPP 2025. Al enviar este formulario, usted autoriza el tratamiento de sus datos para contactarle sobre el servicio solicitado. Consulte nuestro{' '}
+        <a
+          href={noticeUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-[var(--accent)] underline hover:text-[var(--accent-hover)] transition-colors"
+        >
+          Aviso de Privacidad completo
+        </a>
+        .
+      </p>
+    </div>
+  )
+);
+PrivacyNoticeDisclaimer.displayName = 'PrivacyNoticeDisclaimer';
+

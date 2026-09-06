@@ -13,12 +13,15 @@ export interface LeadFormData {
   notes?: string;
   flowId?: string;
   sessionId?: string;
+  privacyConsent: boolean;
+  privacyPolicyVersion?: string;
+  consentedAt?: string;
 }
 
 export interface FormField {
   name: keyof LeadFormData;
   label: string;
-  type: 'text' | 'email' | 'tel' | 'textarea' | 'select' | 'radio';
+  type: 'text' | 'email' | 'tel' | 'textarea' | 'select' | 'radio' | 'checkbox';
   placeholder?: string;
   required: boolean;
   options?: Array<{ value: string; label: string }>;

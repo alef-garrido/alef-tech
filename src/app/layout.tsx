@@ -9,6 +9,7 @@ import es from '@/i18n/translations/es.json';
 import { cookies } from 'next/headers';
 
 import { CapsulaSvgDefs } from './components/capsula';
+import { snasm } from './fonts';
 
 const locales = ['en', 'es'];
 
@@ -24,7 +25,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const messageData = locale === 'es' ? es : en;
 
   return (
-    <html lang={locale} data-theme="dark" suppressHydrationWarning={true}>
+    <html lang={locale} data-theme="dark" className={snasm.variable} suppressHydrationWarning={true}>
       <head>
         <link rel="icon" href="/favicon.ico" />
         <style>

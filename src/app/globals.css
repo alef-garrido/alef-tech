@@ -664,7 +664,7 @@ header.nav {
 /* ── Form Field System ── */
 .field {
   display: grid;
-  gap: var(--space-2);
+  gap: var(--space-3);
   width: 100%;
 }
 

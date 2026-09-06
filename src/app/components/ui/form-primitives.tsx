@@ -144,7 +144,7 @@ export interface RadioGroupProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>(
   ({ className, children, ...props }, ref) => (
-    <div ref={ref} className={cn('space-y-3', className)} {...props}>
+    <div ref={ref} className={cn('space-y-4', className)} {...props}>
       {children}
     </div>
   )

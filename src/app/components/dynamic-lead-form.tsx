@@ -299,21 +299,21 @@ export const DynamicLeadForm = ({ service, onClose, onSubmit }: DynamicLeadFormP
         </div>
 
         {/* Form Content */}
-        <div className="py-6 flex flex-col">
+        <div className="py-8 flex flex-col">
           <FormFieldContainer
             label={currentField.label}
             htmlFor={currentField.name}
             required={currentField.required}
             error={errors[currentField.name]}
           >
-            <div className="my-1">
+            <div className="mt-3 mb-1">
               {renderField(currentField)}
             </div>
           </FormFieldContainer>
 
           {/* Privacy Consent & Disclaimer on Final Step */}
           {isLastStep && (
-            <div className="mt-5 space-y-3">
+            <div className="mt-6 space-y-4">
               <ConsentCheckbox
                 id="privacy-consent-checkbox"
                 checked={privacyConsent}
@@ -334,13 +334,13 @@ export const DynamicLeadForm = ({ service, onClose, onSubmit }: DynamicLeadFormP
           )}
 
           {errors.submit && (
-            <div className="border border-[var(--alert)] rounded-[var(--radius-md)] p-3 mt-4 bg-[var(--surface-2)]">
+            <div className="border border-[var(--alert)] rounded-[var(--radius-md)] p-3 mt-6 bg-[var(--surface-2)]">
               <FormError>{errors.submit}</FormError>
             </div>
           )}
 
           {/* Navigation Buttons */}
-          <div className="flex gap-3 mt-8 pt-6 border-t border-[var(--border)]">
+          <div className="flex gap-4 mt-10 pt-6 border-t border-[var(--border)]">
             <button
               onClick={handlePrevious}
               disabled={currentStep === 0}
@@ -367,8 +367,9 @@ export const DynamicLeadForm = ({ service, onClose, onSubmit }: DynamicLeadFormP
             </button>
           </div>
 
-          <p className="text-[10px] text-[var(--text-faint)] text-center font-mono mt-4 uppercase">
-            CONFIDENTIAL // CAPSULA HARDWARE SPEC
+          <p className="text-[10px] text-[var(--text-faint)] text-center font-mono mt-4 uppercase flex items-center justify-center gap-1.5 tracking-wider">
+            <span>🔒</span>
+            <span>DATA PROTECTED UNDER LFPDPPP 2025 // TLS ENCRYPTED & CONFIDENTIAL</span>
           </p>
         </div>
       </div>

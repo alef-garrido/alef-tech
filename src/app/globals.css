@@ -661,39 +661,133 @@ header.nav {
   border-color: var(--border);
 }
 
-/* ── Form Field ── */
+/* ── Form Field System ── */
 .field {
   display: grid;
   gap: var(--space-2);
+  width: 100%;
 }
 
-.field label {
+.field-label {
   font-family: var(--font-mono);
   font-size: 0.6875rem;
-  letter-spacing: .14em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--text-faint);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
 }
 
-.field input {
-  font-family: var(--font-body);
+.field-label .required-star {
+  color: var(--alert);
+  font-weight: bold;
+}
+
+.field-input,
+.field-textarea,
+.field-select {
+  width: 100%;
+  font-family: var(--font-mono);
   font-size: var(--text-sm);
   color: var(--text);
   background: var(--surface-2);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   padding: 12px 16px;
-  transition: border-color var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out);
+  transition: border-color var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out), background-color var(--dur-fast) var(--ease-out);
 }
 
-.field input::placeholder {
+.field-input::placeholder,
+.field-textarea::placeholder,
+.field-select::placeholder {
   color: var(--text-faint);
 }
 
-.field input:focus {
+.field-input:hover,
+.field-textarea:hover,
+.field-select:hover {
+  border-color: var(--border-strong);
+}
+
+.field-input:focus,
+.field-textarea:focus,
+.field-select:focus {
   outline: none;
   border-color: var(--accent);
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent);
+}
+
+.field-input.has-error,
+.field-textarea.has-error,
+.field-select.has-error {
+  border-color: var(--alert);
+}
+
+.field-input.has-error:focus,
+.field-textarea.has-error:focus,
+.field-select.has-error:focus {
+  border-color: var(--alert);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--alert) 25%, transparent);
+}
+
+.field-input:disabled,
+.field-textarea:disabled,
+.field-select:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: var(--surface);
+}
+
+.field-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%232FD9E3' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 40px;
+  cursor: pointer;
+}
+
+[data-theme='light'] .field-select,
+.light .field-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%230284C7' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+}
+
+.field-radio-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: border-color var(--dur-fast) var(--ease-out), background-color var(--dur-fast) var(--ease-out);
+}
+
+.field-radio-card:hover {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 5%, var(--surface-2));
+}
+
+.field-radio-card.is-checked {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, var(--surface-2));
+  box-shadow: 0 0 0 1px var(--accent);
+}
+
+.field-error {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--alert);
+  margin-top: var(--space-1);
+}
+
+.field-helper {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--text-faint);
+  margin-top: var(--space-1);
 }
 
 /* ── Terminal ── */

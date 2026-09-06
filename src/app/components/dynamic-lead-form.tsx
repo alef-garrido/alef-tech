@@ -1,8 +1,17 @@
 "use client";
 
 import { useState } from 'react';
-import { LeadFormData, ServiceType, FORM_CONFIG, FormField } from '@/app/types/lead';
+import { LeadFormData, ServiceType, FORM_CONFIG, FormField as FormFieldConfig } from '@/app/types/lead';
 import { X, ChevronRight, ChevronLeft } from 'lucide-react';
+import {
+  Input,
+  TextArea,
+  Select,
+  RadioGroup,
+  RadioOption,
+  FormField as FormFieldContainer,
+  FormError,
+} from '@/app/components/ui';
 
 interface DynamicLeadFormProps {
   service: ServiceType;
@@ -24,7 +33,7 @@ export const DynamicLeadForm = ({ service, onClose, onSubmit }: DynamicLeadFormP
   const isLastStep = currentStep === fields.length - 1;
   const progress = ((currentStep + 1) / fields.length) * 100;
 
-  const validateField = (field: FormField, value: string): string | null => {
+  const validateField = (field: FormFieldConfig, value: string): string | null => {
     if (field.required && !value?.trim()) {
       return `${field.label} is required`;
     }
@@ -55,7 +64,7 @@ export const DynamicLeadForm = ({ service, onClose, onSubmit }: DynamicLeadFormP
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
-    field: FormField
+    field: FormFieldConfig
   ) => {
     const value = e.target.value;
     setFormData(prev => ({
@@ -153,79 +162,72 @@ export const DynamicLeadForm = ({ service, onClose, onSubmit }: DynamicLeadFormP
     }
   };
 
-  const renderField = (field: FormField) => {
-    const value = formData[field.name] as string || '';
+  const renderField = (field: FormFieldConfig) => {
+    const value = (formData[field.name] as string) || '';
     const error = errors[field.name];
-
-    const baseInputClasses =
-      'w-full px-4 py-3 bg-[var(--surface-2)] border border-[var(--border)] rounded-[var(--radius-md)] text-[var(--text)] placeholder-[var(--text-faint)] focus:outline-none focus:border-[var(--accent)] font-mono text-sm';
-    const errorClasses = error ? 'border-[var(--alert)] focus:border-[var(--alert)]' : '';
 
     switch (field.type) {
       case 'textarea':
         return (
-          <textarea
+          <TextArea
             autoFocus
+            id={field.name}
             name={field.name}
             value={value}
             onChange={e => handleChange(e, field)}
             placeholder={field.placeholder}
             required={field.required}
+            hasError={!!error}
             rows={4}
-            className={`${baseInputClasses} ${errorClasses} resize-none`}
+            className="resize-none"
           />
         );
 
       case 'select':
         return (
-          <select
+          <Select
             autoFocus
+            id={field.name}
             name={field.name}
             value={value}
             onChange={e => handleChange(e, field)}
             required={field.required}
-            className={`${baseInputClasses} ${errorClasses} cursor-pointer`}
-          >
-            <option value="">Select an option</option>
-            {field.options?.map(opt => (
-              <option key={opt.value} value={opt.value}>
-                {opt.label}
-              </option>
-            ))}
-          </select>
+            hasError={!!error}
+            options={field.options}
+            placeholderOption="Select an option"
+          />
         );
 
       case 'radio':
         return (
-          <div className="space-y-3">
+          <RadioGroup>
             {field.options?.map(opt => (
-              <label key={opt.value} className="flex items-center gap-3 cursor-pointer p-3 border border-[var(--border)] rounded-[var(--radius-md)] bg-[var(--surface-2)] hover:border-[var(--accent)] transition">
-                <input
-                  type="radio"
-                  name={field.name}
-                  value={opt.value}
-                  checked={value === opt.value}
-                  onChange={e => handleChange(e, field)}
-                  required={field.required}
-                  className="w-4 h-4 cursor-pointer accent-[var(--accent)]"
-                />
-                <span className="text-[var(--text)] text-sm font-mono flex-1">{opt.label}</span>
-              </label>
+              <RadioOption
+                key={opt.value}
+                id={`${field.name}-${opt.value}`}
+                name={field.name}
+                value={opt.value}
+                label={opt.label}
+                checked={value === opt.value}
+                onChange={e => handleChange(e, field)}
+                required={field.required}
+              />
             ))}
-          </div>
+          </RadioGroup>
         );
 
       default:
         return (
-          <input
+          <Input
             autoFocus
+            id={field.name}
             type={field.type}
             name={field.name}
             value={value}
             onChange={e => handleChange(e, field)}
             placeholder={field.placeholder}
             required={field.required}
-            className={`${baseInputClasses} ${errorClasses}`}
+            hasError={!!error}
           />
         );
     }
@@ -272,26 +274,22 @@ export const DynamicLeadForm = ({ service, onClose, onSubmit }: DynamicLeadFormP
 
         {/* Form Content */}
         <div className="py-6 flex flex-col">
-          <div className="field">
-            <label htmlFor={currentField.name} className="block text-sm font-mono text-[var(--accent)]">
-              {currentField.label}
-              {currentField.required && <span className="text-[var(--alert)] ml-1">*</span>}
-            </label>
-
-            <div className="my-3">
+          <FormFieldContainer
+            label={currentField.label}
+            htmlFor={currentField.name}
+            required={currentField.required}
+            error={errors[currentField.name]}
+          >
+            <div className="my-1">
               {renderField(currentField)}
             </div>
+          </FormFieldContainer>
 
-            {errors[currentField.name] && (
-              <p className="text-[var(--alert)] text-xs font-mono">{errors[currentField.name]}</p>
-            )}
-
-            {errors.submit && (
-              <div className="border border-[var(--alert)] rounded-[var(--radius-md)] p-3 mt-4 bg-[var(--surface-2)]">
-                <p className="text-[var(--alert)] text-xs font-mono">{errors.submit}</p>
-              </div>
-            )}
-          </div>
+          {errors.submit && (
+            <div className="border border-[var(--alert)] rounded-[var(--radius-md)] p-3 mt-4 bg-[var(--surface-2)]">
+              <FormError>{errors.submit}</FormError>
+            </div>
+          )}
 
           {/* Navigation Buttons */}
           <div className="flex gap-3 mt-8 pt-6 border-t border-[var(--border)]">

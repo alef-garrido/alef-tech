@@ -107,8 +107,8 @@ export default function Navigation() {
 
   return (
     <>
-      <header className="nav w-full sticky top-0 z-50 backdrop-blur-xl bg-[var(--surface)]/80 border-b border-[var(--border)]/40">
-        <div className="mx-auto max-w-none px-4 sm:px-6 lg:px-8 py-3.5">
+      <header className="nav w-full sticky top-0 z-50 backdrop-blur-xl bg-[var(--surface)]/85 border-b border-[var(--border)]/60">
+        <div className="mx-auto max-w-none px-4 sm:px-6 lg:px-8 py-5 sm:py-6">
           <nav className="flex justify-between items-center text-[var(--text)]">
             {/* Left Section - Brand Lockup */}
             <div className="text-left">
@@ -251,41 +251,41 @@ export default function Navigation() {
               </div>
             </div>
 
-            {/* Right Section */}
-            <div className="flex items-center gap-4 font-mono">
-              <LanguageSwitcher />
+            {/* Right Section - Switches & Telemetry Widget */}
+            <div className="flex items-center gap-3 sm:gap-4 font-mono">
+              {/* Control Switches Group */}
+              <div className="flex items-center gap-2">
+                <LanguageSwitcher />
 
-              {/* Theme Switcher Button */}
-              <button
-                type="button"
-                className="theme-btn"
-                onClick={toggleTheme}
-                aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
-              >
-                {theme === 'dark' ? <Moon className="w-3.5 h-3.5" /> : <Sun className="w-3.5 h-3.5" />}
-                <span className="hidden sm:inline font-mono font-semibold">{theme === 'dark' ? 'Dark' : 'Light'}</span>
-              </button>
+                {/* Theme Switcher Button */}
+                <button
+                  type="button"
+                  onClick={toggleTheme}
+                  className="h-8 inline-flex items-center gap-1.5 px-3 rounded-full border border-[var(--border)] bg-[var(--surface-2)] text-[11px] font-mono text-[var(--text-muted)] hover:text-[var(--accent)] hover:border-[var(--accent)] hover:shadow-[0_0_12px_color-mix(in_srgb,var(--accent)_30%,transparent)] transition-all cursor-pointer"
+                  aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+                >
+                  {theme === 'dark' ? (
+                    <Moon className="w-3.5 h-3.5 text-[var(--accent)]" />
+                  ) : (
+                    <Sun className="w-3.5 h-3.5 text-[var(--warning)]" />
+                  )}
+                  <span className="hidden sm:inline font-mono font-semibold tracking-wider uppercase">
+                    {theme === 'dark' ? 'DARK' : 'LIGHT'}
+                  </span>
+                </button>
+              </div>
 
-              {/* Real-time Telemetry Date/Time */}
+              {/* Vertical Divider */}
+              <div className="hidden sm:block h-6 w-px bg-[var(--border)]/60" aria-hidden="true" />
+
+              {/* Real-time Telemetry Date/Time Widget */}
               {currentDateTime && (
-                <div className="text-right">
-                  <div
-                    className="text-[var(--accent)] font-bold relative tracking-wider"
-                    style={{ fontSize: '1.4rem', lineHeight: 1.0 }}
-                    suppressHydrationWarning
-                  >
-                    <span
-                      className="absolute text-[var(--alert)] font-normal rotate-[-15deg] animate-pulse"
-                      style={{ fontSize: '1.4rem', top: '-0.15em', left: '-0.3em' }}
-                    >
-                      *
-                    </span>
-                    {formatDate(currentDateTime)}
+                <div className="hidden sm:flex flex-col justify-center text-right h-8 px-1">
+                  <div className="flex items-center justify-end gap-1.5 text-xs font-mono font-bold tracking-wider text-[var(--accent)]" suppressHydrationWarning>
+                    <span className="w-1.5 h-1.5 rounded-full bg-[var(--alert)] shadow-[0_0_8px_var(--alert)] animate-pulse" aria-hidden="true" />
+                    <span>{formatDate(currentDateTime)}</span>
                   </div>
-                  <p
-                    className="text-[10px] mt-0.5 tracking-widest text-[var(--text-faint)] font-mono lowercase"
-                    suppressHydrationWarning
-                  >
+                  <p className="text-[10px] tracking-widest text-[var(--text-muted)] font-mono lowercase leading-none mt-0.5" suppressHydrationWarning>
                     {formatTime(currentDateTime)} UTC
                   </p>
                 </div>

@@ -1633,8 +1633,10 @@ header.nav {
 /* ── Segmented Control / Tabs ── */
 .tabs {
   display: inline-flex;
-  padding: 4px;
-  gap: 4px;
+  align-items: center;
+  height: 32px;
+  padding: 3px;
+  gap: 3px;
   border-radius: var(--radius-capsule);
   border: 1px solid var(--border);
   background: var(--surface-2);

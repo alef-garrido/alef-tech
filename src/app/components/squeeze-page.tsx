@@ -107,9 +107,9 @@ export const SqueezePage = ({ service }: { service: ServiceType }) => {
         {/* CTA Button */}
         <button
           onClick={() => setShowForm(true)}
-          className="bg-white text-black font-mono font-bold py-4 px-8 rounded-lg text-lg hover:bg-gray-100 transition-colors shadow-lg"
+          className="btn btn-primary lg tracking-wider font-semibold shadow-lg"
         >
-          {config.ctaText}
+          {config.ctaText} →
         </button>
 
         <p className="text-gray-500 text-xs font-mono mt-8">

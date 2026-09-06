@@ -295,12 +295,12 @@ const Footer = () => {
                 />
                 
                 {/* Animated Neon Underline Indicator */}
-                <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#0284C7] dark:bg-[#2FD9E3] scale-x-0 group-focus-within:scale-x-100 transition-transform duration-300 ease-out origin-left shadow-[0_0_10px_rgba(47,217,227,0.5)]" />
+                <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[var(--accent)] scale-x-0 group-focus-within:scale-x-100 transition-transform duration-300 ease-out origin-left shadow-[0_0_10px_color-mix(in_srgb,var(--accent)_50%,transparent)]" />
 
                 {/* Integrated Submit Button */}
                 <button
                   type="submit"
-                  className="absolute right-0 flex items-center gap-1.5 text-xs font-mono font-bold text-[#0284C7] dark:text-[#2FD9E3] hover:text-[var(--text)] transition-colors cursor-pointer py-1"
+                  className="absolute right-0 flex items-center gap-1.5 text-xs font-mono font-bold text-[var(--accent)] hover:text-[var(--text)] transition-colors cursor-pointer py-1"
                 >
                   <span>{tCta('subscribe')}</span>
                   <span className="text-sm transition-transform duration-200 group-hover:translate-x-1">→</span>

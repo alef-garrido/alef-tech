@@ -5,7 +5,7 @@ import DiagnosticClient from './client';
 
 export default async function DiagnosticPage() {
   const cookieStore = await cookies();
-  const locale = cookieStore.get('locale')?.value || 'es';
+  const locale = cookieStore.get('locale')?.value || 'en';
   
   const messages = locale === 'es' ? es : en;
 

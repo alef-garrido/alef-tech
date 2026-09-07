@@ -14,8 +14,8 @@ import { snasm } from './fonts';
 const locales = ['en', 'es'];
 
 export const metadata: Metadata = {
-  title: 'Alef Lemat TECH',
-  description: 'Agentic Website of Alef Lemat',
+  title: 'Exnnoria CX Clinic | alef lemat',
+  description: 'Exnnoria CX Clinic — alef lemat',
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
@@ -25,7 +25,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const messageData = locale === 'es' ? es : en;
 
   return (
-    <html lang={locale} data-theme="dark" className={snasm.variable} suppressHydrationWarning={true}>
+    <html lang={locale} data-theme="light" className={snasm.variable} suppressHydrationWarning={true}>
       <head>
         <link rel="icon" href="/favicon.ico" />
         <style>

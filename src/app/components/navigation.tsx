@@ -61,7 +61,7 @@ export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showLeadForm, setShowLeadForm] = useState(false);
   const [selectedService, setSelectedService] = useState<ServiceType>('general');
-  const [theme, setTheme] = useState<'dark' | 'light'>('dark');
+  const [theme, setTheme] = useState<'dark' | 'light'>('light');
   const [currentDateTime, setCurrentDateTime] = useState<Date | null>(null);
 
   useEffect(() => {
@@ -69,6 +69,11 @@ export default function Navigation() {
     const timer = setInterval(() => {
       setCurrentDateTime(new Date());
     }, 1000);
+
+    const currentTheme = (document.documentElement.getAttribute('data-theme') as 'dark' | 'light') || 'light';
+    setTheme(currentTheme);
+    document.documentElement.setAttribute('data-theme', currentTheme);
+
     return () => clearInterval(timer);
   }, []);
 
@@ -93,8 +98,7 @@ export default function Navigation() {
         month: 'short',
         year: 'numeric',
       })
-      .toUpperCase()
-      .replace(/ /g, '-');
+      .toUpperCase();
   };
 
   const formatTime = (date: Date) => {
@@ -113,10 +117,10 @@ export default function Navigation() {
             {/* Left Section - Brand Lockup */}
             <div className="text-left">
               <Link href="/" className="leading-tight text-sm font-bold block font-display tracking-widest text-[var(--text)]">
-                ALEF LEMAT
+                Exnnoria CX Clinic
               </Link>
               <Link href="/" className="leading-tight text-xs font-mono tracking-widest text-[var(--accent)] block">
-                TECH
+                alef lemat
               </Link>
               <p className="mt-0.5 text-[10px] font-mono text-[var(--text-faint)] lowercase">
                 {tMisc('cxSoftware')}

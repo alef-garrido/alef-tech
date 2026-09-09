@@ -71,7 +71,7 @@ export default function AboutSection() {
             </div>
 
             {/* Bio / Description */}
-            <div className="t-body space-y-8 pt-6 border-t border-[var(--border)]">
+            <div className="t-body space-y-8 pt-6 border-t border-[var(--border)] text-justify">
               <p className="whitespace-pre-line">
                 {tAbout('description')}
               </p>
@@ -98,7 +98,7 @@ export default function AboutSection() {
             </h3>
 
             {/* Main Manifesto Body */}
-            <div className="t-body space-y-12">
+            <div className="t-body space-y-12 text-justify">
               <p className="whitespace-pre-line">
                 {tManifesto('paragraph1')}
               </p>
@@ -108,7 +108,7 @@ export default function AboutSection() {
               </p>
 
               {/* Callout Quote Highlight */}
-              <div className="relative my-12 py-10 px-3 sm:px-4 rounded-r-xl border-l-4 border-[#0284C7] dark:border-[#2FD9E3] bg-[var(--surface-2)]/40 backdrop-blur-sm t-body-lg font-mono italic text-[var(--text)]">
+              <div className="relative my-12 py-10 px-3 sm:px-4 rounded-r-xl border-l-4 border-[#0284C7] dark:border-[#2FD9E3] bg-[var(--surface-2)]/40 backdrop-blur-sm t-body-lg font-mono italic text-[var(--text)] text-left">
                 &ldquo;{tManifesto('highlight')}&rdquo;
               </div>
 

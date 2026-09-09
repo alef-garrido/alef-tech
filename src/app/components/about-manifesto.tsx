@@ -39,7 +39,7 @@ export default function AboutManifesto({ onSendPrompt }: AboutManifestoProps) {
           {tManifesto('title')}
         </h3>
 
-        <div className="t-body space-y-6">
+        <div className="t-body space-y-6 text-justify">
           <p className="whitespace-pre-line">
             {tManifesto('paragraph1')}
           </p>
@@ -48,7 +48,7 @@ export default function AboutManifesto({ onSendPrompt }: AboutManifestoProps) {
             {tManifesto('paragraph2')}
           </p>
 
-          <div className="font-mono text-base italic text-[var(--accent)] py-6 my-6 border-y border-[var(--border)] bg-[var(--surface-2)] px-4 rounded-[var(--radius-md)]">
+          <div className="font-mono text-base italic text-[var(--accent)] py-6 my-6 border-y border-[var(--border)] bg-[var(--surface-2)] px-4 rounded-[var(--radius-md)] text-left">
             &ldquo;{tManifesto('highlight')}&rdquo;
           </div>
 

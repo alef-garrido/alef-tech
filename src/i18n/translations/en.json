@@ -267,5 +267,10 @@
     "realResultsHeading": "REAL RESULTS (Not processes)",
     "ourSolutions": "OUR SOLUTIONS",
     "chooseRemedy": "Choose the remedy your business needs"
+  },
+  "betDesk": {
+    "title": "Bet Desk Event Campaign",
+    "subtitle": "Exclusive CX & Agentic AI Strategy Sessions for High-Growth Leaders",
+    "rsvpCta": "Claim Your Bet Desk Pass"
   }
 }

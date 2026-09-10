@@ -1,5 +1,5 @@
 // Lead form types based on service context
-export type ServiceType = 'training' | 'consulting' | 'implementation' | 'general' | 'diagnostic';
+export type ServiceType = 'training' | 'consulting' | 'implementation' | 'general' | 'diagnostic' | 'bet-desk';
 
 export interface LeadFormData {
   name: string;
@@ -353,6 +353,43 @@ export const FORM_CONFIG: Record<ServiceType, FormField[]> = {
       label: 'Información adicional (opcional)',
       type: 'textarea',
       placeholder: 'Cuéntanos más sobre tu situación actual y qué esperas lograr...',
+      required: false,
+    },
+  ],
+  'bet-desk': [
+    {
+      name: 'name',
+      label: 'Full Name / Nombre Completo',
+      type: 'text',
+      placeholder: 'John Doe',
+      required: true,
+    },
+    {
+      name: 'email',
+      label: 'Email Address / Correo',
+      type: 'email',
+      placeholder: 'john@company.com',
+      required: true,
+    },
+    {
+      name: 'phone',
+      label: 'WhatsApp / Phone Number',
+      type: 'tel',
+      placeholder: '+52 123 456 7890',
+      required: true,
+    },
+    {
+      name: 'company',
+      label: 'Company / Empresa',
+      type: 'text',
+      placeholder: 'Your Company',
+      required: false,
+    },
+    {
+      name: 'notes',
+      label: 'Event RSVP / Special Requests',
+      type: 'textarea',
+      placeholder: 'Tell us about your expectations or topics of interest for Bet Desk...',
       required: false,
     },
   ],

@@ -73,6 +73,18 @@ const SQUEEZE_PAGE_CONFIG: Record<ServiceType, SqueezePage> = {
     ],
     ctaText: 'Schedule Free Diagnostic',
   },
+  'bet-desk': {
+    service: 'bet-desk',
+    title: 'Bet Desk Event',
+    subtitle: 'Exclusive CX & Agentic AI Strategy Sessions',
+    benefits: [
+      'High‑LTV growth strategies',
+      'Live AI workflow demos',
+      'VIP networking with industry leaders',
+      'Actionable playbooks for retention',
+    ],
+    ctaText: 'Claim Your Bet Desk Pass',
+  },
 };
 
 export const SqueezePage = ({ service }: { service: ServiceType }) => {

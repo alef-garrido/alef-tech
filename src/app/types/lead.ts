@@ -16,7 +16,15 @@ export interface LeadFormData {
   privacyConsent: boolean;
   privacyPolicyVersion?: string;
   consentedAt?: string;
+  // New fields for bet-desk form
+  problem?: string;
+  costNumber?: string;
+  solvedNumber?: string;
+  tried?: string;
+  approvers?: string;
+  access?: string;
 }
+
 
 export interface FormField {
   name: keyof LeadFormData;
@@ -358,31 +366,54 @@ export const FORM_CONFIG: Record<ServiceType, FormField[]> = {
   ],
   'bet-desk': [
     {
-      name: 'name',
-      label: 'Full Name / Nombre Completo',
+      name: 'problem',
+      label: 'Your problem, in one sentence a client would understand.',
       type: 'text',
-      placeholder: 'John Doe',
+      placeholder: 'Proposals keep dying right after we send the quote.',
       required: true,
     },
     {
-      name: 'email',
-      label: 'Email Address / Correo',
-      type: 'email',
-      placeholder: 'john@company.com',
-      required: true,
-    },
-    {
-      name: 'phone',
-      label: 'WhatsApp / Phone Number',
-      type: 'tel',
-      placeholder: '+52 123 456 7890',
-      required: true,
-    },
-    {
-      name: 'company',
-      label: 'Company / Empresa',
+      name: 'costNumber',
+      label: 'The number that proves it exists.',
       type: 'text',
-      placeholder: 'Your Company',
+      placeholder: 'Roughly $4k/month in stalled proposals.',
+      required: true,
+      validation: (value: string) => /\d/.test(value) || 'We need a number here — a bet needs a scoreboard. Estimate is fine. ("about $3k/mo", "roughly 10 deals")',
+    },
+    {
+      name: 'solvedNumber',
+      label: 'What "solved" looks like — as a number.',
+      type: 'text',
+      placeholder: '8 proposals per month reaching a signed decision.',
+      required: true,
+      validation: (value: string) => /\d/.test(value) || 'We need a number here — a bet needs a scoreboard. Estimate is fine. ("about $3k/mo", "roughly 10 deals")',
+    },
+    {
+      name: 'tried',
+      label: 'What have you already tried? (optional)',
+      type: 'textarea',
+      placeholder: 'Follow-up emails at 3 days and 7 days. A discount offer.',
+      required: false,
+    },
+    {
+      name: 'approvers',
+      label: 'Who else needs to approve the fix? (optional)',
+      type: 'select',
+      options: [
+        { value: 'just_me', label: 'Just me' },
+        { value: 'partner', label: 'My business partner' },
+      ],
+      required: false,
+    },
+    {
+      name: 'access',
+      label: 'Can we touch the thing itself — data, access, your time?',
+      type: 'radio',
+      options: [
+        { value: 'yes', label: 'Yes' },
+        { value: 'yes_limits', label: 'Yes, with limits' },
+        { value: 'not_sure', label: 'Not sure yet' },
+      ],
       required: false,
     },
     {

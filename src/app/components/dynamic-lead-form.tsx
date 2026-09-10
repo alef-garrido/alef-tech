@@ -26,10 +26,12 @@ export const DynamicLeadForm = ({ service, onClose, onSubmit }: DynamicLeadFormP
     service,
   });
   const [errors, setErrors] = useState<Record<string, string | undefined>>({});
+  const [capReached, setCapReached] = useState(false);
+
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [currentStep, setCurrentStep] = useState(0);
   const [privacyConsent, setPrivacyConsent] = useState(false);
+  const [currentStep, setCurrentStep] = useState(0);
 
   const fields = FORM_CONFIG[service];
   const currentField = fields[currentStep];
@@ -259,19 +261,39 @@ export const DynamicLeadForm = ({ service, onClose, onSubmit }: DynamicLeadFormP
     }
   };
 
-  if (submitted) {
-    return (
-      <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50">
-        <div className="terminal max-w-md w-full mx-4 text-center">
-          <h2 className="text-xl font-bold text-[var(--accent)] mb-4 font-mono">// DISPATCH SUCCESSFUL</h2>
-          <p className="text-[var(--text-muted)] text-sm mb-6">
-            Your telemetry data has been received. Response expected within 24 hours.
-          </p>
-          <div className="inline-block w-8 h-8 border-2 border-[var(--accent)] border-t-transparent rounded-full animate-spin"></div>
+    if (capReached) {
+      return (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50">
+          <div className="max-w-md w-full mx-4 text-center p-6 bg-[var(--surface)] rounded-lg">
+            <h2 className="text-xl font-bold text-[var(--accent)] mb-4 font-mono">MONTH [N] IS FULL — [5]/5 bets placed.</h2>
+            <p className="text-[var(--text-muted)] text-sm mb-4">
+              You're in the queue for Month [N+1]. Your pitch is saved, and if the problem you described matches what this month's bets taught us, you'll get the first call when the door reopens on [date].
+            </p>
+            <p className="text-[var(--text-muted)] text-sm">The queue is real and it moves.</p>
+          </div>
         </div>
-      </div>
-    );
-  }
+      );
+    }
+
+    if (submitted) {
+      return (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50">
+          <div className="max-w-md w-full mx-4 text-center p-6 bg-[var(--surface)] rounded-lg">
+            <h2 className="text-xl font-bold text-[var(--accent)] mb-4 font-mono">// DISPATCH SUCCESSFUL</h2>
+            <p className="text-[var(--text-muted)] text-sm mb-2">PITCH RECEIVED — Month [N]</p>
+            <p className="text-[var(--text-muted)] text-sm mb-4">What happens next:</p>
+            <ol className="text-left list-decimal list-inside text-[var(--text-muted)] space-y-2">
+              <li>A real human (the founder, actually) reviews it within 24 hours.</li>
+              <li>You get a straight answer: diagnosis call, or \"not our strike zone — here's who can help.\"</li>
+              <li>If we believe in it: one milestone, in writing, then the work.</li>
+            </ol>
+            <p className="text-[var(--text-muted)] text-sm mt-4">If it turns out not to be a fit, you'll hear that too — with reasons. Every pitch gets an answer. Even the no.</p>
+            <p className="text-[var(--text-muted)] text-sm mt-2">Prefer voice note? Send it to [WhatsApp number]. Same intake, native format.</p>
+          </div>
+        </div>
+      );
+    }
+
 
   return (
     <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
